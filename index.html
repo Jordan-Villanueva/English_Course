@@ -6,15 +6,14 @@
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.auth0.com/js/auth0-spa-js/1.33/auth0-spa-js.production.js"></script>
   <style>
-    /* Botones básicos */
-    #login-btn, #logout-btn {
-      padding: 10px 20px;
-      background: #0077cc;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin: 5px;
+    #login-btn, #logout-btn { 
+      padding: 10px 20px; 
+      margin: 10px; 
+      background-color: #0077cc; 
+      color: white; 
+      border: none; 
+      border-radius: 5px; 
+      cursor: pointer; 
     }
   </style>
 </head>
@@ -22,13 +21,14 @@
   <header>
     <h1>Curso de Inglés Básico</h1>
     <p class="subtitle">Aprende paso a paso desde cero</p>
-    <button id="login-btn">Iniciar sesión</button>
-    <button id="logout-btn" style="display:none;">Cerrar sesión</button>
+    <div>
+      <button id="login-btn">Iniciar sesión</button>
+      <button id="logout-btn" style="display:none;">Cerrar sesión</button>
+    </div>
   </header>
 
-  <main id="main-content">
-    <!-- Aquí se cargará el contenido solo si el usuario está autorizado -->
-    <p>Por favor inicia sesión para ver el contenido.</p>
+  <main id="content">
+    <!-- El contenido solo se mostrará a usuarios autorizados -->
   </main>
 
   <footer>
@@ -36,67 +36,71 @@
   </footer>
 
   <script>
-    const allowedUsers = ["juanito.perez@gmail.com"]; // emails autorizados
+    const allowedUsers = ["juanito.perez@gmail.com"]; // usuarios autorizados
     let auth0 = null;
+
+    const loginBtn = document.getElementById("login-btn");
+    const logoutBtn = document.getElementById("logout-btn");
 
     async function initAuth() {
       auth0 = await createAuth0Client({
-        domain: "dev-bjoqtux6wua5w2l2.us.auth0.com", // reemplaza con tu dominio
-        client_id: "ZcgIAj7vMvtUixpX421Jv6gs4YrakeC7" // reemplaza con tu client_id
+        domain: "dev-bjoqtux6wua5w2l2.us.auth0.com",
+        client_id: "ZcgIAj7vMvtUixpX421Jv6gs4YrakeC7"
       });
 
-      // Manejar callback después del login
+      // Manejar callback de Auth0
       if (window.location.search.includes("code=") && window.location.search.includes("state=")) {
         await auth0.handleRedirectCallback();
-        window.history.replaceState({}, document.title, "/");
+        window.history.replaceState({}, document.title, window.location.pathname);
       }
 
-      // Asignar botones
-      const loginBtn = document.getElementById("login-btn");
-      const logoutBtn = document.getElementById("logout-btn");
-
-      loginBtn.addEventListener("click", async () => {
-        await auth0.loginWithRedirect({ redirect_uri: window.location.origin });
-      });
-
-      logoutBtn.addEventListener("click", () => {
-        auth0.logout({ returnTo: window.location.origin });
-      });
-
-      updateUI();
-    }
-
-    async function updateUI() {
       const isAuthenticated = await auth0.isAuthenticated();
-      const loginBtn = document.getElementById("login-btn");
-      const logoutBtn = document.getElementById("logout-btn");
-      const mainDiv = document.getElementById("main-content");
 
       if (isAuthenticated) {
         const user = await auth0.getUser();
         if (!allowedUsers.includes(user.email)) {
-          mainDiv.innerHTML = "<h2>Acceso denegado</h2>";
+          document.getElementById("content").innerHTML = "<h2>Acceso denegado</h2>";
+          loginBtn.style.display = "none";
+          logoutBtn.style.display = "none";
         } else {
-          mainDiv.innerHTML = `
-            <section>
-              <h2>Clases disponibles</h2>
-              <ul>
-                <li><a href="Class1/index.html">Clase 1: Presentaciones, saludos y despedidas</a></li>
-                <li><a href="clase2/index.html">Clase 2: (próximamente)</a></li>
-                <li><a href="clase3/index.html">Clase 3: (próximamente)</a></li>
-              </ul>
-            </section>
-          `;
+          // Usuario autorizado
+          showContent();
+          loginBtn.style.display = "none";
+          logoutBtn.style.display = "inline-block";
         }
-        loginBtn.style.display = "none";
-        logoutBtn.style.display = "inline-block";
       } else {
-        mainDiv.innerHTML = "<p>Por favor inicia sesión para ver el contenido.</p>";
+        // No autenticado, mostrar botón de login
         loginBtn.style.display = "inline-block";
         logoutBtn.style.display = "none";
       }
     }
 
+    function showContent() {
+      document.getElementById("content").innerHTML = `
+        <section>
+          <h2>Clases disponibles</h2>
+          <ul>
+            <li><a href="Class1/index.html">Clase 1: Presentaciones, saludos y despedidas</a></li>
+            <li><a href="clase2/index.html">Clase 2: (próximamente)</a></li>
+            <li><a href="clase3/index.html">Clase 3: (próximamente)</a></li>
+          </ul>
+        </section>
+      `;
+    }
+
+    loginBtn.addEventListener("click", async () => {
+      await auth0.loginWithRedirect({
+        redirect_uri: window.location.origin
+      });
+    });
+
+    logoutBtn.addEventListener("click", () => {
+      auth0.logout({
+        returnTo: window.location.origin
+      });
+    });
+
+    // Inicializar Auth0 al cargar
     initAuth();
   </script>
 </body>

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Curso de Inglés Básico</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/1.33/auth0-spa-js.production.js"></script>
 </head>
 <body>
   <header>
@@ -11,19 +12,50 @@
     <p class="subtitle">Aprende paso a paso desde cero</p>
   </header>
 
-  <main>
-    <section>
-      <h2>Clases disponibles</h2>
-      <ul>
-        <li><a href="Class1/index.html">Clase 1: Presentaciones, saludos y despedidas</a></li>
-        <li><a href="clase2/index.html">Clase 2: (próximamente)</a></li>
-        <li><a href="clase3/index.html">Clase 3: (próximamente)</a></li>
-      </ul>
-    </section>
+  <main id="content">
+    <!-- Aquí se cargará el contenido solo si el usuario está autorizado -->
   </main>
 
   <footer>
     <p>Curso de Inglés Básico — Creado por Jordan</p>
   </footer>
+
+  <script>
+    const allowedUsers = ["juanito.perez@gmail.com"]; // emails autorizados
+
+    async function initAuth() {
+      const auth0 = await createAuth0Client({
+        domain: "TU_DOMINIO.auth0.com",
+        client_id: "TU_CLIENT_ID"
+      });
+
+      const isAuthenticated = await auth0.isAuthenticated();
+
+      if (isAuthenticated) {
+        const user = await auth0.getUser();
+        if (!allowedUsers.includes(user.email)) {
+          document.body.innerHTML = "<h2>Acceso denegado</h2>";
+        } else {
+          // Usuario autorizado, mostrar contenido
+          document.getElementById("content").innerHTML = `
+            <section>
+              <h2>Clases disponibles</h2>
+              <ul>
+                <li><a href="Class1/index.html">Clase 1: Presentaciones, saludos y despedidas</a></li>
+                <li><a href="clase2/index.html">Clase 2: (próximamente)</a></li>
+                <li><a href="clase3/index.html">Clase 3: (próximamente)</a></li>
+              </ul>
+            </section>
+          `;
+        }
+      } else {
+        await auth0.loginWithRedirect({
+          redirect_uri: window.location.href
+        });
+      }
+    }
+
+    initAuth();
+  </script>
 </body>
 </html>

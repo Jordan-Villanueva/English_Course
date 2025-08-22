@@ -1,6 +1,6 @@
 /* style.css */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: #f9f9fb;
   margin: 0;
   padding: 0;
@@ -8,19 +8,28 @@ body {
   color: #333;
 }
 
+/* Encabezado */
 header {
-  background: #0077cc;
+  background: linear-gradient(135deg, #0077cc, #005fa3);
   color: white;
-  padding: 20px;
+  padding: 25px;
   text-align: center;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2em;
 }
 
 header .subtitle {
   font-size: 1.2em;
-  margin-top: 5px;
+  margin-top: 8px;
   font-weight: 300;
+  opacity: 0.9;
 }
 
+/* Contenido */
 main {
   padding: 20px;
   max-width: 900px;
@@ -28,32 +37,58 @@ main {
 }
 
 section {
-  margin-bottom: 30px;
+  margin-bottom: 35px;
 }
 
 .bloque, .objetivos {
   background: white;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
 }
 
-h1, h2 {
+.bloque:hover, .objetivos:hover {
+  transform: scale(1.01);
+}
+
+h2 {
+  color: #005fa3;
+  margin-top: 0;
+}
+
+h3 {
   color: #0077cc;
+  margin-bottom: 8px;
 }
 
+/* Bloques destacados */
 blockquote {
   background: #eef6ff;
   border-left: 5px solid #0077cc;
   margin: 15px 0;
-  padding: 10px;
+  padding: 12px 15px;
   font-style: italic;
+  border-radius: 5px;
 }
 
+/* Links y botones */
+a {
+  color: #0077cc;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
 footer {
   background: #333;
   color: white;
   text-align: center;
   padding: 15px;
-  margin-top: 30px;
+  margin-top: 40px;
+  font-size: 0.9em;
 }

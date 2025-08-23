@@ -4,7 +4,10 @@
   <meta charset="UTF-8">
   <title>Curso de Inglés Básico</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.auth0.com/js/auth0-spa-js/1.33/auth0-spa-js.production.js"></script>
+
+  <!-- SDK Auth0 actualizado -->
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+
   <style>
     #login-btn, #logout-btn { 
       padding: 10px 20px; 
@@ -28,7 +31,7 @@
   </header>
 
   <main id="content">
-    <!-- Aquí se mostrará el contenido -->
+    <!-- El contenido solo se mostrará a usuarios autorizados -->
   </main>
 
   <footer>
@@ -36,7 +39,7 @@
   </footer>
 
   <script>
-    const allowedUsers = ["juanito.perez@gmail.com"]; // lista de usuarios autorizados
+    const allowedUsers = ["juanito.perez@gmail.com"];
     let auth0 = null;
 
     const loginBtn = document.getElementById("login-btn");
@@ -48,7 +51,6 @@
         client_id: "ZcgIAj7vMvtUixpX421Jv6gs4YrakeC7"
       });
 
-      // Manejar callback de Auth0 después del login
       if (window.location.search.includes("code=") && window.location.search.includes("state=")) {
         await auth0.handleRedirectCallback();
         window.history.replaceState({}, document.title, window.location.pathname);
@@ -58,14 +60,12 @@
 
       if (isAuthenticated) {
         const user = await auth0.getUser();
-        console.log("Usuario autenticado:", user); // 👈 debug en consola
-
         if (!allowedUsers.includes(user.email)) {
-          document.getElementById("content").innerHTML = `<h2>Acceso denegado para ${user.email}</h2>`;
+          document.getElementById("content").innerHTML = "<h2>Acceso denegado</h2>";
           loginBtn.style.display = "none";
-          logoutBtn.style.display = "inline-block";
+          logoutBtn.style.display = "none";
         } else {
-          showContent(user.email);
+          showContent();
           loginBtn.style.display = "none";
           logoutBtn.style.display = "inline-block";
         }
@@ -75,9 +75,8 @@
       }
     }
 
-    function showContent(email) {
+    function showContent() {
       document.getElementById("content").innerHTML = `
-        <h2>Bienvenido, ${email}</h2>
         <section>
           <h2>Clases disponibles</h2>
           <ul>
@@ -90,4 +89,18 @@
     }
 
     loginBtn.addEventListener("click", async () => {
-      await
+      await auth0.loginWithRedirect({
+        redirect_uri: window.location.origin
+      });
+    });
+
+    logoutBtn.addEventListener("click", () => {
+      auth0.logout({
+        returnTo: window.location.origin
+      });
+    });
+
+    window.onload = initAuth;
+  </script>
+</body>
+</html>

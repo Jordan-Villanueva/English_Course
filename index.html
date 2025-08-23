@@ -28,7 +28,7 @@
   </header>
 
   <main id="content">
-    <!-- El contenido solo se mostrará a usuarios autorizados -->
+    <!-- Aquí se mostrará el contenido -->
   </main>
 
   <footer>
@@ -36,7 +36,7 @@
   </footer>
 
   <script>
-    const allowedUsers = ["juanito.perez@gmail.com"]; // emails autorizados
+    const allowedUsers = ["juanito.perez@gmail.com"]; // lista de usuarios autorizados
     let auth0 = null;
 
     const loginBtn = document.getElementById("login-btn");
@@ -48,7 +48,7 @@
         client_id: "ZcgIAj7vMvtUixpX421Jv6gs4YrakeC7"
       });
 
-      // Callback de redirección
+      // Manejar callback de Auth0 después del login
       if (window.location.search.includes("code=") && window.location.search.includes("state=")) {
         await auth0.handleRedirectCallback();
         window.history.replaceState({}, document.title, window.location.pathname);
@@ -58,12 +58,14 @@
 
       if (isAuthenticated) {
         const user = await auth0.getUser();
+        console.log("Usuario autenticado:", user); // 👈 debug en consola
+
         if (!allowedUsers.includes(user.email)) {
-          document.getElementById("content").innerHTML = "<h2>Acceso denegado</h2>";
+          document.getElementById("content").innerHTML = `<h2>Acceso denegado para ${user.email}</h2>`;
           loginBtn.style.display = "none";
-          logoutBtn.style.display = "none";
+          logoutBtn.style.display = "inline-block";
         } else {
-          showContent();
+          showContent(user.email);
           loginBtn.style.display = "none";
           logoutBtn.style.display = "inline-block";
         }
@@ -73,8 +75,9 @@
       }
     }
 
-    function showContent() {
+    function showContent(email) {
       document.getElementById("content").innerHTML = `
+        <h2>Bienvenido, ${email}</h2>
         <section>
           <h2>Clases disponibles</h2>
           <ul>
@@ -87,18 +90,4 @@
     }
 
     loginBtn.addEventListener("click", async () => {
-      await auth0.loginWithRedirect({
-        redirect_uri: window.location.origin
-      });
-    });
-
-    logoutBtn.addEventListener("click", () => {
-      auth0.logout({
-        returnTo: window.location.origin
-      });
-    });
-
-    initAuth();
-  </script>
-</body>
-</html>
+      await

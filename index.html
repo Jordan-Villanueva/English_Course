@@ -4,10 +4,7 @@
   <meta charset="UTF-8">
   <title>Curso de Inglés Básico</title>
   <link rel="stylesheet" href="style.css">
-
-  <!-- SDK Auth0 actualizado -->
   <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
-
   <style>
     #login-btn, #logout-btn { 
       padding: 10px 20px; 
@@ -42,15 +39,29 @@
     const allowedUsers = ["juanito.perez@gmail.com"];
     let auth0 = null;
 
-    const loginBtn = document.getElementById("login-btn");
-    const logoutBtn = document.getElementById("logout-btn");
-
     async function initAuth() {
       auth0 = await createAuth0Client({
         domain: "dev-bjoqtux6wua5w2l2.us.auth0.com",
         client_id: "ZcgIAj7vMvtUixpX421Jv6gs4YrakeC7"
       });
 
+      const loginBtn = document.getElementById("login-btn");
+      const logoutBtn = document.getElementById("logout-btn");
+
+      // Agregar listeners **después de inicializar auth0**
+      loginBtn.addEventListener("click", async () => {
+        await auth0.loginWithRedirect({
+          redirect_uri: window.location.origin
+        });
+      });
+
+      logoutBtn.addEventListener("click", () => {
+        auth0.logout({
+          returnTo: window.location.origin
+        });
+      });
+
+      // Manejar callback de redirección
       if (window.location.search.includes("code=") && window.location.search.includes("state=")) {
         await auth0.handleRedirectCallback();
         window.history.replaceState({}, document.title, window.location.pathname);
@@ -87,18 +98,6 @@
         </section>
       `;
     }
-
-    loginBtn.addEventListener("click", async () => {
-      await auth0.loginWithRedirect({
-        redirect_uri: window.location.origin
-      });
-    });
-
-    logoutBtn.addEventListener("click", () => {
-      auth0.logout({
-        returnTo: window.location.origin
-      });
-    });
 
     window.onload = initAuth;
   </script>

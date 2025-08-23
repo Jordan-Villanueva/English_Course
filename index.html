@@ -36,7 +36,7 @@
   </footer>
 
   <script>
-    const allowedUsers = ["juanito.perez@gmail.com"]; // usuarios autorizados
+    const allowedUsers = ["juanito.perez@gmail.com"]; // emails autorizados
     let auth0 = null;
 
     const loginBtn = document.getElementById("login-btn");
@@ -48,7 +48,7 @@
         client_id: "ZcgIAj7vMvtUixpX421Jv6gs4YrakeC7"
       });
 
-      // Manejar callback de Auth0
+      // Callback de redirección
       if (window.location.search.includes("code=") && window.location.search.includes("state=")) {
         await auth0.handleRedirectCallback();
         window.history.replaceState({}, document.title, window.location.pathname);
@@ -63,13 +63,11 @@
           loginBtn.style.display = "none";
           logoutBtn.style.display = "none";
         } else {
-          // Usuario autorizado
           showContent();
           loginBtn.style.display = "none";
           logoutBtn.style.display = "inline-block";
         }
       } else {
-        // No autenticado, mostrar botón de login
         loginBtn.style.display = "inline-block";
         logoutBtn.style.display = "none";
       }
@@ -100,7 +98,6 @@
       });
     });
 
-    // Inicializar Auth0 al cargar
     initAuth();
   </script>
 </body>

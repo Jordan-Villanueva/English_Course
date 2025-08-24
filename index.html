@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <title>Curso de Inglés Básico</title>
   <link rel="stylesheet" href="style.css">
-<script src="https://cdn.jsdelivr.net/npm/@auth0/auth0-spa-js@2.8.0/dist/auth0-spa-js.production.js"></script>
+  <!-- CDN público estable de Auth0 -->
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/1.33/auth0-spa-js.production.js"></script>
   <style>
     #login-btn, #logout-btn { 
       padding: 10px 20px; 
@@ -22,7 +23,7 @@
     <h1>Curso de Inglés Básico</h1>
     <p class="subtitle">Aprende paso a paso desde cero</p>
     <div>
-      <button id="login-btn">Iniciar sesión</button>
+      <button id="login-btn" style="display:none;">Iniciar sesión</button>
       <button id="logout-btn" style="display:none;">Cerrar sesión</button>
     </div>
   </header>
@@ -39,7 +40,8 @@
     const allowedUsers = ["juanito.perez@gmail.com"]; // emails autorizados
     let auth0 = null;
 
-    window.onload = async function initAuth() {
+    async function initAuth() {
+      // Crear cliente Auth0
       auth0 = await createAuth0Client({
         domain: "dev-bjoqtux6wua5w2l2.us.auth0.com",
         client_id: "ZcgIAj7vMvtUixpX421Jv6gs4YrakeC7"
@@ -50,15 +52,11 @@
 
       // Event listeners
       loginBtn.addEventListener("click", async () => {
-        await auth0.loginWithRedirect({
-          redirect_uri: window.location.origin
-        });
+        await auth0.loginWithRedirect({ redirect_uri: window.location.origin });
       });
 
       logoutBtn.addEventListener("click", () => {
-        auth0.logout({
-          returnTo: window.location.origin
-        });
+        auth0.logout({ returnTo: window.location.origin });
       });
 
       // Manejar callback de Auth0
@@ -77,17 +75,15 @@
           loginBtn.style.display = "none";
           logoutBtn.style.display = "none";
         } else {
-          // Usuario autorizado, mostrar contenido
           showContent();
           loginBtn.style.display = "none";
           logoutBtn.style.display = "inline-block";
         }
       } else {
-        // Usuario no autenticado
         loginBtn.style.display = "inline-block";
         logoutBtn.style.display = "none";
       }
-    };
+    }
 
     function showContent() {
       document.getElementById("content").innerHTML = `
@@ -101,6 +97,8 @@
         </section>
       `;
     }
+
+    window.onload = initAuth;
   </script>
 </body>
 </html>

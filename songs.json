@@ -1,15 +1,43 @@
 {
   "pop": [
-    {"title": "Hello Hello", "artist": "Super Simple Songs", "youtube_url": "https://www.youtube.com/watch?v=7dN5pV0k-l8"},
-    {"title": "What's Your Name?", "artist": "Maple Leaf Learning", "youtube_url": "https://www.youtube.com/watch?v=H_h8dQX8m1s"},
-    {"title": "Good Morning Song", "artist": "The Kiboomers", "youtube_url": "https://www.youtube.com/watch?v=09Nynlz1bqA"}
+    {
+      "title": "Hello",
+      "artist": "Adele",
+      "youtube_url": "https://www.youtube.com/watch?v=YQHsXMglC9A"
+    },
+    {
+      "title": "I’m Yours",
+      "artist": "Jason Mraz",
+      "youtube_url": "https://www.youtube.com/watch?v=EkHTsc9PU2A"
+    },
+    {
+      "title": "Good Time",
+      "artist": "Owl City & Carly Rae Jepsen",
+      "youtube_url": "https://www.youtube.com/watch?v=H7HmzwI67ec"
+    }
   ],
   "rock": [
-    {"title": "Hello Song", "artist": "Pinkfong", "youtube_url": "https://www.youtube.com/watch?v=d0Dsq9pQWFU"},
-    {"title": "Goodbye Song", "artist": "Super Simple Songs", "youtube_url": "https://www.youtube.com/watch?v=j-ZfQ1O2mnk"}
+    {
+      "title": "Hey Jude",
+      "artist": "The Beatles",
+      "youtube_url": "https://www.youtube.com/watch?v=A_MjCqQoLLA"
+    },
+    {
+      "title": "With a Little Help from My Friends",
+      "artist": "The Beatles",
+      "youtube_url": "https://www.youtube.com/watch?v=sgabJ2xOM64"
+    }
   ],
   "ballads": [
-    {"title": "Hello, How Are You?", "artist": "Maple Leaf Learning", "youtube_url": "https://www.youtube.com/watch?v=7JQ9V3vGf2c"},
-    {"title": "I Am Happy", "artist": "Super Simple Songs", "youtube_url": "https://www.youtube.com/watch?v=Zg2l4Jlq7lE"}
+    {
+      "title": "You Are My Sunshine",
+      "artist": "Johnny Cash",
+      "youtube_url": "https://www.youtube.com/watch?v=3Eqm5i8UnfE"
+    },
+    {
+      "title": "Hello, Goodbye",
+      "artist": "The Beatles",
+      "youtube_url": "https://www.youtube.com/watch?v=YqZlqLJ4Tj8"
+    }
   ]
 }

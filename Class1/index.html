@@ -74,12 +74,17 @@
       <iframe width="560" height="315" src="https://www.youtube.com/embed/ImOoyoLmGUI" frameborder="0" allowfullscreen></iframe>
     </section>
 
-   <!-- Song Practice -->
+<!-- Song Practice -->
 <section class="bloque">
-  <h2>4. Song Practice (10 min)</h2>
-  <p>Escucha y repite solo frases cortas del coro. Sigue los subtítulos si los hay.</p>
-  <div id="song-accordion"></div>
+  <h2>4. Song Practice (15 min)</h2>
+  <p>Escucha la canción y completa la letra usando LyricsTraining:</p>
+
+  <!-- Aquí el iframe de LyricsTraining -->
+  <iframe src="https://lyricstraining.com/play/adele/hello/H9j2bK5U#es"
+          width="800" height="600" frameborder="0" allowfullscreen>
+  </iframe>
 </section>
+
 
     <!-- Ejercicios -->
     <section class="bloque">
@@ -113,52 +118,5 @@
   </footer>
 
   <!-- Script para Song Practice -->
-  
-<script>
-  const songAccordion = document.getElementById("song-accordion");
-
-  fetch("../songs.json")
-    .then(res => res.json())
-    .then(data => {
-      // Solo incluimos unas pocas canciones fáciles por género
-      const beginnerSongs = {
-        pop: data.pop.slice(0, 3),
-        rock: data.rock.slice(0, 2),
-        ballads: data.ballads.slice(0, 2)
-      };
-      renderAccordion(beginnerSongs);
-    })
-    .catch(err => console.error("Error cargando songs.json:", err));
-
-  function renderAccordion(data) {
-    Object.keys(data).forEach(genre => {
-      const genreDiv = document.createElement("div");
-      genreDiv.className = "genre-block";
-
-      const title = document.createElement("button");
-      title.textContent = genre.charAt(0).toUpperCase() + genre.slice(1);
-      title.className = "accordion-btn";
-      title.onclick = () => {
-        const content = genreDiv.querySelector(".songs-list");
-        content.style.display = content.style.display === "block" ? "none" : "block";
-      };
-      genreDiv.appendChild(title);
-
-      const list = document.createElement("div");
-      list.className = "songs-list";
-
-      data[genre].forEach(song => {
-        const div = document.createElement("div");
-        div.className = "song-item";
-        div.innerHTML = `<strong>${song.title}</strong> - ${song.artist}<br>
-                         <a href="${song.youtube_url}" target="_blank">Ver video con subtítulos</a>`;
-        list.appendChild(div);
-      });
-
-      genreDiv.appendChild(list);
-      songAccordion.appendChild(genreDiv);
-    });
-  }
-</script>
 </body>
 </html>

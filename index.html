@@ -34,24 +34,23 @@
     <p>Curso de Inglés Básico — Creado por Jordan</p>
   </footer>
 
-  <!-- 1. Cargar la librería de Auth0 -->
-<script src="https://cdn.auth0.com/js/auth0-spa-js/1.26/auth0-spa-js.production.js"></script>
+  <!-- Cargar la librería de Auth0 desde CDN -->
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/1.26/auth0-spa-js.production.js"></script>
 
-  <!-- 2. Tu inicialización -->
+  <!-- Tu script, esperando a que todo cargue -->
   <script>
-    const allowedUsers = ["juanito.perez@gmail.com"]; // emails autorizados
-    let auth0 = null;
+    window.addEventListener('load', async () => {
+      if (!window.createAuth0Client) {
+        console.error("Auth0 no se cargó correctamente desde el CDN");
+        return;
+      }
 
-    window.addEventListener('DOMContentLoaded', async () => {
-      console.log("Inicializando Auth0...");
-
-      // Crear instancia de Auth0
-      auth0 = await createAuth0Client({
+      const allowedUsers = ["juanito.perez@gmail.com"];
+      const auth0 = await createAuth0Client({
         domain: "dev-bjoqtux6wua5w2l2.us.auth0.com",
-        client_id: "ZcgIAj7vMvtUixpX421Jv6gs4YrakeC7"
+        client_id: "ZcgIAj7vMvtUixpX421Jv6gs4YrakeC7",
+        redirect_uri: window.location.origin
       });
-
-      console.log("Auth0 cargado correctamente", auth0);
 
       const loginBtn = document.getElementById("login-btn");
       const logoutBtn = document.getElementById("logout-btn");
@@ -62,7 +61,6 @@
         window.history.replaceState({}, document.title, window.location.pathname);
       }
 
-      // Verificar autenticación
       const isAuthenticated = await auth0.isAuthenticated();
 
       if (isAuthenticated) {
@@ -74,7 +72,7 @@
           loginBtn.style.display = "none";
           logoutBtn.style.display = "none";
         } else {
-          // Usuario autorizado, mostrar contenido
+          // Usuario autorizado
           showContent();
           loginBtn.style.display = "none";
           logoutBtn.style.display = "inline-block";
@@ -86,17 +84,8 @@
       }
 
       // Event listeners
-      loginBtn.addEventListener("click", async () => {
-        await auth0.loginWithRedirect({
-          redirect_uri: window.location.origin
-        });
-      });
-
-      logoutBtn.addEventListener("click", () => {
-        auth0.logout({
-          returnTo: window.location.origin
-        });
-      });
+      loginBtn.addEventListener("click", () => auth0.loginWithRedirect());
+      logoutBtn.addEventListener("click", () => auth0.logout({ returnTo: window.location.origin }));
     });
 
     function showContent() {

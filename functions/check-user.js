@@ -5,9 +5,9 @@ exports.handler = async (event) => {
 
   try {
     const decoded = jwt.decode(token); // solo decode, no verify con secret
-    const allowedUsers = ["juanito.perez@gmail.com"];
 
-    if (decoded && allowedUsers.includes(decoded.email)) {
+    // Temporal: cualquier usuario es autorizado
+    if (decoded) {
       return { statusCode: 200, body: JSON.stringify({ authorized: true }) };
     } else {
       return { statusCode: 200, body: JSON.stringify({ authorized: false }) };

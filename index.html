@@ -44,7 +44,7 @@
     const REDIRECT_URI = window.location.origin;
 
     loginBtn.onclick = () => {
-      const authUrl = `https://${AUTH0_DOMAIN}/authorize?response_type=token&client_id=${AUTH0_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=openid%20email%20profile`;
+      const authUrl = `https://${AUTH0_DOMAIN}/authorize?response_type=token&client_id=${AUTH0_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=openid%20profile`;
       window.location.href = authUrl;
     };
 
@@ -72,34 +72,18 @@
     }
 
     async function checkUser() {
-      const token = localStorage.getItem("access_token");
-      if (!token) return;
-
-      const res = await fetch("/functions/check-user", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token })
-      });
-
-      const data = await res.json();
-
-      if (data.authorized) {
-        content.innerHTML = `
-          <section>
-            <h2>Clases disponibles</h2>
-            <ul>
-              <li><a href="Class1/index.html">Clase 1: Presentaciones, saludos y despedidas</a></li>
-              <li><a href="Class2/index.html">Clase 2: (próximamente)</a></li>
-            </ul>
-          </section>
-        `;
-        loginBtn.style.display = "none";
-        logoutBtn.style.display = "inline-block";
-      } else {
-        content.innerHTML = "<h2>Acceso denegado</h2>";
-        loginBtn.style.display = "inline-block";
-        logoutBtn.style.display = "none";
-      }
+      // Temporal: cualquier usuario autorizado
+      content.innerHTML = `
+        <section>
+          <h2>Clases disponibles</h2>
+          <ul>
+            <li><a href="Class1/index.html">Clase 1: Presentaciones, saludos y despedidas</a></li>
+            <li><a href="Class2/index.html">Clase 2: (próximamente)</a></li>
+          </ul>
+        </section>
+      `;
+      loginBtn.style.display = "none";
+      logoutBtn.style.display = "inline-block";
     }
 
     if (parseHash() || localStorage.getItem("access_token")) {

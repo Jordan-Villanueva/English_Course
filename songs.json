@@ -1,0 +1,69 @@
+{
+  "pop": [
+    {"title": "Shape of You", "artist": "Ed Sheeran", "youtube_url": "https://www.youtube.com/watch?v=JGwWNGJdvx8"},
+    {"title": "Blinding Lights", "artist": "The Weeknd", "youtube_url": "https://www.youtube.com/watch?v=4NRXx6U8ABQ"},
+    {"title": "Levitating", "artist": "Dua Lipa", "youtube_url": "https://www.youtube.com/watch?v=TUVcZfQe-Kw"},
+    {"title": "Watermelon Sugar", "artist": "Harry Styles", "youtube_url": "https://www.youtube.com/watch?v=E07s5ZYygMg"},
+    {"title": "Bad Habits", "artist": "Ed Sheeran", "youtube_url": "https://www.youtube.com/watch?v=orJSJGHjBLI"},
+    {"title": "Good 4 U", "artist": "Olivia Rodrigo", "youtube_url": "https://www.youtube.com/watch?v=gNi_6U5Pm_o"},
+    {"title": "Stay", "artist": "The Kid LAROI & Justin Bieber", "youtube_url": "https://www.youtube.com/watch?v=kTJczUoc26U"},
+    {"title": "Peaches", "artist": "Justin Bieber ft. Daniel Caesar, Giveon", "youtube_url": "https://www.youtube.com/watch?v=tQ0yjYUFKAE"},
+    {"title": "Kiss Me More", "artist": "Doja Cat ft. SZA", "youtube_url": "https://www.youtube.com/watch?v=0EVVKs6DQLo"},
+    {"title": "Save Your Tears", "artist": "The Weeknd", "youtube_url": "https://www.youtube.com/watch?v=XXYlFuWEuKI"}
+  ],
+  "rock": [
+    {"title": "Bohemian Rhapsody", "artist": "Queen", "youtube_url": "https://www.youtube.com/watch?v=fJ9rUzIMcZQ"},
+    {"title": "Smells Like Teen Spirit", "artist": "Nirvana", "youtube_url": "https://www.youtube.com/watch?v=hTWKbfoikeg"},
+    {"title": "Hotel California", "artist": "Eagles", "youtube_url": "https://www.youtube.com/watch?v=EqPtz5qN7HM"},
+    {"title": "Stairway to Heaven", "artist": "Led Zeppelin", "youtube_url": "https://www.youtube.com/watch?v=QkF3oxziUI4"},
+    {"title": "Sweet Child O' Mine", "artist": "Guns N' Roses", "youtube_url": "https://www.youtube.com/watch?v=1w7OgIMMRc4"},
+    {"title": "Livin' on a Prayer", "artist": "Bon Jovi", "youtube_url": "https://www.youtube.com/watch?v=lDK9QqIzhwk"},
+    {"title": "Don't Stop Believin'", "artist": "Journey", "youtube_url": "https://www.youtube.com/watch?v=1k8craCGpgs"},
+    {"title": "Another Brick in the Wall", "artist": "Pink Floyd", "youtube_url": "https://www.youtube.com/watch?v=YR5ApYxkU-U"},
+    {"title": "Back in Black", "artist": "AC/DC", "youtube_url": "https://www.youtube.com/watch?v=pAgnJDJN4VA"},
+    {"title": "Paint It Black", "artist": "The Rolling Stones", "youtube_url": "https://www.youtube.com/watch?v=O4irXQhgMqg"}
+  ],
+  "hiphop": [
+    {"title": "Lose Yourself", "artist": "Eminem", "youtube_url": "https://www.youtube.com/watch?v=_Yhyp-_hX2s"},
+    {"title": "Sicko Mode", "artist": "Travis Scott", "youtube_url": "https://www.youtube.com/watch?v=6ONRf7h3Mdk"},
+    {"title": "HUMBLE.", "artist": "Kendrick Lamar", "youtube_url": "https://www.youtube.com/watch?v=tvTRZJ-4EyI"},
+    {"title": "God's Plan", "artist": "Drake", "youtube_url": "https://www.youtube.com/watch?v=xpVfcZ0ZcFM"},
+    {"title": "Old Town Road", "artist": "Lil Nas X", "youtube_url": "https://www.youtube.com/watch?v=r7qovpFAGrQ"},
+    {"title": "Hotline Bling", "artist": "Drake", "youtube_url": "https://www.youtube.com/watch?v=uxpDa-c-4Mc"},
+    {"title": "Sicko Mode", "artist": "Travis Scott", "youtube_url": "https://www.youtube.com/watch?v=6ONRf7h3Mdk"},
+    {"title": "Money Trees", "artist": "Kendrick Lamar ft. Jay Rock", "youtube_url": "https://www.youtube.com/watch?v=5feu5zQ5ZyI"},
+    {"title": "DNA.", "artist": "Kendrick Lamar", "youtube_url": "https://www.youtube.com/watch?v=NLZRYQMLDW4"},
+    {"title": "Bad and Boujee", "artist": "Migos ft. Lil Uzi Vert", "youtube_url": "https://www.youtube.com/watch?v=4xkG9gJwG7M"}
+  ],
+  "jazz": [
+    {"title": "Take Five", "artist": "Dave Brubeck", "youtube_url": "https://www.youtube.com/watch?v=vmDDOFXSgAs"},
+    {"title": "So What", "artist": "Miles Davis", "youtube_url": "https://www.youtube.com/watch?v=zqNT7CvlrN4"},
+    {"title": "Feeling Good", "artist": "Nina Simone", "youtube_url": "https://www.youtube.com/watch?v=D5Y11hwjMNs"},
+    {"title": "Fly Me to the Moon", "artist": "Frank Sinatra", "youtube_url": "https://www.youtube.com/watch?v=ZEcq7n6Xz0k"},
+    {"title": "What a Wonderful World", "artist": "Louis Armstrong", "youtube_url": "https://www.youtube.com/watch?v=A3yCcXgbKrE"},
+    {"title": "Autumn Leaves", "artist": "Nat King Cole", "youtube_url": "https://www.youtube.com/watch?v=G1zFqW4yRzY"},
+    {"title": "All of Me", "artist": "Billie Holiday", "youtube_url": "https://www.youtube.com/watch?v=3vZg5Y9Q0Z4"},
+    {"title": "Summertime", "artist": "Ella Fitzgerald & Louis Armstrong", "youtube_url": "https://www.youtube.com/watch?v=9t5vQ6g7qzA"},
+    {"title": "My Favorite Things", "artist": "John Coltrane", "youtube_url": "https://www.youtube.com/watch?v=Z5rRZdiuR6g"},
+    {"title": "Blue in Green", "artist": "Miles Davis", "youtube_url": "https://www.youtube.com/watch?v=PoPL7BExSQU"}
+  ],
+  "electronic": [
+    {"title": "Strobe", "artist": "Deadmau5", "youtube_url": "https://www.youtube.com/watch?v=tKi9Z-f6qX4"},
+    {"title": "Wake Me Up", "artist": "Avicii", "youtube_url": "https://www.youtube.com/watch?v=IcrbM1l_BoI"},
+    {"title": "Titanium", "artist": "David Guetta ft. Sia", "youtube_url": "https://www.youtube.com/watch?v=JRfuAukYTKg"},
+    {"title": "Lean On", "artist": "Major Lazer & DJ Snake ft. MØ", "youtube_url": "https://www.youtube.com/watch?v=YqeW9_5kURI"},
+    {"title": "Animals", "artist": "Martin Garrix", "youtube_url": "https://www.youtube.com/watch?v=gCYcHz2k5x0"},
+    {"title": "Wake Me Up", "artist": "Avicii", "youtube_url": "https://www.youtube.com/watch?v=IcrbM1l_BoI"},
+    {"title": "Clarity", "artist": "Zedd ft. Foxes", "youtube_url": "https://www.youtube.com/watch?v=IxxstCcJlsc"},
+    {"title": "Don't You Worry Child", "artist": "Swedish House Mafia ft. John Martin", "youtube_url": "https://www.youtube.com/watch?v=1y6smkh6c-0"},
+    {"title": "Turn Down for What", "artist": "DJ Snake & Lil Jon", "youtube_url": "https://www.youtube.com/watch?v=HMUDVMiITOU"},
+    {"title": "Scared to Be Lonely", "artist": "Martin Garrix & Dua Lipa", "youtube_url": "https://www.youtube.com/watch?v=I5pBq0v8yWg"}
+  ],
+  "ballads": [
+    {"title": "I Will Always Love You", "artist": "Whitney Houston", "youtube_url": "https://www.youtube.com/watch?v=3JWTaaS7LdU"},
+    {"title": "My Heart Will Go On", "artist": "Celine Dion", "youtube_url": "https://www.youtube.com/watch?v=WNIPqafd4As"},
+    {"title": "Endless Love", "artist": "Diana Ross & Lionel Richie", "youtube_url": "https://www.youtube.com/watch?v=ZIU8B1Gv6tI"},
+    {"title": "Unchained Melody", "artist": "The Righteous Brothers", "youtube_url": "https://www.youtube.com/watch?v=qiiyq2xrSI0"},
+    {"title": "Someone Like You", "artist": "Adele", "youtube_url": "
+::contentReference[oaicite:0]{index=0}
+ 

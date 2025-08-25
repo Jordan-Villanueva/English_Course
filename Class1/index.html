@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Clase 1 - Curso de Inglés</title>
-<link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .song-item { margin-bottom: 10px; }
+    .song-item a { font-weight: bold; color: #0077cc; }
+    .genre-btn { margin: 5px; padding: 5px 10px; cursor: pointer; background-color: #eee; border-radius: 5px; border: none; }
+    .genre-btn.active { background-color: #0077cc; color: white; }
+  </style>
 </head>
 <body>
   <header>
@@ -12,6 +18,7 @@
   </header>
 
   <main>
+    <!-- Objetivos -->
     <section class="objetivos">
       <h2>🎯 Objetivos de la clase</h2>
       <ul>
@@ -20,9 +27,9 @@
       </ul>
     </section>
 
+    <!-- Warm-up -->
     <section class="bloque">
       <h2>1. Warm-up / Icebreaker (10 min)</h2>
-      <p><strong>Presentación tuya en inglés:</strong></p>
       <blockquote>
         Hello, my name is Jordan. I’m from Mexico.  
         I'm a physicist and software developer and I love movies and teaching.
@@ -30,8 +37,9 @@
       <p><em>Greeting, What's your name? Where are you from? What do you like and what do you do?</em></p>
     </section>
 
+    <!-- Vocabulario -->
     <section class="bloque">
-      <h2>2. Introducción de vocabulario básico (15 min)</h2>
+      <h2>2. Vocabulario y pronombres (15 min)</h2>
       <h3>Saludos / Greetings</h3>
       <p>Hello, Hi, Good morning, Good afternoon, Good evening, Good night</p>
       <h3>Despedidas / Farewells</h3>
@@ -39,25 +47,31 @@
       <h3>Pronombres personales + verbo "To be"</h3>
       <p>I am, You are, He/She is, We are, You are, They are, It is</p>
       <h3>Pronombres posesivos</h3>
-      <p>My, your, his/her</p>
+      <p>Your, His, Her</p>
     </section>
 
+    <!-- Listening / Videos modelados -->
     <section class="bloque">
       <h2>3. Listening / Modelado (20 min)</h2>
-      <h3>Video 1</h3>
       <iframe width="560" height="315" src="https://www.youtube.com/embed/RL8pLS8cUOs" frameborder="0" allowfullscreen></iframe>
-
-      <h3>Video 2</h3>
       <iframe width="560" height="315" src="https://www.youtube.com/embed/ImOoyoLmGUI" frameborder="0" allowfullscreen></iframe>
     </section>
 
+    <!-- Song Practice -->
     <section class="bloque">
-      <h2>4. Introducción de “Where are you from?” (10 min)</h2>
+      <h2>4. Song Practice</h2>
+      <div id="genre-buttons"></div>
+      <div id="song-list"></div>
+    </section>
+
+    <!-- Ejercicios -->
+    <section class="bloque">
+      <h2>5. Introducción de “Where are you from?” (10 min)</h2>
       <iframe width="560" height="315" src="https://www.youtube.com/embed/byqOkm6-SCc" frameborder="0" allowfullscreen></iframe>
     </section>
 
     <section class="bloque">
-      <h2>5. Mini writing / journaling (20 min)</h2>
+      <h2>6. Mini writing / journaling (10-15 min)</h2>
       <ul>
         <li>Hello, my name is ___.</li>
         <li>I’m from ___.</li>
@@ -66,20 +80,64 @@
     </section>
 
     <section class="bloque">
-      <h2>6. Speaking en grupo (20 min)</h2>
+      <h2>7. Speaking en grupo (15-20 min)</h2>
       <p>Cada alumno se presenta frente al grupo usando las frases vistas, incluyendo la pregunta <em>Where are you from?</em></p>
     </section>
 
     <section class="bloque">
-  <h2>7. Actividad de cierre (15 min)</h2>
-  <p>Resuelve el siguiente ejercicio:</p>
-  <img src="cierre.png" alt="Actividad de cierre: Completar diálogos" width="600" style="border: 2px solid #ccc; border-radius: 10px;">
+      <h2>8. Actividad de cierre (10-15 min)</h2>
+      <p>Resuelve el siguiente ejercicio:</p>
+      <img src="cierre.png" alt="Actividad de cierre: Completar diálogos" width="600" style="border: 2px solid #ccc; border-radius: 10px;">
     </section>
-
   </main>
 
   <footer>
     <p>Curso de Inglés Básico — Creado por Jordan Ortiz</p>
   </footer>
+
+  <script>
+    const genreButtonsDiv = document.getElementById("genre-buttons");
+    const songListDiv = document.getElementById("song-list");
+    let allSongs = [];
+
+    fetch("../songs.json")
+      .then(res => res.json())
+      .then(data => {
+        allSongs = data.songs;
+        renderGenreButtons();
+        renderSongs(allSongs);
+      });
+
+    function renderGenreButtons() {
+      const genres = [...new Set(allSongs.map(s => s.genre))];
+      genres.unshift("All");
+      genres.forEach(genre => {
+        const btn = document.createElement("button");
+        btn.textContent = genre;
+        btn.className = "genre-btn";
+        if(genre==="All") btn.classList.add("active");
+        btn.onclick = () => filterSongs(genre, btn);
+        genreButtonsDiv.appendChild(btn);
+      });
+    }
+
+    function filterSongs(genre, btn) {
+      document.querySelectorAll(".genre-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      if(genre === "All") renderSongs(allSongs);
+      else renderSongs(allSongs.filter(s => s.genre === genre));
+    }
+
+    function renderSongs(songs) {
+      songListDiv.innerHTML = "";
+      songs.forEach(song => {
+        const div = document.createElement("div");
+        div.className = "song-item";
+        div.innerHTML = `<a href="${song.url}" target="_blank">${song.title}</a> (${song.genre})<br>
+                         Subtítulos: <a href="${song.subtitles}" target="_blank">Ver</a>`;
+        songListDiv.appendChild(div);
+      });
+    }
+  </script>
 </body>
 </html>

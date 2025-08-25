@@ -21,85 +21,92 @@
     <h1>Curso de Inglés Básico</h1>
     <p class="subtitle">Aprende paso a paso desde cero</p>
     <div>
-      <button id="login-btn" style="display:none;">Iniciar sesión</button>
+      <button id="login-btn">Iniciar sesión</button>
       <button id="logout-btn" style="display:none;">Cerrar sesión</button>
     </div>
   </header>
 
   <main id="content">
-    <!-- Contenido solo visible a usuarios autorizados -->
+    <p>Por favor, inicia sesión para acceder al curso.</p>
   </main>
 
   <footer>
     <p>Curso de Inglés Básico — Creado por Jordan</p>
   </footer>
 
-  <!-- Cargar la librería de Auth0 desde CDN -->
-  <script src="https://cdn.auth0.com/js/auth0-spa-js/1.26/auth0-spa-js.production.js"></script>
-
-  <!-- Tu script, esperando a que todo cargue -->
   <script>
-    window.addEventListener('load', async () => {
-      if (!window.createAuth0Client) {
-        console.error("Auth0 no se cargó correctamente desde el CDN");
-        return;
-      }
+    const loginBtn = document.getElementById("login-btn");
+    const logoutBtn = document.getElementById("logout-btn");
+    const content = document.getElementById("content");
 
-      const allowedUsers = ["juanito.perez@gmail.com"];
-      const auth0 = await createAuth0Client({
-        domain: "dev-bjoqtux6wua5w2l2.us.auth0.com",
-        client_id: "ZcgIAj7vMvtUixpX421Jv6gs4YrakeC7",
-        redirect_uri: window.location.origin
+    // URL de Auth0
+    const AUTH0_DOMAIN = "dev-bjoqtux6wua5w2l2.us.auth0.com";
+    const AUTH0_CLIENT_ID = "ZcgIAj7vMvtUixpX421Jv6gs4YrakeC7";
+    const REDIRECT_URI = window.location.origin;
+
+    // Función para iniciar sesión
+    loginBtn.onclick = () => {
+      const authUrl = `https://${AUTH0_DOMAIN}/authorize?response_type=token&client_id=${AUTH0_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=openid%20email%20profile`;
+      window.location.href = authUrl;
+    };
+
+    // Función para cerrar sesión
+    logoutBtn.onclick = () => {
+      localStorage.removeItem("access_token");
+      content.innerHTML = "<p>Por favor, inicia sesión para acceder al curso.</p>";
+      loginBtn.style.display = "inline-block";
+      logoutBtn.style.display = "none";
+    };
+
+    // Función para leer hash de URL después del login
+    function parseHash() {
+      if (window.location.hash) {
+        const hash = window.location.hash.substr(1).split("&").reduce((res, item) => {
+          const parts = item.split("=");
+          res[parts[0]] = parts[1];
+          return res;
+        }, {});
+        if (hash.access_token) {
+          localStorage.setItem("access_token", hash.access_token);
+          window.location.hash = "";
+        }
+      }
+    }
+
+    async function checkUser() {
+      const token = localStorage.getItem("access_token");
+      if (!token) return;
+
+      // Llamada a Netlify Function que valida si el usuario está autorizado
+      const res = await fetch("/.netlify/functions/check-user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token })
       });
 
-      const loginBtn = document.getElementById("login-btn");
-      const logoutBtn = document.getElementById("logout-btn");
+      const data = await res.json();
 
-      // Manejar callback de redirección
-      if (window.location.search.includes("code=") && window.location.search.includes("state=")) {
-        await auth0.handleRedirectCallback();
-        window.history.replaceState({}, document.title, window.location.pathname);
-      }
-
-      const isAuthenticated = await auth0.isAuthenticated();
-
-      if (isAuthenticated) {
-        const user = await auth0.getUser();
-        console.log("Usuario autenticado:", user);
-
-        if (!allowedUsers.includes(user.email)) {
-          document.getElementById("content").innerHTML = "<h2>Acceso denegado</h2>";
-          loginBtn.style.display = "none";
-          logoutBtn.style.display = "none";
-        } else {
-          // Usuario autorizado
-          showContent();
-          loginBtn.style.display = "none";
-          logoutBtn.style.display = "inline-block";
-        }
+      if (data.authorized) {
+        content.innerHTML = `
+          <section>
+            <h2>Clases disponibles</h2>
+            <ul>
+              <li><a href="Class1/index.html">Clase 1: Presentaciones, saludos y despedidas</a></li>
+              <li><a href="Class2/index.html">Clase 2: (próximamente)</a></li>
+            </ul>
+          </section>
+        `;
+        loginBtn.style.display = "none";
+        logoutBtn.style.display = "inline-block";
       } else {
-        // Usuario no autenticado
+        content.innerHTML = "<h2>Acceso denegado</h2>";
         loginBtn.style.display = "inline-block";
         logoutBtn.style.display = "none";
       }
-
-      // Event listeners
-      loginBtn.addEventListener("click", () => auth0.loginWithRedirect());
-      logoutBtn.addEventListener("click", () => auth0.logout({ returnTo: window.location.origin }));
-    });
-
-    function showContent() {
-      document.getElementById("content").innerHTML = `
-        <section>
-          <h2>Clases disponibles</h2>
-          <ul>
-            <li><a href="Class1/index.html">Clase 1: Presentaciones, saludos y despedidas</a></li>
-            <li><a href="clase2/index.html">Clase 2: (próximamente)</a></li>
-            <li><a href="clase3/index.html">Clase 3: (próximamente)</a></li>
-          </ul>
-        </section>
-      `;
     }
+
+    parseHash();
+    checkUser();
   </script>
 </body>
 </html>

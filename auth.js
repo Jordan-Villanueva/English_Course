@@ -87,12 +87,3 @@ if (parseHash() || localStorage.getItem("access_token")) {
 } else {
   showLoggedOut();
 }
-# Ir al proyecto temporal de TypeWords
-cd ~/TypeWords
-
-# Copiar las carpetas ocultas relevantes al proyecto principal
-cp -r .github ~/mi-proyecto/
-cp -r .husky ~/mi-proyecto/
-cp -r .vercel ~/mi-proyecto/
-# Opcional: solo si quieres la configuración de VSCode
-cp -r .vscode ~/mi-proyecto/

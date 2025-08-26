@@ -4,17 +4,6 @@
   <meta charset="UTF-8">
   <title>Curso de Inglés Básico</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    #login-btn, #logout-btn { 
-      padding: 10px 20px; 
-      margin: 10px; 
-      background-color: #0077cc; 
-      color: white; 
-      border: none; 
-      border-radius: 5px; 
-      cursor: pointer; 
-    }
-  </style>
 </head>
 <body>
   <header>
@@ -34,61 +23,6 @@
     <p>Curso de Inglés Básico — Creado por Jordan Ortiz</p>
   </footer>
 
-  <script>
-    const loginBtn = document.getElementById("login-btn");
-    const logoutBtn = document.getElementById("logout-btn");
-    const content = document.getElementById("content");
-
-    const AUTH0_DOMAIN = "dev-bjoqtux6wua5w2l2.us.auth0.com";
-    const AUTH0_CLIENT_ID = "ZcgIAj7vMvtUixpX421Jv6gs4YrakeC7";
-    const REDIRECT_URI = window.location.origin;
-
-    loginBtn.onclick = () => {
-      const authUrl = `https://${AUTH0_DOMAIN}/authorize?response_type=token&client_id=${AUTH0_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=openid%20profile`;
-      window.location.href = authUrl;
-    };
-
-    logoutBtn.onclick = () => {
-      localStorage.removeItem("access_token");
-      content.innerHTML = "<p>Por favor, inicia sesión para acceder al curso.</p>";
-      loginBtn.style.display = "inline-block";
-      logoutBtn.style.display = "none";
-    };
-
-    function parseHash() {
-      if (window.location.hash) {
-        const hash = window.location.hash.substr(1).split("&").reduce((res, item) => {
-          const parts = item.split("=");
-          res[parts[0]] = decodeURIComponent(parts[1]);
-          return res;
-        }, {});
-        if (hash.access_token) {
-          localStorage.setItem("access_token", hash.access_token);
-          window.location.hash = "";
-          return true;
-        }
-      }
-      return false;
-    }
-
-    async function checkUser() {
-      // Temporal: cualquier usuario autorizado
-      content.innerHTML = `
-        <section>
-          <h2>Clases disponibles</h2>
-          <ul>
-            <li><a href="Class1/index.html">Clase 1: Presentaciones, saludos y despedidas</a></li>
-            <li><a href="Class2/index.html">Clase 2: (próximamente)</a></li>
-          </ul>
-        </section>
-      `;
-      loginBtn.style.display = "none";
-      logoutBtn.style.display = "inline-block";
-    }
-
-    if (parseHash() || localStorage.getItem("access_token")) {
-      checkUser();
-    }
-  </script>
+  <script src="auth.js"></script>
 </body>
 </html>

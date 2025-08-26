@@ -12,7 +12,6 @@
     "report": "vite build",
     "preview": "vite preview",
     "commit": "git-cz",
-    "prepare": "husky install",
     "i18n:write": "gulp i18nwrite",
     "deploy-oss": "node scripts/deploy-oss.js"
   },

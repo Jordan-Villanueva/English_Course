@@ -8,22 +8,21 @@ import dayjs from 'dayjs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// 路径设置
+// Path settings
 const normalList_FILE = path.join(__dirname, 'save', 'normalList.json');
 const unnormalList_FILE = path.join(__dirname, 'save', 'unnormalList.json');
 
-// 控制参数
+// Control parameters
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const MAX_COUNT = 999999999999;
 
-
-// 爬虫主函数
-async function crawlWord(val, page,) {
-  let word = val.word
-  const data = val
+// Main crawler function
+async function crawlWord(val, page) {
+  let word = val.word;
+  const data = val;
   const url = `https://www.youdao.com/result?word=${encodeURIComponent(word)}&lang=en`;
 
-  console.log(url)
+  console.log(url);
 
   try {
     await page.goto(url, {waitUntil: 'networkidle', timeout: 15000});
@@ -34,9 +33,10 @@ async function crawlWord(val, page,) {
     const phones = await page.$$('.per-phone .phonetic');
     if (phones[0]) data.phonetic0 = (await phones[0].textContent())?.trim() || '';
     if (phones[1]) data.phonetic1 = (await phones[1].textContent())?.trim() || '';
-    data.phonetic0 = data.phonetic0.replaceAll('/', '').trim()
-    data.phonetic1 = data.phonetic1.replaceAll('/', '').trim()
+    data.phonetic0 = data.phonetic0.replaceAll('/', '').trim();
+    data.phonetic1 = data.phonetic1.replaceAll('/', '').trim();
 
+    // Extract translations
     for (const el of await page.$$('.basic .word-exp')) {
       const pos = await el.$('.pos');
       const tran = await el.$('.trans');
@@ -46,6 +46,7 @@ async function crawlWord(val, page,) {
       });
     }
 
+    // Extract bilingual sentences
     if (await page.locator('div:has-text("双语例句")').count() > 0) {
       for (const el of await page.$$('.blng_sents_part .trans-container ul li .col2')) {
         const en = await el.$('.sen-eng');
@@ -57,6 +58,7 @@ async function crawlWord(val, page,) {
       }
     }
 
+    // Extract phrases
     if (await page.locator('div:has-text("词典短语")').count() > 0) {
       for (const el of await page.$$('.phrs ul li .phrs-content')) {
         const point = await el.$('.point');
@@ -68,6 +70,7 @@ async function crawlWord(val, page,) {
       }
     }
 
+    // Extract synonyms
     try {
       if (await page.locator('div:has-text("同近义词")').count() > 0) {
         await page.getByText('同近义词', {timeout: 2000}).click();
@@ -84,9 +87,9 @@ async function crawlWord(val, page,) {
           });
         }
       }
-    } catch {
-    }
+    } catch {}
 
+    // Extract root words
     try {
       if (await page.locator('div:has-text("同根词")').count() > 0) {
         await page.getByText('同根词', {timeout: 2000}).click();
@@ -107,9 +110,9 @@ async function crawlWord(val, page,) {
           data.relWords.rels.push(item);
         }
       }
-    } catch {
-    }
+    } catch {}
 
+    // Extract etymology
     try {
       if (await page.locator('div:has-text("词源")').count() > 0) {
         await page.getByText('词源', {timeout: 2000}).click();
@@ -123,54 +126,52 @@ async function crawlWord(val, page,) {
           });
         }
       }
-    } catch {
-    }
+    } catch {}
+
     return data;
   } catch (err) {
-    console.log(err)
-    console.log(`🔁 ${word} 抓取失败...`);
+    console.log(err);
+    console.log(`🔁 ${word} crawling failed...`);
     return data;
   }
 }
 
 (async () => {
   const browser = await chromium.launch({headless: true});
-  const page = await browser.newPage()
+  const page = await browser.newPage();
 
   async function start(file) {
     const raw = JSON.parse(fs.readFileSync(file, 'utf-8'));
-    let removeList = raw.slice()
+    let removeList = raw.slice();
     const resultMap = new Map();
-    let newFileName = file.replaceAll('.json', '-fetch.json')
+    let newFileName = file.replaceAll('.json', '-fetch.json');
+
     try {
       const newRaw = JSON.parse(fs.readFileSync(newFileName, 'utf-8'));
-      console.log('已保存：', newRaw.length);
+      console.log('Saved:', newRaw.length);
       newRaw.map(word => {
         resultMap.set(word.word, word);
-      })
-    } catch (e) {
-
-    }
-
+      });
+    } catch (e) {}
 
     for (let i = 0; i < raw.length; i++) {
       let word = raw[i];
-      console.log(`爬取：${file}，${word.word}，进度：${i} / ${raw.length}；时间：${dayjs().format('YYYY-MM-DD HH:mm:ss')}`)
+      console.log(`Crawling: ${file}, ${word.word}, progress: ${i} / ${raw.length}; Time: ${dayjs().format('YYYY-MM-DD HH:mm:ss')}`);
       const result = await crawlWord(word, page);
       if (result) {
         resultMap.set(word.word, result);
         fs.writeFileSync(file.replaceAll('.json', '-fetch.json'), JSON.stringify(Array.from(resultMap.values()), null, 2), 'utf-8');
-        removeList.shift()
+        removeList.shift();
         fs.writeFileSync(file, JSON.stringify(removeList, null, 2), 'utf-8');
       }
       await sleep(300);
     }
   }
 
-  await start(unnormalList_FILE)
-  await start(normalList_FILE)
+  await start(unnormalList_FILE);
+  await start(normalList_FILE);
 
   await browser.close();
 
-  console.log('\n🎉 所有任务完成！');
+  console.log('\n🎉 All tasks completed!');
 })();

@@ -1,5 +1,5 @@
-/* Botones generales */
-#login-btn, #logout-btn, #home-btn, .check-btn, .speak-btn {
+/* Estilos de botones de login, logout e inicio */
+#login-btn, #logout-btn, #home-btn {
   padding: 10px 20px;
   margin: 10px;
   background-color: #0077cc;
@@ -9,8 +9,8 @@
   cursor: pointer;
 }
 
-/* Ejercicios interactivos */
-.interactive-exercise, .bloque {
+/* Estilos para los ejercicios interactivos */
+.interactive-exercise {
   background-color: #f5f9ff;
   border-radius: 10px;
   padding: 20px;
@@ -18,14 +18,13 @@
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* Títulos de sección con borde */
-h2 {
+.exercise-title {
   color: #0077cc;
   border-bottom: 2px solid #0077cc;
   padding-bottom: 10px;
 }
 
-/* Contenedor de objetos */
+/* Contenedor de objetos clicables */
 .object-container {
   display: flex;
   flex-wrap: wrap;
@@ -41,7 +40,9 @@ h2 {
   width: 100px;
 }
 
-.object-item:hover { transform: scale(1.05); }
+.object-item:hover {
+  transform: scale(1.05);
+}
 
 .object-image {
   width: 80px;
@@ -59,8 +60,13 @@ h2 {
   color: #333;
 }
 
-/* Contenedor de preguntas */
-.question-container { text-align: center; margin: 20px 0; font-size: 1.2em; }
+/* Contenedor de preguntas y respuestas */
+.question-container {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 1.2em;
+}
+
 .answer-input {
   padding: 10px;
   border: 2px solid #0077cc;
@@ -70,17 +76,37 @@ h2 {
   margin-right: 10px;
 }
 
-.feedback { margin-top: 15px; font-weight: bold; min-height: 24px; }
-.correct { color: green; }
-.incorrect { color: red; }
+.check-btn {
+  padding: 10px 15px;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-/* Números */
+.feedback {
+  margin-top: 15px;
+  font-weight: bold;
+  min-height: 24px;
+}
+
+.correct {
+  color: green;
+}
+
+.incorrect {
+  color: red;
+}
+
+/* Grid de números */
 .numbers-grid {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   gap: 10px;
   margin: 20px 0;
 }
+
 .number-item {
   padding: 15px 5px;
   text-align: center;
@@ -90,10 +116,55 @@ h2 {
   cursor: pointer;
   transition: all 0.2s;
 }
-.number-item:hover { background-color: #e6f2ff; transform: translateY(-2px); }
-.number { font-size: 1.2em; font-weight: bold; color: #0077cc; }
-.number-name { font-size: 0.8em; color: #666; }
 
-/* Práctica de pronunciación */
-.practice-section { margin-top: 30px; text-align: center; }
-.speak-btn { background-color: #28a745; }
+.number-item:hover {
+  background-color: #e6f2ff;
+  transform: translateY(-2px);
+}
+
+.number {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #0077cc;
+}
+
+.number-name {
+  font-size: 0.8em;
+  color: #666;
+}
+
+/* Sección de práctica */
+.practice-section {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.speak-btn {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+  font-size: 1em;
+}
+
+/* Juegos / Baamboozle */
+.game-item {
+  margin: 10px 0;
+}
+
+.btn-link {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #0077cc;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.btn-link:hover {
+  background-color: #005fa3;
+}

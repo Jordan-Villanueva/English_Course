@@ -1,62 +1,56 @@
-多语言地址：https://www.yuque.com/zhangyurang/ghwvmn/idhcg59wc2204o5n#Ah4t
+## 🌍 Multi-language Address
+https://www.yuque.com/zhangyurang/ghwvmn/idhcg59wc2204o5n#Ah4t
 
-例句:On Jan. 20, former Sen. Barack Obama became the 44th President of the U.S. Millions attended the Inauguration.
-sentence-tokenizer
-    可以正常断句，但无法识别例句
-sentence-splitter
-    无法正常断句（在引号里面的问号和感叹号会被断句），但可以识别例句
+### Example
+_On Jan. 20, former Sen. Barack Obama became the 44th President of the U.S. Millions attended the Inauguration._
 
-https://github.com/Tessmore/sbd
-    无法识别Mr.James Scott has a garage in Silbury and now he has just bought another garage in Pinhurst. 
-    会将Mr.James 断句
+- `sentence-tokenizer`: works for sentence splitting, but cannot recognize example sentences.  
+- `sentence-splitter`: fails at splitting correctly (breaks sentences inside quotes with `?` or `!`), but can recognize example sentences.  
 
-wink-nlp
-    'What a day!' I thought.
-    'What are you doing?' she asked.
-    会被断句
+🔗 https://github.com/Tessmore/sbd  
+- Cannot recognize:  
+  `Mr.James Scott has a garage in Silbury and now he has just bought another garage in Pinhurst.`  
+- Splits at `Mr.James` incorrectly.  
 
-compromise
-    表现良好，另外自带分词功能
+`wink-nlp`  
+- `'What a day!' I thought. 'What are you doing?' she asked.`  
+- Gets split into wrong sentences.  
 
-以上所有库都会将：'Do you always get up so late? It's one o'clock!'分成两句....
+`compromise`  
+- Performs well, also includes built-in word segmentation.  
 
+👉 All of the above libraries split:  
+`'Do you always get up so late? It's one o'clock!'`  
+into **two sentences**...
 
-1 错题本，添加错误次数
+---
 
-bug
-换段的时候没发音
-打完一段的一最后一行的时候，没有自动换行，需要按下空格才能换段
-打完了没检测到
+## 🐞 Bugs and Improvements
 
-所有的图标hover时，有放大效果
-各种声音可以单独调节音量大小
-
-列表加搜索
-
-BaseIcon 在选中模式下，应该显示白色
-
-添加文章时，正文输入123报错
-
-没有内容时，要显示占位符
-
-A cold welcome 有bug
-
-[EditAbleText.vue](src%2Fcomponents%2FEditAbleText.vue) 不能自动聚焦
-
-单词发音，点击第二遍时减速
-
-http://enpuz.com/ 语法分析工具
-
-键盘音效应该多放几遍
-
-加载单词列表时需要loading
-
-点击句子播放的音乐，需要可暂停
-
-footer 的输入数统计有问题，当在列表点一个，然后输入错误之后，不会统计到输入数里面(单词和文章的都有问题)
-
-nce1-16.A polite request.解析出来有问题
-
-I found this note on my car: 'Sir, we welcome you to our city. This is a 'No Parking'  area. You will enjoy your stay here if you pay attention to our street signs. This note is only a reminder.' If you receive a request like this, you cannot fail to obey it!
-
-'No Parking'  会被截断
+1. **Error notebook**: add error count display.  
+2. **Bug**: no sound when changing paragraphs.  
+3. At the end of a paragraph, last line does not auto-wrap — space key is required.  
+4. After finishing text, sometimes end is not detected.  
+5. All icons have **hover zoom effect**.  
+6. Sounds should have **individual volume control**.  
+7. Lists should support **search**.  
+8. `BaseIcon`: when selected, should display in **white**.  
+9. Adding article: input `123` causes error.  
+10. When no content, show **placeholder**.  
+11. `"A cold welcome"` has a bug.  
+12. `EditAbleText.vue` does not auto-focus.  
+13. Word pronunciation: second click should **slow down**.  
+14. Reference: http://enpuz.com/ (grammar analysis tool).  
+15. Keyboard sound effects should repeat more times.  
+16. Show **loading** when loading word list.  
+17. Clicking a sentence to play audio should allow **pause**.  
+18. Footer input stats issue:  
+    - Selecting from list then making a mistake → not counted.  
+    - Happens for both words and articles.  
+19. `nce1-16. A polite request.` parsing issue.  
+20. Example note:  
+    ```
+    'Sir, we welcome you to our city. This is a 'No Parking' area. You will enjoy your stay here if you pay attention to our street signs. This note is only a reminder.'
+    ```
+    - If you receive such a request, you cannot ignore it.  
+    - Problem: `'No Parking'` is incorrectly split.  

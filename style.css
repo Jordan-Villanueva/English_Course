@@ -1,165 +1,99 @@
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f9f9fb;
-  margin: 0;
-  padding: 0;
-  line-height: 1.6;
-  color: #333;
-}
-
-/* Encabezado */
-header {
-  background: linear-gradient(135deg, #0077cc, #005fa3);
-  color: white;
-  padding: 25px;
-  text-align: center;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
-}
-
-header h1 {
-  margin: 0;
-  font-size: 2em;
-}
-
-header .subtitle {
-  font-size: 1.2em;
-  margin-top: 8px;
-  font-weight: 300;
-  opacity: 0.9;
-}
-
-/* Contenido */
-main {
-  padding: 20px;
-  max-width: 900px;
-  margin: auto;
-}
-
-section {
-  margin-bottom: 35px;
-}
-
-.bloque, .objetivos { 
-  background: white; 
-  padding: 20px;
-  border-radius: 12px; 
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
-  transition: transform 0.2s; 
-}
-
-.bloque:hover, .objetivos:hover {
-  transform: scale(1.01);
-}
-
-h2 {
-  color: #005fa3;
-  margin-top: 0;
-}
-
-h3 {
-  color: #0077cc;
-  margin-bottom: 8px;
-}
-
-/* Bloques destacados */
-blockquote {
-  background: #eef6ff;
-  border-left: 5px solid #0077cc;
-  margin: 15px 0;
-  padding: 12px 15px;
-  font-style: italic;
-  border-radius: 5px;
-}
-
-/* Links y botones */
-a {
-  color: #0077cc;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* Footer */
-footer {
-  background: #333;
-  color: white;
-  text-align: center;
-  padding: 15px;
-  margin-top: 40px;
-  font-size: 0.9em;
-}
-
-/* Botón especial para enlaces tipo "juego" */
-.btn-link {
-  display: inline-block;
-  padding: 10px 15px;
-  background-color: #0077cc;
-  color: white;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.3s;
-}
-
-.btn-link:hover {
-  background-color: #005fa3;
-}
-
-/* === NUEVO: Sección de números === */
-.numbers-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-  gap: 15px;
-  margin: 20px 0;
-}
-
-.number-item {
-  background: #eef6ff;
-  border-radius: 8px;
-  padding: 10px;
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.number-item:hover {
-  transform: scale(1.05);
-}
-
-.number {
-  font-size: 1.4em;
-  font-weight: bold;
-  color: #005fa3;
-}
-
-.number-name {
-  font-size: 0.9em;
-  color: #333;
-  margin-top: 5px;
-}
-
-/* Bloque de práctica */
-.practice-block {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.speak-btn {
-  display: inline-block;
-  padding: 10px 15px;
-  margin: 5px;
+/* Botones generales */
+#login-btn, #logout-btn, #home-btn, .check-btn, .speak-btn {
+  padding: 10px 20px;
+  margin: 10px;
   background-color: #0077cc;
   color: white;
   border: none;
-  border-radius: 8px;
-  font-weight: bold;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
 }
 
-.speak-btn:hover {
-  background-color: #005fa3;
+/* Ejercicios interactivos */
+.interactive-exercise, .bloque {
+  background-color: #f5f9ff;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
+
+/* Títulos de sección con borde */
+h2 {
+  color: #0077cc;
+  border-bottom: 2px solid #0077cc;
+  padding-bottom: 10px;
+}
+
+/* Contenedor de objetos */
+.object-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.object-item {
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+  width: 100px;
+}
+
+.object-item:hover { transform: scale(1.05); }
+
+.object-image {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.object-name {
+  margin-top: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Contenedor de preguntas */
+.question-container { text-align: center; margin: 20px 0; font-size: 1.2em; }
+.answer-input {
+  padding: 10px;
+  border: 2px solid #0077cc;
+  border-radius: 5px;
+  font-size: 1em;
+  width: 250px;
+  margin-right: 10px;
+}
+
+.feedback { margin-top: 15px; font-weight: bold; min-height: 24px; }
+.correct { color: green; }
+.incorrect { color: red; }
+
+/* Números */
+.numbers-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 10px;
+  margin: 20px 0;
+}
+.number-item {
+  padding: 15px 5px;
+  text-align: center;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.number-item:hover { background-color: #e6f2ff; transform: translateY(-2px); }
+.number { font-size: 1.2em; font-weight: bold; color: #0077cc; }
+.number-name { font-size: 0.8em; color: #666; }
+
+/* Práctica de pronunciación */
+.practice-section { margin-top: 30px; text-align: center; }
+.speak-btn { background-color: #28a745; }

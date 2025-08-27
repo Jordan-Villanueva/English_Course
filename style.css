@@ -40,12 +40,12 @@ section {
   margin-bottom: 35px;
 }
 
-.bloque, .objetivos {
-  background-color: #f5f9ff;
-  border-radius: 10px;
-  padding: 20px;
-  margin: 20px 0;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+.bloque, .objetivos { 
+background: white; 
+padding: 20px;
+border-radius: 12px; 
+box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+transition: transform 0.2s; 
 }
 
 .bloque:hover, .objetivos:hover {

@@ -5,7 +5,7 @@ const AUTH0_DOMAIN = "dev-bjoqtux6wua5w2l2.us.auth0.com";
 const AUTH0_CLIENT_ID = "ZcgIAj7vMvtUixpX421Jv6gs4YrakeC7";
 
 // Ajusta redirect según la página
-const REDIRECT_URI = window.location.origin + window.location.pathname;
+const REDIRECT_URI = window.location.origin + "/index.html"; 
 
 loginBtn.onclick = () => {
   const authUrl = `https://${AUTH0_DOMAIN}/authorize?response_type=token&client_id=${AUTH0_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=openid%20profile`;

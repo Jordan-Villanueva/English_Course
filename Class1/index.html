@@ -17,21 +17,12 @@
   </header>
 
 <main id="content">
-
   <!-- Objectives -->
   <section class="objetivos">
     <h2>🎯 Class objectives</h2>
     <ul>
-      <li>Students will be able to introduce themselves, greet, say goodbye and use basic courtesy phrases.
-        <button class="speak-btn" onclick="speak('Students will be able to introduce themselves, greet, say goodbye and use basic courtesy phrases.')">🔊</button>
-        <button class="translate-btn" onclick="toggleTranslation(this)">🇪🇸</button>
-        <span class="translation" style="display:none;">Los estudiantes podrán presentarse, saludar, despedirse y usar frases de cortesía básicas.</span>
-      </li>
-      <li>Start speaking and writing in English at a very basic level.
-        <button class="speak-btn" onclick="speak('Start speaking and writing in English at a very basic level.')">🔊</button>
-        <button class="translate-btn" onclick="toggleTranslation(this)">🇪🇸</button>
-        <span class="translation" style="display:none;">Comenzar a hablar y escribir en inglés a un nivel muy básico.</span>
-      </li>
+      <li>Students will be able to introduce themselves, greet, say goodbye and use basic courtesy phrases.</li>
+      <li>Start speaking and writing in English at a very basic level.</li>
     </ul>
   </section>
 
@@ -39,15 +30,9 @@
   <section class="bloque">
     <h2>1. Warm-up / Icebreaker (10 min)</h2>
     <blockquote>
-      Hello, my name is Jordan. I’m from Mexico.
-      <button class="speak-btn" onclick="speak('Hello, my name is Jordan. I’m from Mexico.')">🔊</button>
-      <button class="translate-btn" onclick="toggleTranslation(this)">🇪🇸</button>
-      <span class="translation" style="display:none;">Hola, me llamo Jordan. Soy de México.</span>
-      <br>
+      Hello, my name is Jordan. I’m from Mexico.  
       I'm a physicist and software developer and I love movies and teaching.
-      <button class="speak-btn" onclick="speak('I am a physicist and software developer and I love movies and teaching.')">🔊</button>
-      <button class="translate-btn" onclick="toggleTranslation(this)">🇪🇸</button>
-      <span class="translation" style="display:none;">Soy físico y desarrollador de software y me encantan las películas y enseñar.</span>
+      <button onclick="speak('Hello, my name is Jordan. I’m from Mexico. I\'m a physicist and software developer and I love movies and teaching.')">🔊</button>
     </blockquote>
     <p><em>Greeting: What's your name? Where are you from? What do you like and what do you do?</em></p>
   </section>
@@ -55,53 +40,14 @@
   <!-- Vocabulary -->
   <section class="bloque">
     <h2>2. Vocabulary and pronouns (15 min)</h2>
-
     <h3>Greetings</h3>
-    <p>
-      Hello
-      <button class="speak-btn" onclick="speak('Hello')">🔊</button>
-      <button class="translate-btn" onclick="toggleTranslation(this)">🇪🇸</button>
-      <span class="translation" style="display:none;">Hola</span>,
-      Hi
-      <button class="speak-btn" onclick="speak('Hi')">🔊</button>
-      <button class="translate-btn" onclick="toggleTranslation(this)">🇪🇸</button>
-      <span class="translation" style="display:none;">Hola</span>,
-      Good morning
-      <button class="speak-btn" onclick="speak('Good morning')">🔊</button>
-      <button class="translate-btn" onclick="toggleTranslation(this)">🇪🇸</button>
-      <span class="translation" style="display:none;">Buenos días</span>
-    </p>
-
+    <p>Hello <button onclick="speak('Hello')">🔊</button>, Hi <button onclick="speak('Hi')">🔊</button>, Good morning <button onclick="speak('Good morning')">🔊</button>, Good afternoon <button onclick="speak('Good afternoon')">🔊</button>, Good evening <button onclick="speak('Good evening')">🔊</button>, Good night <button onclick="speak('Good night')">🔊</button></p>
     <h3>Farewells</h3>
-    <p>
-      Goodbye
-      <button class="speak-btn" onclick="speak('Goodbye')">🔊</button>
-      <button class="translate-btn" onclick="toggleTranslation(this)">🇪🇸</button>
-      <span class="translation" style="display:none;">Adiós</span>,
-      Bye
-      <button class="speak-btn" onclick="speak('Bye')">🔊</button>
-      <button class="translate-btn" onclick="toggleTranslation(this)">🇪🇸</button>
-      <span class="translation" style="display:none;">Chao</span>,
-      See you
-      <button class="speak-btn" onclick="speak('See you')">🔊</button>
-      <button class="translate-btn" onclick="toggleTranslation(this)">🇪🇸</button>
-      <span class="translation" style="display:none;">Nos vemos</span>
-    </p>
-
+    <p>Goodbye <button onclick="speak('Goodbye')">🔊</button>, Bye <button onclick="speak('Bye')">🔊</button>, See you <button onclick="speak('See you')">🔊</button>, See you later <button onclick="speak('See you later')">🔊</button></p>
     <h3>Personal pronouns + verb "To be"</h3>
-    <p>
-      I am <button class="speak-btn" onclick="speak('I am')">🔊</button><button class="translate-btn" onclick="toggleTranslation(this)">🇪🇸</button><span class="translation" style="display:none;">Yo soy/estoy</span>,
-      You are <button class="speak-btn" onclick="speak('You are')">🔊</button><button class="translate-btn" onclick="toggleTranslation(this)">🇪🇸</button><span class="translation" style="display:none;">Tú eres/estás</span>,
-      He/She is <button class="speak-btn" onclick="speak('He is')">🔊</button><button class="translate-btn" onclick="toggleTranslation(this)">🇪🇸</button><span class="translation" style="display:none;">Él/Ella es/está</span>
-    </p>
-
+    <p>I am <button onclick="speak('I am')">🔊</button>, You are <button onclick="speak('You are')">🔊</button>, He/She is <button onclick="speak('He or She is')">🔊</button>, We are <button onclick="speak('We are')">🔊</button>, They are <button onclick="speak('They are')">🔊</button></p>
     <h3>Possessive pronouns</h3>
-    <p>
-      My <button class="speak-btn" onclick="speak('My')">🔊</button><button class="translate-btn" onclick="toggleTranslation(this)">🇪🇸</button><span class="translation" style="display:none;">Mi</span>,
-      Your <button class="speak-btn" onclick="speak('Your')">🔊</button><button class="translate-btn" onclick="toggleTranslation(this)">🇪🇸</button><span class="translation" style="display:none;">Tu</span>,
-      His <button class="speak-btn" onclick="speak('His')">🔊</button><button class="translate-btn" onclick="toggleTranslation(this)">🇪🇸</button><span class="translation" style="display:none;">Su (de él)</span>,
-      Her <button class="speak-btn" onclick="speak('Her')">🔊</button><button class="translate-btn" onclick="toggleTranslation(this)">🇪🇸</button><span class="translation" style="display:none;">Su (de ella)</span>
-    </p>
+    <p>My <button onclick="speak('My')">🔊</button>, Your <button onclick="speak('Your')">🔊</button>, His <button onclick="speak('His')">🔊</button>, Her <button onclick="speak('Her')">🔊</button></p>
   </section>
 
   <!-- Listening / Modeled videos -->
@@ -134,36 +80,35 @@
     <div class="object-container">
       <div class="object-item" onclick="speak('Book')">
         <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/book-solid-full.svg" class="object-image" alt="Book">
-        <div class="object-name">Book</div>
+        <div class="object-name">Book 🔊</div>
       </div>
       <div class="object-item" onclick="speak('Pen')">
         <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pen-clip-solid-full.svg" class="object-image" alt="Pen">
-        <div class="object-name">Pen</div>
+        <div class="object-name">Pen 🔊</div>
       </div>
       <div class="object-item" onclick="speak('Pencil')">
         <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pencil-solid-full.svg" class="object-image" alt="Pencil">
-        <div class="object-name">Pencil</div>
+        <div class="object-name">Pencil 🔊</div>
       </div>
       <div class="object-item" onclick="speak('Chair')">
         <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/chair-solid-full.svg" class="object-image" alt="Chair">
-        <div class="object-name">Chair</div>
+        <div class="object-name">Chair 🔊</div>
       </div>
       <div class="object-item" onclick="speak('Table')">
         <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/table-furniture.svg" class="object-image" alt="Table">
-        <div class="object-name">Table</div>
+        <div class="object-name">Table 🔊</div>
       </div>
       <div class="object-item" onclick="speak('Bag')">
         <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/bag-personal.svg" class="object-image" alt="Bag">
-        <div class="object-name">Bag</div>
+        <div class="object-name">Bag 🔊</div>
       </div>
     </div>
-    <p class="instruction">Click any object to hear its pronunciation in English.</p>
   </section>
 
   <!-- Numbers -->
   <section class="bloque">
     <h2>7. Numbers in English: from 1 to 30</h2>
-    <p>Learn the numbers in English. Click each number to hear its pronunciation.</p>
+    <p>Click each number to hear its pronunciation:</p>
     <div class="numbers-grid">
       <script>
         const numberGrid = document.currentScript.parentNode;
@@ -173,69 +118,19 @@
         for(let i=0;i<numbers.length;i++){
           const div = document.createElement('div');
           div.className='number-item';
-          div.onclick=function(){speak(numbers[i])};
-          div.innerHTML=`<div class="number">${i+1}</div><div class="number-name">${numbers[i]}</div>`;
+          div.onclick=function(){ speak(numbers[i]); };
+          div.innerHTML=`<div class="number">${i+1}</div><div class="number-name">${numbers[i]} 🔊</div>`;
           numberGrid.appendChild(div);
         }
       </script>
     </div>
     <div class="practice-block">
       <p><strong>Pronunciation practice:</strong></p>
-      <button class="speak-btn" onclick="practiceNumbers()">Listen numbers 1 to 10</button>
-      <button class="speak-btn" onclick="practiceNumbers(11, 20)">Listen numbers 11 to 20</button>
-      <button class="speak-btn" onclick="practiceNumbers(21, 30)">Listen numbers 21 to 30</button>
+      <button class="speak-btn" onclick="practiceNumbers(1,10)">Listen 1 to 10</button>
+      <button class="speak-btn" onclick="practiceNumbers(11,20)">Listen 11 to 20</button>
+      <button class="speak-btn" onclick="practiceNumbers(21,30)">Listen 21 to 30</button>
     </div>
   </section>
-
-  <!-- Mini writing / journaling -->
-  <section class="bloque">
-    <h2>8. Mini writing / journaling (10-15 min)</h2>
-    <ul>
-      <li>Hello, my name is ___.
-        <button class="speak-btn" onclick="speak('Hello, my name is ___')">🔊</button>
-        <button class="translate-btn" onclick="toggleTranslation(this)">🇪🇸</button>
-        <span class="translation" style="display:none;">Hola, me llamo ___</span>
-      </li>
-      <li>I'm from ___.
-        <button class="speak-btn" onclick="speak('I am from ___')">🔊</button>
-        <button class="translate-btn" onclick="toggleTranslation(this)">🇪🇸</button>
-        <span class="translation" style="display:none;">Soy de ___</span>
-      </li>
-      <li>I like ___.
-        <button class="speak-btn" onclick="speak('I like ___')">🔊</button>
-        <button class="translate-btn" onclick="toggleTranslation(this)">🇪🇸</button>
-        <span class="translation" style="display:none;">Me gusta ___</span>
-      </li>
-    </ul>
-  </section>
-
-  <!-- Group speaking -->
-  <section class="bloque">
-    <h2>9. Group speaking (15-20 min)</h2>
-    <p>Each student introduces themselves to the group using the learned phrases, including the question <em>Where are you from?</em></p>
-  </section>
-
-  <!-- Writing activity -->
-  <section class="bloque">
-    <h2>10. Writing activity (10-15 min)</h2>
-    <p>Solve the following exercise:</p>
-    <img src="cierre.png" alt="Closing activity: Complete the dialogues" width="100%" style="border: 2px solid #ccc; border-radius: 10px; max-width: 600px;">
-  </section>
-
-  <!-- Games -->
-  <section class="bloque">
-    <h2>11. Interactive games / Baamboozle (15 min)</h2>
-    <div class="game-item">
-      <p>🎲 Game 1:</p>
-      <a href="https://www.baamboozle.com/game/641765" target="_blank" class="speak-btn">Play on Baamboozle</a>
-    </div>
-    <div class="game-item">
-      <p>🎲 Game 2:</p>
-      <a href="https://www.baamboozle.com/game/54952" target="_blank" class="speak-btn">Play on Baamboozle</a>
-    </div>
-    <p>Tip: Create teams for the activity.</p>
-  </section>
-
 </main>
 
 <footer>
@@ -243,49 +138,42 @@
 </footer>
 
 <script>
-  // Speak any phrase
-function speak(text) {
-  if ('speechSynthesis' in window) {
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'en-US';
-    utterance.rate = 0.9;
-    utterance.pitch = 1.2;
+  // Universal speak function with improved voice
+  function speak(text) {
+    if ('speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.9;
+      utterance.pitch = 1.1;
 
-    const voices = speechSynthesis.getVoices();
-    // Elegir una voz más natural: Google US, Microsoft, etc.
-    const preferredVoices = ['Google US English', 'Microsoft Zira Desktop - English (United States)', 'Samantha', 'Alex'];
-    let englishVoice = voices.find(v => preferredVoices.includes(v.name));
-    if(!englishVoice) englishVoice = voices.find(v => v.lang.startsWith('en-'));
+      const voices = speechSynthesis.getVoices();
+      const preferredVoices = [
+        'Google US English', 
+        'Microsoft Zira Desktop - English (United States)', 
+        'Samantha', 
+        'Alex'
+      ];
+      let voice = voices.find(v => preferredVoices.includes(v.name));
+      if(!voice) voice = voices.find(v => v.lang.startsWith('en-'));
+      if(voice) utterance.voice = voice;
 
-    if(englishVoice) utterance.voice = englishVoice;
-    speechSynthesis.speak(utterance);
-  } else {
-    alert("Your browser doesn't support speech synthesis.");
-  }
-}
-
-
-  // Toggle translation visibility
-  function toggleTranslation(btn) {
-    const span = btn.nextElementSibling;
-    span.style.display = (span.style.display === 'none') ? 'inline' : 'none';
-  }
-
-  // Practice numbers in sequence
-  function practiceNumbers(start=1,end=10){
-    const nums = ["one","two","three","four","five","six","seven","eight","nine","ten",
-      "eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen","twenty",
-      "twenty-one","twenty-two","twenty-three","twenty-four","twenty-five","twenty-six","twenty-seven","twenty-eight","twenty-nine","thirty"];
-    for(let i=start;i<=end;i++){
-      setTimeout(()=>speak(nums[i-1]),(i-start)*1200);
+      speechSynthesis.speak(utterance);
+    } else {
+      alert("Your browser doesn't support speech synthesis.");
     }
   }
 
-  window.onload=function(){ speechSynthesis.getVoices(); };
+  function practiceNumbers(start=1,end=10){
+    for(let i=start;i<=end;i++){
+      setTimeout(()=>speak(numbers[i-1]), (i-start)*1200);
+    }
+  }
+
+  // Load voices to prevent blank first playback
+  window.onload = function(){ speechSynthesis.getVoices(); };
 </script>
 
 <!-- Auth0 -->
 <script src="../auth.js"></script>
-
 </body>
 </html>

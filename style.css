@@ -78,15 +78,6 @@ h3 {
   border-bottom: 1px solid #ddd;
 }
 
-/* Estilos específicos para secciones */
-.objetivos {
-  background: linear-gradient(to bottom right, #e8f5e9, #c8e6c9);
-}
-
-.bloque {
-  background: linear-gradient(to bottom right, #f0f8ff, #e1f5fe);
-}
-
 /* Bloques interactivos */
 .object-container {
   display: grid;
@@ -165,7 +156,7 @@ h3 {
 }
 
 /* Botones */
-.speak-btn, .btn-link {
+.speak-btn {
   display: inline-block;
   padding: 12px 25px;
   margin: 10px 5px;
@@ -177,17 +168,33 @@ h3 {
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 119, 204, 0.3);
   transition: all 0.3s;
-  text-decoration: none;
 }
 
-.speak-btn:hover, .btn-link:hover {
+.speak-btn:hover {
   background: linear-gradient(135deg, #005fa3 0%, #004d88 100%);
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0, 119, 204, 0.4);
-  color: white;
 }
 
-/* Elementos varios */
+/* Footer */
+footer {
+  background: #333;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: 40px;
+  font-size: 0.9em;
+}
+
+/* Estilos específicos para secciones */
+.objetivos {
+  background: linear-gradient(to bottom right, #e8f5e9, #c8e6c9);
+}
+
+.bloque {
+  background: linear-gradient(to bottom right, #f0f8ff, #e1f5fe);
+}
+
 .instruction {
   text-align: center;
   margin: 20px 0;
@@ -200,37 +207,6 @@ h3 {
   margin-top: 30px;
   padding-top: 20px;
   border-top: 1px dashed #ccc;
-}
-
-blockquote {
-  background: #f9f9f9;
-  border-left: 10px solid #0077cc;
-  margin: 1.5em 10px;
-  padding: 0.5em 10px;
-  quotes: "\201C""\201D""\2018""\2019";
-}
-
-blockquote:before {
-  color: #0077cc;
-  content: open-quote;
-  font-size: 4em;
-  line-height: 0.1em;
-  margin-right: 0.25em;
-  vertical-align: -0.4em;
-}
-
-blockquote p {
-  display: inline;
-}
-
-/* Footer */
-footer {
-  background: #333;
-  color: white;
-  text-align: center;
-  padding: 15px;
-  margin-top: 40px;
-  font-size: 0.9em;
 }
 
 /* Responsive */
@@ -251,9 +227,5 @@ footer {
   .header-buttons button {
     width: 80%;
     margin-bottom: 10px;
-  }
-  
-  iframe {
-    height: 250px !important;
   }
 }

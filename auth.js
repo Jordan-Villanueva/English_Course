@@ -4,8 +4,8 @@ const content = document.getElementById("content");
 const AUTH0_DOMAIN = "dev-bjoqtux6wua5w2l2.us.auth0.com";
 const AUTH0_CLIENT_ID = "ZcgIAj7vMvtUixpX421Jv6gs4YrakeC7";
 
-// Ajusta redirect según la página
-const REDIRECT_URI = window.location.origin + "/index.html"; 
+// Siempre redirigir al index general
+const REDIRECT_URI = "https://elegant-frangipane-efce46.netlify.app";
 
 loginBtn.onclick = () => {
   const authUrl = `https://${AUTH0_DOMAIN}/authorize?response_type=token&client_id=${AUTH0_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=openid%20profile`;
@@ -27,6 +27,8 @@ function parseHash() {
     if (hash.access_token) {
       localStorage.setItem("access_token", hash.access_token);
       window.location.hash = "";
+      // Redirigir al menú general
+      window.location.href = REDIRECT_URI;
       return true;
     }
   }
@@ -34,21 +36,20 @@ function parseHash() {
 }
 
 function showLoggedOut() {
-  // Página de inicio
+  loginBtn.style.display = "inline-block";
+  logoutBtn.style.display = "none";
+
   if (window.location.pathname === "/" || window.location.pathname.endsWith("index.html")) {
     content.innerHTML = "<p>Por favor, inicia sesión para acceder al curso.</p>";
   } else {
     content.style.display = "none";
   }
-  loginBtn.style.display = "inline-block";
-  logoutBtn.style.display = "none";
 }
 
 function showContent() {
   loginBtn.style.display = "none";
   logoutBtn.style.display = "inline-block";
 
-  // Página de inicio
   if (window.location.pathname === "/" || window.location.pathname.endsWith("index.html")) {
     content.innerHTML = `
       <section>
@@ -60,28 +61,11 @@ function showContent() {
       </section>
     `;
   } else {
-    // Página de clase
     content.style.display = "block";
-
-    // Botón para volver a inicio
-    let inicioBtn = document.getElementById("inicio-btn");
-    if (!inicioBtn) {
-      inicioBtn = document.createElement("button");
-      inicioBtn.id = "inicio-btn";
-      inicioBtn.textContent = "🏠 Volver a inicio";
-      inicioBtn.style.margin = "10px";
-      inicioBtn.style.padding = "10px 20px";
-      inicioBtn.style.border = "none";
-      inicioBtn.style.borderRadius = "5px";
-      inicioBtn.style.backgroundColor = "#0077cc";
-      inicioBtn.style.color = "white";
-      inicioBtn.style.cursor = "pointer";
-      inicioBtn.onclick = () => window.location.href = window.location.origin;
-      document.body.insertBefore(inicioBtn, content);
-    }
   }
 }
 
+// Detecta token en localStorage
 if (parseHash() || localStorage.getItem("access_token")) {
   showContent();
 } else {

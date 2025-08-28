@@ -244,19 +244,26 @@
 
 <script>
   // Speak any phrase
-  function speak(text) {
-    if ('speechSynthesis' in window) {
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'en-US';
-      utterance.rate = 0.9;
-      const voices = speechSynthesis.getVoices();
-      const englishVoice = voices.find(v => v.lang.startsWith('en-'));
-      if (englishVoice) utterance.voice = englishVoice;
-      speechSynthesis.speak(utterance);
-    } else {
-      alert("Your browser doesn't support speech synthesis.");
-    }
+function speak(text) {
+  if ('speechSynthesis' in window) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    utterance.rate = 0.9;
+    utterance.pitch = 1.2;
+
+    const voices = speechSynthesis.getVoices();
+    // Elegir una voz más natural: Google US, Microsoft, etc.
+    const preferredVoices = ['Google US English', 'Microsoft Zira Desktop - English (United States)', 'Samantha', 'Alex'];
+    let englishVoice = voices.find(v => preferredVoices.includes(v.name));
+    if(!englishVoice) englishVoice = voices.find(v => v.lang.startsWith('en-'));
+
+    if(englishVoice) utterance.voice = englishVoice;
+    speechSynthesis.speak(utterance);
+  } else {
+    alert("Your browser doesn't support speech synthesis.");
   }
+}
+
 
   // Toggle translation visibility
   function toggleTranslation(btn) {

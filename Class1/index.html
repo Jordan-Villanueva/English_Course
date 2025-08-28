@@ -213,28 +213,10 @@
 
   // Cargar voces
   window.onload=function(){ speechSynthesis.getVoices(); };
-
-  // --- OPCIÓN 2: mostrar botones según login ---
-  const loggedIn = true; // Cambiar según estado
-
-  const loginBtn = document.getElementById('login-btn');
-  const logoutBtn = document.getElementById('logout-btn');
-  const homeBtn = document.getElementById('home-btn');
-
-  if(loggedIn){
-    loginBtn.style.display = 'none';
-    logoutBtn.style.display = 'inline-block';
-    homeBtn.style.display = 'inline-block';
-  } else {
-    loginBtn.style.display = 'inline-block';
-    logoutBtn.style.display = 'none';
-    homeBtn.style.display = 'none';
-  }
-
-  // Acciones de los botones
-  loginBtn.onclick = ()=> alert("Simular login");
-  logoutBtn.onclick = ()=> alert("Simular logout");
-  homeBtn.onclick = ()=> window.location.href = "../index.html"; // ejemplo de inicio
 </script>
+
+<!-- Auth0 -->
+<script src="../auth.js"></script>
+
 </body>
 </html>

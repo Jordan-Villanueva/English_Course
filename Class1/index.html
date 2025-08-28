@@ -178,26 +178,34 @@
 
 <script>
 // Speak function improved
-  function speak(text, lang='en-US') {
-    if ('speechSynthesis' in window) {
+ function speak(text, lang='en-US') {
+  if ('speechSynthesis' in window) {
+    function doSpeak() {
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = lang;
       utterance.rate = 0.9;
       utterance.pitch = 1.1;
 
       const voices = speechSynthesis.getVoices();
-      const preferredVoices = (lang.startsWith('en')) 
-        ? ['Google US English', 'Microsoft Zira Desktop - English (United States)', 'Samantha', 'Alex'] 
-        : ['Google Español', 'Microsoft Helena Desktop - Spanish (Spain)', 'Monica', 'Paulina'];
-      let voice = voices.find(v => preferredVoices.includes(v.name));
+      // Filtrar voces naturales
+      let voice = voices.find(v => v.name.includes('Google US English') || v.name.includes('Samantha') || v.name.includes('Alex'));
       if(!voice) voice = voices.find(v => v.lang.startsWith(lang.slice(0,2)));
       if(voice) utterance.voice = voice;
 
       speechSynthesis.speak(utterance);
-    } else {
-      alert("Your browser doesn't support speech synthesis.");
     }
+
+    // Esperar si las voces no están listas
+    if(speechSynthesis.getVoices().length === 0){
+      speechSynthesis.onvoiceschanged = doSpeak;
+    } else {
+      doSpeak();
+    }
+
+  } else {
+    alert("Your browser doesn't support speech synthesis.");
   }
+}
 
   function practiceNumbers(start=1,end=10){
     for(let i=start;i<=end;i++){

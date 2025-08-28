@@ -1,3 +1,4 @@
+const homeBtn = document.getElementById("home-btn");
 const loginBtn = document.getElementById("login-btn");
 const logoutBtn = document.getElementById("logout-btn");
 const content = document.getElementById("content");
@@ -38,9 +39,10 @@ function parseHash() {
 function showLoggedOut() {
   loginBtn.style.display = "inline-block";
   logoutBtn.style.display = "none";
+  if (homeBtn) homeBtn.style.display = "none";
 
   if (window.location.pathname === "/" || window.location.pathname.endsWith("index.html")) {
-    content.innerHTML = "<p>Por favor, inicia sesión para acceder al curso.</p>";
+    content.innerHTML = "<p>Please log in to access the course.</p>";
   } else {
     content.style.display = "none";
   }
@@ -49,14 +51,20 @@ function showLoggedOut() {
 function showContent() {
   loginBtn.style.display = "none";
   logoutBtn.style.display = "inline-block";
+  if (homeBtn) {
+    homeBtn.style.display = "inline-block";
+    homeBtn.onclick = () => {
+      window.location.href = REDIRECT_URI;
+    };
+  }
 
   if (window.location.pathname === "/" || window.location.pathname.endsWith("index.html")) {
     content.innerHTML = `
       <section>
-        <h2>Clases disponibles</h2>
+        <h2>Available Classes</h2>
         <ul>
-          <li><a href="Class1/index.html">Clase 1: Presentaciones, saludos y despedidas</a></li>
-          <li><a href="Class2/index.html">Clase 2: (próximamente)</a></li>
+          <li><a href="Class1/index.html">Class 1: Introductions, Greetings, and Farewells</a></li>
+          <li><a href="Class2/index.html">Class 2: (coming soon)</a></li>
         </ul>
       </section>
     `;

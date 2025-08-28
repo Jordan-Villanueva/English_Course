@@ -2,73 +2,60 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Class 1 - English Course | Clase 1 - Curso de Inglés</title>
+  <title>Class 1 - English Course</title>
   <link rel="stylesheet" href="../style.css">
+  <style>
+    .number-item, .object-item { cursor: pointer; display: inline-block; margin: 5px; text-align: center; }
+    .numbers-grid, .object-container { display: flex; flex-wrap: wrap; justify-content: center; }
+    .speak-btn { margin: 5px; }
+  </style>
 </head>
 <body>
   <header>
-    <h1>
-      Class 1: Introductions, greetings and farewells
-      <button onclick="speak('Class 1: Introductions, greetings and farewells')">🔊</button> |
-      Clase 1: Presentaciones, saludos y despedidas
-      <button onclick="translateText(this)">🇪🇸</button>
-    </h1>
-    <p class="subtitle">
-      Basic English Course
-      <button onclick="speak('Basic English Course')">🔊</button> |
-      Curso básico de inglés
-      <button onclick="translateText(this)">🇪🇸</button>
-    </p>
+    <h1 id="title">Class 1: Introductions, greetings and farewells</h1>
+    <p id="subtitle">Basic English Course</p>
+    <button onclick="translateText()">🇪🇸 Translate</button>
   </header>
 
   <main id="content">
 
     <!-- 1. Objectives -->
     <section class="bloque">
-      <h2>🎯 Class objectives</h2>
+      <h2>1. Class objectives</h2>
       <ul>
-        <li>
-          Students will be able to introduce themselves, greet, say goodbye and use basic courtesy phrases.
+        <li>Students will be able to introduce themselves, greet, say goodbye and use basic courtesy phrases.
           <button onclick="speak('Students will be able to introduce themselves, greet, say goodbye and use basic courtesy phrases')">🔊</button>
-          <button onclick="speak('Los estudiantes podrán presentarse, saludar, despedirse y usar frases de cortesía básicas','es-ES')">🇪🇸</button>
         </li>
-        <li>
-          Start speaking and writing in English at a very basic level.
+        <li>Start speaking and writing in English at a very basic level.
           <button onclick="speak('Start speaking and writing in English at a very basic level')">🔊</button>
-          <button onclick="speak('Comenzar a hablar y escribir en inglés a nivel muy básico','es-ES')">🇪🇸</button>
         </li>
       </ul>
     </section>
 
     <!-- 2. Warm-up / Icebreaker -->
     <section class="bloque">
-      <h2>1. Warm-up / Icebreaker (10 min)</h2>
+      <h2>2. Warm-up / Icebreaker (10 min)</h2>
       <blockquote>
         Hello, my name is Jordan. I’m from Mexico. I'm a physicist and software developer and I love movies and teaching.
         <button onclick="speak('Hello, my name is Jordan. I’m from Mexico. I am a physicist and software developer and I love movies and teaching.')">🔊</button>
       </blockquote>
-      <p><em>
-        Greeting: What's your name? Where are you from? What do you like and what do you do?
+      <p>Greeting: What's your name? Where are you from? What do you like and what do you do?
         <button onclick="speak('Greeting: What is your name? Where are you from? What do you like and what do you do?')">🔊</button>
-      </em></p>
+      </p>
     </section>
 
     <!-- 3. Vocabulary -->
     <section class="bloque">
-      <h2>2. Vocabulary and pronouns (15 min)</h2>
-      <h3>Greetings</h3>
+      <h2>3. Vocabulary and pronouns (15 min)</h2>
       <p>Hello, Hi, Good morning, Good afternoon, Good evening, Good night
         <button onclick="speak('Hello, Hi, Good morning, Good afternoon, Good evening, Good night')">🔊</button>
       </p>
-      <h3>Farewells</h3>
       <p>Goodbye, Bye, See you, See you later
         <button onclick="speak('Goodbye, Bye, See you, See you later')">🔊</button>
       </p>
-      <h3>Personal pronouns + verb "To be"</h3>
       <p>I am, You are, He/She is, We are, They are
         <button onclick="speak('I am, You are, He or She is, We are, They are')">🔊</button>
       </p>
-      <h3>Possessive pronouns</h3>
       <p>My, Your, His, Her
         <button onclick="speak('My, Your, His, Her')">🔊</button>
       </p>
@@ -76,132 +63,104 @@
 
     <!-- 4. Listening / Modeling -->
     <section class="bloque">
-      <h2>3. Listening / Modeling (20 min)</h2>
-      <p>Watch the introduction video and write key sentences. Then in the clip about movies, identify the learned phrases.
-        <button onclick="speak('Watch the introduction video and write key sentences. Then in the clip about movies, identify the learned phrases.')">🔊</button>
-      </p>
+      <h2>4. Listening / Modeling (20 min)</h2>
+      <p>Watch the videos and write key sentences:</p>
       <iframe width="100%" height="315" src="https://www.youtube.com/embed/RL8pLS8cUOs" frameborder="0" allowfullscreen></iframe>
       <iframe width="100%" height="315" src="https://www.youtube.com/embed/ImOoyoLmGUI" frameborder="0" allowfullscreen></iframe>
     </section>
 
     <!-- 5. Song Practice -->
     <section class="bloque">
-      <h2>4. Song Practice (15 min)</h2>
-      <p>Listen to the song and complete the lyrics playing on LyricsTraining.
-        <button onclick="speak('Listen to the song and complete the lyrics playing on LyricsTraining')">🔊</button>
-      </p>
-      <button class="speak-btn" onclick="window.open('https://es.lyricstraining.com/play/the-beatles/hello-goodbye/HkEvrcQWdk#b7w!jortizvilla','_blank')">
-        🎵 Play with the song on LyricsTraining
+      <h2>5. Song Practice (15 min)</h2>
+      <button onclick="window.open('https://es.lyricstraining.com/play/the-beatles/hello-goodbye/HkEvrcQWdk#b7w!jortizvilla','_blank')">
+        🎵 Play with LyricsTraining
       </button>
     </section>
 
-    <!-- 6. Exercises -->
-    <section class="bloque">
-      <h2>5. Introduction of "Where are you from?" (10 min)</h2>
-      <iframe width="100%" height="315" src="https://www.youtube.com/embed/byqOkm6-SCc" frameborder="0" allowfullscreen></iframe>
-    </section>
-
-    <!-- 6. Interactive practice / Objects -->
+    <!-- 6. Interactive Practice: Objects -->
     <section class="bloque">
       <h2>6. Interactive Practice: "What's this?"</h2>
-      <p>Click on the objects to hear their names in English. Then practice asking "What's this?"</p>
       <div class="object-container">
         <div class="object-item" onclick="speak('Book')">
-          <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/book-solid-full.svg" class="object-image" alt="Book">
-          <div class="object-name">Book 🔊</div>
+          <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/book-solid-full.svg" alt="Book" width="60">
+          <div>Book 🔊</div>
         </div>
         <div class="object-item" onclick="speak('Pen')">
-          <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pen-clip-solid-full.svg" class="object-image" alt="Pen">
-          <div class="object-name">Pen 🔊</div>
+          <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pen-clip-solid-full.svg" alt="Pen" width="60">
+          <div>Pen 🔊</div>
         </div>
         <div class="object-item" onclick="speak('Pencil')">
-          <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pencil-solid-full.svg" class="object-image" alt="Pencil">
-          <div class="object-name">Pencil 🔊</div>
+          <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pencil-solid-full.svg" alt="Pencil" width="60">
+          <div>Pencil 🔊</div>
         </div>
         <div class="object-item" onclick="speak('Chair')">
-          <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/chair-solid-full.svg" class="object-image" alt="Chair">
-          <div class="object-name">Chair 🔊</div>
+          <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/chair-solid-full.svg" alt="Chair" width="60">
+          <div>Chair 🔊</div>
         </div>
         <div class="object-item" onclick="speak('Table')">
-          <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/table-furniture.svg" class="object-image" alt="Table">
-          <div class="object-name">Table 🔊</div>
+          <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/table-furniture.svg" alt="Table" width="60">
+          <div>Table 🔊</div>
         </div>
         <div class="object-item" onclick="speak('Bag')">
-          <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/bag-personal.svg" class="object-image" alt="Bag">
-          <div class="object-name">Bag 🔊</div>
+          <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/bag-personal.svg" alt="Bag" width="60">
+          <div>Bag 🔊</div>
         </div>
       </div>
     </section>
 
     <!-- 7. Numbers -->
     <section class="bloque">
-      <h2>7. Numbers in English: from 1 to 30</h2>
-      <p>Click each number to hear its pronunciation:</p>
+      <h2>7. Numbers in English: 1-30</h2>
       <div class="numbers-grid"></div>
-      <div class="practice-block">
-        <p><strong>Pronunciation practice:</strong></p>
-        <button class="speak-btn" onclick="practiceNumbers(1,10)">Listen 1 to 10</button>
-        <button class="speak-btn" onclick="practiceNumbers(11,20)">Listen 11 to 20</button>
-        <button class="speak-btn" onclick="practiceNumbers(21,30)">Listen 21 to 30</button>
+      <div>
+        <button onclick="practiceNumbers(1,10)">Listen 1-10</button>
+        <button onclick="practiceNumbers(11,20)">Listen 11-20</button>
+        <button onclick="practiceNumbers(21,30)">Listen 21-30</button>
       </div>
     </section>
 
     <!-- 8. Mini writing / journaling -->
     <section class="bloque">
-      <h2>8. Mini writing / journaling (10-15 min)</h2>
+      <h2>8. Mini writing / journaling</h2>
       <ul>
-        <li>Hello, my name is ___. <button onclick="speak('Hello, my name is')">🔊</button> <button onclick="speak('Hola, mi nombre es','es-ES')">🇪🇸</button></li>
-        <li>I'm from ___.<button onclick="speak('I am from')">🔊</button> <button onclick="speak('Soy de','es-ES')">🇪🇸</button></li>
-        <li>I like ___.<button onclick="speak('I like')">🔊</button> <button onclick="speak('Me gusta','es-ES')">🇪🇸</button></li>
+        <li>Hello, my name is ___</li>
+        <li>I'm from ___</li>
+        <li>I like ___</li>
       </ul>
     </section>
 
     <!-- 9. Group speaking -->
     <section class="bloque">
-      <h2>9. Group speaking (15-20 min)</h2>
-      <p>Each student introduces themselves to the group using the learned phrases, including the question <em>Where are you from?</em>
-        <button onclick="speak('Where are you from?')">🔊</button> <button onclick="speak('¿De dónde eres?','es-ES')">🇪🇸</button>
-      </p>
+      <h2>9. Group speaking</h2>
+      <p>Each student introduces themselves and asks: "Where are you from?"</p>
     </section>
 
     <!-- 10. Writing activity -->
     <section class="bloque">
-      <h2>10. Writing activity (10-15 min)</h2>
-      <p>Solve the following exercise:</p>
-      <img src="cierre.png" alt="Closing activity: Complete the dialogues" width="100%" style="border: 2px solid #ccc; border-radius: 10px; max-width: 600px;">
+      <h2>10. Writing activity</h2>
+      <img src="cierre.png" alt="Complete the dialogues" width="100%" style="max-width:600px;border:2px solid #ccc;border-radius:10px;">
     </section>
 
     <!-- 11. Games -->
     <section class="bloque">
-      <h2>11. Interactive games / Baamboozle (15 min)</h2>
-      <div class="game-item">
-        <p>🎲 Game 1:</p>
-        <a href="https://www.baamboozle.com/game/641765" target="_blank" class="speak-btn">Play on Baamboozle</a>
-      </div>
-      <div class="game-item">
-        <p>🎲 Game 2:</p>
-        <a href="https://www.baamboozle.com/game/54952" target="_blank" class="speak-btn">Play on Baamboozle</a>
-      </div>
+      <h2>11. Interactive games / Baamboozle</h2>
+      <a href="https://www.baamboozle.com/game/641765" target="_blank">🎲 Game 1</a><br>
+      <a href="https://www.baamboozle.com/game/54952" target="_blank">🎲 Game 2</a>
       <p>Tip: Create teams for the activity.</p>
     </section>
 
   </main>
 
   <script>
-    function speak(text, lang='en-US'){
+    function speak(text){
       if('speechSynthesis' in window){
-        window.speechSynthesis.cancel();
         const utter = new SpeechSynthesisUtterance(text);
-        utter.lang = lang;
-        utter.rate = 0.95;
-        utter.pitch = 1.2;
+        utter.lang = 'en-US';
+        window.speechSynthesis.cancel();
         window.speechSynthesis.speak(utter);
-      } else {
-        alert("Your browser doesn't support speech synthesis.");
       }
     }
 
-    // Numbers 1-30
     const numbers = ["one","two","three","four","five","six","seven","eight","nine","ten",
       "eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen","twenty",
       "twenty-one","twenty-two","twenty-three","twenty-four","twenty-five","twenty-six","twenty-seven","twenty-eight","twenty-nine","thirty"];
@@ -210,7 +169,7 @@
       const div = document.createElement('div');
       div.className='number-item';
       div.onclick = ()=>speak(num);
-      div.innerHTML = `<div class="number">${i+1}</div><div class="number-name">${num} 🔊</div>`;
+      div.innerHTML = `<div>${i+1}</div><div>${num} 🔊</div>`;
       grid.appendChild(div);
     });
 
@@ -218,6 +177,11 @@
       for(let i=start-1;i<end;i++){
         setTimeout(()=>speak(numbers[i]), (i-start+1)*1500);
       }
+    }
+
+    function translateText(){
+      document.getElementById('title').textContent = "Clase 1: Presentaciones, saludos y despedidas";
+      document.getElementById('subtitle').textContent = "Curso de inglés básico";
     }
   </script>
 </body>

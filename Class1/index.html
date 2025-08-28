@@ -177,23 +177,20 @@
 </footer>
 
 <script>
-  // Universal speak function with improved voice
-  function speak(text) {
+// Speak function improved
+  function speak(text, lang='en-US') {
     if ('speechSynthesis' in window) {
       const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'en-US';
+      utterance.lang = lang;
       utterance.rate = 0.9;
       utterance.pitch = 1.1;
 
       const voices = speechSynthesis.getVoices();
-      const preferredVoices = [
-        'Google US English', 
-        'Microsoft Zira Desktop - English (United States)', 
-        'Samantha', 
-        'Alex'
-      ];
+      const preferredVoices = (lang.startsWith('en')) 
+        ? ['Google US English', 'Microsoft Zira Desktop - English (United States)', 'Samantha', 'Alex'] 
+        : ['Google Español', 'Microsoft Helena Desktop - Spanish (Spain)', 'Monica', 'Paulina'];
       let voice = voices.find(v => preferredVoices.includes(v.name));
-      if(!voice) voice = voices.find(v => v.lang.startsWith('en-'));
+      if(!voice) voice = voices.find(v => v.lang.startsWith(lang.slice(0,2)));
       if(voice) utterance.voice = voice;
 
       speechSynthesis.speak(utterance);

@@ -17,7 +17,270 @@
   </header>
 
   <main id="content" style="display:none;">
-    <!-- Aquí van todas tus secciones como ya tenías en tu HTML -->
+    <!-- Objetivos -->
+    <section class="objetivos">
+      <h2>🎯 Objetivos de la clase</h2>
+      <ul>
+        <li>Que los alumnos puedan presentarse, saludar, despedirse y usar frases básicas de cortesía.</li>
+        <li>Empezar a hablar y escribir en inglés de forma muy básica.</li>
+      </ul>
+    </section>
+
+    <!-- Warm-up -->
+    <section class="bloque">
+      <h2>1. Warm-up / Icebreaker (10 min)</h2>
+      <blockquote>
+        Hello, my name is Jordan. I’m from Mexico.  
+        I'm a physicist and software developer and I love movies and teaching.
+      </blockquote>
+      <p><em>Greeting, What's your name? Where are you from? What do you like and what do you do?</em></p>
+    </section>
+
+    <!-- Vocabulario -->
+    <section class="bloque">
+      <h2>2. Vocabulario y pronombres (15 min)</h2>
+      <h3>Saludos / Greetings</h3>
+      <p>Hello, Hi, Good morning, Good afternoon, Good evening, Good night</p>
+      <h3>Despedidas / Farewells</h3>
+      <p>Goodbye, Bye, See you, See you later</p>
+      <h3>Pronombres personales + verbo "To be"</h3>
+      <p>I am, You are, He/She is, We are, You are, They are, It is</p>
+      <h3>Pronombres posesivos</h3>
+      <p>My, Your, His, Her</p>
+    </section>
+
+    <!-- Listening / Videos modelados -->
+    <section class="bloque">
+      <h2>3. Listening / Modelado (20 min)</h2>
+      <p>Ver el video de Introduction y escribir frases clave; luego en el clip de movies, identificar las frases aprendidas:</p>
+      <iframe width="100%" height="315" src="https://www.youtube.com/embed/RL8pLS8cUOs" frameborder="0" allowfullscreen style="margin-bottom: 15px;"></iframe>
+      <iframe width="100%" height="315" src="https://www.youtube.com/embed/ImOoyoLmGUI" frameborder="0" allowfullscreen></iframe>
+    </section>
+
+    <!-- Song Practice -->
+    <section class="bloque">
+      <h2>4. Song Practice (15 min)</h2>
+      <p>Escucha la canción y completa la letra jugando en LyricsTraining:</p>
+      <a href="https://es.lyricstraining.com/play/the-beatles/hello-goodbye/HkEvrcQWdk#b7w!jortizvilla" 
+         target="_blank" class="btn-link">
+         🎵 Jugar con la canción en LyricsTraining
+      </a>
+    </section>
+
+    <!-- Ejercicios -->
+    <section class="bloque">
+      <h2>5. Introducción de "Where are you from?" (10 min)</h2>
+      <iframe width="100%" height="315" src="https://www.youtube.com/embed/byqOkm6-SCc" frameborder="0" allowfullscreen></iframe>
+    </section>
+
+    <!-- Ejercicio interactivo "What's this?" -->
+    <section class="bloque">
+      <h2>6. Práctica Interactiva: "What's this?"</h2>
+      <p>Haz clic en los objetos para escuchar su nombre en inglés. Luego practica preguntando "What's this?"</p>
+      
+      <div class="object-container">
+        <div class="object-item" onclick="speakWord('book')">
+          <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/book-solid-full.svg" class="object-image" alt="Book">
+          <div class="object-name">Book</div>
+        </div>
+        <div class="object-item" onclick="speakWord('pen')">
+          <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pen-clip-solid-full.svg" class="object-image" alt="Pen">
+          <div class="object-name">Pen</div>
+        </div>
+        <div class="object-item" onclick="speakWord('pencil')">
+          <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pencil-solid-full.svg" class="object-image" alt="Pencil">
+          <div class="object-name">Pencil</div>
+        </div>
+        <div class="object-item" onclick="speakWord('chair')">
+          <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/chair-solid-full.svg" class="object-image" alt="Chair">
+          <div class="object-name">Chair</div>
+        </div>
+        <div class="object-item" onclick="speakWord('table')">
+          <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/table-furniture.svg" class="object-image" alt="Table">
+          <div class="object-name">Table</div>
+        </div>
+        <div class="object-item" onclick="speakWord('bag')">
+          <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/bag-personal.svg" class="object-image" alt="Bag">
+          <div class="object-name">Bag</div>
+        </div>
+      </div>
+      
+      <p class="instruction">Haz clic en cualquier objeto para escuchar su pronunciación en inglés.</p>
+    </section>
+
+    <!-- Números -->
+    <section class="bloque">
+      <h2>7. Números en inglés: del 1 al 30</h2>
+      <p>Aprende los números en inglés. Haz clic en cada número para escuchar su pronunciación.</p>
+
+      <div class="numbers-grid">
+        <div class="number-item" onclick="speakNumber(1)">
+          <div class="number">1</div>
+          <div class="number-name">one</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(2)">
+          <div class="number">2</div>
+          <div class="number-name">two</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(3)">
+          <div class="number">3</div>
+          <div class="number-name">three</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(4)">
+          <div class="number">4</div>
+          <div class="number-name">four</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(5)">
+          <div class="number">5</div>
+          <div class="number-name">five</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(6)">
+          <div class="number">6</div>
+          <div class="number-name">six</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(7)">
+          <div class="number">7</div>
+          <div class="number-name">seven</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(8)">
+          <div class="number">8</div>
+          <div class="number-name">eight</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(9)">
+          <div class="number">9</div>
+          <div class="number-name">nine</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(10)">
+          <div class="number">10</div>
+          <div class="number-name">ten</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(11)">
+          <div class="number">11</div>
+          <div class="number-name">eleven</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(12)">
+          <div class="number">12</div>
+          <div class="number-name">twelve</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(13)">
+          <div class="number">13</div>
+          <div class="number-name">thirteen</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(14)">
+          <div class="number">14</div>
+          <div class="number-name">fourteen</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(15)">
+          <div class="number">15</div>
+          <div class="number-name">fifteen</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(16)">
+          <div class="number">16</div>
+          <div class="number-name">sixteen</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(17)">
+          <div class="number">17</div>
+          <div class="number-name">seventeen</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(18)">
+          <div class="number">18</div>
+          <div class="number-name">eighteen</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(19)">
+          <div class="number">19</div>
+          <div class="number-name">nineteen</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(20)">
+          <div class="number">20</div>
+          <div class="number-name">twenty</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(21)">
+          <div class="number">21</div>
+          <div class="number-name">twenty-one</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(22)">
+          <div class="number">22</div>
+          <div class="number-name">twenty-two</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(23)">
+          <div class="number">23</div>
+          <div class="number-name">twenty-three</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(24)">
+          <div class="number">24</div>
+          <div class="number-name">twenty-four</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(25)">
+          <div class="number">25</div>
+          <div class="number-name">twenty-five</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(26)">
+          <div class="number">26</div>
+          <div class="number-name">twenty-six</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(27)">
+          <div class="number">27</div>
+          <div class="number-name">twenty-seven</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(28)">
+          <div class="number">28</div>
+          <div class="number-name">twenty-eight</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(29)">
+          <div class="number">29</div>
+          <div class="number-name">twenty-nine</div>
+        </div>
+        <div class="number-item" onclick="speakNumber(30)">
+          <div class="number">30</div>
+          <div class="number-name">thirty</div>
+        </div>
+      </div>
+
+      <div class="practice-block">
+        <p><strong>Práctica de pronunciación:</strong></p>
+        <button class="speak-btn" onclick="practiceNumbers()">Escuchar números del 1 al 10</button>
+        <button class="speak-btn" onclick="practiceNumbers(11, 20)">Escuchar números del 11 al 20</button>
+        <button class="speak-btn" onclick="practiceNumbers(21, 30)">Escuchar números del 21 al 30</button>
+      </div>
+    </section>
+
+    <!-- Mini writing / journaling -->
+    <section class="bloque">
+      <h2>8. Mini writing / journaling (10-15 min)</h2>
+      <ul>
+        <li>Hello, my name is ___.</li>
+        <li>I'm from ___.</li>
+        <li>I like ___.</li>
+      </ul>
+    </section>
+
+    <!-- Speaking en grupo -->
+    <section class="bloque">
+      <h2>9. Speaking en grupo (15-20 min)</h2>
+      <p>Cada alumno se presenta frente al grupo usando las frases vistas, incluyendo la pregunta <em>Where are you from?</em></p>
+    </section>
+
+    <!-- Actividad de writing -->
+    <section class="bloque">
+      <h2>10. Actividad de writing (10-15 min)</h2>
+      <p>Resuelve el siguiente ejercicio:</p>
+      <img src="cierre.png" alt="Actividad de cierre: Completar diálogos" width="100%" style="border: 2px solid #ccc; border-radius: 10px; max-width: 600px;">
+    </section>
+
+    <!-- Juegos Baamboozle -->
+    <section class="bloque">
+      <h2>11. Juegos interactivos / Baamboozle (15 min)</h2>
+      <div class="game-item">
+        <p>🎲 Juego 1:</p>
+        <a href="https://www.baamboozle.com/game/641765" target="_blank" class="btn-link">Ir al juego en Baamboozle</a>
+      </div>
+      <div class="game-item">
+        <p>🎲 Juego 2:</p>
+        <a href="https://www.baamboozle.com/game/54952" target="_blank" class="btn-link">Ir al juego en Baamboozle</a>
+      </div>
+      <p>Consejo: Formar equipos para la actividad.</p>
+    </section>
+
   </main>
 
   <footer>
@@ -25,12 +288,65 @@
   </footer>
 
   <script>
-    // Aquí va tu código de pronunciación y práctica
-    function speakWord(word) { /*...*/ }
-    function speakNumber(number) { /*...*/ }
-    function practiceNumbers(start = 1, end = 10) { /*...*/ }
-
+    // Función para pronunciar palabras en inglés
+    function speakWord(word) {
+      // Verificar si el navegador soporta la síntesis de voz
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(word);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.8; // Velocidad ligeramente más lenta para mejor comprensión
+        
+        // Intentar encontrar una voz en inglés
+        const voices = speechSynthesis.getVoices();
+        const englishVoice = voices.find(voice => voice.lang.startsWith('en-'));
+        
+        if (englishVoice) {
+          utterance.voice = englishVoice;
+        }
+        
+        speechSynthesis.speak(utterance);
+      } else {
+        alert('Tu navegador no soporta la función de síntesis de voz. Por favor, utiliza Chrome, Edge o Safari.');
+      }
+    }
+    
+    // Función para pronunciar números en inglés
+    function speakNumber(number) {
+      const numbers = {
+        1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five',
+        6: 'six', 7: 'seven', 8: 'eight', 9: 'nine', 10: 'ten',
+        11: 'eleven', 12: 'twelve', 13: 'thirteen', 14: 'fourteen', 15: 'fifteen',
+        16: 'sixteen', 17: 'seventeen', 18: 'eighteen', 19: 'nineteen', 20: 'twenty',
+        21: 'twenty-one', 22: 'twenty-two', 23: 'twenty-three', 24: 'twenty-four', 25: 'twenty-five',
+        26: 'twenty-six', 27: 'twenty-seven', 28: 'twenty-eight', 29: 'twenty-nine', 30: 'thirty'
+      };
+      
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(numbers[number]);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.8;
+        
+        const voices = speechSynthesis.getVoices();
+        const englishVoice = voices.find(voice => voice.lang.startsWith('en-'));
+        
+        if (englishVoice) {
+          utterance.voice = englishVoice;
+        }
+        
+        speechSynthesis.speak(utterance);
+      }
+    }
+    
+    // Función para practicar números en secuencia
+    function practiceNumbers(start = 1, end = 10) {
+      for (let i = start; i <= end; i++) {
+        setTimeout(() => speakNumber(i), (i - start) * 1200);
+      }
+    }
+    
+    // Inicializar la síntesis de voz
     window.onload = function() {
+      // Forzar la carga de voces
       speechSynthesis.getVoices();
     };
   </script>

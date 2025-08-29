@@ -71,17 +71,17 @@ h2 {
   border-bottom: 2px solid #eaeaea;
 }
 
-h2.title-flex {
+h2.title-flex, h3.title-flex {
   display: flex;
-  align-items: center;   /* alinea texto y botones en el centro vertical */
-  gap: 10px;             /* espacio entre texto y botones */
-  font-size: 1.8em;      /* tamaño del título */
+  align-items: center;   /* centra verticalmente texto + botones */
+  gap: 8px;              /* separación entre texto y botones */
+  font-size: 1.5em;      /* asegura tamaño grande en móvil */
+  flex-wrap: wrap;       /* si no cabe en una sola línea en pantallas pequeñas, se ajusta */
 }
 
-h2.title-flex button {
-  font-size: 0.6em;      /* botones más pequeños */
-  padding: 4px 6px;
-  cursor: pointer;
+h2.title-flex button, h3.title-flex button {
+  font-size: 0.9em;      /* botones más discretos que el título */
+  padding: 2px 6px;
 }
 
 h3 {

@@ -230,58 +230,61 @@
 <!-- Interactive exercise -->
 <section class="bloque" data-translated="false">
   <h2 class="title-flex">
-    <span class="translatable" 
-          data-original="6. Interactive Practice: &quot;What's this?&quot;" 
+    <span id="interactive-title-6" class="translatable"
+          data-original="6. Interactive Practice: &quot;What&#39;s this?&quot;"
           data-translation="6. Práctica interactiva: &quot;¿Qué es esto?&quot;">
       6. Interactive Practice: "What's this?"
     </span>
-    <button class="translate-section-btn">🌐</button>
-    <button onclick="speak('Interactive Practice: What\'s this?')">🔊</button>
+    <button class="translate-section-btn" type="button">🌐</button>
+    <button type="button" onclick="speak(document.getElementById('interactive-title-6').dataset.original)">🔊</button>
   </h2>
 
-  <p class="translatable" 
-     data-original="Click on the objects to hear their names in English. Then practice asking &quot;What's this?&quot;" 
-     data-translation="Haz clic en los objetos para escuchar sus nombres en inglés. Luego practica preguntando &quot;¿Qué es esto?&quot;">
-    Click on the objects to hear their names in English. Then practice asking "What's this?"
+  <p>
+    <span id="interactive-desc-6" class="translatable"
+          data-original="Click on the objects to hear their names in English. Then practice asking &quot;What&#39;s this?&quot;"
+          data-translation="Haz clic en los objetos para escuchar sus nombres en inglés. Luego practica preguntando &quot;¿Qué es esto?&quot;">
+      Click on the objects to hear their names in English. Then practice asking "What's this?"
+    </span>
+    <button type="button" onclick="speak(document.getElementById('interactive-desc-6').dataset.original)">🔊</button>
   </p>
 
   <div class="object-container">
-    <div class="object-item" onclick="speak('Book')">
+    <div class="object-item" onclick="speak(this.querySelector('.translatable').dataset.original)">
       <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/book-solid-full.svg" class="object-image" alt="Book">
       <div class="object-name">
         <span class="translatable" data-original="Book" data-translation="Libro">Book</span> 🔊
       </div>
     </div>
 
-    <div class="object-item" onclick="speak('Pen')">
+    <div class="object-item" onclick="speak(this.querySelector('.translatable').dataset.original)">
       <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pen-clip-solid-full.svg" class="object-image" alt="Pen">
       <div class="object-name">
         <span class="translatable" data-original="Pen" data-translation="Pluma">Pen</span> 🔊
       </div>
     </div>
 
-    <div class="object-item" onclick="speak('Pencil')">
+    <div class="object-item" onclick="speak(this.querySelector('.translatable').dataset.original)">
       <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pencil-solid-full.svg" class="object-image" alt="Pencil">
       <div class="object-name">
         <span class="translatable" data-original="Pencil" data-translation="Lápiz">Pencil</span> 🔊
       </div>
     </div>
 
-    <div class="object-item" onclick="speak('Chair')">
+    <div class="object-item" onclick="speak(this.querySelector('.translatable').dataset.original)">
       <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/chair-solid-full.svg" class="object-image" alt="Chair">
       <div class="object-name">
         <span class="translatable" data-original="Chair" data-translation="Silla">Chair</span> 🔊
       </div>
     </div>
 
-    <div class="object-item" onclick="speak('Table')">
+    <div class="object-item" onclick="speak(this.querySelector('.translatable').dataset.original)">
       <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/table-furniture.svg" class="object-image" alt="Table">
       <div class="object-name">
         <span class="translatable" data-original="Table" data-translation="Mesa">Table</span> 🔊
       </div>
     </div>
 
-    <div class="object-item" onclick="speak('Bag')">
+    <div class="object-item" onclick="speak(this.querySelector('.translatable').dataset.original)">
       <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/bag-personal.svg" class="object-image" alt="Bag">
       <div class="object-name">
         <span class="translatable" data-original="Bag" data-translation="Bolsa">Bag</span> 🔊

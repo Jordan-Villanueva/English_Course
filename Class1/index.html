@@ -391,7 +391,7 @@ window.onload = () => { speechSynthesis.getVoices(); };
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".translate-section-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      const section = btn.closest("section");
+      const container = btn.closest("section, header");
       const isTranslated = section.getAttribute("data-translated") === "true";
 
       // Alternar todos los elementos traducibles dentro de la sección

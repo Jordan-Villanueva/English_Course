@@ -6,101 +6,175 @@
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-<header>
+  <header>
   <h1 class="title-flex">
     Class 1: Introductions, greetings and farewells
+    <button class="translate-btn" data-original="Class 1: Introductions, greetings and farewells" data-translation="Clase 1: Presentaciones, saludos y despedidas">🌐</button>
     <button onclick="speak('Class 1: Introductions, greetings and farewells')">🔊</button>
-  </h1>
-  <p class="subtitle">English Course for Beginners</p>
-  <div class="header-buttons">
-    <button id="login-btn" style="display:none;">Login/Ingresar</button>
-    <button id="logout-btn" style="display:none;">Logout/Salir</button>
-    <button id="home-btn" style="display:none;">🏠 Home/Inicio</button>
-  </div>
-</header>
+    </h1>
+    <p class="subtitle">English Course for Beginners
+      <button class="translate-btn" data-original="English Course for Beginners" data-translation="Curso de Inglés para principiantes">🌐</button>
+      <button onclick="speak('English Course for Beginners')">🔊</button>
+    </p>
+    <div class="header-buttons">
+      <button id="login-btn" style="display:none;">Login/Ingresar</button>
+      <button id="logout-btn" style="display:none;">Logout/Salir</button>
+      <button id="home-btn" style="display:none;">🏠 Home/Inicio</button>
+    </div>
+  </header>
 
 <main id="content">
   <!-- Objectives -->
-  <section class="objetivos" data-original="Students will be able to introduce themselves, greet, say goodbye and use basic courtesy phrases. Start speaking and writing in English at a very basic level." data-translation="Los estudiantes podrán presentarse, saludar, despedirse y usar frases básicas de cortesía. Comenzar a hablar y escribir en inglés a un nivel muy básico.">
-    <h2 class="title-flex">
+<section class="objetivos" data-translated="false">
+  <h2 class="title-flex">
+    <span class="translatable" 
+          data-original="🎯 Class objectives" 
+          data-translation="🎯 Objetivos de la clase">
       🎯 Class objectives
-      <button class="translate-section-btn">🌐 Translate section</button>
-      <button onclick="speak('Class objectives')">🔊</button>
-    </h2>
-    <ul>
-      <li>Students will be able to introduce themselves, greet, say goodbye and use basic courtesy phrases.</li>
-      <li>Start speaking and writing in English at a very basic level.</li>
-    </ul>
-  </section>
+    </span>
+    <button class="translate-section-btn">🌐</button>
+    <button onclick="speak('Class objectives')">🔊</button>
+  </h2>
+  <ul>
+    <li>
+      <span class="translatable" 
+            data-original="Students will be able to introduce themselves, greet, say goodbye and use basic courtesy phrases." 
+            data-translation="Los estudiantes podrán presentarse, saludar, despedirse y usar frases básicas de cortesía.">
+        Students will be able to introduce themselves, greet, say goodbye and use basic courtesy phrases.
+      </span>
+      <button onclick="speak('Students will be able to introduce themselves, greet, say goodbye and use basic courtesy phrases.')">🔊</button>
+    </li>
+    <li>
+      <span class="translatable" 
+            data-original="Start speaking and writing in English at a very basic level." 
+            data-translation="Comenzar a hablar y escribir en inglés a un nivel muy básico.">
+        Start speaking and writing in English at a very basic level.
+      </span>
+      <button onclick="speak('Start speaking and writing in English at a very basic level.')">🔊</button>
+    </li>
+  </ul>
+</section>
 
   <!-- Warm-up -->
-  <section class="bloque" data-original="Hello, my name is Jordan. I’m from Mexico. I'm a physicist and software developer and I love movies and teaching. Greeting: What's your name? Where are you from? What do you like and what do you do?" data-translation="Hola, mi nombre es Jordan. Soy de México. Soy físico y desarrollador de software, y me encantan las películas y la enseñanza. Saludo: ¿Cómo te llamas? ¿De dónde eres? ¿Qué te gusta y a qué te dedicas?">
+  <section class="bloque">
     <h2 class="title-flex">
       1. Warm-up / Icebreaker (10 min)
-      <button class="translate-section-btn">🌐 Translate section</button>
+      <button class="translate-btn" data-original="1. Warm-up / Icebreaker (10 min)" data-translation="1. Calentamiento / Rompehielos (10 min)">🌐</button>
       <button onclick="speak('Warm-up Icebreaker')">🔊</button>
     </h2>
-    <blockquote>Hello, my name is Jordan. I’m from Mexico. I'm a physicist and software developer and I love movies and teaching.</blockquote>
-    <p><em>Greeting: What's your name? Where are you from? What do you like and what do you do?</em></p>
+    <blockquote>
+      Hello, my name is Jordan. I’m from Mexico. I'm a physicist and software developer and I love movies and teaching.
+      <button class="translate-btn" data-original="Hello, my name is Jordan. I’m from Mexico. I'm a physicist and software developer and I love movies and teaching." data-translation="Hola, mi nombre es Jordan. Soy de México. Soy físico y desarrollador de software, y me encantan las películas y la enseñanza.">🌐</button>
+      <button onclick="speak('Hello, my name is Jordan. I’m from Mexico. I am a physicist and software developer and I love movies and teaching.')">🔊</button>
+    </blockquote>
+    <p><em>
+      Greeting: What's your name? Where are you from? What do you like and what do you do?
+      <button class="translate-btn" data-original="Greeting: What's your name? Where are you from? What do you like and what do you do?" data-translation="Saludo: ¿Cómo te llamas? ¿De dónde eres? ¿Qué te gusta y a qué te dedicas?">🌐</button>
+      <button onclick="speak('Greeting: What is your name? Where are you from? What do you like and what do you do?')">🔊</button>
+    </em></p>
   </section>
 
   <!-- Vocabulary -->
-  <section class="bloque" data-original="Greetings: Hello, Hi, Good morning, Good afternoon, Good evening. Farewells: Good night, Goodbye, Bye, See you, See you later. Personal pronouns + verb 'To be': I am, You are, He/She is, We are, They are. Possessive pronouns: My, Your, His, Her." data-translation="Saludos: Hola, Hi, Buen día, Buena tarde, Buena noche. Despedidas: Buena noche, Adiós, Bye, Nos vemos, Hasta luego. Pronombres personales + verbo 'Ser/Estar': Yo soy/estoy, Tú eres/estás, Él/Ella es/está, Nosotros somos/estamos, Ellos son/están. Pronombres posesivos: Mi, Tu, Su (de él), Su (de ella).">
+  <section class="bloque">
     <h2 class="title-flex">
       2. Vocabulary and pronouns (15 min)
-      <button class="translate-section-btn">🌐 Translate section</button>
+      <button class="translate-btn" data-original="Vocabulary and pronouns" data-translation="Vocabulario y pronombres">🌐</button>
       <button onclick="speak('Vocabulary and pronouns')">🔊</button>
     </h2>
-    <h3>Greetings</h3>
-    <p>Hello, Hi, Good morning, Good afternoon, Good evening</p>
-    <h3>Farewells</h3>
-    <p>Good night, Goodbye, Bye, See you, See you later</p>
-    <h3>Personal pronouns + verb "To be"</h3>
-    <p>I am, You are, He/She is, We are, They are</p>
-    <h3>Possessive pronouns</h3>
-    <p>My, Your, His, Her</p>
+    <h3 class="title-flex">
+      Greetings
+      <button class="translate-btn" data-original="Greetings" data-translation="Saludos">🌐</button>
+      <button onclick="speak('Greetings')">🔊</button>
+    </h3>
+    <p>Hello <button class="translate-btn" data-original="Hello" data-translation="Hola">🌐</button><button onclick="speak('Hello')">🔊</button>, 
+      Hi <button class="translate-btn" data-original="Hi" data-translation="Hola">🌐</button><button onclick="speak('Hi')">🔊</button>, 
+      Good morning <button class="translate-btn" data-original="Good morning" data-translation="Buen día">🌐</button><button onclick="speak('Good morning')">🔊</button>, 
+      Good afternoon  <button class="translate-btn" data-original="Good afternoon" data-translation="Buena tarde">🌐</button><button onclick="speak('Good afternoon')">🔊</button>, 
+      Good evening  <button class="translate-btn" data-original="Good evening" data-translation="Buena noche">🌐</button><button onclick="speak('Good evening')">🔊</button>
+    <h3 class="title-flex">Farewells <button class="translate-btn" data-original="Farewells" data-translation="Despedidas">🌐</button> <button onclick="speak('Farewells')">🔊</button></h3> 
+    <p>Good night <button class="translate-btn" data-original="Good night" data-translation="Buena noche">🌐</button><button onclick="speak('Good night')">🔊</button></p>
+      Goodbye <button class="translate-btn" data-original="Goodbye" data-translation="Adiós">🌐</button><button onclick="speak('Goodbye')">🔊</button>,
+      Bye <button class="translate-btn" data-original="Bye" data-translation="Adiós">🌐</button><button onclick="speak('Bye')">🔊</button>, 
+      See you <button class="translate-btn" data-original="See you" data-translation="Nos vemos">🌐</button><button onclick="speak('See you')">🔊</button>,
+      See you later <button class="translate-btn" data-original="See you later" data-translation="Hasta luego">🌐</button><button onclick="speak('See you later')">🔊</button></p>
+  <h3 class="title-flex">
+    Personal pronouns + verb "To be"
+    <button class="translate-btn" data-original="Personal pronouns + verb 'To be'" data-translation="Pronombres personales + verbo 'Ser/Estar'">🌐</button>
+    <button onclick="speak('Personal pronouns and verb to be')">🔊</button>
+  </h3>
+  <p>
+    I am <button class="translate-btn" data-original="I am" data-translation="Yo soy/estoy">🌐</button><button onclick="speak('I am')">🔊</button>, 
+    You are <button class="translate-btn" data-original="You are" data-translation="Tú eres/estás">🌐</button><button onclick="speak('You are')">🔊</button>, 
+    He/She is <button class="translate-btn" data-original="He/She is" data-translation="Él/Ella es/está">🌐</button><button onclick="speak('He is, She is')">🔊</button>, 
+    We are <button class="translate-btn" data-original="We are" data-translation="Nosotros somos/estamos">🌐</button><button onclick="speak('We are')">🔊</button>, 
+    They are <button class="translate-btn" data-original="They are" data-translation="Ellos son/están">🌐</button><button onclick="speak('They are')">🔊</button>
+  </p>
+  
+  <h3 class="title-flex">
+    Possessive pronouns
+    <button class="translate-btn" data-original="Possessive pronouns" data-translation="Pronombres posesivos">🌐</button>
+    <button onclick="speak('Possessive pronouns')">🔊</button>
+  </h3>
+  <p>
+    My <button class="translate-btn" data-original="My" data-translation="Mi">🌐</button><button onclick="speak('My')">🔊</button>, 
+    Your <button class="translate-btn" data-original="Your" data-translation="Tu">🌐</button><button onclick="speak('Your')">🔊</button>, 
+    His <button class="translate-btn" data-original="His" data-translation="Su (de él)">🌐</button><button onclick="speak('His')">🔊</button>, 
+    Her <button class="translate-btn" data-original="Her" data-translation="Su (de ella)">🌐</button><button onclick="speak('Her')">🔊</button>
+  </p>
   </section>
 
-  <!-- Listening / Modeled videos -->
-  <section class="bloque" data-original="Watch the introduction video and write key sentences. Then in the clip about movies, identify the learned phrases:" data-translation="Mira el video de introducción y escribe las frases clave. Luego, en el clip sobre películas, identifica las frases aprendidas:">
-    <h2 class="title-flex">
-      3. Listening / Modeling (20 min)
-      <button class="translate-section-btn">🌐 Translate section</button>
-      <button onclick="speak('Listening / Modeling')">🔊</button>
-    </h2>
-    <p>Watch the introduction video and write key sentences. Then in the clip about movies, identify the learned phrases:</p>
-    <iframe width="100%" height="315" src="https://www.youtube.com/embed/RL8pLS8cUOs" frameborder="0" allowfullscreen style="margin-bottom: 15px;"></iframe>
-    <iframe width="100%" height="315" src="https://www.youtube.com/embed/ImOoyoLmGUI" frameborder="0" allowfullscreen></iframe>
-  </section>
+<!-- Listening / Modeled videos -->
+<section class="bloque">
+  <h2 class="title-flex">
+    3. Listening / Modeling (20 min)
+    <button class="translate-btn" data-original="Listening / Modeling" data-translation="Escucha / Modelado">🌐</button>
+    <button onclick="speak('Listening / Modeling')">🔊</button>
+  </h2>
+  <p>
+    Watch the introduction video and write key sentences. Then in the clip about movies, identify the learned phrases:
+    <button class="translate-btn" data-original="Watch the introduction video and write key sentences. Then in the clip about movies, identify the learned phrases:" 
+            data-translation="Mira el video de introducción y escribe las frases clave. Luego, en el clip sobre películas, identifica las frases aprendidas:">🌐</button>
+    <button onclick="speak('Watch the introduction video and write key sentences. Then in the clip about movies, identify the learned phrases:')">🔊</button>
+  </p>
+  <iframe width="100%" height="315" src="https://www.youtube.com/embed/RL8pLS8cUOs" frameborder="0" allowfullscreen style="margin-bottom: 15px;"></iframe>
+  <iframe width="100%" height="315" src="https://www.youtube.com/embed/ImOoyoLmGUI" frameborder="0" allowfullscreen></iframe>
+</section>
 
-  <!-- Song practice -->
-  <section class="bloque" data-original="Listen to the song and complete the lyrics playing on LyricsTraining:" data-translation="Escucha la canción y completa la letra en LyricsTraining:">
-    <h2 class="title-flex">
-      4. Song Practice (15 min)
-      <button class="translate-section-btn">🌐 Translate section</button>
-      <button onclick="speak('Song Practice')">🔊</button>
-    </h2>
-    <p>Listen to the song and complete the lyrics playing on LyricsTraining:</p>
-    <button class="speak-btn" onclick="window.open('https://es.lyricstraining.com/play/the-beatles/hello-goodbye/HkEvrcQWdk#b7w!jortizvilla','_blank')">🎵 Play with the song on LyricsTraining</button>
-  </section>
+<!-- Song practice -->
+<section class="bloque">
+  <h2 class="title-flex">
+    4. Song Practice (15 min)
+    <button class="translate-btn" data-original="Song Practice" data-translation="Práctica de canción">🌐</button>
+    <button onclick="speak('Song Practice')">🔊</button>
+  </h2>
+  <p>
+    Listen to the song and complete the lyrics playing on LyricsTraining:
+    <button class="translate-btn" data-original="Listen to the song and complete the lyrics playing on LyricsTraining:" 
+            data-translation="Escucha la canción y completa la letra en LyricsTraining:">🌐</button>
+    <button onclick="speak('Listen to the song and complete the lyrics playing on LyricsTraining:')">🔊</button>
+  </p>
+  <button class="speak-btn" onclick="window.open('https://es.lyricstraining.com/play/the-beatles/hello-goodbye/HkEvrcQWdk#b7w!jortizvilla','_blank')">
+    🎵 Play with the song on LyricsTraining
+  </button>
+</section>
 
-  <!-- Exercises -->
-  <section class="bloque" data-original='Introduction of "Where are you from?"' data-translation='Introducción de "¿De dónde eres?"'>
-    <h2 class="title-flex">
-      5. Introduction of "Where are you from?" (10 min)
-      <button class="translate-section-btn">🌐 Translate section</button>
-      <button onclick="speak('Introduction of Where are you from?')">🔊</button>
-    </h2>
-    <iframe width="100%" height="315" src="https://www.youtube.com/embed/byqOkm6-SCc" frameborder="0" allowfullscreen></iframe>
-  </section>
+<!-- Exercises -->
+<section class="bloque">
+  <h2 class="title-flex">
+    5. Introduction of "Where are you from?" (10 min)
+    <button class="translate-btn" data-original='Introduction of "Where are you from?"' data-translation='Introducción de "¿De dónde eres?"'>🌐</button>
+    <button onclick="speak('Introduction of Where are you from?')">🔊</button>
+  </h2>
+  <iframe width="100%" height="315" src="https://www.youtube.com/embed/byqOkm6-SCc" frameborder="0" allowfullscreen></iframe>
+</section>
 
-  <!-- Interactive exercise -->
-  <section class="bloque" data-original='Click on the objects to hear their names in English. Then practice asking "What\'s this?"' data-translation='Haz clic en los objetos para escuchar sus nombres en inglés. Luego practica preguntando "¿Qué es esto?"'>
-    <h2 class="title-flex">
-      6. Interactive Practice: "What's this?"
-      <button class="translate-section-btn">🌐 Translate section</button>
-      <button onclick="speak('Interactive Practice: What\'s this?')">🔊</button>
-    </h2>
+<!-- Interactive exercise -->
+<section class="bloque">
+  <h2 class="title-flex">
+    6. Interactive Practice: "What's this?"
+    <button class="translate-btn" data-original='Interactive Practice: "What\'s this?"' data-translation='Práctica interactiva: "¿Qué es esto?"'>🌐</button>
+    <button onclick="speak('Interactive Practice: What\'s this?')">🔊</button>
+  </h2>
     <p>Click on the objects to hear their names in English. Then practice asking "What's this?"</p>
     <div class="object-container">
       <div class="object-item" onclick="speak('Book')">
@@ -131,10 +205,8 @@
   </section>
 
   <!-- Numbers -->
-  <section class="bloque" data-original="Numbers from one to thirty" data-translation="Números del uno al treinta">
-    <h2 class="title-flex">7. Numbers in English: from 1 to 30
-      <button class="translate-section-btn">🌐 Translate section</button>
-    </h2>
+  <section class="bloque">
+    <h2 class="title-flex">7. Numbers in English: from 1 to 30</h2>
     <p>Click each number to hear its pronunciation:</p>
     <div class="numbers-grid">
       <script>
@@ -160,57 +232,90 @@
   </section>
 
  <!-- Mini writing / journaling -->
-  <section class="bloque" data-original="Hello, my name is ___. I'm from ___. I like ___." data-translation="Hola, mi nombre es ___. Soy de ___. Me gusta ___">
-    <h2 class="title-flex">
-      8. Mini writing / journaling (10-15 min)
-      <button class="translate-section-btn">🌐 Translate section</button>
-      <button onclick="speak('Mini writing / journaling')">🔊</button>
-    </h2>
-    <ul>
-      <li>Hello, my name is ___.</li>
-      <li>I'm from ___.</li>
-      <li>I like ___.</li>
-    </ul>
-  </section>
+<section class="bloque">
+  <h2 class="title-flex">
+    8. Mini writing / journaling (10-15 min)
+    <button class="translate-btn" data-original="Mini writing / journaling" data-translation="Escritura / Diario personal">🌐</button>
+    <button onclick="speak('Mini writing / journaling')">🔊</button>
+  </h2>
+  <ul>
+    <li>
+      Hello, my name is ___.
+      <button class="translate-btn" data-original="Hello, my name is" data-translation="Hola, mi nombre es">🌐</button>
+      <button onclick="speak('Hello, my name is')">🔊</button>
+    </li>
+    <li>
+      I'm from ___.
+      <button class="translate-btn" data-original="I'm from" data-translation="Soy de">🌐</button>
+      <button onclick="speak('I am from')">🔊</button>
+    </li>
+    <li>
+      I like ___.
+      <button class="translate-btn" data-original="I like" data-translation="Me gusta">🌐</button>
+      <button onclick="speak('I like')">🔊</button>
+    </li>
+  </ul>
+</section>
 
-  <!-- Group speaking -->
-  <section class="bloque" data-original="Each student introduces themselves to the group using the learned phrases, including the question 'Where are you from?'" data-translation="Cada estudiante se presenta al grupo usando las frases aprendidas, incluyendo la pregunta '¿De dónde eres?'">
-    <h2 class="title-flex">
-      9. Group speaking (15-20 min)
-      <button class="translate-section-btn">🌐 Translate section</button>
-      <button onclick="speak('Group speaking')">🔊</button>
-    </h2>
-    <p>Each student introduces themselves to the group using the learned phrases, including the question <em>Where are you from?</em></p>
-  </section>
+<!-- Group speaking -->
+<section class="bloque">
+  <h2 class="title-flex">
+    9. Group speaking (15-20 min)
+    <button class="translate-btn" data-original="Group speaking" data-translation="Conversación grupal">🌐</button>
+    <button onclick="speak('Group speaking')">🔊</button>
+  </h2>
+  <p>
+    Each student introduces themselves to the group using the learned phrases, including the question 
+    <em>Where are you from?</em>
+    <button class="translate-btn" data-original="Where are you from?" data-translation="¿De dónde eres?">🌐</button>
+    <button onclick="speak('Where are you from?')">🔊</button>
+  </p>
+</section>
+  
+<!-- Writing activity -->
+<section class="bloque">
+  <h2 class="title-flex">
+    10. Writing activity (10-15 min)
+    <button class="translate-btn" data-original="Writing activity" data-translation="Actividad de escritura">🌐</button>
+    <button onclick="speak('Writing activity')">🔊</button>
+  </h2>
+  <p>
+    Solve the following exercise:
+    <button class="translate-btn" data-original="Solve the following exercise:" data-translation="Resuelve el siguiente ejercicio:">🌐</button>
+    <button onclick="speak('Solve the following exercise:')">🔊</button>
+  </p>
+  <img src="cierre.png" alt="Closing activity: Complete the dialogues" width="100%" style="border: 2px solid #ccc; border-radius: 10px; max-width: 600px;">
+</section>
 
-  <!-- Writing activity -->
-  <section class="bloque" data-original="Solve the following exercise:" data-translation="Resuelve el siguiente ejercicio:">
-    <h2 class="title-flex">
-      10. Writing activity (10-15 min)
-      <button class="translate-section-btn">🌐 Translate section</button>
-      <button onclick="speak('Writing activity')">🔊</button>
-    </h2>
-    <p>Solve the following exercise:</p>
-    <img src="cierre.png" alt="Closing activity: Complete the dialogues" width="100%" style="border: 2px solid #ccc; border-radius: 10px; max-width: 600px;">
-  </section>
-
-  <!-- Games -->
-  <section class="bloque" data-original="Games: Play on Baamboozle. Tip: Create teams for the activity." data-translation="Juegos: Juega en Baamboozle. Consejo: Crea equipos para la actividad.">
-    <h2 class="title-flex">
-      11. Interactive games / Baamboozle (15 min)
-      <button class="translate-section-btn">🌐 Translate section</button>
-      <button onclick="speak('Interactive games / Baamboozle')">🔊</button>
-    </h2>
-    <div class="game-item">
-      <p>🎲 Game 1:</p>
-      <a href="https://www.baamboozle.com/game/641765" target="_blank" class="speak-btn">Play on Baamboozle</a>
-    </div>
-    <div class="game-item">
-      <p>🎲 Game 2:</p>
-      <a href="https://www.baamboozle.com/game/54952" target="_blank" class="speak-btn">Play on Baamboozle</a>
-    </div>
-    <p>Tip: Create teams for the activity.</p>
-  </section>
+<!-- Games -->
+<section class="bloque">
+  <h2 class="title-flex">
+    11. Interactive games / Baamboozle (15 min)
+    <button class="translate-btn" data-original="Interactive games / Baamboozle" data-translation="Juegos interactivos / Baamboozle">🌐</button>
+    <button onclick="speak('Interactive games / Baamboozle')">🔊</button>
+  </h2>
+  <div class="game-item">
+    <p>
+      🎲 Game 1:
+      <button class="translate-btn" data-original="🎲 Game 1" data-translation="🎲 Juego 1">🌐</button>
+      <button onclick="speak('Game 1')">🔊</button>
+    </p>
+    <a href="https://www.baamboozle.com/game/641765" target="_blank" class="speak-btn">Play on Baamboozle</a>
+  </div>
+  <div class="game-item">
+    <p>
+      🎲 Game 2:
+      <button class="translate-btn" data-original="🎲 Game 2" data-translation="🎲 Juego 2">🌐</button>
+      <button onclick="speak('Game 2')">🔊</button>
+    </p>
+    <a href="https://www.baamboozle.com/game/54952" target="_blank" class="speak-btn">Play on Baamboozle</a>
+  </div>
+  <p>
+    Tip: Create teams for the activity.
+    <button class="translate-btn" data-original="Tip: Create teams for the activity." data-translation="Consejo: Crea equipos para la actividad.">🌐</button>
+    <button onclick="speak('Tip: Create teams for the activity.')">🔊</button>
+  </p>
+</section>
 </main>
 
 <footer>
@@ -262,34 +367,27 @@ window.onload = () => { speechSynthesis.getVoices(); };
   // Load voices to prevent blank first playback
   window.onload = function(){ speechSynthesis.getVoices(); };
 
-  // Toggle section translation (título + contenido)
+// Toggle section translation
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".translate-section-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       const section = btn.closest("section");
       const isTranslated = section.getAttribute("data-translated") === "true";
 
-      // Traducir título
-      const h2 = section.querySelector("h2.title-flex");
-      if(h2){
-        h2.childNodes[0].nodeValue = isTranslated 
-          ? h2.dataset.titleOriginal 
-          : h2.dataset.titleTranslation;
-      }
-
-      // Traducir contenido
-      section.querySelectorAll("blockquote, p, li, em").forEach(el => {
+      // Alternar todos los elementos traducibles dentro de la sección
+      section.querySelectorAll(".translatable").forEach(el => {
         el.textContent = isTranslated 
-          ? section.dataset.original 
-          : section.dataset.translation;
+          ? el.dataset.original 
+          : el.dataset.translation;
       });
 
-      // Alternar flag
+      // Cambiar flag
       section.setAttribute("data-translated", isTranslated ? "false" : "true");
     });
   });
 });
 
+  
 </script>
 
 <!-- Auth0 -->

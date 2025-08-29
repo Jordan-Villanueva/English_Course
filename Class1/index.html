@@ -224,6 +224,24 @@ window.onload = () => { speechSynthesis.getVoices(); };
 
   // Load voices to prevent blank first playback
   window.onload = function(){ speechSynthesis.getVoices(); };
+
+// Toggle translation
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".translate-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const parent = btn.parentNode;
+      const isTranslated = parent.getAttribute("data-translated") === "true";
+      if (isTranslated) {
+        parent.childNodes[0].nodeValue = btn.dataset.original + " ";
+        parent.setAttribute("data-translated", "false");
+      } else {
+        parent.childNodes[0].nodeValue = btn.dataset.translation + " ";
+        parent.setAttribute("data-translated", "true");
+      }
+    });
+  });
+});
+  
 </script>
 
 <!-- Auth0 -->

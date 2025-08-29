@@ -6,24 +6,26 @@
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-  <header>
+  <header class="page-header" data-translated="false">
     <h1 class="title-flex">
-    <span class="translatable" 
-          data-original="Class 1: Introductions, greetings and farewells" 
-          data-translation="Clase 1: Presentaciones, saludos y despedidas">
-      Class 1: Introductions, greetings and farewells
-    </span>
-    <button class="translate-section-btn">🌐</button>
-    <button onclick="speak('Class 1: Introductions, greetings and farewells')">🔊</button>
-  </h1>
-  <p class="subtitle">
-    <span class="translatable"
-          data-original="English Course for Beginners"
-          data-translation="Curso de Inglés para principiantes">
-      English Course for Beginners
-    </span>
-    <button onclick="speak('English Course for Beginners')">🔊</button>
-  </p>
+      <span class="translatable"
+            data-original="Class 1: Introductions, greetings and farewells"
+            data-translation="Clase 1: Presentaciones, saludos y despedidas">
+        Class 1: Introductions, greetings and farewells
+      </span>
+      <button class="translate-section-btn" type="button">🌐</button>
+      <button type="button" onclick="speak('Class 1: Introductions, greetings and farewells')">🔊</button>
+    </h1>
+  
+    <p class="subtitle">
+      <span class="translatable"
+            data-original="English Course for Beginners"
+            data-translation="Curso de Inglés para principiantes">
+        English Course for Beginners
+      </span>
+      <button type="button" onclick="speak('English Course for Beginners')">🔊</button>
+    </p>
+  
     <div class="header-buttons">
       <button id="login-btn" style="display:none;">Login/Ingresar</button>
       <button id="logout-btn" style="display:none;">Logout/Salir</button>

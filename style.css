@@ -8,11 +8,18 @@ body {
 }
 
 /* Encabezado */
-header {
-  background: linear-gradient(135deg, #0077cc, #005fa3);
-  padding: 20px;
-  color: white;
-  text-align: center;
+/* Ajuste específico para centrar el header */
+header h1.title-flex {
+  justify-content: center;   /* centra todo el contenido horizontal */
+  text-align: center;        /* asegura que el texto respete el centrado */
+}
+
+/* Subtítulo centrado también */
+header .subtitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;                  /* espacio entre texto y botón */
 }
 
 h1.title-flex, h2.title-flex, h3.title-flex {

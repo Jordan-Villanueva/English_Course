@@ -71,6 +71,19 @@ h2 {
   border-bottom: 2px solid #eaeaea;
 }
 
+h2.title-flex {
+  display: flex;
+  align-items: center;   /* alinea texto y botones en el centro vertical */
+  gap: 10px;             /* espacio entre texto y botones */
+  font-size: 1.8em;      /* tamaño del título */
+}
+
+h2.title-flex button {
+  font-size: 0.6em;      /* botones más pequeños */
+  padding: 4px 6px;
+  cursor: pointer;
+}
+
 h3 {
   color: #0077cc;
   margin: 15px 0 8px 0;

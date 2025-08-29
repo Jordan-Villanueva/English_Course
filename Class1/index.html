@@ -296,19 +296,22 @@
 <!-- Numbers -->
 <section class="bloque" data-translated="false">
   <h2 class="title-flex">
-    <span class="translatable" 
+    <span id="interactive-title-7" class="translatable" 
           data-original="7. Numbers in English: from 1 to 30" 
           data-translation="7. Números en inglés: del 1 al 30">
       7. Numbers in English: from 1 to 30
-    </span>
+    </span> 
     <button class="translate-section-btn">🌐</button>
+    <button type="button" onclick="speak(document.getElementById('interactive-title-7').dataset.original)">🔊</button>
   </h2>
 
-  <p class="translatable" 
+  <p id="interactive-desc-7" class="translatable" 
      data-original="Click each number to hear its pronunciation:" 
      data-translation="Haz clic en cada número para escuchar su pronunciación:">
-    Click each number to hear its pronunciation:
-  </p>
+    Click each number to listen the pronunciation:
+  </p>   
+  <button type="button" onclick="speak(document.getElementById('interactive-desc-7').dataset.original)">🔊</button>
+
 
   <div class="numbers-grid">
     <script>
@@ -364,12 +367,13 @@
     </script>
   </div>
 
-  <div class="practice-block">
+  <div id='pronunc-final' class="practice-block">
     <p><strong class="translatable" 
                 data-original="Pronunciation practice:" 
                 data-translation="Práctica de pronunciación:">
       Pronunciation practice:
     </strong></p>
+    <button type="button" onclick="speak(document.getElementById('pronunc-final').dataset.original)">🔊</button>
 
     <button class="speak-btn translatable" 
             data-original="Listen 1 to 10" 
@@ -393,92 +397,100 @@
     </button>
   </div>
 </section>
-  
- <!-- Mini writing / journaling -->
-<section class="bloque">
+
+<!-- Mini writing / journaling -->
+<section class="bloque" data-translated="false">
   <h2 class="title-flex">
-    8. Mini writing / journaling (10-15 min)
-    <button class="translate-btn" data-original="Mini writing / journaling" data-translation="Escritura / Diario personal">🌐</button>
-    <button onclick="speak('Mini writing / journaling')">🔊</button>
+    <span class="translatable" data-original="8. Mini writing / journaling (10-15 min)" data-translation="8. Escritura / Diario personal (10-15 min)">
+      8. Mini writing / journaling (10-15 min)
+    </span>
+    <button class="translate-section-btn">🌐</button>
+    <button onclick="speak(this.previousElementSibling.dataset.original)">🔊</button>
   </h2>
   <ul>
     <li>
-      Hello, my name is ___.
-      <button class="translate-btn" data-original="Hello, my name is" data-translation="Hola, mi nombre es">🌐</button>
-      <button onclick="speak('Hello, my name is')">🔊</button>
+      <span class="translatable" data-original="Hello, my name is ___." data-translation="Hola, mi nombre es ___.">Hello, my name is ___.</span>
+      <button onclick="speak(this.previousElementSibling.dataset.original)">🔊</button>
     </li>
     <li>
-      I'm from ___.
-      <button class="translate-btn" data-original="I'm from" data-translation="Soy de">🌐</button>
-      <button onclick="speak('I am from')">🔊</button>
+      <span class="translatable" data-original="I'm from ___." data-translation="Soy de ___.">I'm from ___.</span>
+      <button onclick="speak(this.previousElementSibling.dataset.original)">🔊</button>
     </li>
     <li>
-      I like ___.
-      <button class="translate-btn" data-original="I like" data-translation="Me gusta">🌐</button>
-      <button onclick="speak('I like')">🔊</button>
+      <span class="translatable" data-original="I like ___." data-translation="Me gusta ___.">I like ___.</span>
+      <button onclick="speak(this.previousElementSibling.dataset.original)">🔊</button>
     </li>
   </ul>
 </section>
 
 <!-- Group speaking -->
-<section class="bloque">
+<section class="bloque" data-translated="false">
   <h2 class="title-flex">
-    9. Group speaking (15-20 min)
-    <button class="translate-btn" data-original="Group speaking" data-translation="Conversación grupal">🌐</button>
-    <button onclick="speak('Group speaking')">🔊</button>
+    <span class="translatable" data-original="9. Group speaking (15-20 min)" data-translation="9. Conversación grupal (15-20 min)">
+      9. Group speaking (15-20 min)
+    </span>
+    <button class="translate-section-btn">🌐</button>
+    <button onclick="speak(this.previousElementSibling.dataset.original)">🔊</button>
   </h2>
   <p>
-    Each student introduces themselves to the group using the learned phrases, including the question 
-    <em>Where are you from?</em>
-    <button class="translate-btn" data-original="Where are you from?" data-translation="¿De dónde eres?">🌐</button>
-    <button onclick="speak('Where are you from?')">🔊</button>
+    <span class="translatable" data-original="Each student introduces themselves to the group using the learned phrases, including the question" 
+          data-translation="Cada estudiante se presenta al grupo usando las frases aprendidas, incluyendo la pregunta">
+      Each student introduces themselves to the group using the learned phrases, including the question
+    </span> 
+    <em>
+      <span class="translatable" data-original="Where are you from?" data-translation="¿De dónde eres?">Where are you from?</span>
+    </em>
+    <button onclick="speak(this.previousElementSibling.dataset.original)">🔊</button>
   </p>
 </section>
-  
+
 <!-- Writing activity -->
-<section class="bloque">
+<section class="bloque" data-translated="false">
   <h2 class="title-flex">
-    10. Writing activity (10-15 min)
-    <button class="translate-btn" data-original="Writing activity" data-translation="Actividad de escritura">🌐</button>
-    <button onclick="speak('Writing activity')">🔊</button>
+    <span class="translatable" data-original="10. Writing activity (10-15 min)" data-translation="10. Actividad de escritura (10-15 min)">
+      10. Writing activity (10-15 min)
+    </span>
+    <button class="translate-section-btn">🌐</button>
+    <button onclick="speak(this.previousElementSibling.dataset.original)">🔊</button>
   </h2>
   <p>
-    Solve the following exercise:
-    <button class="translate-btn" data-original="Solve the following exercise:" data-translation="Resuelve el siguiente ejercicio:">🌐</button>
-    <button onclick="speak('Solve the following exercise:')">🔊</button>
+    <span class="translatable" data-original="Solve the following exercise:" data-translation="Resuelve el siguiente ejercicio:">Solve the following exercise:</span>
+    <button onclick="speak(this.previousElementSibling.dataset.original)">🔊</button>
   </p>
   <img src="cierre.png" alt="Closing activity: Complete the dialogues" width="100%" style="border: 2px solid #ccc; border-radius: 10px; max-width: 600px;">
 </section>
 
 <!-- Games -->
-<section class="bloque">
+<section class="bloque" data-translated="false">
   <h2 class="title-flex">
-    11. Interactive games / Baamboozle (15 min)
-    <button class="translate-btn" data-original="Interactive games / Baamboozle" data-translation="Juegos interactivos / Baamboozle">🌐</button>
-    <button onclick="speak('Interactive games / Baamboozle')">🔊</button>
+    <span class="translatable" data-original="11. Interactive games / Baamboozle (15 min)" data-translation="11. Juegos interactivos / Baamboozle (15 min)">
+      11. Interactive games / Baamboozle (15 min)
+    </span>
+    <button class="translate-section-btn">🌐</button>
+    <button onclick="speak(this.previousElementSibling.dataset.original)">🔊</button>
   </h2>
+
   <div class="game-item">
     <p>
-      🎲 Game 1:
-      <button class="translate-btn" data-original="🎲 Game 1" data-translation="🎲 Juego 1">🌐</button>
-      <button onclick="speak('Game 1')">🔊</button>
+      <span class="translatable" data-original="🎲 Game 1" data-translation="🎲 Juego 1">🎲 Game 1</span>
+      <button onclick="speak(this.previousElementSibling.dataset.original)">🔊</button>
     </p>
     <a href="https://www.baamboozle.com/game/641765" target="_blank" class="speak-btn">Play on Baamboozle</a>
   </div>
+
   <div class="game-item">
     <p>
-      🎲 Game 2:
-      <button class="translate-btn" data-original="🎲 Game 2" data-translation="🎲 Juego 2">🌐</button>
-      <button onclick="speak('Game 2')">🔊</button>
+      <span class="translatable" data-original="🎲 Game 2" data-translation="🎲 Juego 2">🎲 Game 2</span>
+      <button onclick="speak(this.previousElementSibling.dataset.original)">🔊</button>
     </p>
     <a href="https://www.baamboozle.com/game/54952" target="_blank" class="speak-btn">Play on Baamboozle</a>
   </div>
+
   <p>
-    Tip: Create teams for the activity.
-    <button class="translate-btn" data-original="Tip: Create teams for the activity." data-translation="Consejo: Crea equipos para la actividad.">🌐</button>
-    <button onclick="speak('Tip: Create teams for the activity.')">🔊</button>
+    <span class="translatable" data-original="Tip: Create teams for the activity." data-translation="Consejo: Crea equipos para la actividad.">Tip: Create teams for the activity.</span>
+    <button onclick="speak(this.previousElementSibling.dataset.original)">🔊</button>
   </p>
-</section>
+</section> 
 </main>
 
 <footer>

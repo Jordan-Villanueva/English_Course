@@ -268,33 +268,28 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener("click", () => {
       const section = btn.closest("section");
       const isTranslated = section.getAttribute("data-translated") === "true";
-      const originalText = section.dataset.original;
-      const translationText = section.dataset.translation;
 
-      // Traducir título <h2>
+      // Traducir título
       const h2 = section.querySelector("h2.title-flex");
       if(h2){
-        if(isTranslated){
-          h2.childNodes[0].nodeValue = originalText.split("\n").shift().trim();
-        } else {
-          h2.childNodes[0].nodeValue = translationText.split("\n").shift().trim();
-        }
+        h2.childNodes[0].nodeValue = isTranslated 
+          ? h2.dataset.titleOriginal 
+          : h2.dataset.titleTranslation;
       }
 
       // Traducir contenido
       section.querySelectorAll("blockquote, p, li, em").forEach(el => {
-        if(isTranslated){
-          el.textContent = originalText.split("\n").shift().trim();
-        } else {
-          el.textContent = translationText.split("\n").shift().trim();
-        }
+        el.textContent = isTranslated 
+          ? section.dataset.original 
+          : section.dataset.translation;
       });
 
       // Alternar flag
       section.setAttribute("data-translated", isTranslated ? "false" : "true");
     });
   });
-});  
+});
+
 </script>
 
 <!-- Auth0 -->

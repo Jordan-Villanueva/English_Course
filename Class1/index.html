@@ -391,18 +391,18 @@ window.onload = () => { speechSynthesis.getVoices(); };
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".translate-section-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      const container = btn.closest("section, header");
-      const isTranslated = section.getAttribute("data-translated") === "true";
-
-      // Alternar todos los elementos traducibles dentro de la sección
-      section.querySelectorAll(".translatable").forEach(el => {
-        el.textContent = isTranslated 
-          ? el.dataset.original 
-          : el.dataset.translation;
-      });
-
-      // Cambiar flag
-      section.setAttribute("data-translated", isTranslated ? "false" : "true");
+    const container = btn.closest("section, header");
+    const isTranslated = container.getAttribute("data-translated") === "true";
+    
+    // Alternar todos los elementos traducibles dentro del contenedor
+    container.querySelectorAll(".translatable").forEach(el => {
+      el.textContent = isTranslated 
+        ? el.dataset.original 
+        : el.dataset.translation;
+    });
+    
+    // Cambiar flag
+    container.setAttribute("data-translated", isTranslated ? "false" : "true");
     });
   });
 });

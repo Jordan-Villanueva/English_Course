@@ -262,7 +262,7 @@ window.onload = () => { speechSynthesis.getVoices(); };
   // Load voices to prevent blank first playback
   window.onload = function(){ speechSynthesis.getVoices(); };
 
-// Toggle section translation
+  // Toggle section translation (título + contenido)
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".translate-section-btn").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -271,13 +271,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const originalText = section.dataset.original;
       const translationText = section.dataset.translation;
 
-      // Recorrer todos los nodos de texto dentro de la sección y reemplazar
+      // Traducir título <h2>
+      const h2 = section.querySelector("h2.title-flex");
+      if(h2){
+        if(isTranslated){
+          h2.childNodes[0].nodeValue = originalText.split("\n").shift().trim();
+        } else {
+          h2.childNodes[0].nodeValue = translationText.split("\n").shift().trim();
+        }
+      }
+
+      // Traducir contenido
       section.querySelectorAll("blockquote, p, li, em").forEach(el => {
         if(isTranslated){
-          // Volver a inglés
           el.textContent = originalText.split("\n").shift().trim();
         } else {
-          // Traducir
           el.textContent = translationText.split("\n").shift().trim();
         }
       });
@@ -286,9 +294,7 @@ document.addEventListener("DOMContentLoaded", () => {
       section.setAttribute("data-translated", isTranslated ? "false" : "true");
     });
   });
-});
-
-  
+});  
 </script>
 
 <!-- Auth0 -->

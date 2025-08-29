@@ -290,33 +290,107 @@
   </div>
 </section>
 
-  <!-- Numbers -->
-  <section class="bloque">
-    <h2 class="title-flex">7. Numbers in English: from 1 to 30</h2>
-    <p>Click each number to hear its pronunciation:</p>
-    <div class="numbers-grid">
-      <script>
-        const numberGrid = document.currentScript.parentNode;
-        const numbers = ["one","two","three","four","five","six","seven","eight","nine","ten",
-          "eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen","twenty",
-          "twenty-one","twenty-two","twenty-three","twenty-four","twenty-five","twenty-six","twenty-seven","twenty-eight","twenty-nine","thirty"];
-        for(let i=0;i<numbers.length;i++){
-          const div = document.createElement('div');
-          div.className='number-item';
-          div.onclick=function(){ speak(numbers[i]); };
-          div.innerHTML=`<div class="number">${i+1}</div><div class="number-name">${numbers[i]} 🔊</div>`;
-          numberGrid.appendChild(div);
-        }
-      </script>
-    </div>
-    <div class="practice-block">
-      <p><strong>Pronunciation practice:</strong></p>
-      <button class="speak-btn" onclick="practiceNumbers(1,10)">Listen 1 to 10</button>
-      <button class="speak-btn" onclick="practiceNumbers(11,20)">Listen 11 to 20</button>
-      <button class="speak-btn" onclick="practiceNumbers(21,30)">Listen 21 to 30</button>
-    </div>
-  </section>
+<!-- Numbers -->
+<section class="bloque" data-translated="false">
+  <h2 class="title-flex">
+    <span class="translatable" 
+          data-original="7. Numbers in English: from 1 to 30" 
+          data-translation="7. Números en inglés: del 1 al 30">
+      7. Numbers in English: from 1 to 30
+    </span>
+    <button class="translate-section-btn">🌐</button>
+  </h2>
 
+  <p class="translatable" 
+     data-original="Click each number to hear its pronunciation:" 
+     data-translation="Haz clic en cada número para escuchar su pronunciación:">
+    Click each number to hear its pronunciation:
+  </p>
+
+  <div class="numbers-grid">
+    <script>
+      const numberGrid = document.currentScript.parentNode;
+      const numbers = [
+        { en: "one", es: "uno" },
+        { en: "two", es: "dos" },
+        { en: "three", es: "tres" },
+        { en: "four", es: "cuatro" },
+        { en: "five", es: "cinco" },
+        { en: "six", es: "seis" },
+        { en: "seven", es: "siete" },
+        { en: "eight", es: "ocho" },
+        { en: "nine", es: "nueve" },
+        { en: "ten", es: "diez" },
+        { en: "eleven", es: "once" },
+        { en: "twelve", es: "doce" },
+        { en: "thirteen", es: "trece" },
+        { en: "fourteen", es: "catorce" },
+        { en: "fifteen", es: "quince" },
+        { en: "sixteen", es: "dieciséis" },
+        { en: "seventeen", es: "diecisiete" },
+        { en: "eighteen", es: "dieciocho" },
+        { en: "nineteen", es: "diecinueve" },
+        { en: "twenty", es: "veinte" },
+        { en: "twenty-one", es: "veintiuno" },
+        { en: "twenty-two", es: "veintidós" },
+        { en: "twenty-three", es: "veintitrés" },
+        { en: "twenty-four", es: "veinticuatro" },
+        { en: "twenty-five", es: "veinticinco" },
+        { en: "twenty-six", es: "veintiséis" },
+        { en: "twenty-seven", es: "veintisiete" },
+        { en: "twenty-eight", es: "veintiocho" },
+        { en: "twenty-nine", es: "veintinueve" },
+        { en: "thirty", es: "treinta" }
+      ];
+
+      for (let i = 0; i < numbers.length; i++) {
+        const div = document.createElement('div');
+        div.className = 'number-item';
+        div.onclick = function(){ speak(numbers[i].en); };
+        div.innerHTML = `
+          <div class="number">${i+1}</div>
+          <div class="number-name">
+            <span class="translatable" 
+                  data-original="${numbers[i].en}" 
+                  data-translation="${numbers[i].es}">
+              ${numbers[i].en}
+            </span> 🔊
+          </div>`;
+        numberGrid.appendChild(div);
+      }
+    </script>
+  </div>
+
+  <div class="practice-block">
+    <p><strong class="translatable" 
+                data-original="Pronunciation practice:" 
+                data-translation="Práctica de pronunciación:">
+      Pronunciation practice:
+    </strong></p>
+
+    <button class="speak-btn translatable" 
+            data-original="Listen 1 to 10" 
+            data-translation="Escuchar del 1 al 10"
+            onclick="practiceNumbers(1,10)">
+      Listen 1 to 10
+    </button>
+
+    <button class="speak-btn translatable" 
+            data-original="Listen 11 to 20" 
+            data-translation="Escuchar del 11 al 20"
+            onclick="practiceNumbers(11,20)">
+      Listen 11 to 20
+    </button>
+
+    <button class="speak-btn translatable" 
+            data-original="Listen 21 to 30" 
+            data-translation="Escuchar del 21 al 30"
+            onclick="practiceNumbers(21,30)">
+      Listen 21 to 30
+    </button>
+  </div>
+</section>
+  
  <!-- Mini writing / journaling -->
 <section class="bloque">
   <h2 class="title-flex">

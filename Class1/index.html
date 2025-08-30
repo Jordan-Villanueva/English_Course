@@ -367,18 +367,24 @@
       for (let i = 0; i < numbers.length; i++) {
         const div = document.createElement('div');
         div.className = 'number-item';
-        
-        // Usar data-tts para audio independiente de traducción
+
         const numberName = document.createElement('div');
         numberName.className = 'number-name translatable';
         numberName.dataset.original = numbers[i].en;
         numberName.dataset.translation = numbers[i].es;
         numberName.dataset.tts = numbers[i].en;
-        numberName.textContent = numbers[i].en + " 🔊";
-        
+        numberName.innerHTML = `${numbers[i].en} <button class="speak-btn" onclick="speak(this.parentNode.dataset.tts)">🔊</button>`;
+
         div.innerHTML = `<div class="number">${i+1}</div>`;
         div.appendChild(numberName);
-        div.onclick = function() { speak(this.querySelector('.number-name').dataset.tts); };
+
+        // También hacer clic en el div completo reproduce el audio
+        div.onclick = function(e) {
+          if (!e.target.classList.contains('speak-btn')) {
+            speak(this.querySelector('.number-name').dataset.tts);
+          }
+        };
+
         numberGrid.appendChild(div);
       }
     </script>

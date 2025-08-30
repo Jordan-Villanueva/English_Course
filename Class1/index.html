@@ -347,26 +347,41 @@
     <button onclick="speak(document.getElementById('numbers-desc').dataset.original)">🔊</button>
   </p>
 
-  <div class="numbers-grid">
-    <script>
-      const numberGrid = document.currentScript.parentNode;
-      const numbers = [
-        "one","two","three","four","five","six","seven","eight","nine","ten",
-        "eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen",
-        "eighteen","nineteen","twenty","twenty-one","twenty-two","twenty-three",
-        "twenty-four","twenty-five","twenty-six","twenty-seven","twenty-eight",
-        "twenty-nine","thirty"
-      ];
-      for(let i=0;i<numbers.length;i++){
-        const div = document.createElement('div');
-        div.className='number-item';
-        div.onclick=function(){ speak(numbers[i]); };
-        div.innerHTML=`<div class="number">${i+1}</div>
-                       <div class="number-name">${numbers[i]} 🔊</div>`;
-        numberGrid.appendChild(div);
-      }
-    </script>
-  </div>
+ <div class="numbers-grid">
+  <script>
+    const numberGrid = document.currentScript.parentNode;
+    const numbers = [
+      { en: "one", es: "uno" }, { en: "two", es: "dos" }, { en: "three", es: "tres" }, 
+      { en: "four", es: "cuatro" }, { en: "five", es: "cinco" }, { en: "six", es: "seis" },
+      { en: "seven", es: "siete" }, { en: "eight", es: "ocho" }, { en: "nine", es: "nueve" },
+      { en: "ten", es: "diez" }, { en: "eleven", es: "once" }, { en: "twelve", es: "doce" },
+      { en: "thirteen", es: "trece" }, { en: "fourteen", es: "catorce" }, { en: "fifteen", es: "quince" },
+      { en: "sixteen", es: "dieciséis" }, { en: "seventeen", es: "diecisiete" }, { en: "eighteen", es: "dieciocho" },
+      { en: "nineteen", es: "diecinueve" }, { en: "twenty", es: "veinte" }, { en: "twenty-one", es: "veintiuno" },
+      { en: "twenty-two", es: "veintidós" }, { en: "twenty-three", es: "veintitrés" },
+      { en: "twenty-four", es: "veinticuatro" }, { en: "twenty-five", es: "veinticinco" },
+      { en: "twenty-six", es: "veintiséis" }, { en: "twenty-seven", es: "veintisiete" },
+      { en: "twenty-eight", es: "veintiocho" }, { en: "twenty-nine", es: "veintinueve" },
+      { en: "thirty", es: "treinta" }
+    ];
+
+    for (let i = 0; i < numbers.length; i++) {
+      const div = document.createElement('div');
+      div.className = 'number-item';
+      div.onclick = function() { speak(numbers[i].en); };
+
+      const numberName = document.createElement('div');
+      numberName.className = 'number-name translatable';
+      numberName.dataset.original = numbers[i].en;
+      numberName.dataset.translation = numbers[i].es;
+      numberName.textContent = numbers[i].en + " 🔊";
+
+      div.innerHTML = `<div class="number">${i+1}</div>`;
+      div.appendChild(numberName);
+      numberGrid.appendChild(div);
+    }
+  </script>
+</div>
 
   <div class="practice-block">
     <p><strong>
@@ -411,16 +426,16 @@
   </h2>
   <ul>
     <li>
-      <span id="mini-write-1" class="translatable" data-original="Hello, my name is" data-translation="Hola, mi nombre es">Hello, my name is ___.</span>
-      <button type="button" onclick="speak(document.getElementById('mini-write-1').dataset.original)">🔊</button>
+      <span id="mini-write-1" class="translatable" data-original="Hello, my name is ___" data-translation="Hola, mi nombre es ___">Hello, my name is ___.</span>
+      <button type="button" onclick="speak('Hello, my name is')">🔊</button>
     </li>
     <li>
-      <span id="mini-write-2" class="translatable" data-original="I'm from" data-translation="Soy de">I'm from ___.</span>
-      <button type="button" onclick="speak(document.getElementById('mini-write-2').dataset.original)">🔊</button>
+      <span id="mini-write-2" class="translatable" data-original="I'm from ___" data-translation="Soy de ___">I'm from ___.</span>
+      <button type="button" onclick="speak('Am from')">🔊</button>
     </li>
     <li>
-      <span id="mini-write-3" class="translatable" data-original="I like" data-translation="Me gusta">I like ___.</span>
-      <button type="button" onclick="speak(document.getElementById('mini-write-3').dataset.original)">🔊</button>
+      <span id="mini-write-3" class="translatable" data-original="I like ___" data-translation="Me gusta ___">I like ___.</span>
+      <button type="button" onclick="speak('I like')">🔊</button>
     </li>
   </ul>
 </section>

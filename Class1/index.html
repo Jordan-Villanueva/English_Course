@@ -368,21 +368,29 @@
         const div = document.createElement('div');
         div.className = 'number-item';
 
-        const numberName = document.createElement('div');
+        // Texto traducible
+        const numberName = document.createElement('span');
         numberName.className = 'number-name translatable';
         numberName.dataset.original = numbers[i].en;
         numberName.dataset.translation = numbers[i].es;
         numberName.dataset.tts = numbers[i].en;
-        numberName.innerHTML = `${numbers[i].en} <button onclick="speak(this.parentNode.dataset.tts)">🔊</button>`;
+        numberName.textContent = numbers[i].en; // solo texto
+
+        // Botón de bocina separado
+        const speakerBtn = document.createElement('button');
+        speakerBtn.textContent = "🔊";
+        speakerBtn.onclick = function(e) {
+          e.stopPropagation(); // evitar que el div padre también haga speak
+          speak(numberName.dataset.tts);
+        };
 
         div.innerHTML = `<div class="number">${i+1}</div>`;
         div.appendChild(numberName);
+        div.appendChild(speakerBtn);
 
-        // También hacer clic en el div completo reproduce el audio
-        div.onclick = function(e) {
-          if (!e.target.classList.contains('speak-btn')) {
-            speak(this.querySelector('.number-name').dataset.tts);
-          }
+        // Click en div completo también reproduce audio
+        div.onclick = function() {
+          speak(numberName.dataset.tts);
         };
 
         numberGrid.appendChild(div);

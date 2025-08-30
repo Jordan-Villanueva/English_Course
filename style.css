@@ -151,7 +151,7 @@ h3 {
 /* Números */
 .numbers-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  grid-template-columns: repeat(6, 1fr);
   gap: 12px;
   margin: 25px 0;
 }

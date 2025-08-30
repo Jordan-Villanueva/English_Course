@@ -78,7 +78,7 @@
   </h2>
   <blockquote>
     <span id=warm-desc1 class="translatable"
-          data-original="Hello, my name is Jordan. I’m from Mexico. I'm a physicist and software developer and I love movies and teaching."
+          data-original="Hello, my name is Jordan. I’m from Mexico. I’m a physicist and software developer and I love movies and teaching."
           data-translation="Hola, mi nombre es Jordan. Soy de México. Soy físico y desarrollador de software, y me encantan las películas y la enseñanza.">
       Hello, my name is Jordan. I’m from Mexico. I'm a physicist and software developer and I love movies and teaching.
     </span>
@@ -259,7 +259,6 @@
   <iframe width="100%" height="315" src="https://www.youtube.com/embed/byqOkm6-SCc" frameborder="0" allowfullscreen></iframe>
 </section>
 
-
 <!-- Interactive exercise -->
 <section class="bloque" data-translated="false">
   <h2 class="title-flex">
@@ -335,7 +334,7 @@
       7. Numbers in English: from 1 to 30 (10 min)
     </span>
     <button class="translate-section-btn">🌐</button>
-    <button onclick="speak('7. Numbers in English: from 1 to 30')">🔊</button>
+    <button onclick="speak(document.getElementById('numbers-title').dataset.original)">🔊</button>
   </h2>
 
   <p>
@@ -347,41 +346,43 @@
     <button onclick="speak(document.getElementById('numbers-desc').dataset.original)">🔊</button>
   </p>
 
- <div class="numbers-grid">
-  <script>
-    const numberGrid = document.currentScript.parentNode;
-    const numbers = [
-      { en: "one", es: "uno" }, { en: "two", es: "dos" }, { en: "three", es: "tres" }, 
-      { en: "four", es: "cuatro" }, { en: "five", es: "cinco" }, { en: "six", es: "seis" },
-      { en: "seven", es: "siete" }, { en: "eight", es: "ocho" }, { en: "nine", es: "nueve" },
-      { en: "ten", es: "diez" }, { en: "eleven", es: "once" }, { en: "twelve", es: "doce" },
-      { en: "thirteen", es: "trece" }, { en: "fourteen", es: "catorce" }, { en: "fifteen", es: "quince" },
-      { en: "sixteen", es: "dieciséis" }, { en: "seventeen", es: "diecisiete" }, { en: "eighteen", es: "dieciocho" },
-      { en: "nineteen", es: "diecinueve" }, { en: "twenty", es: "veinte" }, { en: "twenty-one", es: "veintiuno" },
-      { en: "twenty-two", es: "veintidós" }, { en: "twenty-three", es: "veintitrés" },
-      { en: "twenty-four", es: "veinticuatro" }, { en: "twenty-five", es: "veinticinco" },
-      { en: "twenty-six", es: "veintiséis" }, { en: "twenty-seven", es: "veintisiete" },
-      { en: "twenty-eight", es: "veintiocho" }, { en: "twenty-nine", es: "veintinueve" },
-      { en: "thirty", es: "treinta" }
-    ];
+  <div class="numbers-grid">
+    <script>
+      const numberGrid = document.currentScript.parentNode;
+      const numbers = [
+        { en: "one", es: "uno" }, { en: "two", es: "dos" }, { en: "three", es: "tres" }, 
+        { en: "four", es: "cuatro" }, { en: "five", es: "cinco" }, { en: "six", es: "seis" },
+        { en: "seven", es: "siete" }, { en: "eight", es: "ocho" }, { en: "nine", es: "nueve" },
+        { en: "ten", es: "diez" }, { en: "eleven", es: "once" }, { en: "twelve", es: "doce" },
+        { en: "thirteen", es: "trece" }, { en: "fourteen", es: "catorce" }, { en: "fifteen", es: "quince" },
+        { en: "sixteen", es: "dieciséis" }, { en: "seventeen", es: "diecisiete" }, { en: "eighteen", es: "dieciocho" },
+        { en: "nineteen", es: "diecinueve" }, { en: "twenty", es: "veinte" }, { en: "twenty-one", es: "veintiuno" },
+        { en: "twenty-two", es: "veintidós" }, { en: "twenty-three", es: "veintitrés" },
+        { en: "twenty-four", es: "veinticuatro" }, { en: "twenty-five", es: "veinticinco" },
+        { en: "twenty-six", es: "veintiséis" }, { en: "twenty-seven", es: "veintisiete" },
+        { en: "twenty-eight", es: "veintiocho" }, { en: "twenty-nine", es: "veintinueve" },
+        { en: "thirty", es: "treinta" }
+      ];
 
-    for (let i = 0; i < numbers.length; i++) {
-      const div = document.createElement('div');
-      div.className = 'number-item';
-      div.onclick = function() { speak(numbers[i].en); };
-
-      const numberName = document.createElement('div');
-      numberName.className = 'number-name translatable';
-      numberName.dataset.original = numbers[i].en;
-      numberName.dataset.translation = numbers[i].es;
-      numberName.textContent = numbers[i].en + " 🔊";
-
-      div.innerHTML = `<div class="number">${i+1}</div>`;
-      div.appendChild(numberName);
-      numberGrid.appendChild(div);
-    }
-  </script>
-</div>
+      for (let i = 0; i < numbers.length; i++) {
+        const div = document.createElement('div');
+        div.className = 'number-item';
+        
+        // Usar data-tts para audio independiente de traducción
+        const numberName = document.createElement('div');
+        numberName.className = 'number-name translatable';
+        numberName.dataset.original = numbers[i].en;
+        numberName.dataset.translation = numbers[i].es;
+        numberName.dataset.tts = numbers[i].en;
+        numberName.textContent = numbers[i].en + " 🔊";
+        
+        div.innerHTML = `<div class="number">${i+1}</div>`;
+        div.appendChild(numberName);
+        div.onclick = function() { speak(this.querySelector('.number-name').dataset.tts); };
+        numberGrid.appendChild(div);
+      }
+    </script>
+  </div>
 
   <div class="practice-block">
     <p><strong>
@@ -431,7 +432,7 @@
     </li>
     <li>
       <span id="mini-write-2" class="translatable" data-original="I'm from ___" data-translation="Soy de ___">I'm from ___.</span>
-      <button type="button" onclick="speak('I m from')">🔊</button>
+      <button type="button" onclick="speak('I’m from')">🔊</button>
     </li>
     <li>
       <span id="mini-write-3" class="translatable" data-original="I like ___" data-translation="Me gusta ___">I like ___.</span>

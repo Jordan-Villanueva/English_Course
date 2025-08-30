@@ -43,7 +43,7 @@
       🎯 Class objectives
     </span>
     <button class="translate-section-btn">🌐</button>
-    <button onclick="speak(document.getElementById('objectives').dataset.original)">🔊</button>
+    <button onclick="speak('Class objectives')">🔊</button>
   </h2>
   <ul>
     <li>
@@ -583,15 +583,16 @@ function speak(text, lang = 'en-US') {
 // Evitar primer playback en blanco
 window.onload = () => { speechSynthesis.getVoices(); };
 
+let practiceTimeouts = [];
 
-  function practiceNumbers(start=1,end=10){
-    for(let i=start;i<=end;i++){
-      setTimeout(()=>speak(numbers[i-1]), (i-start)*1200);
-    }
-  }
+function practiceNumbers(start=1, end=10) {
+  practiceTimeouts.forEach(t => clearTimeout(t));
+  practiceTimeouts = [];
+  window.speechSynthesis.cancel();
 
-  // Load voices to prevent blank first playback
-  window.onload = function(){ speechSynthesis.getVoices(); };
+  const text = numbers.slice(start-1, end).join(", ");
+  speak(text);
+}
 
 // Toggle section translation
 document.addEventListener("DOMContentLoaded", () => {

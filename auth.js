@@ -2,22 +2,27 @@ const homeBtn = document.getElementById("home-btn");
 const loginBtn = document.getElementById("login-btn");
 const logoutBtn = document.getElementById("logout-btn");
 const content = document.getElementById("content");
+
 const AUTH0_DOMAIN = "dev-bjoqtux6wua5w2l2.us.auth0.com";
 const AUTH0_CLIENT_ID = "ZcgIAj7vMvtUixpX421Jv6gs4YrakeC7";
-
-// Siempre redirigir al index general
 const REDIRECT_URI = "https://elegant-frangipane-efce46.netlify.app";
 
+// Lista de usuarios revocados
+const REVOKED_USERS = ["revokeduser1@example.com", "revokeduser2@example.com"];
+
+// Login
 loginBtn.onclick = () => {
-  const authUrl = `https://${AUTH0_DOMAIN}/authorize?response_type=token&client_id=${AUTH0_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=openid%20profile`;
+  const authUrl = `https://${AUTH0_DOMAIN}/authorize?response_type=token&client_id=${AUTH0_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=openid%20profile%20email`;
   window.location.href = authUrl;
 };
 
+// Logout
 logoutBtn.onclick = () => {
   localStorage.removeItem("access_token");
   showLoggedOut();
 };
 
+// Parsear hash de Auth0
 function parseHash() {
   if (window.location.hash) {
     const hash = window.location.hash.substr(1).split("&").reduce((res, item) => {
@@ -28,14 +33,13 @@ function parseHash() {
     if (hash.access_token) {
       localStorage.setItem("access_token", hash.access_token);
       window.location.hash = "";
-      // Redirigir al menú general
-      window.location.href = REDIRECT_URI;
-      return true;
+      return true; // token guardado, no redirigir
     }
   }
   return false;
 }
 
+// Mostrar estado desconectado
 function showLoggedOut() {
   loginBtn.style.display = "inline-block";
   logoutBtn.style.display = "none";
@@ -48,6 +52,7 @@ function showLoggedOut() {
   }
 }
 
+// Mostrar contenido para usuarios logueados
 function showContent() {
   loginBtn.style.display = "none";
   logoutBtn.style.display = "inline-block";
@@ -73,21 +78,29 @@ function showContent() {
   }
 }
 
-// Función para validar el token en Auth0
+// Validar token y usuarios revocados
 async function validateToken(token) {
   try {
     const res = await fetch(`https://${AUTH0_DOMAIN}/userinfo`, {
       headers: { Authorization: `Bearer ${token}` }
     });
     if (!res.ok) throw new Error("Invalid token");
-    return true; // token válido
+
+    const userInfo = await res.json();
+
+    if (REVOKED_USERS.includes(userInfo.email)) {
+      throw new Error("User revoked");
+    }
+
+    return true; // token válido y usuario permitido
   } catch (e) {
-    localStorage.removeItem("access_token"); // token inválido, eliminar
+    console.warn(e.message);
+    localStorage.removeItem("access_token");
     return false;
   }
 }
 
-// Inicializa la app validando el token
+// Inicializar app
 async function initApp() {
   let tokenValid = false;
 

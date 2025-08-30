@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <title>Class 1 - English Course</title>
   <link rel="stylesheet" href="../style.css">
+  <link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet/dist/leaflet.css"
+  />
 </head>
 <body>
   <header class="page-header" data-translated="false">
@@ -255,6 +259,13 @@
     <button onclick="speak(document.getElementById('where-instr').dataset.original)">🔊</button>
   </p>
   <iframe width="100%" height="315" src="https://www.youtube.com/embed/byqOkm6-SCc" frameborder="0" allowfullscreen></iframe>
+</section>
+
+  <!-- Map Exercise -->
+<section class="bloque" data-translated="false">
+  <h3>Select a country on the map!</h3>
+  <div id="map" style="height: 400px; width: 100%; border: 1px solid #ccc;"></div>
+  <p id="dialogue"></p>
 </section>
 
 <!-- Interactive exercise -->
@@ -677,5 +688,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <!-- Auth0 -->
 <script src="../auth.js"></script>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+  // Inicializa el mapa
+  const map = L.map('map').setView([20, 0], 2); // vista mundial
+
+  // Capa de mapa
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 5,
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Lista de países y ciudades de referencia
+  const countries = [
+    { name: "Japan", lat: 35.68, lng: 139.76, dialogue: "I'm from Japan. I'm Japanese." },
+    { name: "USA", lat: 38.9, lng: -77.03, dialogue: "I'm from the USA. I'm American." },
+    { name: "France", lat: 48.85, lng: 2.35, dialogue: "I'm from France. I'm French." },
+    { name: "Brazil", lat: -15.79, lng: -47.88, dialogue: "I'm from Brazil. I'm Brazilian." }
+  ];
+
+  // Agrega marcadores
+  countries.forEach(c => {
+    L.marker([c.lat, c.lng])
+      .addTo(map)
+      .bindPopup(`<b>${c.name}</b>`)
+      .on('click', () => {
+        document.getElementById('dialogue').textContent = c.dialogue;
+      });
+  });
+</script>
+
+  
 </body>
 </html>

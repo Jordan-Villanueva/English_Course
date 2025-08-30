@@ -33,15 +33,14 @@ h1.title-flex, h2.title-flex, h3.title-flex {
   display: flex;
   align-items: center;   /* centra verticalmente texto + botones */
   gap: 8px;              /* separación entre texto y botones */
-  font-size: 1.5em;      /* asegura tamaño grande en móvil */
   flex-wrap: wrap;       /* si no cabe en una sola línea en pantallas pequeñas, se ajusta */
+  /* font-size quitado (se reemplaza al final con tipografía escalable) */
 }
 
 h1.title-flex button, h2.title-flex button, h3.title-flex button {
   font-size: 0.9em;      /* botones más discretos que el título */
   padding: 2px 6px;
 }
-
 
 header h1 {
   margin: 0;
@@ -271,43 +270,32 @@ footer {
   color: #333;
 }
 
-/* ================================
-   Ajuste global de tipografía
-   ================================ */
-
-/* Encabezados */
-h1 {
-  font-size: 2.2em;   /* título principal */
-  font-weight: bold;
+/* ===== Escala tipográfica coherente (responsive) ===== */
+:root{
+  --h1-size: clamp(2.2rem, 4.5vw, 3rem);
+  --h2-size: clamp(1.8rem, 3.5vw, 2.25rem);
+  --h3-size: clamp(1.5rem, 2.8vw, 1.9rem);
+  --subtitle-size: clamp(1.2rem, 2.2vw, 1.5rem);
+  --p-size: clamp(1rem, 1.4vw, 1.15rem);
 }
 
-h2 {
-  font-size: 1.8em;   /* secciones principales */
-  font-weight: bold;
+/* Aplica a títulos con o sin .title-flex */
+h1, h1.title-flex { font-size: var(--h1-size); font-weight: 700; }
+h2, h2.title-flex { font-size: var(--h2-size); font-weight: 700; }
+h3, h3.title-flex { font-size: var(--h3-size); font-weight: 700; }
+
+/* Subtítulo del header */
+header .subtitle { font-size: var(--subtitle-size); font-weight: 400; }
+
+/* Párrafos e itálicas */
+p { font-size: var(--p-size); line-height: 1.7; }
+i, em { font-size: calc(var(--p-size) * 1.02); color:#444; }
+
+/* Asegura que .title-flex no sobrescriba el tamaño */
+h1.title-flex, h2.title-flex, h3.title-flex { font-size: inherit; }
+
+/* Botones dentro de títulos */
+h1.title-flex button, h2.title-flex button, h3.title-flex button {
+  font-size: 0.7em;
+  line-height: 1;
 }
-
-h3 {
-  font-size: 1.5em;   /* subsecciones */
-  font-weight: bold;
-}
-
-/* Subtítulos en el header */
-header .subtitle {
-  font-size: 1.4em;   /* estaba en 1.2em */
-  font-weight: 400;
-}
-
-/* Párrafos */
-p {
-  font-size: 1.1em;   /* un poco más grande para mejor lectura */
-  line-height: 1.7;
-}
-
-/* Texto en cursiva (ej: instrucciones) */
-i, em {
-  font-size: 1.05em;
-  font-style: italic;
-  color: #444;       /* un gris un poco más suave */
-}
-
-

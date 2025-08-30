@@ -248,29 +248,13 @@
     <button class="translate-section-btn">🌐</button>
     <button onclick="speak('5. Introduction of "Where are you from?"')">🔊</button>
   </h2>
-
   <p>
     <span id="where-instr" class="translatable" data-original="Watch the video" data-translation="Mira el video">
       Watch the video
     </span>
     <button onclick="speak(document.getElementById('where-instr').dataset.original)">🔊</button>
   </p>
-
   <iframe width="100%" height="315" src="https://www.youtube.com/embed/byqOkm6-SCc" frameborder="0" allowfullscreen></iframe>
-
-  <!-- Map container -->
-<div id="map-container" style="margin-top: 20px; text-align:center;">
-  <h3>Select a country:</h3>
-  <select id="country-select" onchange="showCountryDialog()">
-    <option value="">--Choose a country--</option>
-    <option value="Japan">Japan</option>
-    <option value="USA">USA</option>
-    <option value="France">France</option>
-    <option value="Mexico">Mexico</option>
-  </select>
-
-  <p id="country-dialog" style="margin-top: 15px; font-weight:bold;"></p>
-</div>
 </section>
 
 <!-- Interactive exercise -->
@@ -689,21 +673,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });  
-
-   const countryDialog = {
-    "Japan": "I'm from Japan. I'm Japanese.",
-    "USA": "I'm from the USA. I'm American.",
-    "France": "I'm from France. I'm French.",
-    "Mexico": "I'm from Mexico. I'm Mexican."
-  };
-
-  function showCountryDialog() {
-    const select = document.getElementById("country-select");
-    const country = select.value;
-    const dialog = countryDialog[country] || "";
-    document.getElementById("country-dialog").textContent = dialog;
-    if (dialog) speak(dialog);
-  }  
 </script>
 
 <!-- Auth0 -->

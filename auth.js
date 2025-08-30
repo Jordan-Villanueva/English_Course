@@ -73,9 +73,38 @@ function showContent() {
   }
 }
 
-// Detecta token en localStorage
-if (parseHash() || localStorage.getItem("access_token")) {
-  showContent();
-} else {
-  showLoggedOut();
+// Función para validar el token en Auth0
+async function validateToken(token) {
+  try {
+    const res = await fetch(`https://${AUTH0_DOMAIN}/userinfo`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (!res.ok) throw new Error("Invalid token");
+    return true; // token válido
+  } catch (e) {
+    localStorage.removeItem("access_token"); // token inválido, eliminar
+    return false;
+  }
 }
+
+// Inicializa la app validando el token
+async function initApp() {
+  let tokenValid = false;
+
+  if (parseHash()) {
+    const token = localStorage.getItem("access_token");
+    tokenValid = await validateToken(token);
+  } else if (localStorage.getItem("access_token")) {
+    const token = localStorage.getItem("access_token");
+    tokenValid = await validateToken(token);
+  }
+
+  if (tokenValid) {
+    showContent();
+  } else {
+    showLoggedOut();
+  }
+}
+
+// Arranca la app
+initApp();

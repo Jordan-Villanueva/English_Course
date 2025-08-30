@@ -522,31 +522,58 @@
 </footer>
 
 <script>
+
+ function preprocessTextForTTS(text) {
+  // Diccionario de contracciones comunes → versión hackeada
+  const hacks = {
+    "I'm": "I\u200Bm",       // "I’m"
+    "I'm.": "I\u200Bm.", 
+    "I'm,": "I\u200Bm,", 
+
+    "It's": "It\u200Bs",    // "It’s"
+    "What's": "What\u200Bs",
+    "That's": "That\u200Bs",
+    "There's": "There\u200Bs",
+    "Here's": "Here\u200Bs",
+
+    "You're": "You\u200Bre",
+    "We're": "We\u200Bre",
+    "They're": "They\u200Bre",
+
+    "He’s": "He\u200Bs",
+    "She’s": "She\u200Bs"
+  };
+
+  let processed = text;
+  for (const [key, val] of Object.entries(hacks)) {
+    const regex = new RegExp(key, "gi");
+    processed = processed.replace(regex, val);
+  }
+
+  return processed;
+} 
+  
 // Speak function improved
 function speak(text, lang = 'en-US') {
   if ('speechSynthesis' in window) {
-    // Cancelar cualquier voz en curso
     window.speechSynthesis.cancel();
 
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = lang;
+    // Usar el preprocesador ANTES de mandar al motor
+    const fixedText = preprocessTextForTTS(text);
 
-    // Configuración uniforme
-    utterance.rate = 0.95;   // velocidad
-    utterance.pitch = 1.2;   // tono
-    utterance.volume = 1;    // volumen máximo
+    const utterance = new SpeechSynthesisUtterance(fixedText);
+    utterance.lang = lang;
+    utterance.rate = 0.95;
+    utterance.pitch = 1.2;
+    utterance.volume = 1;
 
     const voices = speechSynthesis.getVoices();
+    let customVoice = voices.find(v => v.name === 'Google US English')
+                      || voices.find(v => v.name === 'Microsoft Zira Desktop - English (United States)')
+                      || voices.find(v => v.name === 'Samantha')
+                      || voices[0];
+    if (customVoice) utterance.voice = customVoice;
 
-    // Voz personalizada / fallback
-    let customVoice = voices.find(v => v.name === 'Google US English')   // Chrome
-                      || voices.find(v => v.name === 'Microsoft Zira Desktop - English (United States)') // Windows
-                      || voices.find(v => v.name === 'Samantha') // macOS
-                      || voices[0];  // cualquier otra disponible
-
-    if(customVoice) utterance.voice = customVoice;
-
-    // Reproducir
     window.speechSynthesis.speak(utterance);
   } else {
     alert("Your browser doesn't support speech synthesis.");
@@ -584,9 +611,7 @@ document.addEventListener("DOMContentLoaded", () => {
     container.setAttribute("data-translated", isTranslated ? "false" : "true");
     });
   });
-});
-
-  
+});  
 </script>
 
 <!-- Auth0 -->

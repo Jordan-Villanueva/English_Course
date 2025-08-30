@@ -33,14 +33,15 @@ h1.title-flex, h2.title-flex, h3.title-flex {
   display: flex;
   align-items: center;   /* centra verticalmente texto + botones */
   gap: 8px;              /* separación entre texto y botones */
+  font-size: 1.5em;      /* asegura tamaño grande en móvil */
   flex-wrap: wrap;       /* si no cabe en una sola línea en pantallas pequeñas, se ajusta */
-  /* font-size quitado (se reemplaza al final con tipografía escalable) */
 }
 
 h1.title-flex button, h2.title-flex button, h3.title-flex button {
   font-size: 0.9em;      /* botones más discretos que el título */
   padding: 2px 6px;
 }
+
 
 header h1 {
   margin: 0;
@@ -270,32 +271,28 @@ footer {
   color: #333;
 }
 
-/* ===== Escala tipográfica coherente (responsive) ===== */
+/* ===== Tipografía general ===== */
 :root{
-  --h1-size: clamp(2.2rem, 4.5vw, 3rem);
-  --h2-size: clamp(1.8rem, 3.5vw, 2.25rem);
-  --h3-size: clamp(1.5rem, 2.8vw, 1.9rem);
-  --subtitle-size: clamp(1.2rem, 2.2vw, 1.5rem);
-  --p-size: clamp(1rem, 1.4vw, 1.15rem);
+  --h1-size: 2rem;
+  --h2-size: 1.6rem;
+  --h3-size: 1.3rem;
+  --p-size: 1rem;
 }
 
-/* Aplica a títulos con o sin .title-flex */
+/* Desktop: escalamos un poco */
+@media (min-width: 769px) {
+  :root{
+    --h1-size: 2.5rem;
+    --h2-size: 2rem;
+    --h3-size: 1.5rem;
+    --p-size: 1.1rem;
+  }
+}
+
+/* Aplicación */
 h1, h1.title-flex { font-size: var(--h1-size); font-weight: 700; }
 h2, h2.title-flex { font-size: var(--h2-size); font-weight: 700; }
 h3, h3.title-flex { font-size: var(--h3-size); font-weight: 700; }
+p { font-size: var(--p-size); line-height: 1.6; }
+i, em { font-size: 1em; font-style: italic; color: #444; }
 
-/* Subtítulo del header */
-header .subtitle { font-size: var(--subtitle-size); font-weight: 400; }
-
-/* Párrafos e itálicas */
-p { font-size: var(--p-size); line-height: 1.7; }
-i, em { font-size: calc(var(--p-size) * 1.02); color:#444; }
-
-/* Asegura que .title-flex no sobrescriba el tamaño */
-h1.title-flex, h2.title-flex, h3.title-flex { font-size: inherit; }
-
-/* Botones dentro de títulos */
-h1.title-flex button, h2.title-flex button, h3.title-flex button {
-  font-size: 0.7em;
-  line-height: 1;
-}

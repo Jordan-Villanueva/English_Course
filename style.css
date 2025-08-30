@@ -271,4 +271,105 @@ footer {
   color: #333;
 }
 
+/* Estilo general de títulos */
+h1 {
+  font-size: 2.2em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  font-size: 1.8em;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+h3 {
+  font-size: 1.4em;
+  margin-top: 1em;
+  margin-bottom: 0.3em;
+}
+
+/* Subtítulo debajo del h1 */
+.subtitle {
+  font-size: 1.2em;
+  font-style: italic;
+  color: #444;
+  margin-top: 0.3em;
+}
+
+/* Ajustes extra para títulos flexibles con botones 🌐 y 🔊 */
+.title-flex {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.title-flex span {
+  flex: 1;
+}
+
+/* ===== Estilos de texto base ===== */
+body {
+  font-family: Arial, sans-serif; /* Fuente limpia y fácil de leer */
+  line-height: 1.6;               /* Espaciado entre líneas */
+  font-size: 16px;                /* Tamaño base */
+  color: #222;                    /* Texto principal */
+}
+
+/* Párrafos */
+p {
+  font-size: 1em;                 /* Se ajusta al tamaño base */
+  margin: 0.6em 0;                /* Espacio arriba y abajo */
+}
+
+/* Listas */
+ul, ol {
+  margin: 0.6em 0 0.6em 1.2em;    /* Espaciado general */
+  padding-left: 1em;              /* Separación de viñetas */
+}
+
+li {
+  margin-bottom: 0.4em;           /* Separación entre ítems */
+  font-size: 1em;
+}
+
+/* ===== Ajustes visuales de títulos ===== */
+h1 {
+  font-size: 2.2em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  font-size: 1.8em;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+h3 {
+  font-size: 1.4em;
+  margin-top: 1em;
+  margin-bottom: 0.3em;
+}
+
+/* Subtítulo debajo del h1 */
+.subtitle {
+  font-size: 1.2em;
+  font-style: italic;
+  color: #444;
+  margin-top: 0.3em;
+}
+
+/* Ajustes para títulos con botones 🌐 y 🔊 */
+.title-flex {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.title-flex span {
+  flex: 1;
+}
+
 

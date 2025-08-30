@@ -373,7 +373,7 @@
         numberName.dataset.original = numbers[i].en;
         numberName.dataset.translation = numbers[i].es;
         numberName.dataset.tts = numbers[i].en;
-        numberName.innerHTML = `${numbers[i].en} <button class="speak-btn" onclick="speak(this.parentNode.dataset.tts)">🔊</button>`;
+        numberName.innerHTML = `${numbers[i].en} <button onclick="speak(this.parentNode.dataset.tts)">🔊</button>`;
 
         div.innerHTML = `<div class="number">${i+1}</div>`;
         div.appendChild(numberName);

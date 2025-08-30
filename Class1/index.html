@@ -293,7 +293,7 @@
   </div>
 </section>
   
-  <!-- Numbers -->
+<!-- Numbers -->
 <section class="bloque" data-translated="false">
   <h2 class="title-flex">
     <span id="interactive-title-7" class="translatable" 
@@ -308,56 +308,37 @@
             onclick="speak(document.getElementById('interactive-title-7').dataset.original)">🔊</button>
   </h2>
 
-  <span id="interactive-desc-7" class="translatable" 
-     data-original="Click each number to listen the pronunciation:" 
-     data-translation="Haz clic en cada número para escuchar la pronunciación:">
-    Click each number to listen the pronunciation:
-  </span>   
-  <button class="speak-btn translatable" type="button" 
-          data-original="Click each number to listen the pronunciation:" 
-          data-translation="Haz clic en cada número para escuchar la pronunciación:"
-          onclick="speak(document.getElementById('interactive-desc-7').dataset.original)">🔊</button>
+  <p>
+    <span id="interactive-desc-7" class="translatable" 
+          data-original="Click each number to listen to the pronunciation:" 
+          data-translation="Haz clic en cada número para escuchar la pronunciación:">
+      Click each number to listen to the pronunciation:
+    </span>
+    <button class="speak-btn translatable" type="button" 
+            onclick="speak(document.getElementById('interactive-desc-7').dataset.original)">🔊</button>
+  </p>
 
   <div class="numbers-grid">
     <script>
-      const numberGrid = document.currentScript.parentNode;
-      const numbers = [
-        { en: "one", es: "uno" }, { en: "two", es: "dos" }, { en: "three", es: "tres" },
-        { en: "four", es: "cuatro" }, { en: "five", es: "cinco" }, { en: "six", es: "seis" },
-        { en: "seven", es: "siete" }, { en: "eight", es: "ocho" }, { en: "nine", es: "nueve" },
-        { en: "ten", es: "diez" }, { en: "eleven", es: "once" }, { en: "twelve", es: "doce" },
-        { en: "thirteen", es: "trece" }, { en: "fourteen", es: "catorce" }, { en: "fifteen", es: "quince" },
-        { en: "sixteen", es: "dieciséis" }, { en: "seventeen", es: "diecisiete" }, { en: "eighteen", es: "dieciocho" },
-        { en: "nineteen", es: "diecinueve" }, { en: "twenty", es: "veinte" }, { en: "twenty-one", es: "veintiuno" },
-        { en: "twenty-two", es: "veintidós" }, { en: "twenty-three", es: "veintitrés" }, { en: "twenty-four", es: "veinticuatro" },
-        { en: "twenty-five", es: "veinticinco" }, { en: "twenty-six", es: "veintiséis" }, { en: "twenty-seven", es: "veintisiete" },
-        { en: "twenty-eight", es: "veintiocho" }, { en: "twenty-nine", es: "veintinueve" }, { en: "thirty", es: "treinta" }
-      ];
-
-      numbers.forEach((num, i) => {
-        const div = document.createElement('div');
-        div.className = 'number-item';
-        div.onclick = () => speak(num.en);
-        div.innerHTML = `
-          <div class="number">${i+1}</div>
-          <div class="number-name">
-            <span id="number-${i+1}" class="translatable" data-original="${num.en}" data-translation="${num.es}">
-              ${num.en}
-            </span> 🔊
-          </div>`;
-        numberGrid.appendChild(div);
-      });
-    </script>
+        const numberGrid = document.currentScript.parentNode;
+        const numbers = ["one","two","three","four","five","six","seven","eight","nine","ten",
+          "eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen","twenty",
+          "twenty-one","twenty-two","twenty-three","twenty-four","twenty-five","twenty-six","twenty-seven","twenty-eight","twenty-nine","thirty"];
+        for(let i=0;i<numbers.length;i++){
+          const div = document.createElement('div');
+          div.className='number-item';
+          div.onclick=function(){ speak(numbers[i]); };
+          div.innerHTML=`<div class="number">${i+1}</div><div class="number-name">${numbers[i]} 🔊</div>`;
+          numberGrid.appendChild(div);
+        }
+      </script>
   </div>
-
   <div class="practice-block">
     <p>
       <strong id="pronunc-label" class="translatable" data-original="Pronunciation practice:" data-translation="Práctica de pronunciación:">
         Pronunciation practice:
       </strong>
       <button class="speak-btn translatable" type="button" 
-              data-original="Pronunciation practice:" 
-              data-translation="Práctica de pronunciación:"
               onclick="speak(document.getElementById('pronunc-label').dataset.original)">🔊</button>
     </p>
 
@@ -384,6 +365,7 @@
   </div>
 </section>
 
+  
 <!-- Mini writing / journaling -->
 <section class="bloque" data-translated="false">
   <h2 class="title-flex">

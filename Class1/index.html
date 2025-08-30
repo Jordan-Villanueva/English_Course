@@ -296,46 +296,53 @@
 <!-- Numbers -->
 <section class="bloque" data-translated="false">
   <h2 class="title-flex">
-    <span id="interactive-title-7" class="translatable" 
-          data-original="7. Numbers in English: from 1 to 30" 
+    <span id="numbers-title" class="translatable"
+          data-original="7. Numbers in English: from 1 to 30"
           data-translation="7. Números en inglés: del 1 al 30">
       7. Numbers in English: from 1 to 30
-    </span> 
+    </span>
     <button class="translate-section-btn">🌐</button>
-    <button onclick="speak(document.getElementById('interactive-title-7').dataset.original)">🔊</button>
+    <button onclick="speak(document.getElementById('numbers-title').dataset.original)">🔊</button>
   </h2>
 
   <p>
-    <span id="interactive-desc-7" class="translatable" 
-          data-original="Click each number to listen to the pronunciation:" 
-          data-translation="Haz clic en cada número para escuchar la pronunciación:">
-      Click each number to listen to the pronunciation:
+    <span id="numbers-desc" class="translatable"
+          data-original="Click each number to hear its pronunciation:"
+          data-translation="Haz clic en cada número para escuchar su pronunciación:">
+      Click each number to hear its pronunciation:
     </span>
-    <button onclick="speak(document.getElementById('interactive-desc-7').dataset.original)">🔊</button>
+    <button onclick="speak(document.getElementById('numbers-desc').dataset.original)">🔊</button>
   </p>
 
   <div class="numbers-grid">
     <script>
-        const numberGrid = document.currentScript.parentNode;
-        const numbers = ["one","two","three","four","five","six","seven","eight","nine","ten",
-          "eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen","twenty",
-          "twenty-one","twenty-two","twenty-three","twenty-four","twenty-five","twenty-six","twenty-seven","twenty-eight","twenty-nine","thirty"];
-        for(let i=0;i<numbers.length;i++){
-          const div = document.createElement('div');
-          div.className='number-item';
-          div.onclick=function(){ speak(numbers[i]); };
-          div.innerHTML=`<div class="number">${i+1}</div><div class="number-name">${numbers[i]} 🔊</div>`;
-          numberGrid.appendChild(div);
-        }
-      </script>
+      const numberGrid = document.currentScript.parentNode;
+      const numbers = [
+        "one","two","three","four","five","six","seven","eight","nine","ten",
+        "eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen",
+        "eighteen","nineteen","twenty","twenty-one","twenty-two","twenty-three",
+        "twenty-four","twenty-five","twenty-six","twenty-seven","twenty-eight",
+        "twenty-nine","thirty"
+      ];
+      for(let i=0;i<numbers.length;i++){
+        const div = document.createElement('div');
+        div.className='number-item';
+        div.onclick=function(){ speak(numbers[i]); };
+        div.innerHTML=`<div class="number">${i+1}</div>
+                       <div class="number-name">${numbers[i]} 🔊</div>`;
+        numberGrid.appendChild(div);
+      }
+    </script>
   </div>
+
   <div class="practice-block">
-    <p>
-      <strong id="pronunc-label" class="translatable" data-original="Pronunciation practice:" data-translation="Práctica de pronunciación:">
+    <p><strong>
+      <span class="translatable"
+            data-original="Pronunciation practice:"
+            data-translation="Práctica de pronunciación:">
         Pronunciation practice:
-      </strong>
-      <button onclick="speak(document.getElementById('pronunc-label').dataset.original)">🔊</button>
-    </p>
+      </span>
+    </strong></p>
 
     <button class="speak-btn translatable" 
             data-original="Listen 1 to 10" 
@@ -359,7 +366,6 @@
     </button>
   </div>
 </section>
-
   
 <!-- Mini writing / journaling -->
 <section class="bloque" data-translated="false">
@@ -424,7 +430,9 @@
 <!-- Games -->
 <section class="bloque" data-translated="false">
   <h2 class="title-flex">
-    <span id="interactive-title-11" class="translatable" data-original="11. Interactive games / Baamboozle (15 min)" data-translation="11. Juegos interactivos / Baamboozle (15 min)">
+    <span id="interactive-title-11" class="translatable"
+          data-original="11. Interactive games / Baamboozle (15 min)"
+          data-translation="11. Juegos interactivos / Baamboozle (15 min)">
       11. Interactive games / Baamboozle (15 min)
     </span>
     <button class="translate-section-btn">🌐</button>
@@ -433,22 +441,44 @@
 
   <div class="game-item">
     <p>
-      <span id="game-1" class="translatable" data-original="Game 1" data-translation="Juego 1">Game 1</span>
+      <span id="game-1" class="translatable"
+            data-original="Game 1"
+            data-translation="Juego 1">
+        Game 1
+      </span>
       <button onclick="speak(document.getElementById('game-1').dataset.original)">🔊</button>
     </p>
-    <a href="https://www.baamboozle.com/game/641765" target="_blank" class="speak-btn">Play on Baamboozle</a>
+    <a href="https://www.baamboozle.com/game/641765" target="_blank"
+       class="speak-btn translatable"
+       data-original="Play on Baamboozle"
+       data-translation="Jugar en Baamboozle">
+       Play on Baamboozle
+    </a>
   </div>
 
   <div class="game-item">
     <p>
-      <span id="game-2" class="translatable" data-original="Game 2" data-translation="Juego 2">Game 2</span>
+      <span id="game-2" class="translatable"
+            data-original="Game 2"
+            data-translation="Juego 2">
+        Game 2
+      </span>
       <button onclick="speak(document.getElementById('game-2').dataset.original)">🔊</button>
     </p>
-    <a href="https://www.baamboozle.com/game/54952" target="_blank" class="speak-btn">Play on Baamboozle</a>
+    <a href="https://www.baamboozle.com/game/54952" target="_blank"
+       class="speak-btn translatable"
+       data-original="Play on Baamboozle"
+       data-translation="Jugar en Baamboozle">
+       Play on Baamboozle
+    </a>
   </div>
 
   <p>
-    <span id="game-tip" class="translatable" data-original="Tip: Create teams for the activity." data-translation="Consejo: Crea equipos para la actividad.">Tip: Create teams for the activity.</span>
+    <span id="game-tip" class="translatable"
+          data-original="Tip: Create teams for the activity."
+          data-translation="Consejo: Crea equipos para la actividad.">
+      Tip: Create teams for the activity.
+    </span>
     <button onclick="speak(document.getElementById('game-tip').dataset.original)">🔊</button>
   </p>
 </section>

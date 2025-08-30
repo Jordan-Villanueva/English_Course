@@ -292,8 +292,8 @@
     </div>
   </div>
 </section>
-
-<!-- Numbers -->
+  
+  <!-- Numbers -->
 <section class="bloque" data-translated="false">
   <h2 class="title-flex">
     <span id="interactive-title-7" class="translatable" 
@@ -302,7 +302,10 @@
       7. Numbers in English: from 1 to 30
     </span> 
     <button class="translate-section-btn">🌐</button>
-    <button type="button" onclick="speak(document.getElementById('interactive-title-7').dataset.original)">🔊</button>
+    <button class="speak-btn translatable" type="button" 
+            data-original="7. Numbers in English: from 1 to 30" 
+            data-translation="7. Números en inglés: del 1 al 30"
+            onclick="speak(document.getElementById('interactive-title-7').dataset.original)">🔊</button>
   </h2>
 
   <span id="interactive-desc-7" class="translatable" 
@@ -310,70 +313,53 @@
      data-translation="Haz clic en cada número para escuchar la pronunciación:">
     Click each number to listen the pronunciation:
   </span>   
-  <button type="button" onclick="speak(document.getElementById('interactive-desc-7').dataset.original)">🔊</button>
-
+  <button class="speak-btn translatable" type="button" 
+          data-original="Click each number to listen the pronunciation:" 
+          data-translation="Haz clic en cada número para escuchar la pronunciación:"
+          onclick="speak(document.getElementById('interactive-desc-7').dataset.original)">🔊</button>
 
   <div class="numbers-grid">
     <script>
       const numberGrid = document.currentScript.parentNode;
       const numbers = [
-        { en: "one", es: "uno" },
-        { en: "two", es: "dos" },
-        { en: "three", es: "tres" },
-        { en: "four", es: "cuatro" },
-        { en: "five", es: "cinco" },
-        { en: "six", es: "seis" },
-        { en: "seven", es: "siete" },
-        { en: "eight", es: "ocho" },
-        { en: "nine", es: "nueve" },
-        { en: "ten", es: "diez" },
-        { en: "eleven", es: "once" },
-        { en: "twelve", es: "doce" },
-        { en: "thirteen", es: "trece" },
-        { en: "fourteen", es: "catorce" },
-        { en: "fifteen", es: "quince" },
-        { en: "sixteen", es: "dieciséis" },
-        { en: "seventeen", es: "diecisiete" },
-        { en: "eighteen", es: "dieciocho" },
-        { en: "nineteen", es: "diecinueve" },
-        { en: "twenty", es: "veinte" },
-        { en: "twenty-one", es: "veintiuno" },
-        { en: "twenty-two", es: "veintidós" },
-        { en: "twenty-three", es: "veintitrés" },
-        { en: "twenty-four", es: "veinticuatro" },
-        { en: "twenty-five", es: "veinticinco" },
-        { en: "twenty-six", es: "veintiséis" },
-        { en: "twenty-seven", es: "veintisiete" },
-        { en: "twenty-eight", es: "veintiocho" },
-        { en: "twenty-nine", es: "veintinueve" },
-        { en: "thirty", es: "treinta" }
+        { en: "one", es: "uno" }, { en: "two", es: "dos" }, { en: "three", es: "tres" },
+        { en: "four", es: "cuatro" }, { en: "five", es: "cinco" }, { en: "six", es: "seis" },
+        { en: "seven", es: "siete" }, { en: "eight", es: "ocho" }, { en: "nine", es: "nueve" },
+        { en: "ten", es: "diez" }, { en: "eleven", es: "once" }, { en: "twelve", es: "doce" },
+        { en: "thirteen", es: "trece" }, { en: "fourteen", es: "catorce" }, { en: "fifteen", es: "quince" },
+        { en: "sixteen", es: "dieciséis" }, { en: "seventeen", es: "diecisiete" }, { en: "eighteen", es: "dieciocho" },
+        { en: "nineteen", es: "diecinueve" }, { en: "twenty", es: "veinte" }, { en: "twenty-one", es: "veintiuno" },
+        { en: "twenty-two", es: "veintidós" }, { en: "twenty-three", es: "veintitrés" }, { en: "twenty-four", es: "veinticuatro" },
+        { en: "twenty-five", es: "veinticinco" }, { en: "twenty-six", es: "veintiséis" }, { en: "twenty-seven", es: "veintisiete" },
+        { en: "twenty-eight", es: "veintiocho" }, { en: "twenty-nine", es: "veintinueve" }, { en: "thirty", es: "treinta" }
       ];
 
-      for (let i = 0; i < numbers.length; i++) {
+      numbers.forEach((num, i) => {
         const div = document.createElement('div');
         div.className = 'number-item';
-        div.onclick = function(){ speak(numbers[i].en); };
+        div.onclick = () => speak(num.en);
         div.innerHTML = `
           <div class="number">${i+1}</div>
           <div class="number-name">
-            <span class="translatable" 
-                  data-original="${numbers[i].en}" 
-                  data-translation="${numbers[i].es}">
-              ${numbers[i].en}
+            <span id="number-${i+1}" class="translatable" data-original="${num.en}" data-translation="${num.es}">
+              ${num.en}
             </span> 🔊
           </div>`;
         numberGrid.appendChild(div);
-      }
+      });
     </script>
   </div>
 
-  <div id='pronunc-final' class="practice-block">
-    <p><strong class="translatable" 
-                data-original="Pronunciation practice:" 
-                data-translation="Práctica de pronunciación:">
-      Pronunciation practice:
-    </strong></p>
-    <button type="button" onclick="speak(document.getElementById('pronunc-final').dataset.original)">🔊</button>
+  <div class="practice-block">
+    <p>
+      <strong id="pronunc-label" class="translatable" data-original="Pronunciation practice:" data-translation="Práctica de pronunciación:">
+        Pronunciation practice:
+      </strong>
+      <button class="speak-btn translatable" type="button" 
+              data-original="Pronunciation practice:" 
+              data-translation="Práctica de pronunciación:"
+              onclick="speak(document.getElementById('pronunc-label').dataset.original)">🔊</button>
+    </p>
 
     <button class="speak-btn translatable" 
             data-original="Listen 1 to 10" 
@@ -437,10 +423,7 @@
           data-translation="Cada estudiante se presenta al grupo usando las frases aprendidas, incluyendo la pregunta">
       Each student introduces themselves to the group using the learned phrases, including the question
     </span> 
-    <em>
-      <span id="group-question" class="translatable" data-original="Where are you from?" data-translation="¿De dónde eres?">Where are you from?</span>
-    </em>
-    <button type="button" onclick="speak(document.getElementById('group-question').dataset.original)">🔊</button>
+    <button type="button" onclick="speak(document.getElementById('group-desc').dataset.original)">🔊</button>
   </p>
 </section>
 
@@ -460,6 +443,7 @@
   <img src="cierre.png" alt="Closing activity: Complete the dialogues" width="100%" style="border: 2px solid #ccc; border-radius: 10px; max-width: 600px;">
 </section>
 
+
 <!-- Games -->
 <section class="bloque" data-translated="false">
   <h2 class="title-flex">
@@ -467,28 +451,40 @@
       11. Interactive games / Baamboozle (15 min)
     </span>
     <button class="translate-section-btn">🌐</button>
-    <button type="button" onclick="speak(document.getElementById('interactive-title-11').dataset.original)">🔊</button>
+    <button class="speak-btn translatable" type="button" 
+            data-original="11. Interactive games / Baamboozle (15 min)" 
+            data-translation="11. Juegos interactivos / Baamboozle (15 min)"
+            onclick="speak(document.getElementById('interactive-title-11').dataset.original)">🔊</button>
   </h2>
 
   <div class="game-item">
     <p>
-      <span id="game-1" class="translatable" data-original="🎲 Game 1" data-translation="🎲 Juego 1">🎲 Game 1</span>
-      <button type="button" onclick="speak(document.getElementById('game-1').dataset.original)">🔊</button>
+      <span id="game-1" class="translatable" data-original="Game 1" data-translation="Juego 1">Game 1</span>
+      <button class="speak-btn translatable" type="button"
+              data-original="Game 1"
+              data-translation="Juego 1"
+              onclick="speak(document.getElementById('game-1').dataset.original)">🔊</button>
     </p>
     <a href="https://www.baamboozle.com/game/641765" target="_blank" class="speak-btn">Play on Baamboozle</a>
   </div>
 
   <div class="game-item">
     <p>
-      <span id="game-2" class="translatable" data-original="🎲 Game 2" data-translation="🎲 Juego 2">🎲 Game 2</span>
-      <button type="button" onclick="speak(document.getElementById('game-2').dataset.original)">🔊</button>
+      <span id="game-2" class="translatable" data-original="Game 2" data-translation="Juego 2">Game 2</span>
+      <button class="speak-btn translatable" type="button"
+              data-original="Game 2"
+              data-translation="Juego 2"
+              onclick="speak(document.getElementById('game-2').dataset.original)">🔊</button>
     </p>
     <a href="https://www.baamboozle.com/game/54952" target="_blank" class="speak-btn">Play on Baamboozle</a>
   </div>
 
   <p>
     <span id="game-tip" class="translatable" data-original="Tip: Create teams for the activity." data-translation="Consejo: Crea equipos para la actividad.">Tip: Create teams for the activity.</span>
-    <button type="button" onclick="speak(document.getElementById('game-tip').dataset.original)">🔊</button>
+    <button class="speak-btn translatable" type="button"
+            data-original="Tip: Create teams for the activity."
+            data-translation="Consejo: Crea equipos para la actividad."
+            onclick="speak(document.getElementById('game-tip').dataset.original)">🔊</button>
   </p>
 </section>
 </main>

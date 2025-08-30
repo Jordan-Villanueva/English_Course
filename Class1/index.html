@@ -8,22 +8,22 @@
 <body>
   <header class="page-header" data-translated="false">
     <h1 class="title-flex">
-      <span class="translatable"
+      <span id=introduction class="translatable"
             data-original="Class 1: Introductions, greetings and farewells"
             data-translation="Clase 1: Presentaciones, saludos y despedidas">
         Class 1: Introductions, greetings and farewells
       </span>
       <button class="translate-section-btn" type="button">🌐</button>
-      <button type="button" onclick="speak('Class 1: Introductions, greetings and farewells')">🔊</button>
+      <button onclick="speak(document.getElementById('introduction').dataset.original)">🔊</button>
     </h1>
   
     <p class="subtitle">
-      <span class="translatable"
+      <span id=beginners class="translatable"
             data-original="English Course for Beginners"
             data-translation="Curso de Inglés para principiantes">
         English Course for Beginners
       </span>
-      <button type="button" onclick="speak('English Course for Beginners')">🔊</button>
+      <button onclick="speak(document.getElementById('beginners').dataset.original)">🔊</button>
     </p>
   
     <div class="header-buttons">
@@ -37,30 +37,30 @@
   <!-- Objectives -->
 <section class="objetivos" data-translated="false">
   <h2 class="title-flex">
-    <span class="translatable" 
+    <span id=objectives class="translatable" 
           data-original="🎯 Class objectives" 
           data-translation="🎯 Objetivos de la clase">
       🎯 Class objectives
     </span>
     <button class="translate-section-btn">🌐</button>
-    <button onclick="speak('Class objectives')">🔊</button>
+    <button onclick="speak(document.getElementById('objectives').dataset.original)">🔊</button>
   </h2>
   <ul>
     <li>
-      <span class="translatable" 
+      <span id=objectives-desc1 class="translatable" 
             data-original="Students will be able to introduce themselves, greet, say goodbye and use basic courtesy phrases." 
             data-translation="Los estudiantes podrán presentarse, saludar, despedirse y usar frases básicas de cortesía.">
         Students will be able to introduce themselves, greet, say goodbye and use basic courtesy phrases.
       </span>
-      <button onclick="speak('Students will be able to introduce themselves, greet, say goodbye and use basic courtesy phrases.')">🔊</button>
+    <button onclick="speak(document.getElementById('objectives-desc1').dataset.original)">🔊</button>
     </li>
     <li>
-      <span class="translatable" 
+      <span id=objectives-desc2 class="translatable" 
             data-original="Start speaking and writing in English at a very basic level." 
             data-translation="Comenzar a hablar y escribir en inglés a un nivel muy básico.">
         Start speaking and writing in English at a very basic level.
       </span>
-      <button onclick="speak('Start speaking and writing in English at a very basic level.')">🔊</button>
+     <button onclick="speak(document.getElementById('objectives-desc2').dataset.original)">🔊</button>
     </li>
   </ul>
 </section>
@@ -68,113 +68,145 @@
 <!-- Warm-up -->
 <section class="bloque" data-translated="false">
   <h2 class="title-flex">
-    <span class="translatable" 
+    <span id=warmup class="translatable" 
           data-original="1. Warm-up / Icebreaker (10 min)" 
           data-translation="1. Calentamiento / Rompehielos (10 min)">
       1. Warm-up / Icebreaker (10 min)
     </span>
     <button class="translate-section-btn">🌐</button>
-    <button onclick="speak('Warm-up Icebreaker')">🔊</button>
+    <button onclick="speak(document.getElementById('warmup').dataset.original)">🔊</button>
   </h2>
   <blockquote>
-    <span class="translatable"
+    <span id=warm-desc1 class="translatable"
           data-original="Hello, my name is Jordan. I’m from Mexico. I'm a physicist and software developer and I love movies and teaching."
           data-translation="Hola, mi nombre es Jordan. Soy de México. Soy físico y desarrollador de software, y me encantan las películas y la enseñanza.">
       Hello, my name is Jordan. I’m from Mexico. I'm a physicist and software developer and I love movies and teaching.
     </span>
-    <button onclick="speak('Hello, my name is Jordan. I’m from Mexico. I am a physicist and software developer and I love movies and teaching.')">🔊</button>
+    <button onclick="speak(document.getElementById('warm-desc1').dataset.original)">🔊</button>
   </blockquote>
   <p><em>
-    <span class="translatable"
+    <span id=warm-desc2 class="translatable"
           data-original="Greeting: What's your name? Where are you from? What do you like and what do you do?"
           data-translation="Saludo: ¿Cómo te llamas? ¿De dónde eres? ¿Qué te gusta y a qué te dedicas?">
       Greeting: What's your name? Where are you from? What do you like and what do you do?
     </span>
-    <button onclick="speak('Greeting: What is your name? Where are you from? What do you like and what do you do?')">🔊</button>
+    <button onclick="speak(document.getElementById('warm-desc2').dataset.original)">🔊</button>
   </em></p>
 </section>
 
   <!-- Vocabulary -->
 <section class="bloque" data-translated="false">
   <h2 class="title-flex">
-    <span class="translatable" 
+    <span id=vocabulary class="translatable" 
           data-original="2. Vocabulary and pronouns (15 min)" 
           data-translation="2. Vocabulario y pronombres (15 min)">
       2. Vocabulary and pronouns (15 min)
     </span>
     <button class="translate-section-btn">🌐</button>
-    <button onclick="speak('Vocabulary and pronouns')">🔊</button>
+    <button onclick="speak(document.getElementById('vocabulary').dataset.original)">🔊</button>
   </h2>
 
   <!-- Greetings -->
   <h3 class="title-flex">
-    <span class="translatable" data-original="Greetings" data-translation="Saludos">Greetings</span>
-    <button onclick="speak('Greetings')">🔊</button>
+    <span id=greetings class="translatable" data-original="Greetings" data-translation="Saludos">Greetings</span>
+    <button onclick="speak(document.getElementById('greetings').dataset.original)">🔊</button>
   </h3>
   <p>
-    <span class="translatable" data-original="Hello" data-translation="Hola">Hello</span> <button onclick="speak('Hello')">🔊</button>, 
-    <span class="translatable" data-original="Hi" data-translation="Hola">Hi</span> <button onclick="speak('Hi')">🔊</button>, 
-    <span class="translatable" data-original="Good morning" data-translation="Buen día">Good morning</span> <button onclick="speak('Good morning')">🔊</button>, 
-    <span class="translatable" data-original="Good afternoon" data-translation="Buena tarde">Good afternoon</span> <button onclick="speak('Good afternoon')">🔊</button>, 
-    <span class="translatable" data-original="Good evening" data-translation="Buena noche">Good evening</span> <button onclick="speak('Good evening')">🔊</button>
+    <span id=hello class="translatable" data-original="Hello" data-translation="Hola">Hello</span><button onclick="speak(document.getElementById('hello').dataset.original)">🔊</button>, 
+    <span id=hi class="translatable" data-original="Hi" data-translation="Hola">Hi</span><button onclick="speak(document.getElementById('hi').dataset.original)">🔊</button>, 
+    <span id=goodm class="translatable" data-original="Good morning" data-translation="Buen día">Good morning</span><button onclick="speak(document.getElementById('goodm').dataset.original)">🔊</button>, 
+    <span id=goodaf class="translatable" data-original="Good afternoon" data-translation="Buena tarde">Good afternoon</span><button onclick="speak(document.getElementById('goodaf').dataset.original)">🔊</button>, 
+    <span id=goodev class="translatable" data-original="Good evening" data-translation="Buena noche">Good evening</span><button onclick="speak(document.getElementById('goodev').dataset.original)">🔊</button>
   </p>
-
   <!-- Farewells -->
   <h3 class="title-flex">
-    <span class="translatable" data-original="Farewells" data-translation="Despedidas">Farewells</span>
-    <button onclick="speak('Farewells')">🔊</button>
+    <span id=farew class="translatable" data-original="Farewells" data-translation="Despedidas">Farewells</span>
+    <button onclick="speak(document.getElementById('farew').dataset.original)">🔊</button>
   </h3>
-  <p>
-    <span class="translatable" data-original="Good night" data-translation="Buena noche">Good night</span> <button onclick="speak('Good night')">🔊</button>, 
-    <span class="translatable" data-original="Goodbye" data-translation="Adiós">Goodbye</span> <button onclick="speak('Goodbye')">🔊</button>, 
-    <span class="translatable" data-original="Bye" data-translation="Adiós">Bye</span> <button onclick="speak('Bye')">🔊</button>, 
-    <span class="translatable" data-original="See you" data-translation="Nos vemos">See you</span> <button onclick="speak('See you')">🔊</button>, 
-    <span class="translatable" data-original="See you later" data-translation="Hasta luego">See you later</span> <button onclick="speak('See you later')">🔊</button>
-  </p>
+<p>
+  <span id="farew1" class="translatable" data-original="Good night" data-translation="Buena noche">Good night</span>
+  <button onclick="speak(document.getElementById('farew1').dataset.original)">🔊</button>, 
 
-  <!-- Personal pronouns + verb "To be" -->
-  <h3 class="title-flex">
-    <span class="translatable" data-original="Personal pronouns + verb 'To be'" data-translation="Pronombres personales + verbo 'Ser/Estar'">Personal pronouns + verb "To be"</span>
-    <button onclick="speak('Personal pronouns and verb to be')">🔊</button>
-  </h3>
-  <p>
-    <span class="translatable" data-original="I am" data-translation="Yo soy/estoy">I am</span> <button onclick="speak('I am')">🔊</button>, 
-    <span class="translatable" data-original="You are" data-translation="Tú eres/estás">You are</span> <button onclick="speak('You are')">🔊</button>, 
-    <span class="translatable" data-original="He/She is" data-translation="Él/Ella es/está">He/She is</span> <button onclick="speak('He is, She is')">🔊</button>, 
-    <span class="translatable" data-original="We are" data-translation="Nosotros somos/estamos">We are</span> <button onclick="speak('We are')">🔊</button>, 
-    <span class="translatable" data-original="They are" data-translation="Ellos son/están">They are</span> <button onclick="speak('They are')">🔊</button>
-  </p>
+  <span id="farew2" class="translatable" data-original="Goodbye" data-translation="Adiós">Goodbye</span>
+  <button onclick="speak(document.getElementById('farew2').dataset.original)">🔊</button>, 
 
-  <!-- Possessive pronouns -->
-  <h3 class="title-flex">
-    <span class="translatable" data-original="Possessive pronouns" data-translation="Pronombres posesivos">Possessive pronouns</span>
-    <button onclick="speak('Possessive pronouns')">🔊</button>
-  </h3>
-  <p>
-    <span class="translatable" data-original="My" data-translation="Mi">My</span> <button onclick="speak('My')">🔊</button>, 
-    <span class="translatable" data-original="Your" data-translation="Tu">Your</span> <button onclick="speak('Your')">🔊</button>, 
-    <span class="translatable" data-original="His" data-translation="Su (de él)">His</span> <button onclick="speak('His')">🔊</button>, 
-    <span class="translatable" data-original="Her" data-translation="Su (de ella)">Her</span> <button onclick="speak('Her')">🔊</button>
-  </p>
+  <span id="farew3" class="translatable" data-original="Bye" data-translation="Adiós">Bye</span>
+  <button onclick="speak(document.getElementById('farew3').dataset.original)">🔊</button>, 
+
+  <span id="farew4" class="translatable" data-original="See you" data-translation="Nos vemos">See you</span>
+  <button onclick="speak(document.getElementById('farew4').dataset.original)">🔊</button>, 
+
+  <span id="farew5" class="translatable" data-original="See you later" data-translation="Hasta luego">See you later</span>
+  <button onclick="speak(document.getElementById('farew5').dataset.original)">🔊</button>
+</p>
+
+<!-- Personal pronouns + verb "To be" -->
+<h3 class="title-flex">
+  <span id="title-pronouns" class="translatable"
+        data-original="Personal pronouns + verb 'To be'"
+        data-translation="Pronombres personales + verbo 'Ser/Estar'">
+    Personal pronouns + verb "To be"
+  </span>
+  <button onclick="speak(document.getElementById('title-pronouns').dataset.original)">🔊</button>
+</h3>
+<p>
+  <span id="pron1" class="translatable" data-original="I am" data-translation="Yo soy/estoy">I am</span>
+  <button onclick="speak(document.getElementById('pron1').dataset.original)">🔊</button>, 
+
+  <span id="pron2" class="translatable" data-original="You are" data-translation="Tú eres/estás">You are</span>
+  <button onclick="speak(document.getElementById('pron2').dataset.original)">🔊</button>, 
+
+  <span id="pron3" class="translatable" data-original="He/She is" data-translation="Él/Ella es/está">He/She is</span>
+  <button onclick="speak(document.getElementById('pron3').dataset.original)">🔊</button>, 
+
+  <span id="pron4" class="translatable" data-original="We are" data-translation="Nosotros somos/estamos">We are</span>
+  <button onclick="speak(document.getElementById('pron4').dataset.original)">🔊</button>, 
+
+  <span id="pron5" class="translatable" data-original="They are" data-translation="Ellos son/están">They are</span>
+  <button onclick="speak(document.getElementById('pron5').dataset.original)">🔊</button>
+</p>
+
+<!-- Possessive pronouns -->
+<h3 class="title-flex">
+  <span id="title-possessive" class="translatable"
+        data-original="Possessive pronouns"
+        data-translation="Pronombres posesivos">
+    Possessive pronouns
+  </span>
+  <button onclick="speak(document.getElementById('title-possessive').dataset.original)">🔊</button>
+</h3>
+<p>
+  <span id="pos1" class="translatable" data-original="My" data-translation="Mi">My</span>
+  <button onclick="speak(document.getElementById('pos1').dataset.original)">🔊</button>, 
+
+  <span id="pos2" class="translatable" data-original="Your" data-translation="Tu">Your</span>
+  <button onclick="speak(document.getElementById('pos2').dataset.original)">🔊</button>, 
+
+  <span id="pos3" class="translatable" data-original="His" data-translation="Su (de él)">His</span>
+  <button onclick="speak(document.getElementById('pos3').dataset.original)">🔊</button>, 
+
+  <span id="pos4" class="translatable" data-original="Her" data-translation="Su (de ella)">Her</span>
+  <button onclick="speak(document.getElementById('pos4').dataset.original)">🔊</button>
+</p>
 </section>
 
 <!-- Listening / Modeled videos -->
 <section class="bloque" data-translated="false">
   <h2 class="title-flex">
-    <span class="translatable" data-original="3. Listening / Modeling (20 min)" data-translation="3. Escucha / Modelado (20 min)">
+    <span id="title-listening" class="translatable" data-original="3. Listening / Modeling (20 min)" data-translation="3. Escucha / Modelado (20 min)">
       3. Listening / Modeling (20 min)
     </span>
     <button class="translate-section-btn">🌐</button>
-    <button onclick="speak('Listening / Modeling')">🔊</button>
+    <button onclick="speak(document.getElementById('title-listening').dataset.original)">🔊</button>
   </h2>
 
   <p>
-    <span class="translatable" 
+    <span id="listen-instr" class="translatable" 
           data-original="Watch the introduction video and write key sentences. Then, identify the learned phrases:" 
           data-translation="Mira el video de introducción y escribe las frases clave. Luego, identifica las frases aprendidas:">
       Watch the introduction video and write key sentences. Then, identify the learned phrases:
     </span>
-    <button onclick="speak('Watch the introduction video and write key sentences. Then in the clip about movies, identify the learned phrases:')">🔊</button>
+    <button onclick="speak(document.getElementById('listen-instr').dataset.original)">🔊</button>
   </p>
 
   <iframe width="100%" height="315" src="https://www.youtube.com/embed/RL8pLS8cUOs" frameborder="0" allowfullscreen style="margin-bottom: 15px;"></iframe>
@@ -184,24 +216,24 @@
 <!-- Song practice -->
 <section class="bloque" data-translated="false">
   <h2 class="title-flex">
-    <span class="translatable" data-original="4. Song Practice (15 min)" data-translation="4. Práctica de canción (15 min)">
+    <span id="title-song" class="translatable" data-original="4. Song Practice (15 min)" data-translation="4. Práctica de canción (15 min)">
       4. Song Practice (15 min)
     </span>
     <button class="translate-section-btn">🌐</button>
-    <button onclick="speak('Song Practice')">🔊</button>
+    <button onclick="speak(document.getElementById('title-song').dataset.original)">🔊</button>
   </h2>
 
   <p>
-    <span class="translatable" 
+    <span id="song-instr" class="translatable" 
           data-original="Listen to the song and complete the lyrics playing on LyricsTraining:" 
           data-translation="Escucha la canción y completa la letra en LyricsTraining:">
       Listen to the song and complete the lyrics playing on LyricsTraining:
     </span>
-    <button onclick="speak('Listen to the song and complete the lyrics playing on LyricsTraining:')">🔊</button>
+    <button onclick="speak(document.getElementById('song-instr').dataset.original)">🔊</button>
   </p>
 
   <button class="speak-btn" onclick="window.open('https://es.lyricstraining.com/play/the-beatles/hello-goodbye/HkEvrcQWdk#b7w!jortizvilla','_blank')">
-    <span class="translatable" data-original="🎵 Play with the song on LyricsTraining" data-translation="🎵 Juega con la canción en LyricsTraining">
+    <span id="song-btn" class="translatable" data-original="🎵 Play with the song on LyricsTraining" data-translation="🎵 Juega con la canción en LyricsTraining">
       🎵 Play with the song on LyricsTraining
     </span>
   </button>
@@ -210,22 +242,23 @@
 <!-- Exercises -->
 <section class="bloque" data-translated="false">
   <h2 class="title-flex">
-    <span class="translatable" data-original='5. Introduction of "Where are you from?" (10 min)' data-translation='5. Introducción de "¿De dónde eres?" (10 min)'>
+    <span id="title-where" class="translatable" data-original='5. Introduction of "Where are you from?" (10 min)' data-translation='5. Introducción de "¿De dónde eres?" (10 min)'>
       5. Introduction of "Where are you from?" (10 min)
     </span>
     <button class="translate-section-btn">🌐</button>
-    <button onclick="speak('Introduction of Where are you from?')">🔊</button>
+    <button onclick="speak(document.getElementById('title-where').dataset.original)">🔊</button>
   </h2>
 
   <p>
-    <span class="translatable" data-original="Watch the video" data-translation="Mira el video">
+    <span id="where-instr" class="translatable" data-original="Watch the video" data-translation="Mira el video">
       Watch the video
     </span>
-    <button onclick="speak('Watch the video')">🔊</button>
+    <button onclick="speak(document.getElementById('where-instr').dataset.original)">🔊</button>
   </p>
 
   <iframe width="100%" height="315" src="https://www.youtube.com/embed/byqOkm6-SCc" frameborder="0" allowfullscreen></iframe>
 </section>
+
 
 <!-- Interactive exercise -->
 <section class="bloque" data-translated="false">
@@ -442,11 +475,11 @@
   <div class="game-item">
     <p>
       <span id="game-1" class="translatable"
-            data-original="Game 1"
+            data-original="🎲 Game 1"
             data-translation="🎲 Juego 1">
        🎲 Game 1
       </span>
-      <button onclick="speak(document.getElementById('game-1').dataset.original)">🔊</button>
+      <button onclick="speak('Game 1')">🔊</button>
     </p>
     <a href="https://www.baamboozle.com/game/641765" target="_blank"
        class="speak-btn translatable"
@@ -459,11 +492,11 @@
   <div class="game-item">
     <p>
       <span id="game-2" class="translatable"
-            data-original="Game 2"
+            data-original="🎲 Game 2"
             data-translation="🎲 Juego 2">
         🎲 Game 2
       </span>
-      <button onclick="speak(document.getElementById('game-2').dataset.original)">🔊</button>
+      <button onclick="speak('Game 2')">🔊</button>
     </p>
     <a href="https://www.baamboozle.com/game/54952" target="_blank"
        class="speak-btn translatable"

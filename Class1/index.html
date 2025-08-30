@@ -414,16 +414,16 @@
         numberName.textContent = numbers[i].en; // solo texto
 
         // Botón de bocina separado
-        const speakerBtn = document.createElement('button');
+        // const speakerBtn = document.createElement('button');
         // speakerBtn.textContent = "🔊";
-        speakerBtn.onclick = function(e) {
-          e.stopPropagation(); // evitar que el div padre también haga speak
-          speak(numberName.dataset.tts);
+        // speakerBtn.onclick = function(e) {
+        // e.stopPropagation(); // evitar que el div padre también haga speak
+        // speak(numberName.dataset.tts);
         };
 
         div.innerHTML = `<div class="number">${i+1}</div>`;
         div.appendChild(numberName);
-        div.appendChild(speakerBtn);
+       // div.appendChild(speakerBtn);
 
         // Click en div completo también reproduce audio
         div.onclick = function() {

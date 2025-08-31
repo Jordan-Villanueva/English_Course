@@ -338,18 +338,18 @@ button.speak-btn.lyrics-btn {
 button[onclick="practiceNumbers(1,10)"] span.translatable,
 button[onclick="practiceNumbers(11,20)"] span.translatable,
 button[onclick="practiceNumbers(21,30)"] span.translatable {
-  font-size: 1.3em;
+  font-size: 2rem;
   font-weight: bold;
 }
 
 /* Baamboozle link */
 a.speak-btn.translatable[data-original="Play on Baamboozle"] {
-  font-size: 1.3em;
+  font-size: 2rem;
   font-weight: bold;
 }
 
 .speak-btn.big-btn {
-  font-size: 1.3em;
+  font-size: 2rem;
   font-weight: bold;
 }
 

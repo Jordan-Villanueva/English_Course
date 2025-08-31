@@ -321,9 +321,16 @@ h3 button:hover
 
 
 <style>
-/* LyricsTraining button */
-#song-btn {
-  font-size: 1.3em;
+
+/* LyricsTraining button completo */
+button.speak-btn #song-btn {
+  font-size: 2rem;  /* ajustar al tamaño deseado */
+  font-weight: bold;
+}
+
+/* O directamente al botón, ignorando el span */
+button.speak-btn.lyrics-btn {
+  font-size: 2rem;
   font-weight: bold;
 }
 

@@ -1,3 +1,4 @@
+/* ===== Base general ===== */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: #f9f9fb;
@@ -7,7 +8,33 @@ body {
   color: #333;
 }
 
-/* Encabezado */
+/* ===== Tipografía general con variables ===== */
+:root {
+  --h1-size: 3rem;
+  --h2-size: 2.8rem;
+  --h3-size: 2.6rem;
+  --p-size: 2.4rem;
+}
+
+/* Desktop: escalamos un poco */
+@media (min-width: 769px) {
+  :root {
+    --h1-size: 3rem;
+    --h2-size: 2.8rem;
+    --h3-size: 2.6rem;
+    --p-size: 2.4rem;
+  }
+}
+
+/* Encabezados */
+h1, h1.title-flex { font-size: var(--h1-size); font-weight: 700; }
+h2, h2.title-flex { font-size: var(--h2-size); font-weight: 700; }
+h3, h3.title-flex { font-size: var(--h3-size); font-weight: 700; }
+
+p { font-size: var(--p-size); line-height: 1.6; }
+i, em { font-size: 0.6em; font-style: italic; color: #444; }
+
+/* ===== Header ===== */
 header, .page-header {
   background: linear-gradient(135deg, #0077cc, #005fa3);
   padding: 20px;
@@ -15,41 +42,21 @@ header, .page-header {
   text-align: center;
 }
 
-/* Ajuste específico para centrar el header */
-header h1.title-flex {
-  justify-content: center;   /* centra todo el contenido horizontal */
-  text-align: center;        /* asegura que el texto respete el centrado */
+header h1 {
+  margin: 0;
 }
 
-/* Subtítulo centrado también */
+header h1.title-flex {
+  justify-content: center;   /* centra todo el contenido horizontal */
+  text-align: center;
+}
+
 header .subtitle {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;                  /* espacio entre texto y botón */
-}
-
-h1.title-flex, h2.title-flex, h3.title-flex {
-  display: flex;
-  align-items: center;   /* centra verticalmente texto + botones */
-  gap: 8px;              /* separación entre texto y botones */
-  font-size: 1.5em;      /* asegura tamaño grande en móvil */
-  flex-wrap: wrap;       /* si no cabe en una sola línea en pantallas pequeñas, se ajusta */
-}
-
-h1.title-flex button, h2.title-flex button, h3.title-flex button {
-  font-size: 0.9em;      /* botones más discretos que el título */
-  padding: 2px 6px;
-}
-
-
-header h1 {
-  margin: 0;
-  font-size: 2em;
-}
-
-header .subtitle {
-  font-size: 1.2em;
+  gap: 8px;
+  font-size: 2.8em;
   margin-top: 8px;
   font-weight: 300;
   opacity: 0.9;
@@ -76,7 +83,30 @@ header .subtitle {
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-/* Contenido */
+/* ===== Títulos con botones (h1-h3 .title-flex) ===== */
+h1.title-flex, h2.title-flex, h3.title-flex {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap; /* se ajusta en pantallas pequeñas */
+}
+
+h1.title-flex button,
+h2.title-flex button,
+h3.title-flex button {
+  font-size: 0.85em;  /* un poco más pequeño que el texto del título */
+  padding: 2px 6px;
+  min-height: 1.5em;  /* asegura que el botón no se vea aplastado */
+  cursor: pointer;
+}
+
+h1.title-flex button:hover,
+h2.title-flex button:hover,
+h3.title-flex button:hover {
+  background-color: #c8e6ff;
+}
+
+/* ===== Contenido ===== */
 main {
   padding: 20px;
   max-width: 1000px;
@@ -91,7 +121,6 @@ section {
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* Títulos de sección */
 h2 {
   color: #005fa3;
   margin-top: 0;
@@ -106,7 +135,7 @@ h3 {
   border-bottom: 1px solid #ddd;
 }
 
-/* Bloques interactivos */
+/* ===== Bloques interactivos ===== */
 .object-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -114,7 +143,6 @@ h3 {
   margin: 25px 0;
 }
 
-/* Objetos */
 .object-item {
   background-color: white;
   border-radius: 12px;
@@ -145,10 +173,10 @@ h3 {
 .object-name {
   font-weight: bold;
   color: #0077cc;
-  font-size: 1.1rem;
+  font-size: 2rem;
 }
 
-/* Números */
+/* ===== Números ===== */
 .numbers-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -183,7 +211,7 @@ h3 {
   color: #666;
 }
 
-/* Botones */
+/* ===== Botones generales ===== */
 .speak-btn {
   display: inline-block;
   padding: 12px 25px;
@@ -204,7 +232,7 @@ h3 {
   box-shadow: 0 6px 12px rgba(0, 119, 204, 0.4);
 }
 
-/* Footer */
+/* ===== Footer ===== */
 footer {
   background: #333;
   color: white;
@@ -214,7 +242,7 @@ footer {
   font-size: 0.9em;
 }
 
-/* Estilos específicos para secciones */
+/* ===== Secciones especiales ===== */
 .objetivos {
   background: linear-gradient(to bottom right, #e8f5e9, #c8e6c9);
 }
@@ -237,7 +265,21 @@ footer {
   border-top: 1px dashed #ccc;
 }
 
-/* Responsive */
+/* ===== Map ===== */
+#map {
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  margin: 10px 0;
+}
+
+#dialogue {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #333;
+}
+
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
   .object-container {
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -258,41 +300,45 @@ footer {
   }
 }
 
-#map {
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  margin: 10px 0;
+/* ===== Botones de subsecciones (p, em, ul li, h3) ===== */
+p button,
+em button,
+ul li button,
+h3 button {
+  font-size: 2.4rem;   /* tamaño del ícono 🔊 */
+  padding: 4px 8px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  vertical-align: middle;
+  line-height: 1; 
 }
 
-#dialogue {
-  margin-top: 10px;
+p button:hover,
+em button:hover,
+ul li button:hover,
+h3 button:hover
+
+
+<style>
+/* LyricsTraining button */
+#song-btn {
+  font-size: 1.3em;
   font-weight: bold;
-  font-size: 1.2em;
-  color: #333;
 }
 
-/* ===== Tipografía general ===== */
-:root{
-  --h1-size: 2rem;
-  --h2-size: 1.6rem;
-  --h3-size: 1.3rem;
-  --p-size: 1rem;
+/* Listen 1-10, 11-20, 21-30 buttons */
+button[onclick="practiceNumbers(1,10)"] span.translatable,
+button[onclick="practiceNumbers(11,20)"] span.translatable,
+button[onclick="practiceNumbers(21,30)"] span.translatable {
+  font-size: 1.3em;
+  font-weight: bold;
 }
 
-/* Desktop: escalamos un poco */
-@media (min-width: 769px) {
-  :root{
-    --h1-size: 2.5rem;
-    --h2-size: 2rem;
-    --h3-size: 1.5rem;
-    --p-size: 1.1rem;
-  }
+/* Baamboozle link */
+a.speak-btn.translatable[data-original="Play on Baamboozle"] {
+  font-size: 1.3em;
+  font-weight: bold;
 }
-
-/* Aplicación */
-h1, h1.title-flex { font-size: var(--h1-size); font-weight: 700; }
-h2, h2.title-flex { font-size: var(--h2-size); font-weight: 700; }
-h3, h3.title-flex { font-size: var(--h3-size); font-weight: 700; }
-p { font-size: var(--p-size); line-height: 1.6; }
-i, em { font-size: 1em; font-style: italic; color: #444; }
+</style>
 

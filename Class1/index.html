@@ -72,7 +72,7 @@
 <!-- Warm-up -->
 <section class="bloque" data-translated="false">
   <h2 class="title-flex">
-    <span id=warmup class="translatable" 
+    <span id="warmup-title" class="translatable" 
           data-original="1. Warm-up / Icebreaker (10 min)" 
           data-translation="1. Calentamiento / Rompehielos (10 min)">
       1. Warm-up / Icebreaker (10 min)
@@ -80,16 +80,20 @@
     <button class="translate-section-btn">🌐</button>
     <button onclick="speak('1. Warm-up / Icebreaker')">🔊</button>
   </h2>
-  <blockquote>
-    <span id=warm-desc1 class="translatable"
+
+  <!-- Primer texto: presentación -->
+  <p>
+    <span id="warm-desc1" class="translatable"
           data-original="Hello, my name is Jordan. I’m from Mexico. I’m a physicist and software developer and I love movies and teaching."
           data-translation="Hola, mi nombre es Jordan. Soy de México. Soy físico y desarrollador de software, y me encantan las películas y la enseñanza.">
       Hello, my name is Jordan. I’m from Mexico. I'm a physicist and software developer and I love movies and teaching.
     </span>
     <button onclick="speak(document.getElementById('warm-desc1').dataset.original)">🔊</button>
-  </blockquote>
+  </p>
+
+  <!-- Segundo texto: ejemplo en cursiva -->
   <p><em>
-    <span id=warm-desc2 class="translatable"
+    <span id="warm-desc2" class="translatable"
           data-original="Greeting: What's your name? Where are you from? What do you like and what do you do?"
           data-translation="Saludo: ¿Cómo te llamas? ¿De dónde eres? ¿Qué te gusta y a qué te dedicas?">
       Greeting: What's your name? Where are you from? What do you like and what do you do?

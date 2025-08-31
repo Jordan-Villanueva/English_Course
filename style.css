@@ -347,5 +347,11 @@ a.speak-btn.translatable[data-original="Play on Baamboozle"] {
   font-size: 1.3em;
   font-weight: bold;
 }
+
+.speak-btn.big-btn {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
 </style>
 

@@ -176,22 +176,23 @@ h3 {
   font-size: 2rem;
 }
 
-/* ===== Números ===== */
-.numbers-grid {
+/* ===== Section 7 Numbers Grid Responsive ===== */
+#section7 .numbers-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 12px;
-  margin: 25px 0;
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  gap: 10px;
 }
 
-.number-item {
-  background: #eef6ff;
-  border-radius: 8px;
-  padding: 15px 10px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+@media (max-width: 768px) {
+  #section7 .numbers-grid {
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  #section7 .numbers-grid {
+    grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+  }
 }
 
 .number-item:hover {

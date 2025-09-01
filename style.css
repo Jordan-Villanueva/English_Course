@@ -298,3 +298,26 @@ p button:hover, em button:hover, ul li button:hover, h3 button:hover {
   opacity: 0.8;
 }
 
+/* ===== Botones de vocabulario (palabras para escuchar) ===== */
+.speak-word-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 3px 4px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(135deg, #0077cc 0%, #0055aa 100%);
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 119, 204, 0.3);
+  transition: all 0.3s;
+}
+
+.speak-word-btn:hover {
+  background: linear-gradient(135deg, #005fa3 0%, #004d88 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 119, 204, 0.4);
+}
+
+

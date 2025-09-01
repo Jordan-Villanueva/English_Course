@@ -164,8 +164,8 @@ h3 {
 /* ===== Section 7 Numbers Grid ===== */
 #section7 .numbers-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(6, 1fr); /* 6 columnas fijas */
+  gap: 16px;
   margin-top: 20px;
 }
 
@@ -175,26 +175,27 @@ h3 {
   align-items: center;
   justify-content: center;
   background: #f0f0f0;
-  border-radius: 10px;
-  padding: 20px;
+  border-radius: 12px;
+  aspect-ratio: 1 / 1;   /* cada celda cuadrada */
   cursor: pointer;
   transition: transform 0.2s, background 0.2s;
 }
 
 #section7 .number-item:hover {
-  transform: scale(1.08);
+  transform: scale(1.05);
   background: #e0e0e0;
 }
 
 #section7 .number {
   font-weight: bold;
-  font-size: 2rem;
-  margin-bottom: 8px;
+  font-size: clamp(1.5rem, 3vw, 2.4rem); /* adaptativo */
+  margin-bottom: 6px;
   color: #0077cc;
+  text-align: center;
 }
 
 #section7 .number-name {
-  font-size: 2rem;
+  font-size: clamp(1rem, 2vw, 1.6rem); /* adaptativo */
   text-align: center;
   color: #666;
 }
@@ -253,9 +254,6 @@ footer {
 @media (max-width: 768px) {
   .object-container { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
   #section7 .numbers-grid { grid-template-columns: repeat(3, 1fr); }
-  #section7 .number-item { padding: 15px; }
-  #section7 .number { font-size: 1.8rem; }
-  #section7 .number-name { font-size: 1.4rem; }
   .header-buttons { flex-direction: column; align-items: center; }
   .header-buttons button { width: 80%; margin-bottom: 10px; }
   .speak-btn, .speak-btn.big-btn { font-size: 1.6rem; padding: 12px 24px; }
@@ -263,9 +261,6 @@ footer {
 
 @media (max-width: 480px) {
   #section7 .numbers-grid { grid-template-columns: repeat(2, 1fr); }
-  #section7 .number-item { padding: 12px; }
-  #section7 .number { font-size: 1.6rem; }
-  #section7 .number-name { font-size: 0.9em; }
   .speak-btn, .speak-btn.big-btn { font-size: 1.2rem; padding: 10px 20px; }
 }
 

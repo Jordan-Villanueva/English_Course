@@ -190,16 +190,16 @@ h3 {
 
 #section7 .number {
   font-weight: bold;
-  font-size: clamp(1.6rem, 2vw, 2.8rem); /* crece pero no rompe */
+  font-size: clamp(2rem, 3vw, 4rem); /* ahora crece hasta 4rem */
   margin-bottom: 6px;
   color: #0077cc;
   text-align: center;
   line-height: 1.2;
-  word-break: break-word;  /* corta palabras largas */
+  word-break: break-word;
 }
 
 #section7 .number-name {
-  font-size: clamp(1.2rem, 1.8vw, 2.2rem); /* flexible */
+  font-size: clamp(1.6rem, 2.5vw, 3rem); /* crece más también */
   text-align: center;
   color: #666;
   line-height: 1.2;

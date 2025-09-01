@@ -8,7 +8,6 @@ body {
   color: #333;
 }
 
-/* ===== Tipografía general con variables ===== */
 :root {
   --h1-size: 3rem;
   --h2-size: 2.8rem;
@@ -16,17 +15,7 @@ body {
   --p-size: 2.4rem;
 }
 
-/* Desktop: escalamos un poco */
-@media (min-width: 769px) {
-  :root {
-    --h1-size: 3rem;
-    --h2-size: 2.8rem;
-    --h3-size: 2.6rem;
-    --p-size: 2.4rem;
-  }
-}
-
-/* Encabezados */
+/* ===== Encabezados ===== */
 h1, h1.title-flex { font-size: var(--h1-size); font-weight: 700; }
 h2, h2.title-flex { font-size: var(--h2-size); font-weight: 700; }
 h3, h3.title-flex { font-size: var(--h3-size); font-weight: 700; }
@@ -42,12 +31,8 @@ header, .page-header {
   text-align: center;
 }
 
-header h1 {
-  margin: 0;
-}
-
 header h1.title-flex {
-  justify-content: center;   /* centra todo el contenido horizontal */
+  justify-content: center;
   text-align: center;
 }
 
@@ -83,20 +68,20 @@ header .subtitle {
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-/* ===== Títulos con botones (h1-h3 .title-flex) ===== */
+/* ===== Títulos con botones ===== */
 h1.title-flex, h2.title-flex, h3.title-flex {
   display: flex;
   align-items: center;
   gap: 8px;
-  flex-wrap: wrap; /* se ajusta en pantallas pequeñas */
+  flex-wrap: wrap;
 }
 
 h1.title-flex button,
 h2.title-flex button,
 h3.title-flex button {
-  font-size: 0.85em;  /* un poco más pequeño que el texto del título */
+  font-size: 0.85em;
   padding: 2px 6px;
-  min-height: 1.5em;  /* asegura que el botón no se vea aplastado */
+  min-height: 1.5em;
   cursor: pointer;
 }
 
@@ -150,7 +135,7 @@ h3 {
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -159,7 +144,7 @@ h3 {
 
 .object-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
   background-color: #e3f2fd;
 }
 
@@ -179,8 +164,9 @@ h3 {
 /* ===== Section 7 Numbers Grid ===== */
 #section7 .numbers-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr); /* 6 columnas fijas */
+  grid-template-columns: repeat(6, 1fr);
   gap: 12px;
+  margin-top: 20px;
 }
 
 #section7 .number-item {
@@ -190,7 +176,7 @@ h3 {
   justify-content: center;
   background: #f0f0f0;
   border-radius: 10px;
-  padding: 15px; /* más grande */
+  padding: 20px;
   cursor: pointer;
   transition: transform 0.2s, background 0.2s;
 }
@@ -202,76 +188,29 @@ h3 {
 
 #section7 .number {
   font-weight: bold;
-  font-size: 1.4em; /* más grande */
-  margin-bottom: 6px;
+  font-size: 1.5em;
+  margin-bottom: 8px;
+  color: #0077cc;
 }
 
 #section7 .number-name {
-  font-size: 1em; /* más grande */
+  font-size: 1.1em;
   text-align: center;
-}
-
-/* ===== Responsive ===== */
-@media (max-width: 768px) {
-  #section7 .numbers-grid {
-    grid-template-columns: repeat(3, 1fr); /* 3 columnas en tablet */
-  }
-
-  #section7 .number-item {
-    padding: 12px;
-  }
-
-  #section7 .number {
-    font-size: 1.2em;
-  }
-
-  #section7 .number-name {
-    font-size: 0.9em;
-  }
-}
-
-@media (max-width: 480px) {
-  #section7 .numbers-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 columnas en móvil */
-  }
-
-  #section7 .number-item {
-    padding: 10px;
-  }
-
-  #section7 .number {
-    font-size: 1em;
-  }
-
-  #section7 .number-name {
-    font-size: 0.8em;
-  }
-}
-
-.number-item:hover {
-  background-color: #e6f2ff;
-  transform: translateY(-2px);
-}
-
-.number {
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #0077cc;
-  margin-bottom: 5px;
-}
-
-.number-name {
-  font-size: 0.9rem;
   color: #666;
 }
 
-/* ===== Botones generales ===== */
-.speak-btn {
+/* ===== Buttons: Listen 1-10 / LyricsTraining / Baamboozle ===== */
+.speak-btn,
+.speak-btn.big-btn,
+button.speak-btn.lyrics-btn,
+button.speak-btn #song-btn,
+a.speak-btn.translatable[data-original="Play on Baamboozle"] {
   display: inline-block;
-  padding: 12px 25px;
+  padding: 14px 28px;
   margin: 10px 5px;
   border: none;
   border-radius: 30px;
+  font-size: 2rem;
   font-weight: bold;
   background: linear-gradient(135deg, #0077cc 0%, #0055aa 100%);
   color: white;
@@ -280,7 +219,11 @@ h3 {
   transition: all 0.3s;
 }
 
-.speak-btn:hover {
+.speak-btn:hover,
+.speak-btn.big-btn:hover,
+button.speak-btn.lyrics-btn:hover,
+button.speak-btn #song-btn:hover,
+a.speak-btn.translatable[data-original="Play on Baamboozle"]:hover {
   background: linear-gradient(135deg, #005fa3 0%, #004d88 100%);
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0, 119, 204, 0.4);
@@ -297,115 +240,47 @@ footer {
 }
 
 /* ===== Secciones especiales ===== */
-.objetivos {
-  background: linear-gradient(to bottom right, #e8f5e9, #c8e6c9);
-}
-
-.bloque {
-  background: linear-gradient(to bottom right, #f0f8ff, #e1f5fe);
-}
-
-.instruction {
-  text-align: center;
-  margin: 20px 0;
-  font-style: italic;
-  color: #555;
-}
-
-.practice-block {
-  text-align: center;
-  margin-top: 30px;
-  padding-top: 20px;
-  border-top: 1px dashed #ccc;
-}
+.objetivos { background: linear-gradient(to bottom right, #e8f5e9, #c8e6c9); }
+.bloque { background: linear-gradient(to bottom right, #f0f8ff, #e1f5fe); }
+.instruction { text-align: center; margin: 20px 0; font-style: italic; color: #555; }
+.practice-block { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px dashed #ccc; }
 
 /* ===== Map ===== */
-#map {
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  margin: 10px 0;
-}
-
-#dialogue {
-  margin-top: 10px;
-  font-weight: bold;
-  font-size: 1.2em;
-  color: #333;
-}
+#map { border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); margin: 10px 0; }
+#dialogue { margin-top: 10px; font-weight: bold; font-size: 1.2em; color: #333; }
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
-  .object-container {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  }
-  
-  .numbers-grid {
-    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
-  }
-  
-  .header-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .header-buttons button {
-    width: 80%;
-    margin-bottom: 10px;
-  }
+  .object-container { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+  #section7 .numbers-grid { grid-template-columns: repeat(3, 1fr); }
+  #section7 .number-item { padding: 15px; }
+  #section7 .number { font-size: 1.3em; }
+  #section7 .number-name { font-size: 1em; }
+  .header-buttons { flex-direction: column; align-items: center; }
+  .header-buttons button { width: 80%; margin-bottom: 10px; }
+  .speak-btn, .speak-btn.big-btn { font-size: 1.6rem; padding: 12px 24px; }
+}
+
+@media (max-width: 480px) {
+  #section7 .numbers-grid { grid-template-columns: repeat(2, 1fr); }
+  #section7 .number-item { padding: 12px; }
+  #section7 .number { font-size: 1.1em; }
+  #section7 .number-name { font-size: 0.9em; }
+  .speak-btn, .speak-btn.big-btn { font-size: 1.4rem; padding: 10px 20px; }
 }
 
 /* ===== Botones de subsecciones (p, em, ul li, h3) ===== */
-p button,
-em button,
-ul li button,
-h3 button {
-  font-size: 2.4rem;   /* tamaño del ícono 🔊 */
+p button, em button, ul li button, h3 button {
+  font-size: 2.4rem;
   padding: 4px 8px;
   border: none;
   background: none;
   cursor: pointer;
   vertical-align: middle;
-  line-height: 1; 
+  line-height: 1;
 }
 
-p button:hover,
-em button:hover,
-ul li button:hover,
-h3 button:hover
-
-
-<style>
-
-/* LyricsTraining button completo */
-button.speak-btn #song-btn {
-  font-size: 2rem;  /* ajustar al tamaño deseado */
-  font-weight: bold;
+p button:hover, em button:hover, ul li button:hover, h3 button:hover {
+  opacity: 0.8;
 }
-
-/* O directamente al botón, ignorando el span */
-button.speak-btn.lyrics-btn {
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-/* Listen 1-10, 11-20, 21-30 buttons */
-button[onclick="practiceNumbers(1,10)"] span.translatable,
-button[onclick="practiceNumbers(11,20)"] span.translatable,
-button[onclick="practiceNumbers(21,30)"] span.translatable {
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-/* Baamboozle link */
-a.speak-btn.translatable[data-original="Play on Baamboozle"] {
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-.speak-btn.big-btn {
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-</style>
 

@@ -366,12 +366,13 @@ h3 button:hover {
 
 /* ===== Ajuste de las listas para que no desplacen botones ===== */
 section ul li {
-  list-style-position: inside;    /* opcional, viñetas dentro */
-  margin: 0;                       /* elimina margen por defecto */
-  padding: 0;                      /* elimina padding por defecto */
-  display: flex;                   /* permite alinear botón y texto */
-  align-items: center;             /* centra verticalmente */
-  gap: 6px;                        /* espacio entre texto y botón */
+  list-style-type: disc;      /* asegura que haya viñeta */
+  list-style-position: outside; /* viñeta fuera del contenido flex */
+  margin-left: 20px;          /* espacio para el bullet */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;                  /* opcional */
 }
 
 

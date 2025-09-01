@@ -341,4 +341,38 @@ section p .translatable {
   display: inline;
 }
 
+/* ===== Botones de bocina uniformes ===== */
+p button, 
+em button, 
+ul li button, 
+h3 button {
+  display: inline-block;          /* para poder usar padding y tamaño */
+  font-size: 2.4rem;              /* tamaño consistente con p/em */
+  padding: 4px 8px;               /* espacio interno */
+  margin: 0;                       /* elimina margen extra */
+  border: none;                   /* sin borde */
+  background: none;               /* sin fondo */
+  cursor: pointer;                /* puntero al pasar */
+  vertical-align: middle;         /* alinea con el texto */
+  line-height: 1;                 /* evita que estire la línea */
+}
+
+p button:hover, 
+em button:hover, 
+ul li button:hover, 
+h3 button:hover {
+  opacity: 0.8;                   /* efecto hover */
+}
+
+/* ===== Ajuste de las listas para que no desplacen botones ===== */
+section ul li {
+  list-style-position: inside;    /* opcional, viñetas dentro */
+  margin: 0;                       /* elimina margen por defecto */
+  padding: 0;                      /* elimina padding por defecto */
+  display: flex;                   /* permite alinear botón y texto */
+  align-items: center;             /* centra verticalmente */
+  gap: 6px;                        /* espacio entre texto y botón */
+}
+
+
 

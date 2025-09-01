@@ -693,13 +693,15 @@ document.addEventListener("DOMContentLoaded", () => {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 
-  // Lista de países y ciudades de referencia
+  // Lista de países con diálogos y traducción
   const countries = [
-    { name: "Japan", lat: 35.68, lng: 139.76, dialogue: "I'm from Japan. I'm Japanese." },
-    { name: "USA", lat: 38.9, lng: -77.03, dialogue: "I'm from the USA. I'm American." },
-    { name: "France", lat: 48.85, lng: 2.35, dialogue: "I'm from France. I'm French." },
-    { name: "Brazil", lat: -15.79, lng: -47.88, dialogue: "I'm from Brazil. I'm Brazilian." }
+    { name: "Japan", lat: 35.68, lng: 139.76, dialogue: "I'm from Japan. I'm Japanese.", translation: "Soy de Japón. Soy japonés/a." },
+    { name: "USA", lat: 38.9, lng: -77.03, dialogue: "I'm from the USA. I'm American.", translation: "Soy de Estados Unidos. Soy estadounidense." },
+    { name: "France", lat: 48.85, lng: 2.35, dialogue: "I'm from France. I'm French.", translation: "Soy de Francia. Soy francés/a." },
+    { name: "Brazil", lat: -15.79, lng: -47.88, dialogue: "I'm from Brazil. I'm Brazilian.", translation: "Soy de Brasil. Soy brasileño/a." }
   ];
+
+  let selectedDialogue = null;
 
   // Agrega marcadores
   countries.forEach(c => {
@@ -707,10 +709,50 @@ document.addEventListener("DOMContentLoaded", () => {
       .addTo(map)
       .bindPopup(`<b>${c.name}</b>`)
       .on('click', () => {
-        document.getElementById('dialogue').textContent = c.dialogue;
+        const dialogueEl = document.getElementById('dialogue');
+        
+        // Crear el span dinámico si no existe
+        if (!selectedDialogue) {
+          selectedDialogue = document.createElement('span');
+          selectedDialogue.className = 'translatable';
+          dialogueEl.innerHTML = '';
+          dialogueEl.appendChild(selectedDialogue);
+        }
+
+        // Guardar original + traducción
+        selectedDialogue.dataset.original = c.dialogue;
+        selectedDialogue.dataset.translation = c.translation;
+        selectedDialogue.textContent = c.dialogue;
+
+        // Reproducir audio
+        speak(c.dialogue);
       });
   });
+
+  // Función de texto a voz
+  function speak(text) {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    speechSynthesis.speak(utterance);
+  }
+
+  // Botón general de traducción de la sección (asegúrate de tenerlo en tu HTML)
+  document.querySelector('#section5 .translate-section-btn')
+    .addEventListener('click', () => {
+      document.querySelectorAll('#section5 .translatable').forEach(el => {
+        if (!el.dataset.original) return;
+        if (el.textContent === el.dataset.original) {
+          el.textContent = el.dataset.translation;
+        } else {
+          el.textContent = el.dataset.original;
+        }
+      });
+    });
+
+  // Evitar primer playback en blanco
+  window.onload = () => { speechSynthesis.getVoices(); };
 </script>
+
 
   
 </body>

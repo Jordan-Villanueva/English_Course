@@ -366,14 +366,23 @@ h3 button:hover {
 
 /* ===== Ajuste de las listas para que no desplacen botones ===== */
 section ul li {
-  list-style-type: disc;      /* asegura que haya viñeta */
-  list-style-position: outside; /* viñeta fuera del contenido flex */
-  margin-left: 20px;          /* espacio para el bullet */
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 0;                  /* opcional */
+  margin: 0;
+  padding: 0;
+  position: relative;
+  list-style: none; /* quitamos el original */
 }
+
+section ul li::before {
+  content: "•";       /* o usa "\2022" */
+  color: #333;        /* color de la viñeta */
+  font-size: 1.2em;   /* tamaño de la viñeta */
+  margin-right: 6px;  /* espacio entre viñeta y texto */
+  line-height: 1;
+}
+
 
 
 

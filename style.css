@@ -320,4 +320,30 @@ p button:hover, em button:hover, ul li button:hover, h3 button:hover {
   box-shadow: 0 6px 12px rgba(0, 119, 204, 0.4);
 }
 
+/* ===== Ajuste de tamaño para spans translatable ===== */
+.translatable {
+  font-size: 1.6rem;  /* base móvil */
+  line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+  .translatable {
+    font-size: 2rem;  /* versión web más grande */
+  }
+}
+
+section ul li .translatable {
+  display: inline-block;
+}
+
+section p em .translatable,
+section p .translatable {
+  display: inline;
+}
+
+ul li button,
+p em button {
+  font-size: 1em;  /* igual tamaño que el texto del span */
+}
+
 

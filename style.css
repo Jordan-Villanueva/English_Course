@@ -190,7 +190,7 @@ h3 {
 
 #section7 .number {
   font-weight: bold;
-  font-size: clamp(2rem, 3vw, 4rem); /* ahora crece hasta 4rem */
+  font-size: clamp(2.4rem, 4vw, 6rem); /* ahora puede llegar hasta 6rem */
   margin-bottom: 6px;
   color: #0077cc;
   text-align: center;
@@ -199,7 +199,7 @@ h3 {
 }
 
 #section7 .number-name {
-  font-size: clamp(1.6rem, 2.5vw, 3rem); /* crece más también */
+  font-size: clamp(2rem, 3vw, 4.5rem); /* subimos el máximo a 4.5rem */
   text-align: center;
   color: #666;
   line-height: 1.2;

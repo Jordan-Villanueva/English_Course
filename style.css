@@ -188,13 +188,13 @@ h3 {
 
 #section7 .number {
   font-weight: bold;
-  font-size: 1.5em;
+  font-size: 2rem;
   margin-bottom: 8px;
   color: #0077cc;
 }
 
 #section7 .number-name {
-  font-size: 1.1em;
+  font-size: 2rem;
   text-align: center;
   color: #666;
 }
@@ -254,8 +254,8 @@ footer {
   .object-container { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
   #section7 .numbers-grid { grid-template-columns: repeat(3, 1fr); }
   #section7 .number-item { padding: 15px; }
-  #section7 .number { font-size: 1.3em; }
-  #section7 .number-name { font-size: 1em; }
+  #section7 .number { font-size: 1.8rem; }
+  #section7 .number-name { font-size: 1.4rem; }
   .header-buttons { flex-direction: column; align-items: center; }
   .header-buttons button { width: 80%; margin-bottom: 10px; }
   .speak-btn, .speak-btn.big-btn { font-size: 1.6rem; padding: 12px 24px; }
@@ -264,9 +264,9 @@ footer {
 @media (max-width: 480px) {
   #section7 .numbers-grid { grid-template-columns: repeat(2, 1fr); }
   #section7 .number-item { padding: 12px; }
-  #section7 .number { font-size: 1.1em; }
+  #section7 .number { font-size: 1.6rem; }
   #section7 .number-name { font-size: 0.9em; }
-  .speak-btn, .speak-btn.big-btn { font-size: 1.4rem; padding: 10px 20px; }
+  .speak-btn, .speak-btn.big-btn { font-size: 1.2rem; padding: 10px 20px; }
 }
 
 /* ===== Botones de subsecciones (p, em, ul li, h3) ===== */

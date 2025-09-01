@@ -378,7 +378,7 @@ section ul li {
 section ul li::before {
   content: "•";       /* o usa "\2022" */
   color: #333;        /* color de la viñeta */
-  font-size: 1.2em;   /* tamaño de la viñeta */
+  font-size: 2rem;   /* tamaño de la viñeta */
   margin-right: 6px;  /* espacio entre viñeta y texto */
   line-height: 1;
 }

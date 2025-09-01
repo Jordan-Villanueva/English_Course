@@ -341,9 +341,4 @@ section p .translatable {
   display: inline;
 }
 
-ul li button,
-p em button {
-  font-size: 1em;  /* igual tamaño que el texto del span */
-}
-
 

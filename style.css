@@ -164,7 +164,7 @@ h3 {
 /* ===== Section 7 Numbers Grid ===== */
 #section7 .numbers-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(6, 1fr); /* siempre 6 columnas */
   gap: 12px;
   margin-top: 20px;
 }
@@ -179,6 +179,8 @@ h3 {
   padding: 20px;
   cursor: pointer;
   transition: transform 0.2s, background 0.2s;
+  min-width: 0;        /* evita desbordes horizontales */
+  overflow: hidden;    /* corta contenido que se pase */
 }
 
 #section7 .number-item:hover {
@@ -188,18 +190,20 @@ h3 {
 
 #section7 .number {
   font-weight: bold;
-  font-size: 2em;       /* relativo al tamaño del contenedor */
-  margin-bottom: 8px;
+  font-size: clamp(1.6rem, 2vw, 2.8rem); /* crece pero no rompe */
+  margin-bottom: 6px;
   color: #0077cc;
   text-align: center;
-  line-height: 1.2;     /* evita que desborde verticalmente */
+  line-height: 1.2;
+  word-break: break-word;  /* corta palabras largas */
 }
 
 #section7 .number-name {
-  font-size: 1.5em;     /* también relativo */
+  font-size: clamp(1.2rem, 1.8vw, 2.2rem); /* flexible */
   text-align: center;
   color: #666;
   line-height: 1.2;
+  word-break: break-word;
 }
 
 /* ===== Responsive ===== */

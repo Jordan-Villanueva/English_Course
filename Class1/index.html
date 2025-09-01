@@ -245,6 +245,8 @@
     <button class="translate-section-btn">🌐</button>
     <button onclick="speak('5. Introduction of Where are you from?')">🔊</button>
   </h2>
+
+  <!-- Video -->
   <p>
     <span id="where-instr" class="translatable" data-original="Watch the video" data-translation="Mira el video">
       Watch the video
@@ -252,11 +254,14 @@
     <button onclick="speak(document.getElementById('where-instr').dataset.original)">🔊</button>
   </p>
   <iframe width="100%" height="315" src="https://www.youtube.com/embed/byqOkm6-SCc" frameborder="0" allowfullscreen></iframe>
-</section>
 
-  <!-- Map Exercise -->
-<section class="bloque" data-translated="false">
-  <h3>Select a country on the map!</h3>
+  <!-- Map con audio -->
+  <p>
+    <span id="map-instr" class="translatable" data-original="Select a country on the map!" data-translation="¡Selecciona un país en el mapa!">
+      Select a country on the map!
+    </span>
+    <button onclick="speak(document.getElementById('map-instr').dataset.original)">🔊</button>
+  </p>
   <div id="map" style="height: 400px; width: 100%; border: 1px solid #ccc;"></div>
   <p id="dialogue"></p>
 </section>

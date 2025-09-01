@@ -179,8 +179,8 @@ h3 {
 /* ===== Section 7 Numbers Grid ===== */
 #section7 .numbers-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(6, 1fr); /* 6 columnas fijas */
+  gap: 12px;
 }
 
 #section7 .number-item {
@@ -189,42 +189,54 @@ h3 {
   align-items: center;
   justify-content: center;
   background: #f0f0f0;
-  border-radius: 8px;
-  padding: 10px;
+  border-radius: 10px;
+  padding: 15px; /* más grande */
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.2s, background 0.2s;
 }
 
 #section7 .number-item:hover {
-  transform: scale(1.05);
+  transform: scale(1.08);
   background: #e0e0e0;
 }
 
 #section7 .number {
   font-weight: bold;
-  font-size: 1.2em;
-  margin-bottom: 5px;
+  font-size: 1.4em; /* más grande */
+  margin-bottom: 6px;
 }
 
 #section7 .number-name {
-  font-size: 0.9em;
+  font-size: 1em; /* más grande */
   text-align: center;
 }
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
   #section7 .numbers-grid {
-    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas en tablet */
+  }
+
+  #section7 .number-item {
+    padding: 12px;
+  }
+
+  #section7 .number {
+    font-size: 1.2em;
+  }
+
+  #section7 .number-name {
+    font-size: 0.9em;
   }
 }
 
 @media (max-width: 480px) {
   #section7 .numbers-grid {
-    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en móvil */
   }
 
   #section7 .number-item {
-    padding: 8px;
+    padding: 10px;
   }
 
   #section7 .number {

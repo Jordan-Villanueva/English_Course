@@ -579,6 +579,22 @@
     <button onclick="speak(document.getElementById('game-tip').dataset.original)">🔊</button>
   </p>
 </section>
+
+<!-- Material PDF -->
+  <p>
+    <span id="pdf-material" class="translatable"
+          data-original="📄 Download the base material for session 1"
+          data-translation="📄 Descargar material base de la sesión 1">
+      📄 Download the base material for session 1
+    </span>
+    <button onclick="speak(document.getElementById('pdf-material').dataset.original)">🔊</button>
+    <a href="class1.pdf" download="class1.pdf" class="big-btn">
+      📄 Download PDF
+    </a>
+  </p>
+
+  <!-- Incrustación del PDF -->
+  <embed src="class1.pdf" type="application/pdf" width="100%" height="600px" />
 </main>
 
 <footer>

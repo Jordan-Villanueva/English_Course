@@ -69,7 +69,7 @@ function showContent() {
         <h2>Available Classes</h2>
         <ul>
           <li><a href="Class1/index.html">Class 1: Introductions, Greetings, and Farewells</a></li>
-          <li><a href="Class2/index.html">Class 2: (coming soon)</a></li>
+	  <li><a href="Class2/index.html">Class 2: Personal Information</a></li>
         </ul>
       </section>
     `;

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English Course</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1 class="title-flex">English Interactive Course</h1>
+    <p class="subtitle">Unit 3: Personal Information</p>
+    <div class="header-buttons">
+      <button onclick="scrollToSection('objectives')">🎯 Objectives</button>
+      <button onclick="scrollToSection('jobs')">👩‍⚕️ Jobs</button>
+      <button onclick="scrollToSection('quiz')">📝 Quiz</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- OBJETIVOS -->
+    <section id="objectives" class="objetivos">
+      <h2>🎯 Objectives</h2>
+      <ul>
+        <li>Learn job vocabulary</li>
+        <li>Practice the verb <em>to be</em></li>
+        <li>Ask and answer questions about work</li>
+      </ul>
+    </section>
+
+    <!-- VOCABULARIO JOBS -->
+    <section id="jobs" class="bloque">
+      <h2>👩‍🏫 Vocabulary: Jobs</h2>
+      <p class="instruction">Click the cards to reveal the job and press 🔊 to hear it</p>
+
+      <div class="object-container">
+        <div class="object-item" onclick="flipCard(this)">
+          <img src="images/teacher.png" class="object-image" alt="Teacher">
+          <span class="object-name">???</span>
+          <button class="speak-word-btn" onclick="speakWord('teacher'); event.stopPropagation();">🔊</button>
+        </div>
+        <div class="object-item" onclick="flipCard(this)">
+          <img src="images/nurse.png" class="object-image" alt="Nurse">
+          <span class="object-name">???</span>
+          <button class="speak-word-btn" onclick="speakWord('nurse'); event.stopPropagation();">🔊</button>
+        </div>
+        <div class="object-item" onclick="flipCard(this)">
+          <img src="images/police.png" class="object-image" alt="Police Officer">
+          <span class="object-name">???</span>
+          <button class="speak-word-btn" onclick="speakWord('police officer'); event.stopPropagation();">🔊</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- MINI QUIZ -->
+    <section id="quiz">
+      <h2>📝 Quick Quiz</h2>
+      <p class="instruction">Type the correct job in English</p>
+
+      <label>👨‍🏫 What’s his job?</label>
+      <input type="text" id="q1" placeholder="Write here...">
+      <button class="speak-btn" onclick="checkAnswer()">Check</button>
+      <p id="feedback"></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Interactive English Course</p>
+  </footer>
+
+  <script>
+    // Scroll to section
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Flashcards
+    function flipCard(card) {
+      const name = card.querySelector(".object-name");
+      if (name.innerText === "???") {
+        name.innerText = card.querySelector("img").alt;
+      } else {
+        name.innerText = "???";
+      }
+    }
+
+    // Text-to-speech
+    function speakWord(word) {
+      const utter = new SpeechSynthesisUtterance(word);
+      utter.lang = "en-US";
+      speechSynthesis.speak(utter);
+    }
+
+    // Quiz
+    function checkAnswer() {
+      const ans = document.getElementById("q1").value.toLowerCase().trim();
+      const feedback = document.getElementById("feedback");
+      if (ans === "teacher") {
+        feedback.innerHTML = "✅ Correct!";
+        feedback.style.color = "green";
+      } else {
+        feedback.innerHTML = "❌ Try again!";
+        feedback.style.color = "red";
+      }
+    }
+  </script>
+</body>
+</html>
+

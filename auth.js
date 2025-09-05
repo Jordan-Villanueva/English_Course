@@ -1,8 +1,10 @@
+// ===== Botones y contenido =====
 const homeBtn = document.getElementById("home-btn");
 const loginBtn = document.getElementById("login-btn");
 const logoutBtn = document.getElementById("logout-btn");
 const content = document.getElementById("content");
 
+// ===== Auth0 Config =====
 const AUTH0_DOMAIN = "dev-bjoqtux6wua5w2l2.us.auth0.com";
 const AUTH0_CLIENT_ID = "ZcgIAj7vMvtUixpX421Jv6gs4YrakeC7";
 const REDIRECT_URI = "https://elegant-frangipane-efce46.netlify.app";
@@ -10,19 +12,22 @@ const REDIRECT_URI = "https://elegant-frangipane-efce46.netlify.app";
 // Lista de usuarios revocados
 const REVOKED_USERS = ["revokeduser1@example.com", "revokeduser2@example.com"];
 
-// Login
+// ===== Helpers =====
+const onHomePage = window.location.pathname === "/" || window.location.pathname.endsWith("index.html");
+
+// ===== Login =====
 loginBtn.onclick = () => {
   const authUrl = `https://${AUTH0_DOMAIN}/authorize?response_type=token&client_id=${AUTH0_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=openid%20profile%20email`;
   window.location.href = authUrl;
 };
 
-// Logout
+// ===== Logout =====
 logoutBtn.onclick = () => {
   localStorage.removeItem("access_token");
   showLoggedOut();
 };
 
-// Parsear hash de Auth0
+// ===== Parsear hash de Auth0 =====
 function parseHash() {
   if (window.location.hash) {
     const hash = window.location.hash.substr(1).split("&").reduce((res, item) => {
@@ -33,29 +38,31 @@ function parseHash() {
     if (hash.access_token) {
       localStorage.setItem("access_token", hash.access_token);
       window.location.hash = "";
-      return true; // token guardado, no redirigir
+      return true;
     }
   }
   return false;
 }
 
-// Mostrar estado desconectado
+// ===== Mostrar estado desconectado =====
 function showLoggedOut() {
   loginBtn.style.display = "inline-block";
   logoutBtn.style.display = "none";
   if (homeBtn) homeBtn.style.display = "none";
 
-  if (window.location.pathname === "/" || window.location.pathname.endsWith("index.html")) {
+  if (onHomePage) {
     content.innerHTML = "<p>Please log in to access the course.</p>";
   } else {
-    content.style.display = "none";
+    const main = document.querySelector("main");
+    if (main) main.innerHTML = "<p>Please log in to access this class.</p>";
   }
 }
 
-// Mostrar contenido para usuarios logueados
+// ===== Mostrar contenido para usuarios logueados =====
 function showContent() {
   loginBtn.style.display = "none";
   logoutBtn.style.display = "inline-block";
+
   if (homeBtn) {
     homeBtn.style.display = "inline-block";
     homeBtn.onclick = () => {
@@ -63,22 +70,23 @@ function showContent() {
     };
   }
 
-  if (window.location.pathname === "/" || window.location.pathname.endsWith("index.html")) {
+  if (onHomePage) {
     content.innerHTML = `
       <section>
         <h2>Available Classes</h2>
         <ul>
           <li><a href="Class1/index.html">Class 1: Introductions, Greetings, and Farewells</a></li>
-	  <li><a href="Class2/index.html">Class 2: Personal Information</a></li>
+          <li><a href="Class2/index.html">Class 2: Personal Information</a></li>
         </ul>
       </section>
     `;
   } else {
-    content.style.display = "block";
+    const main = document.querySelector("main");
+    if (main) main.style.display = "block";
   }
 }
 
-// Validar token y usuarios revocados
+// ===== Validar token y usuarios revocados =====
 async function validateToken(token) {
   try {
     const res = await fetch(`https://${AUTH0_DOMAIN}/userinfo`, {
@@ -92,7 +100,7 @@ async function validateToken(token) {
       throw new Error("User revoked");
     }
 
-    return true; // token válido y usuario permitido
+    return true;
   } catch (e) {
     console.warn(e.message);
     localStorage.removeItem("access_token");
@@ -100,7 +108,7 @@ async function validateToken(token) {
   }
 }
 
-// Inicializar app
+// ===== Inicializar app =====
 async function initApp() {
   let tokenValid = false;
 
@@ -119,5 +127,6 @@ async function initApp() {
   }
 }
 
-// Arranca la app
+// ===== Arranca la app =====
 initApp();
+

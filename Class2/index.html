@@ -3,64 +3,211 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>English Course</title>
+  <title>Class 2 - English Course</title>
   <link rel="stylesheet" href="../style.css">
 </head>
+<script src="../auth.js"></script>
 <body>
-  <header>
-    <h1 class="title-flex">English Interactive Course</h1>
-    <p class="subtitle">Class 2: Personal information and social expressions. Family relations, possessive's and the alphabet </p>
+  <header class="page-header" data-translated="false">
+    <h1 class="title-flex h1-class1">
+      <span id="introduction" class="translatable"
+            data-original="Class 2: Personal information and social expressions. Family relations, possessive's and the alphabet"
+            data-translation="Clase 2: Información personal y expresiones sociales. Relaciones familiares, posesivos y el alfabeto">
+        Class 2: Personal information and social expressions. Family relations, possessive's and the alphabet.
+      </span>
+      <button class="translate-section-btn btn-style" type="button">🌐</button>
+      <button onclick="speak(document.getElementById('introduction').dataset.original)">🔊</button>
+    </h1>
+
+    <p class="subtitle">
+      <span id="beginners" class="translatable"
+            data-original="English Course for Beginners"
+            data-translation="Curso de Inglés para principiantes">
+        English Course for Beginners
+      </span>
+      <button onclick="speak(document.getElementById('beginners').dataset.original)">🔊</button>
+    </p>
+
     <div class="header-buttons">
-      <button onclick="scrollToSection('objectives')">🎯 Objectives</button>
-      <button onclick="scrollToSection('jobs')">👩‍⚕️ Jobs</button>
-      <button onclick="scrollToSection('quiz')">📝 Quiz</button>
+      <button id="login-btn" class="header-btn">Login/Ingresar</button>
+      <button id="logout-btn" class="header-btn">Logout/Salir</button>
+      <button id="home-btn" class="header-btn">🏠 Home/Inicio</button>
     </div>
   </header>
 
-  <main>
+  <main id="content">
     <!-- OBJETIVOS -->
-    <section id="objectives" class="objetivos">
-      <h2>🎯 Objectives</h2>
+    <section class="objetivos" data-translated="false">
+      <h2 class="title-flex">
+        <span id="obj-title" class="translatable"
+              data-original="🎯 Class Objectives"
+              data-translation="🎯 Objetivos de la clase">
+          🎯 Class Objectives
+        </span>
+        <button class="translate-section-btn">🌐</button>
+	<button onclick="speak('Class objectives')">🔊</button>
+      </h2>
       <ul>
-        <li>Learn job vocabulary</li>
-        <li>Practice the verb <em>to be</em></li>
-        <li>Ask and answer questions about work</li>
+        <li>
+          <span id="obj1" class="translatable"
+                data-original="Introduce yourself and others"
+                data-translation="Presentarte a ti mismo y a otros">
+            Introduce yourself and others
+          </span>
+          <button onclick="speak(document.getElementById('obj1').dataset.original)">🔊</button>
+        </li>
+        <li>
+          <span id="obj2" class="translatable"
+                data-original="Practice common social expressions"
+                data-translation="Practicar expresiones sociales comunes">
+            Practice common social expressions
+          </span>
+          <button onclick="speak(document.getElementById('obj2').dataset.original)">🔊</button>
+        </li>
+        <li>
+          <span id="obj3" class="translatable"
+                data-original="Learn family-related vocabulary and possessive's"
+                data-translation="Aprender vocabulario relacionado con la familia y los posesivos">
+            Learn family-related vocabulary and possessive's
+          </span>
+          <button onclick="speak(document.getElementById('obj3').dataset.original)">🔊</button>
+        </li>
+        <li>
+          <span id="obj4" class="translatable"
+                data-original="Practice the alphabet"
+                data-translation="Practicar el alfabeto">
+            Practice the alphabet
+          </span>
+          <button onclick="speak(document.getElementById('obj4').dataset.original)">🔊</button>
+        </li>
       </ul>
     </section>
 
-    <!-- VOCABULARIO JOBS -->
-    <section id="jobs" class="bloque">
-      <h2>👩‍🏫 Vocabulary: Jobs</h2>
-      <p class="instruction">Click the cards to reveal the job and press 🔊 to hear it</p>
+    <!-- VOCABULARIO FAMILY -->
+    <section id="family" class="bloque class1-style">
+      <h2 class="h2-class1">
+        <span id="family-title" class="translatable"
+              data-original="👪 Vocabulary: Family"
+              data-translation="👪 Vocabulario: Familia">
+          👪 Vocabulary: Family
+        </span>
+        <button class="translate-section-btn btn-style" type="button" onclick="translateSection('family-title')">🌐</button>
+        <button class="speak-btn btn-style" onclick="speakText('family-title')">🔊</button>
+      </h2>
+      <p class="instruction">
+        <span id="family-instr" class="translatable"
+              data-original="Click the cards to reveal the family member and press 🔊 to hear it"
+              data-translation="Haz clic en las tarjetas para revelar al miembro de la familia y presiona 🔊 para escucharlo">
+          Click the cards to reveal the family member and press 🔊 to hear it
+        </span>
+        <button class="speak-btn btn-style" onclick="speakText('family-instr')">🔊</button>
+      </p>
 
       <div class="object-container">
         <div class="object-item" onclick="flipCard(this)">
-          <img src="images/teacher.png" class="object-image" alt="Teacher">
+          <img src="images/mother.png" class="object-image" alt="Mother">
           <span class="object-name">???</span>
-          <button class="speak-word-btn" onclick="speakWord('teacher'); event.stopPropagation();">🔊</button>
+          <button class="speak-word-btn btn-style" onclick="speakWord('mother'); event.stopPropagation();">🔊</button>
         </div>
         <div class="object-item" onclick="flipCard(this)">
-          <img src="images/nurse.png" class="object-image" alt="Nurse">
+          <img src="images/father.png" class="object-image" alt="Father">
           <span class="object-name">???</span>
-          <button class="speak-word-btn" onclick="speakWord('nurse'); event.stopPropagation();">🔊</button>
+          <button class="speak-word-btn btn-style" onclick="speakWord('father'); event.stopPropagation();">🔊</button>
         </div>
         <div class="object-item" onclick="flipCard(this)">
-          <img src="images/police.png" class="object-image" alt="Police Officer">
+          <img src="images/sister.png" class="object-image" alt="Sister">
           <span class="object-name">???</span>
-          <button class="speak-word-btn" onclick="speakWord('police officer'); event.stopPropagation();">🔊</button>
+          <button class="speak-word-btn btn-style" onclick="speakWord('sister'); event.stopPropagation();">🔊</button>
+        </div>
+        <div class="object-item" onclick="flipCard(this)">
+          <img src="images/brother.png" class="object-image" alt="Brother">
+          <span class="object-name">???</span>
+          <button class="speak-word-btn btn-style" onclick="speakWord('brother'); event.stopPropagation();">🔊</button>
         </div>
       </div>
     </section>
 
     <!-- MINI QUIZ -->
-    <section id="quiz">
-      <h2>📝 Quick Quiz</h2>
-      <p class="instruction">Type the correct job in English</p>
+    <section id="quiz" class="class1-style">
+      <h2 class="h2-class1">
+        <span id="quiz-title" class="translatable"
+              data-original="📝 Quick Quiz"
+              data-translation="📝 Mini Quiz">
+          📝 Quick Quiz
+        </span>
+        <button class="translate-section-btn btn-style" type="button" onclick="translateSection('quiz-title')">🌐</button>
+        <button class="speak-btn btn-style" onclick="speakText('quiz-title')">🔊</button>
+      </h2>
+      <p class="instruction">
+        <span id="quiz-instr" class="translatable"
+              data-original="Type the correct family member in English"
+              data-translation="Escribe el miembro de la familia correcto en inglés">
+          Type the correct family member in English
+        </span>
+        <button class="speak-btn btn-style" onclick="speakText('quiz-instr')">🔊</button>
+      </p>
 
-      <label>👨‍🏫 What’s his job?</label>
+      <label>
+        <span id="quiz-label" class="translatable"
+              data-original="👩 Who is she?"
+              data-translation="👩 ¿Quién es ella?">
+          👩 Who is she?
+        </span>
+        <button class="speak-btn btn-style" onclick="speakText('quiz-label')">🔊</button>
+      </label>
       <input type="text" id="q1" placeholder="Write here...">
-      <button class="speak-btn" onclick="checkAnswer()">Check</button>
+      <button class="speak-btn btn-style" onclick="checkAnswer()">Check</button>
       <p id="feedback"></p>
+    </section>
+
+    <!-- ALPHABET -->
+    <section id="alphabet" class="bloque class1-style">
+      <h2 class="h2-class1">
+        <span id="alphabet-title" class="translatable"
+              data-original="🔤 Practice: The Alphabet"
+              data-translation="🔤 Práctica: El Alfabeto">
+          🔤 Practice: The Alphabet
+        </span>
+        <button class="translate-section-btn btn-style" type="button" onclick="translateSection('alphabet-title')">🌐</button>
+        <button class="speak-btn btn-style" onclick="speakText('alphabet-title')">🔊</button>
+      </h2>
+      <p class="instruction">
+        <span id="alphabet-instr" class="translatable"
+              data-original="Click a letter to hear its pronunciation"
+              data-translation="Haz clic en una letra para escuchar su pronunciación">
+          Click a letter to hear its pronunciation
+        </span>
+        <button class="speak-btn btn-style" onclick="speakText('alphabet-instr')">🔊</button>
+      </p>
+
+      <div class="alphabet-container">
+        <button onclick="speakWord('A')">A</button>
+        <button onclick="speakWord('B')">B</button>
+        <button onclick="speakWord('C')">C</button>
+        <button onclick="speakWord('D')">D</button>
+        <button onclick="speakWord('E')">E</button>
+        <button onclick="speakWord('F')">F</button>
+        <button onclick="speakWord('G')">G</button>
+        <button onclick="speakWord('H')">H</button>
+        <button onclick="speakWord('I')">I</button>
+        <button onclick="speakWord('J')">J</button>
+        <button onclick="speakWord('K')">K</button>
+        <button onclick="speakWord('L')">L</button>
+        <button onclick="speakWord('M')">M</button>
+        <button onclick="speakWord('N')">N</button>
+        <button onclick="speakWord('O')">O</button>
+        <button onclick="speakWord('P')">P</button>
+        <button onclick="speakWord('Q')">Q</button>
+        <button onclick="speakWord('R')">R</button>
+        <button onclick="speakWord('S')">S</button>
+        <button onclick="speakWord('T')">T</button>
+        <button onclick="speakWord('U')">U</button>
+        <button onclick="speakWord('V')">V</button>
+        <button onclick="speakWord('W')">W</button>
+        <button onclick="speakWord('X')">X</button>
+        <button onclick="speakWord('Y')">Y</button>
+        <button onclick="speakWord('Z')">Z</button>
+      </div>
     </section>
   </main>
 
@@ -69,12 +216,10 @@
   </footer>
 
   <script>
-    // Scroll to section
     function scrollToSection(id) {
       document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Flashcards
     function flipCard(card) {
       const name = card.querySelector(".object-name");
       if (name.innerText === "???") {
@@ -84,18 +229,35 @@
       }
     }
 
-    // Text-to-speech
     function speakWord(word) {
       const utter = new SpeechSynthesisUtterance(word);
       utter.lang = "en-US";
       speechSynthesis.speak(utter);
     }
 
-    // Quiz
+    function speakText(id) {
+      const elem = document.getElementById(id);
+      const text = elem.dataset.translated === "true" ? elem.dataset.translation : elem.dataset.original;
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = "en-US";
+      speechSynthesis.speak(utter);
+    }
+
+    function translateSection(id) {
+      const elem = document.getElementById(id);
+      if (elem.dataset.translated === "false" || !elem.dataset.translated) {
+        elem.innerText = elem.dataset.translation;
+        elem.dataset.translated = "true";
+      } else {
+        elem.innerText = elem.dataset.original;
+        elem.dataset.translated = "false";
+      }
+    }
+
     function checkAnswer() {
       const ans = document.getElementById("q1").value.toLowerCase().trim();
       const feedback = document.getElementById("feedback");
-      if (ans === "teacher") {
+      if (ans === "mother") {
         feedback.innerHTML = "✅ Correct!";
         feedback.style.color = "green";
       } else {
@@ -103,7 +265,17 @@
         feedback.style.color = "red";
       }
     }
+
+    document.querySelectorAll(".translate-section-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const translatable = btn.previousElementSibling;
+        translateSection(translatable.id);
+      });
+    });
   </script>
+  
+<!-- Auth0 -->
+<script src="../auth.js"></script>
 </body>
 </html>
 

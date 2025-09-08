@@ -270,7 +270,7 @@
 <section class="bloque" data-translated="false">
   <h2 class="title-flex">
     <span id="interactive-title-6" class="translatable"
-          data-original="6. Interactive Practice: &quot;What&#39;s this?&quot;"
+          data-original="6. Interactive Practice: &quot;What's this?&quot;"
           data-translation="6. Práctica interactiva: &quot;¿Qué es esto?&quot;">
       6. Interactive Practice: "What's this?" (10 min)
     </span>
@@ -280,7 +280,7 @@
 
   <p>
     <span id="interactive-desc-6" class="translatable"
-          data-original="Click on the objects to hear their names in English. Then practice asking &quot;What&#39;s this?&quot;"
+          data-original="Click on the objects to hear their names in English. Then practice asking &quot;What's this?&quot;"
           data-translation="Haz clic en los objetos para escuchar sus nombres en inglés. Luego practica preguntando &quot;¿Qué es esto?&quot;">
       Click on the objects to hear their names in English. Then practice asking "What's this?"
     </span>
@@ -288,77 +288,106 @@
   </p>
 
   <div class="object-container">
-    <div class="object-item" onclick="speak(this.querySelector('.translatable').dataset.original)">
-      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/book-solid-full.svg" class="object-image" alt="Book">
-      <div class="object-name">
-        <span class="translatable" data-original="Book" data-translation="Libro">Book</span> 
-      </div>
+    <!-- Book -->
+    <div class="object-item" onclick="flipCard(this)">
+      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/book-solid-full.svg" 
+           class="object-image" alt="Book">
+      <span class="object-name">???</span>
+      <button class="speak-word-btn btn-style" onclick="speakWord('Book'); event.stopPropagation();">🔊</button>
     </div>
 
-    <div class="object-item" onclick="speak(this.querySelector('.translatable').dataset.original)">
-      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pen-clip-solid-full.svg" class="object-image" alt="Pen">
-      <div class="object-name">
-        <span class="translatable" data-original="Pen" data-translation="Pluma">Pen</span> 
-      </div>
+    <!-- Pen -->
+    <div class="object-item" onclick="flipCard(this)">
+      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pen-clip-solid-full.svg" 
+           class="object-image" alt="Pen">
+      <span class="object-name">???</span>
+      <button class="speak-word-btn btn-style" onclick="speakWord('Pen'); event.stopPropagation();">🔊</button>
     </div>
 
-    <div class="object-item" onclick="speak(this.querySelector('.translatable').dataset.original)">
-      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pencil-solid-full.svg" class="object-image" alt="Pencil">
-      <div class="object-name">
-        <span class="translatable" data-original="Pencil" data-translation="Lápiz">Pencil</span> 
-      </div>
+    <!-- Pencil -->
+    <div class="object-item" onclick="flipCard(this)">
+      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pencil-solid-full.svg" 
+           class="object-image" alt="Pencil">
+      <span class="object-name">???</span>
+      <button class="speak-word-btn btn-style" onclick="speakWord('Pencil'); event.stopPropagation();">🔊</button>
     </div>
 
-    <div class="object-item" onclick="speak(this.querySelector('.translatable').dataset.original)">
-      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/chair-solid-full.svg" class="object-image" alt="Chair">
-      <div class="object-name">
-        <span class="translatable" data-original="Chair" data-translation="Silla">Chair</span> 
-      </div>
+    <!-- Chair -->
+    <div class="object-item" onclick="flipCard(this)">
+      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/chair-solid-full.svg" 
+           class="object-image" alt="Chair">
+      <span class="object-name">???</span>
+      <button class="speak-word-btn btn-style" onclick="speakWord('Chair'); event.stopPropagation();">🔊</button>
     </div>
 
-    <div class="object-item" onclick="speak(this.querySelector('.translatable').dataset.original)">
-      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/table-furniture.svg" class="object-image" alt="Table">
-      <div class="object-name">
-        <span class="translatable" data-original="Table" data-translation="Mesa">Table</span> 
-      </div>
+    <!-- Table -->
+    <div class="object-item" onclick="flipCard(this)">
+      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/table-furniture.svg" 
+           class="object-image" alt="Table">
+      <span class="object-name">???</span>
+      <button class="speak-word-btn btn-style" onclick="speakWord('Table'); event.stopPropagation();">🔊</button>
     </div>
 
-    <div class="object-item" onclick="speak(this.querySelector('.translatable').dataset.original)">
-      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/bag-personal.svg" class="object-image" alt="Bag">
-      <div class="object-name">
-        <span class="translatable" data-original="Bag" data-translation="Bolsa">Bag</span> 
-      </div>
+    <!-- Bag -->
+    <div class="object-item" onclick="flipCard(this)">
+      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/bag-personal.svg" 
+           class="object-image" alt="Bag">
+      <span class="object-name">???</span>
+      <button class="speak-word-btn btn-style" onclick="speakWord('Bag'); event.stopPropagation();">🔊</button>
     </div>
 
-    <div class="object-item" onclick="speak(this.querySelector('.translatable').dataset.original)">
-      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/clock-time-seven-outline.svg" class="object-image" alt="Bag">
-      <div class="object-name">
-        <span class="translatable" data-original="Clock" data-translation="Reloj">Clock</span> 
-      </div>
+    <!-- Clock -->
+    <div class="object-item" onclick="flipCard(this)">
+      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/clock-time-seven-outline.svg" 
+           class="object-image" alt="Clock">
+      <span class="object-name">???</span>
+      <button class="speak-word-btn btn-style" onclick="speakWord('Clock'); event.stopPropagation();">🔊</button>
     </div>
 
-    <div class="object-item" onclick="speak(this.querySelector('.translatable').dataset.original)">
-      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/notebook.svg" class="object-image" alt="Bag">
-      <div class="object-name">
-        <span class="translatable" data-original="Notebook" data-translation="Cuaderno">Notebook</span> 
-      </div>
+    <!-- Notebook -->
+    <div class="object-item" onclick="flipCard(this)">
+      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/notebook.svg" 
+           class="object-image" alt="Notebook">
+      <span class="object-name">???</span>
+      <button class="speak-word-btn btn-style" onclick="speakWord('Notebook'); event.stopPropagation();">🔊</button>
     </div>
 
-    <div class="object-item" onclick="speak(this.querySelector('.translatable').dataset.original)">
-      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/marker.svg" class="object-image" alt="Bag">
-      <div class="object-name">
-        <span class="translatable" data-original="Marker" data-translation="Marcador">Marker</span> 
-      </div>
+    <!-- Marker -->
+    <div class="object-item" onclick="flipCard(this)">
+      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/marker.svg" 
+           class="object-image" alt="Marker">
+      <span class="object-name">???</span>
+      <button class="speak-word-btn btn-style" onclick="speakWord('Marker'); event.stopPropagation();">🔊</button>
     </div>
 
-    <div class="object-item" onclick="speak(this.querySelector('.translatable').dataset.original)">
-      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/eraser-solid-full.svg" class="object-image" alt="Bag">
-      <div class="object-name">
-        <span class="translatable" data-original="Eraser" data-translation="Borrador">Eraser</span> 
-      </div>
+    <!-- Eraser -->
+    <div class="object-item" onclick="flipCard(this)">
+      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/eraser-solid-full.svg" 
+           class="object-image" alt="Eraser">
+      <span class="object-name">???</span>
+      <button class="speak-word-btn btn-style" onclick="speakWord('Eraser'); event.stopPropagation();">🔊</button>
     </div>
+
   </div>
 </section>
+
+<script>
+function flipCard(card) {
+  const wordSpan = card.querySelector(".object-name");
+  if (wordSpan.textContent === "???") {
+    wordSpan.textContent = card.querySelector("img").alt; // revela el alt
+  } else {
+    wordSpan.textContent = "???"; // opcional: vuelve a ocultar
+  }
+}
+
+function speakWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-US";
+  speechSynthesis.speak(utterance);
+}
+</script>
+
   
 <!-- Numbers -->
 <section id="section7" class="bloque" data-translated="false">
@@ -702,9 +731,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });  
 </script>
 
-<!-- Auth0 -->
-<script src="../auth.js"></script>
-
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
   // Inicializa el mapa
@@ -811,7 +837,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.onload = () => { speechSynthesis.getVoices(); };
 </script>
 
-
-  
+<!-- Auth0 -->
+<script src="../auth.js"></script>
 </body>
 </html>

@@ -619,47 +619,85 @@
           data-translation="📝 Quiz: ¡Comprueba tu conocimiento!">
       📝 Quiz: Check your knowledge!
     </span>
-    <button class="translate-section-btn">🌐</button>
-    <button onclick="speak('Quiz: Check your knowledge!')">🔊</button>
+    <button class="translate-section-btn" 
+            data-original="🌐" data-translation="🌐">🌐</button>
+    <button onclick="speak('Quiz: Check your knowledge!')"
+            data-original="🔊" data-translation="🔊">🔊</button>
   </h2>
 
   <form id="quiz-form">
     <!-- Q1 -->
     <div class="quiz-item">
-      <p><strong>1. How do you say "Hola" in English?</strong></p>
-      <label><input type="radio" name="q1" value="a"> Good night</label><br>
-      <label><input type="radio" name="q1" value="b"> Hello</label><br>
-      <label><input type="radio" name="q1" value="c"> Bye</label>
+      <p><strong class="translatable" 
+                 data-original="1. How do you say 'Hola' in English?" 
+                 data-translation="1. ¿Cómo se dice 'Hola' en inglés?">
+        1. How do you say "Hola" in English?
+      </strong></p>
+      <label><input type="radio" name="q1" value="a"
+                    data-original="Good night" data-translation="Buenas noches">Good night</label><br>
+      <label><input type="radio" name="q1" value="b"
+                    data-original="Hello" data-translation="Hola">Hello</label><br>
+      <label><input type="radio" name="q1" value="c"
+                    data-original="Bye" data-translation="Adiós">Bye</label>
     </div>
 
     <!-- Q2 -->
     <div class="quiz-item">
-      <p><strong>2. Which pronoun fits: "___ am Jordan"</strong></p>
-      <label><input type="radio" name="q2" value="a"> I</label><br>
-      <label><input type="radio" name="q2" value="b"> You</label><br>
-      <label><input type="radio" name="q2" value="c"> They</label>
+      <p><strong class="translatable" 
+                 data-original="2. Which pronoun fits: '___ am Jordan'" 
+                 data-translation="2. ¿Qué pronombre va: '___ soy Jordan'?">
+        2. Which pronoun fits: "___ am Jordan"
+      </strong></p>
+      <label><input type="radio" name="q2" value="a"
+                    data-original="I" data-translation="Yo">I</label><br>
+      <label><input type="radio" name="q2" value="b"
+                    data-original="You" data-translation="Tú">You</label><br>
+      <label><input type="radio" name="q2" value="c"
+                    data-original="They" data-translation="Ellos/Ellas">They</label>
     </div>
 
     <!-- Q3 -->
     <div class="quiz-item">
-      <p><strong>3. What is "treinta" in English?</strong></p>
-      <label><input type="radio" name="q3" value="a"> Twenty</label><br>
-      <label><input type="radio" name="q3" value="b"> Thirty</label><br>
-      <label><input type="radio" name="q3" value="c"> Thirty-one</label>
+      <p><strong class="translatable" 
+                 data-original="3. What is 'treinta' in English?" 
+                 data-translation="3. ¿Qué es 'treinta' en inglés?">
+        3. What is "treinta" in English?
+      </strong></p>
+      <label><input type="radio" name="q3" value="a"
+                    data-original="Twenty" data-translation="Veinte">Twenty</label><br>
+      <label><input type="radio" name="q3" value="b"
+                    data-original="Thirty" data-translation="Treinta">Thirty</label><br>
+      <label><input type="radio" name="q3" value="c"
+                    data-original="Thirty-one" data-translation="Treinta y uno">Thirty-one</label>
     </div>
 
     <!-- Q4 -->
     <div class="quiz-item">
-      <p><strong>4. Which farewell means "Hasta luego"?</strong></p>
-      <label><input type="radio" name="q4" value="a"> See you later</label><br>
-      <label><input type="radio" name="q4" value="b"> Good morning</label><br>
-      <label><input type="radio" name="q4" value="c"> Hello</label>
+      <p><strong class="translatable" 
+                 data-original="4. Which farewell means 'Hasta luego'?" 
+                 data-translation="4. ¿Cuál despedida significa 'Hasta luego'?">
+        4. Which farewell means "Hasta luego"?
+      </strong></p>
+      <label><input type="radio" name="q4" value="a"
+                    data-original="See you later" data-translation="Hasta luego">See you later</label><br>
+      <label><input type="radio" name="q4" value="b"
+                    data-original="Good morning" data-translation="Buenos días">Good morning</label><br>
+      <label><input type="radio" name="q4" value="c"
+                    data-original="Hello" data-translation="Hola">Hello</label>
     </div>
 
     <!-- Q5: matching objects -->
     <div class="quiz-item">
-      <p><strong>5. Match the object with its name:</strong></p>
-      <p>Drag the English word to the correct picture (Book, Pen, Chair)</p>
+      <p><strong class="translatable" 
+                 data-original="5. Match the object with its name:" 
+                 data-translation="5. Empareja el objeto con su nombre:">
+        5. Match the object with its name:
+      </strong></p>
+      <p class="translatable" 
+         data-original="Drag the English word to the correct picture (Book, Pen, Chair)"
+         data-translation="Arrastra la palabra en inglés a la imagen correcta (Libro, Bolígrafo, Silla)">
+        Drag the English word to the correct picture (Book, Pen, Chair)
+      </p>
       <div class="matching-grid">
         <div class="object-item" data-answer="Book">
           <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/book-solid-full.svg" 
@@ -675,18 +713,25 @@
         </div>
       </div>
       <div class="word-bank">
-        <span class="draggable" draggable="true" id="word-Book">Book</span>
-        <span class="draggable" draggable="true" id="word-Pen">Pen</span>
-        <span class="draggable" draggable="true" id="word-Chair">Chair</span>
+        <span class="draggable" draggable="true" id="word-Book" 
+              data-original="Book" data-translation="Libro">Book</span>
+        <span class="draggable" draggable="true" id="word-Pen" 
+              data-original="Pen" data-translation="Bolígrafo">Pen</span>
+        <span class="draggable" draggable="true" id="word-Chair" 
+              data-original="Chair" data-translation="Silla">Chair</span>
       </div>
     </div>
 
-    <button type="button" onclick="checkQuiz()" class="big-btn">Submit / Enviar</button>
+    <button type="button" onclick="checkQuiz()" class="big-btn"
+            data-original="Submit / Enviar" data-translation="Enviar">Submit / Enviar</button>
   </form>
 
-  <p id="quiz-result"></p>
+  <p id="quiz-result" class="translatable" 
+     data-original="Your result will appear here." 
+     data-translation="Tu resultado aparecerá aquí.">
+    Your result will appear here.
+  </p>
 </section>
-
 
 <!-- Material PDF -->
   <section id="material-final" class="bloque" data-translated="false">
@@ -944,56 +989,56 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <script>
   // Drag & Drop for Q5
-  const draggables = document.querySelectorAll('.draggable');
-  const objectItems = document.querySelectorAll('.object-item');
+const draggables = document.querySelectorAll('.draggable');
+const objectItems = document.querySelectorAll('.object-item');
 
-  draggables.forEach(draggable => {
-    draggable.addEventListener('dragstart', e => {
-      e.dataTransfer.setData('text', e.target.id);
-    });
+draggables.forEach(draggable => {
+  draggable.addEventListener('dragstart', e => {
+    e.dataTransfer.setData('text', e.target.id);
   });
+});
 
-  objectItems.forEach(item => {
-    item.addEventListener('dragover', e => e.preventDefault());
-    item.addEventListener('drop', e => {
-      e.preventDefault();
-      const id = e.dataTransfer.getData('text');
-      const word = document.getElementById(id);
-      if(word.textContent === item.dataset.answer) {
-        item.appendChild(word);
-        item.style.border = "2px solid green";
-      } else {
-        alert('Try again!');
-      }
-    });
+objectItems.forEach(item => {
+  item.addEventListener('dragover', e => e.preventDefault());
+  item.addEventListener('drop', e => {
+    e.preventDefault();
+    const id = e.dataTransfer.getData('text');
+    const word = document.getElementById(id);
+    if(word.textContent === item.dataset.answer){
+      item.appendChild(word);
+      item.style.border = "2px solid green";
+    } else {
+      alert('Try again!');
+    }
   });
+});
 
-  // Check multiple choice answers
-  function checkQuiz() {
-    let score = 0;
-    const answers = {q1:'b', q2:'a', q3:'b', q4:'a'};
-    for(const q in answers){
-      const radios = document.getElementsByName(q);
-      for(let r of radios){
-        if(r.checked && r.value === answers[q]){
-          score++;
-        }
+// Check multiple choice answers + drag & drop
+function checkQuiz() {
+  let score = 0;
+  const answers = {q1:'b', q2:'a', q3:'b', q4:'a'};
+  for(const q in answers){
+    const radios = document.getElementsByName(q);
+    for(let r of radios){
+      if(r.checked && r.value === answers[q]){
+        score++;
       }
     }
-
-    // Check drag-drop
-    let dragScore = 0;
-    objectItems.forEach(item => {
-      const word = item.querySelector('.draggable');
-      if(word && word.textContent === item.dataset.answer){
-        dragScore++;
-      }
-    });
-
-    const totalScore = score + dragScore;
-    document.getElementById('quiz-result').textContent = `You scored ${totalScore}/8 🎉`;
-    speak(`You scored ${totalScore} out of 8`);
   }
+
+  // Check drag-drop
+  let dragScore = 0;
+  objectItems.forEach(item => {
+    const word = item.querySelector('.draggable');
+    if(word && word.textContent === item.dataset.answer){
+      dragScore++;
+    }
+  });
+
+  const totalScore = score + dragScore;
+  document.getElementById('quiz-result').textContent = `You scored ${totalScore}/8 🎉`;
+  speak(`You scored ${totalScore} out of 8`);
+}
 </script>
 
 <style>

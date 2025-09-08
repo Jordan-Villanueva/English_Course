@@ -390,24 +390,6 @@
 
   </div>
 </section>
-
-<script>
-function flipCard(card) {
-  const wordSpan = card.querySelector(".object-name");
-  if (wordSpan.textContent === "???") {
-    wordSpan.textContent = card.querySelector("img").alt; // revela el alt
-  } else {
-    wordSpan.textContent = "???"; // opcional: vuelve a ocultar
-  }
-}
-
-function speakWord(word) {
-  const utterance = new SpeechSynthesisUtterance(word);
-  utterance.lang = "en-US";
-  speechSynthesis.speak(utterance);
-}
-</script>
-
   
 <!-- Numbers -->
 <section id="section7" class="bloque" data-translated="false">
@@ -658,6 +640,26 @@ function speakWord(word) {
 </footer>
 
 <script>
+function flipCard(card) {
+  const wordSpan = card.querySelector(".object-name");
+  const isTranslated = card.closest("section").getAttribute("data-translated") === "true";
+  if (wordSpan.textContent === "???") {
+    // Revela el texto en el idioma actual
+    wordSpan.textContent = isTranslated 
+      ? wordSpan.dataset.translation 
+      : wordSpan.dataset.original;
+    wordSpan.dataset.revealed = "true"; // marcar como revelado
+  } else {
+    wordSpan.textContent = "???"; // opcional: volver a ocultar
+    wordSpan.dataset.revealed = "false";
+  }
+}
+
+function speakWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-US";
+  speechSynthesis.speak(utterance);
+}
 
  function preprocessTextForTTS(text) {
   // Diccionario de contracciones comunes → versión hackeada
@@ -730,25 +732,31 @@ function practiceNumbers(start=1, end=10) {
   speak(text);
 }
 
-// Toggle section translation
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".translate-section-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-    const container = btn.closest("section, header");
-    const isTranslated = container.getAttribute("data-translated") === "true";
-    
-    // Alternar todos los elementos traducibles dentro del contenedor
-    container.querySelectorAll(".translatable").forEach(el => {
-      el.textContent = isTranslated 
-        ? el.dataset.original 
-        : el.dataset.translation;
-    });
-    
-    // Cambiar flag
-    container.setAttribute("data-translated", isTranslated ? "false" : "true");
+      const container = btn.closest("section, header");
+      const isTranslated = container.getAttribute("data-translated") === "true";
+
+      container.querySelectorAll(".translatable").forEach(el => {
+        // Si es un objeto interactivo revelado, traducirlo
+        if (el.classList.contains("object-name") && el.dataset.revealed === "true") {
+          el.textContent = isTranslated 
+            ? el.dataset.original 
+            : el.dataset.translation;
+        } else if (!el.classList.contains("object-name")) {
+          // Otro texto de la sección
+          el.textContent = isTranslated 
+            ? el.dataset.original 
+            : el.dataset.translation;
+        }
+      });
+
+      container.setAttribute("data-translated", isTranslated ? "false" : "true");
     });
   });
-});  
+});
+
 </script>
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>

@@ -611,6 +611,83 @@
   </p>
 </section>
 
+<!-- Quiz -->
+<section id="quiz-section" class="bloque" data-translated="false">
+  <h2 class="title-flex">
+    <span id="quiz-title" class="translatable"
+          data-original="📝 Quiz: Check your knowledge!"
+          data-translation="📝 Quiz: ¡Comprueba tu conocimiento!">
+      📝 Quiz: Check your knowledge!
+    </span>
+    <button class="translate-section-btn">🌐</button>
+    <button onclick="speak('Quiz: Check your knowledge!')">🔊</button>
+  </h2>
+
+  <form id="quiz-form">
+    <!-- Q1 -->
+    <div class="quiz-item">
+      <p><strong>1. How do you say "Hola" in English?</strong></p>
+      <label><input type="radio" name="q1" value="a"> Good night</label><br>
+      <label><input type="radio" name="q1" value="b"> Hello</label><br>
+      <label><input type="radio" name="q1" value="c"> Bye</label>
+    </div>
+
+    <!-- Q2 -->
+    <div class="quiz-item">
+      <p><strong>2. Which pronoun fits: "___ am Jordan"</strong></p>
+      <label><input type="radio" name="q2" value="a"> I</label><br>
+      <label><input type="radio" name="q2" value="b"> You</label><br>
+      <label><input type="radio" name="q2" value="c"> They</label>
+    </div>
+
+    <!-- Q3 -->
+    <div class="quiz-item">
+      <p><strong>3. What is "treinta" in English?</strong></p>
+      <label><input type="radio" name="q3" value="a"> Twenty</label><br>
+      <label><input type="radio" name="q3" value="b"> Thirty</label><br>
+      <label><input type="radio" name="q3" value="c"> Thirty-one</label>
+    </div>
+
+    <!-- Q4 -->
+    <div class="quiz-item">
+      <p><strong>4. Which farewell means "Hasta luego"?</strong></p>
+      <label><input type="radio" name="q4" value="a"> See you later</label><br>
+      <label><input type="radio" name="q4" value="b"> Good morning</label><br>
+      <label><input type="radio" name="q4" value="c"> Hello</label>
+    </div>
+
+    <!-- Q5: matching objects -->
+    <div class="quiz-item">
+      <p><strong>5. Match the object with its name:</strong></p>
+      <p>Drag the English word to the correct picture (Book, Pen, Chair)</p>
+      <div class="matching-grid">
+        <div class="object-item" data-answer="Book">
+          <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/book-solid-full.svg" 
+               class="object-image" alt="Book">
+        </div>
+        <div class="object-item" data-answer="Pen">
+          <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pen-clip-solid-full.svg" 
+               class="object-image" alt="Pen">
+        </div>
+        <div class="object-item" data-answer="Chair">
+          <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/chair-solid-full.svg" 
+               class="object-image" alt="Chair">
+        </div>
+      </div>
+      <div class="word-bank">
+        <span class="draggable" draggable="true" id="word-Book">Book</span>
+        <span class="draggable" draggable="true" id="word-Pen">Pen</span>
+        <span class="draggable" draggable="true" id="word-Chair">Chair</span>
+      </div>
+    </div>
+
+    <button type="button" onclick="checkQuiz()" class="big-btn">Submit / Enviar</button>
+  </form>
+
+  <p id="quiz-result"></p>
+</section>
+
+
 <!-- Material PDF -->
   <section id="material-final" class="bloque" data-translated="false">
    <h2 class="title-flex">
@@ -864,6 +941,68 @@ document.addEventListener("DOMContentLoaded", () => {
   // Evitar primer playback en blanco
   window.onload = () => { speechSynthesis.getVoices(); };
 </script>
+
+<script>
+  // Drag & Drop for Q5
+  const draggables = document.querySelectorAll('.draggable');
+  const objectItems = document.querySelectorAll('.object-item');
+
+  draggables.forEach(draggable => {
+    draggable.addEventListener('dragstart', e => {
+      e.dataTransfer.setData('text', e.target.id);
+    });
+  });
+
+  objectItems.forEach(item => {
+    item.addEventListener('dragover', e => e.preventDefault());
+    item.addEventListener('drop', e => {
+      e.preventDefault();
+      const id = e.dataTransfer.getData('text');
+      const word = document.getElementById(id);
+      if(word.textContent === item.dataset.answer) {
+        item.appendChild(word);
+        item.style.border = "2px solid green";
+      } else {
+        alert('Try again!');
+      }
+    });
+  });
+
+  // Check multiple choice answers
+  function checkQuiz() {
+    let score = 0;
+    const answers = {q1:'b', q2:'a', q3:'b', q4:'a'};
+    for(const q in answers){
+      const radios = document.getElementsByName(q);
+      for(let r of radios){
+        if(r.checked && r.value === answers[q]){
+          score++;
+        }
+      }
+    }
+
+    // Check drag-drop
+    let dragScore = 0;
+    objectItems.forEach(item => {
+      const word = item.querySelector('.draggable');
+      if(word && word.textContent === item.dataset.answer){
+        dragScore++;
+      }
+    });
+
+    const totalScore = score + dragScore;
+    document.getElementById('quiz-result').textContent = `You scored ${totalScore}/8 🎉`;
+    speak(`You scored ${totalScore} out of 8`);
+  }
+</script>
+
+<style>
+  #quiz-section .quiz-item { margin-bottom: 15px; }
+  .matching-grid { display: flex; gap: 15px; margin: 10px 0; }
+  .matching-grid .object-item { width: 100px; height: 100px; border: 2px dashed #ccc; display:flex; align-items:center; justify-content:center; }
+  .word-bank { margin-top: 10px; display:flex; gap:10px; }
+  .word-bank .draggable { cursor: grab; padding: 5px 10px; background: #eee; border-radius:5px; }
+</style>
 
 <!-- Auth0 -->
 <script src="../auth.js"></script>

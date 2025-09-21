@@ -445,6 +445,35 @@
 	  .header-buttons { flex-direction:column; align-items:center; }
 	  .header-buttons button { width:80%; margin-bottom:10px; }
 	}
+	
+	@media (max-width: 768px) {
+	    .title-flex {
+		display: grid !important;
+		grid-template-columns: 1fr auto;
+		gap: 10px;
+		align-items: center;
+	    }
+	    
+	    .title-flex > .translatable {
+		grid-column: 1;
+	    }
+	    
+	    .title-flex > button {
+		grid-column: 2;
+		margin: 0 !important;
+		justify-self: end;
+	    }
+	    
+	    /* Para múltiples botones */
+	    .title-flex > button.translate-section-btn {
+		grid-row: 1;
+	    }
+	    
+	    .title-flex > button[onclick*="speak"] {
+		grid-row: 1;
+		grid-column: 3;
+	    }
+	}
         
         /* Animaciones */
         @keyframes pulse {

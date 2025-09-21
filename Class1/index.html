@@ -64,6 +64,29 @@
             gap: 15px;
         }
         
+	.header-buttons {
+	  display: flex;
+	  justify-content: center;
+	  gap: 10px;
+	  margin-top: 15px;
+	  flex-wrap: wrap;
+	}
+
+	.header-buttons button {
+	  padding: 10px 20px;
+	  background-color: rgba(255,255,255,0.2);
+	  color: white;
+	  border: 1px solid white;
+	  border-radius: 12px;
+	  cursor: pointer;
+	  transition: all 0.4s ease;
+	}
+
+	.header-buttons button:hover {
+	  background-color: rgba(255,255,255,0.35);
+	  transform: translateY(-2px) scale(1.05);
+	}
+        
         .user-progress {
             display: flex;
             align-items: center;
@@ -411,6 +434,11 @@
             }
         }
         
+	@media (max-width:768px) {
+	  .header-buttons { flex-direction:column; align-items:center; }
+	  .header-buttons button { width:80%; margin-bottom:10px; }
+	}
+        
         /* Animaciones */
         @keyframes pulse {
             0% { transform: scale(1); }
@@ -543,21 +571,27 @@
     </style>
 </head>
 <body>
-    <header class="main-header">
-        <div class="container">
-            <div class="header-content">
-                <h1><i class="fas fa-language"></i> English Learning Platform</h1>
-                <div class="user-progress">
-                    <div class="xp-bar">
-                        <div class="xp-progress" style="width: 30%;">150/500 XP</div>
-                    </div>
-                    <div class="streak-counter"><i class="fas fa-fire"></i> 3 días</div>
-                    <div class="coins"><i class="fas fa-coins"></i> 75</div>
-                    <button id="theme-toggle"><i class="fas fa-moon"></i></button>
-                </div>
-            </div>
-        </div>
-    </header>
+	<header class="main-header">
+	    <div class="container">
+		<div class="header-content">
+		    <h1><i class="fas fa-language"></i> English Learning Platform</h1>
+		    <div class="user-progress">
+		        <div class="xp-bar">
+		            <div class="xp-progress" style="width: 30%;">150/500 XP</div>
+		        </div>
+		        <div class="streak-counter"><i class="fas fa-fire"></i> 3 días</div>
+		        <div class="coins"><i class="fas fa-coins"></i> 75</div>
+		        <button id="theme-toggle"><i class="fas fa-moon"></i></button>
+		    </div>
+		</div>
+		
+	<div class="header-buttons">
+	    <button id="login-btn">Login/Ingresar</button>
+	    <button id="logout-btn">Logout/Salir</button>
+	    <button id="home-btn">🏠 Home/Inicio</button>
+	</div>
+	    </div>
+	</header>
     
     <nav class="lessons-nav">
         <div class="container">
@@ -1135,6 +1169,74 @@
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
+
+// Esperar a que el DOM esté listo
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar los botones
+    const loginBtn = document.getElementById('login-btn');
+    const logoutBtn = document.getElementById('logout-btn');
+    const homeBtn = document.getElementById('home-btn');
+    
+    // Función para redirigir al home
+    function goHome() {
+        window.location.href = 'https://elegant-frangipane-efce46.netlify.app/';
+    }
+    
+    // Asignar evento al botón home
+    if (homeBtn) {
+        homeBtn.addEventListener('click', goHome);
+    }
+    
+    // Verificar si auth.js ya está cargado y tiene las funciones
+    function checkAuthLoaded() {
+        if (typeof window.showLoggedOut === 'function' && 
+            typeof window.showContent === 'function') {
+            // Auth.js está cargado, actualizar UI según estado
+            if (localStorage.getItem('access_token')) {
+                // Usuario logueado
+                if (loginBtn) loginBtn.style.display = 'none';
+                if (logoutBtn) logoutBtn.style.display = 'block';
+                if (homeBtn) homeBtn.style.display = 'block';
+            } else {
+                // Usuario no logueado
+                if (loginBtn) loginBtn.style.display = 'block';
+                if (logoutBtn) logoutBtn.style.display = 'none';
+                if (homeBtn) homeBtn.style.display = 'none';
+            }
+            return true;
+        }
+        return false;
+    }
+    
+    // Intentar verificar si auth.js está cargado
+    if (!checkAuthLoaded()) {
+        // Si no está cargado aún, esperar un poco y reintentar
+        setTimeout(checkAuthLoaded, 500);
+    }
+    
+    // Si estamos en una página de clase (no en el index principal)
+    // y el usuario no está autenticado, mostrar mensaje
+    const isClassPage = window.location.pathname.includes('Class');
+    if (isClassPage && !localStorage.getItem('access_token')) {
+        const mainContent = document.querySelector('.main-content');
+        if (mainContent) {
+            mainContent.innerHTML = `
+                <div style="text-align: center; padding: 40px;">
+                    <h2>Authentication Required</h2>
+                    <p>Please log in to access this class content.</p>
+                    <button id="goto-login" style="padding: 10px 20px; background: var(--primary); color: white; border: none; border-radius: 5px;">
+                        Go to Login
+                    </button>
+                </div>
+            `;
+            
+            document.getElementById('goto-login').addEventListener('click', function() {
+                window.location.href = 'https://elegant-frangipane-efce46.netlify.app/';
+            });
+        }
+    }
+});
+
 /* ------------------------
   Texto a voz (TTS) mejorado
 ------------------------ */
@@ -1412,6 +1514,127 @@ function practiceNumbers(start=1, end=10) {
   
   const text = numbers.slice(start-1, end).join(", ");
   speak(text);
+}
+</script>
+
+<script src="../auth.js"></script>
+<!-- Script específico para páginas de clase -->
+<script>
+// Función para verificar autenticación y mostrar botones
+function checkAuthAndSetupButtons() {
+    console.log("Setting up buttons for class page...");
+    
+    // Obtener referencias a los botones
+    const loginBtn = document.getElementById('login-btn');
+    const logoutBtn = document.getElementById('logout-btn');
+    const homeBtn = document.getElementById('home-btn');
+    
+    // Verificar si se encontraron los botones
+    if (!loginBtn || !logoutBtn || !homeBtn) {
+        console.error("No se encontraron todos los botones");
+        return;
+    }
+    
+    console.log("Botones encontrados:", {loginBtn, logoutBtn, homeBtn});
+    
+    // Configurar el botón de home
+    homeBtn.onclick = function() {
+        window.location.href = 'https://elegant-frangipane-efce46.netlify.app/';
+    };
+    
+    // Configurar el botón de logout
+    logoutBtn.onclick = function() {
+        localStorage.removeItem('access_token');
+        updateAuthUI();
+        alert('Logged out successfully! / ¡Cierre de sesión exitoso!');
+    };
+    
+    // Configurar el botón de login
+    loginBtn.onclick = function() {
+        const AUTH0_DOMAIN = "dev-bjoqtux6wua5w2l2.us.auth0.com";
+        const AUTH0_CLIENT_ID = "ZcgIAj7vMvtUixpX421Jv6gs4YrakeC7";
+        const REDIRECT_URI = "https://elegant-frangipane-efce46.netlify.app";
+        
+        const authUrl = `https://${AUTH0_DOMAIN}/authorize?response_type=token&client_id=${AUTH0_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=openid%20profile%20email`;
+        window.location.href = authUrl;
+    };
+    
+    // Función para actualizar la interfaz
+    function updateAuthUI() {
+        const isLoggedIn = localStorage.getItem('access_token');
+        console.log("Usuario autenticado:", isLoggedIn);
+        
+        if (isLoggedIn) {
+            loginBtn.style.display = 'none';
+            logoutBtn.style.display = 'block';
+            homeBtn.style.display = 'block';
+        } else {
+            loginBtn.style.display = 'block';
+            logoutBtn.style.display = 'none';
+            homeBtn.style.display = 'none';
+        }
+    }
+    
+    // Verificar si hay un token en el URL (después de redirección de Auth0)
+    function checkUrlForToken() {
+        const hash = window.location.hash.substr(1);
+        const params = new URLSearchParams(hash);
+        const accessToken = params.get('access_token');
+        
+        if (accessToken) {
+            localStorage.setItem('access_token', accessToken);
+            // Limpiar el URL
+            window.location.hash = '';
+            return true;
+        }
+        return false;
+    }
+    
+    // Verificar autenticación y actualizar UI
+    if (checkUrlForToken()) {
+        // Se acaba de autenticar
+        updateAuthUI();
+    } else {
+        // Verificar si ya estaba autenticado
+        updateAuthUI();
+    }
+    
+    // Si no está autenticado en una página de clase, mostrar mensaje
+    if (!localStorage.getItem('access_token')) {
+        const mainContent = document.querySelector('.lesson-content');
+        if (mainContent && !document.getElementById('auth-required-message')) {
+            const originalContent = mainContent.innerHTML;
+            
+            // Crear mensaje de autenticación
+            const authMessage = document.createElement('div');
+            authMessage.id = 'auth-required-message';
+            authMessage.style.textAlign = 'center';
+            authMessage.style.padding = '40px';
+            authMessage.innerHTML = `
+                <h2>Authentication Required</h2>
+                <p>Please log in to access this class content.</p>
+                <button style="padding: 10px 20px; background: var(--primary); color: white; border: none; border-radius: 5px;">
+                    Go to Login
+                </button>
+            `;
+            
+            // Reemplazar contenido
+            mainContent.innerHTML = '';
+            mainContent.appendChild(authMessage);
+            
+            // Configurar evento del botón
+            authMessage.querySelector('button').onclick = function() {
+                window.location.href = 'https://elegant-frangipane-efce46.netlify.app/';
+            };
+        }
+    }
+}
+
+// Esperar a que el DOM esté completamente cargado
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', checkAuthAndSetupButtons);
+} else {
+    checkAuthAndSetupButtons();
 }
 </script>
 </body>

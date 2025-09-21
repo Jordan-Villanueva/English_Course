@@ -86,26 +86,28 @@ header .subtitle {
 }
 
 .header-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 15px;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
 }
 
 .header-buttons button {
-  padding: 10px 20px;
-  background-color: rgba(255,255,255,0.2);
-  color: white;
-  border: 1px solid white;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.4s ease;
+    padding: 10px 20px;
+    background-color: rgba(255,255,255,0.2);
+    color: white;
+    border: 1px solid white;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    display: inline-block; /* Esto reemplaza el display:none que quitamos */
 }
 
 .header-buttons button:hover {
-  background-color: rgba(255,255,255,0.35);
-  transform: translateY(-2px) scale(1.05);
+    background-color: rgba(255,255,255,0.35);
+    transform: translateY(-2px) scale(1.05);
 }
 
 /* ===== Contenido ===== */

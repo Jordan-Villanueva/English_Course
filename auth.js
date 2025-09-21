@@ -1,6 +1,12 @@
 // ===== Helpers =====
-const path = window.location.pathname.replace(/\/+$/, ""); // quita barra al final
-const onHomePage = path === "" || path === "/" || path.endsWith("index.html");
+// Conectar elementos del DOM
+const loginBtn  = document.getElementById("login-btn");
+const logoutBtn = document.getElementById("logout-btn");
+const homeBtn   = document.getElementById("home-btn"); // si existe
+const content   = document.getElementById("content");
+
+// Detectar si estamos en index.html
+const onHomePage = window.location.pathname.endsWith("index.html") || window.location.pathname === "/";
 
 
 // ===== Inicializar app =====

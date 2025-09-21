@@ -19,16 +19,15 @@ async function initApp() {
   }
 
   // Configurar evento de login (funciona en todas las páginas)
-  if (loginBtn) {
-    loginBtn.onclick = () => {
-      // Guardar la página actual para redirección después del login
-      if (!onHomePage) {
-        localStorage.setItem("redirectAfterLogin", window.location.href);
-      }
-      const authUrl = `https://${AUTH0_DOMAIN}/authorize?response_type=token&client_id=${AUTH0_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=openid%20profile%20email`;
-      window.location.href = authUrl;
-    };
-  }
+	if (loginBtn) {
+	  loginBtn.onclick = () => {
+	    // Siempre guardar a dónde quería ir el usuario
+	    localStorage.setItem("redirectAfterLogin", window.location.href);
+
+	    const authUrl = `https://${AUTH0_DOMAIN}/authorize?response_type=token&client_id=${AUTH0_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=openid%20profile%20email`;
+	    window.location.href = authUrl;
+	  };
+	}
 
   // Parsear hash primero (para manejar redirección de Auth0) - funciona en todas las páginas
   if (parseHash()) {

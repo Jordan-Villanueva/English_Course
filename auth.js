@@ -3,6 +3,7 @@ const content = document.getElementById("content");
 const loginBtn = document.getElementById("login-btn");
 const logoutBtn = document.getElementById("logout-btn");
 const homeBtn = document.getElementById("home-btn");
+
 // ===== Auth0 Config =====
 const AUTH0_DOMAIN = "dev-bjoqtux6wua5w2l2.us.auth0.com";
 const AUTH0_CLIENT_ID = "ZcgIAj7vMvtUixpX421Jv6gs4YrakeC7";
@@ -12,34 +13,7 @@ const REDIRECT_URI = "https://elegant-frangipane-efce46.netlify.app";
 const onHomePage = window.location.pathname === "/" || 
                    window.location.pathname.endsWith("index.html");
 
-// Solo ejecutar en página principal
-if (onHomePage) {
-    // ===== Botones de la página principal =====
-    const homeBtn = document.getElementById("home-btn");
-    const loginBtn = document.getElementById("login-btn");
-    const logoutBtn = document.getElementById("logout-btn");
-
-    // ===== Configurar eventos =====
-    if (loginBtn) {
-        loginBtn.onclick = () => {
-            const authUrl = `https://${AUTH0_DOMAIN}/authorize?response_type=token&client_id=${AUTH0_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=openid%20profile%20email`;
-            window.location.href = authUrl;
-        };
-    }
-
-    if (logoutBtn) {
-        logoutBtn.onclick = () => {
-            localStorage.removeItem("access_token");
-            showLoggedOut();
-        };
-    }
-
-    if (homeBtn) {
-        homeBtn.onclick = () => {
-            window.location.href = REDIRECT_URI;
-        };
-    }
-
+// ===== Parsear hash de Auth0 =====
 function parseHash() {
   if (window.location.hash) {
     const hash = window.location.hash.substr(1).split("&").reduce((res, item) => {
@@ -52,7 +26,7 @@ function parseHash() {
       localStorage.setItem("access_token", hash.access_token);
       window.location.hash = "";
       
-      // Redirigir a Class1 después de login exitoso
+      // Redirigir a la página destino después de login exitoso
       const redirectTo = localStorage.getItem("redirectAfterLogin");
       if (redirectTo) {
         localStorage.removeItem("redirectAfterLogin");
@@ -159,6 +133,15 @@ async function initApp() {
 
 // ===== Solo ejecutar en página principal =====
 if (onHomePage) {
+  // Configurar evento de login (solo en página principal)
+  if (loginBtn) {
+    loginBtn.onclick = () => {
+      const authUrl = `https://${AUTH0_DOMAIN}/authorize?response_type=token&client_id=${AUTH0_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=openid%20profile%20email`;
+      window.location.href = authUrl;
+    };
+  }
+
+  // Inicializar la app
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initApp);
   } else {

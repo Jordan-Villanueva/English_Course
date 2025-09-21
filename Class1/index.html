@@ -1249,22 +1249,192 @@
                 </section>
 
                 <!-- Sección 9: Group speaking -->
-                <section class="lesson-section" data-translated="false">
-                    <h2 class="title-flex">
-                        <span id="interactive-title-9" class="translatable" data-original="9. Group speaking (10 min)" data-translation="9. Conversación grupal (10 min)">
-                            9. Group speaking (10 min)
-                        </span>
-                        <button class="translate-section-btn">🌐</button>
-                        <button type="button" onclick="speak('9. Group speaking')">🔊</button>
-                    </h2>
-                    <p>
-                        <span id="group-desc" class="translatable" data-original="The students practice to introduce themselves in groups using the learned phrases, including the questions" 
-                              data-translation="Los estudiantes practican presentarse en grupos usando las frases aprendidas, incluyendo las preguntas">
-                            The students practice to introduce themselves in groups using the learned phrases, including the questions
-                        </span> 
-                        <button type="button" onclick="speak(document.getElementById('group-desc').dataset.original)">🔊</button>
-                    </p>
-                </section>
+	        <section class="lesson-section" data-translated="false">
+	            <h2 class="title-flex">
+	                <span id="interactive-title-9" class="translatable" data-original="9. Group speaking (10 min)" data-translation="9. Conversación grupal (10 min)">
+	                    9. Group speaking (10 min)
+	                </span>
+	                <button class="translate-section-btn">🌐</button>
+	                <button type="button" onclick="speak('9. Group speaking')">🔊</button>
+	            </h2>
+	            <p>
+	                <span id="group-desc" class="translatable" data-original="The students practice to introduce themselves in groups using the learned phrases, including the questions" 
+	                      data-translation="Los estudiantes practican presentarse en grupos usando las frases aprendidas, incluyendo las preguntas">
+	                    The students practice to introduce themselves in groups using the learned phrases, including the questions
+	                </span> 
+	                <button type="button" onclick="speak(document.getElementById('group-desc').dataset.original)">🔊</button>
+	            </p>
+	        </section>
+	        
+<!-- Writing activity -->
+	<section class="lesson-section" data-translated="false">
+	    <h2 class="title-flex">
+		<span id="interactive-title-10" class="translatable" data-original="10. Writing activity (10 min)" data-translation="10. Actividad de escritura (10 min)">10. Writing activity (10 min)</span>
+		<button class="translate-section-btn">🌐</button>
+		<button onclick="speak('10. Writing activity')">🔊</button>
+	    </h2>
+	    <div class="paragraph-with-buttons">
+		<div class="translatable-content">
+		    <span id="write-desc" class="translatable" data-original="Solve the following exercise:" data-translation="Resuelve el siguiente ejercicio:">Solve the following exercise:</span>
+		</div>
+		<div class="translation-buttons">
+		    <button onclick="speak(document.getElementById('write-desc').dataset.original)">🔊</button>
+		</div>
+	    </div>
+	    <img src="cierre.png" alt="Closing activity: Complete the dialogues" width="100%" style="border: 2px solid #ccc; border-radius: 10px; max-width: 600px;">
+	</section>
+
+	<!-- Games -->
+	<section class="lesson-section" data-translated="false">
+	    <h2 class="title-flex">
+		<span id="interactive-title-11" class="translatable" data-original="11. Interactive games / Baamboozle (10 min)" data-translation="11. Juegos interactivos / Baamboozle (10 min)">11. Interactive games / Baamboozle (10 min)</span>
+		<button class="translate-section-btn">🌐</button>
+		<button onclick="speak('11. Interactive games / Baamboozle')">🔊</button>
+	    </h2>
+
+	    <div class="game-item">
+		<div class="paragraph-with-buttons">
+		    <div class="translatable-content">
+			<span id="game-1" class="translatable" data-original="🎲 Game 1" data-translation="🎲 Juego 1">🎲 Game 1</span>
+		    </div>
+		    <div class="translation-buttons">
+			<button onclick="speak('Game 1')">🔊</button>
+		    </div>
+		</div>
+		<a href="https://www.baamboozle.com/game/641765" target="_blank" class="speak-btn translatable big-btn" data-original="Play on Baamboozle" data-translation="Jugar en Baamboozle">Play on Baamboozle</a>
+	    </div>
+
+	    <div class="game-item">
+		<div class="paragraph-with-buttons">
+		    <div class="translatable-content">
+			<span id="game-2" class="translatable" data-original="🎲 Game 2" data-translation="🎲 Juego 2">🎲 Game 2</span>
+		    </div>
+		    <div class="translation-buttons">
+			<button onclick="speak('Game 2')">🔊</button>
+		    </div>
+		</div>
+		<a href="https://www.baamboozle.com/game/54952" target="_blank" class="speak-btn translatable big-btn" data-original="Play on Baamboozle" data-translation="Jugar en Baamboozle">Play on Baamboozle</a>
+	    </div>
+
+	    <div class="paragraph-with-buttons">
+		<div class="translatable-content">
+		    <span id="game-tip" class="translatable" data-original="Tip: Create teams for the activity." data-translation="Consejo: Crea equipos para la actividad.">Tip: Create teams for the activity.</span>
+		</div>
+		<div class="translation-buttons">
+		    <button onclick="speak(document.getElementById('game-tip').dataset.original)">🔊</button>
+		</div>
+	    </div>
+	</section>
+
+	<!-- Quiz -->
+	<section class="lesson-section" data-translated="false">
+	    <h2 class="title-flex">
+		<span id="quiz-title" class="translatable" data-original="📝 Quiz: Check your knowledge!" data-translation="📝 Quiz: ¡Comprueba tu conocimiento!">📝 Quiz: Check your knowledge!</span>
+		<button class="translate-section-btn">🌐</button>
+		<button onclick="speak('Quiz: Check your knowledge!')">🔊</button>
+	    </h2>
+
+	    <form id="quiz-form">
+		<!-- Q1 -->
+		<div class="quiz-item">
+		    <div class="paragraph-with-buttons">
+			<div class="translatable-content">
+			    <strong class="translatable" data-original="1. How do you say 'Hola' in English?" data-translation="1. ¿Cómo se dice 'Hola' en inglés?">1. How do you say "Hola" in English?</strong>
+			</div>
+		    </div>
+		    <label><input type="radio" name="q1" value="a"> <span class="translatable" data-original="Good night" data-translation="Buenas noches">Good night</span></label><br>
+		    <label><input type="radio" name="q1" value="b"> <span class="translatable" data-original="Hello" data-translation="Hola">Hello</span></label><br>
+		    <label><input type="radio" name="q1" value="c"> <span class="translatable" data-original="Bye" data-translation="Adiós">Bye</span></label>
+		</div>
+
+		<!-- Q2 -->
+		<div class="quiz-item">
+		    <div class="paragraph-with-buttons">
+			<div class="translatable-content">
+			    <strong class="translatable" data-original="2. Which pronoun fits: '___ am Jordan'" data-translation="2. ¿Qué pronombre va: '___ soy Jordan'?">2. Which pronoun fits: "___ am Jordan"</strong>
+			</div>
+		    </div>
+		    <label><input type="radio" name="q2" value="a"> <span class="translatable" data-original="I" data-translation="Yo">I</span></label><br>
+		    <label><input type="radio" name="q2" value="b"> <span class="translatable" data-original="You" data-translation="Tú">You</span></label><br>
+		    <label><input type="radio" name="q2" value="c"> <span class="translatable" data-original="They" data-translation="Ellos/Ellas">They</span></label>
+		</div>
+
+		<!-- Q3 -->
+		<div class="quiz-item">
+		    <div class="paragraph-with-buttons">
+			<div class="translatable-content">
+			    <strong class="translatable" data-original="3. What is 'treinta' in English?" data-translation="3. ¿Qué es 'treinta' en inglés?">3. What is "treinta" in English?</strong>
+			</div>
+		    </div>
+		    <label><input type="radio" name="q3" value="a"> <span class="translatable" data-original="Twenty" data-translation="Veinte">Twenty</span></label><br>
+		    <label><input type="radio" name="q3" value="b"> <span class="translatable" data-original="Thirty" data-translation="Treinta">Thirty</span></label><br>
+		    <label><input type="radio" name="q3" value="c"> <span class="translatable" data-original="Thirty-one" data-translation="Treinta y uno">Thirty-one</span></label>
+		</div>
+
+		<!-- Q4 -->
+		<div class="quiz-item">
+		    <div class="paragraph-with-buttons">
+			<div class="translatable-content">
+			    <strong class="translatable" data-original="4. Which farewell means 'Hasta luego'?" data-translation="4. ¿Cuál despedida significa 'Hasta luego'?">4. Which farewell means "Hasta luego"?</strong>
+			</div>
+		    </div>
+		    <label><input type="radio" name="q4" value="a"> <span class="translatable" data-original="See you later" data-translation="Hasta luego">See you later</span></label><br>
+		    <label><input type="radio" name="q4" value="b"> <span class="translatable" data-original="Good morning" data-translation="Buenos días">Good morning</span></label><br>
+		    <label><input type="radio" name="q4" value="c"> <span class="translatable" data-original="Hello" data-translation="Hola">Hello</span></label>
+		</div>
+
+		<!-- Q5: matching objects -->
+		<div class="quiz-item">
+		    <div class="paragraph-with-buttons">
+			<div class="translatable-content">
+			    <strong class="translatable" data-original="5. Match the object with its name:" data-translation="5. Empareja el objeto con su nombre:">5. Match the object with its name:</strong>
+			</div>
+		    </div>
+		    <div class="paragraph-with-buttons">
+			<div class="translatable-content">
+			    <span class="translatable" data-original="Drag the English word to the correct picture (Book, Pen, Chair)" data-translation="Arrastra la palabra en inglés a la imagen correcta (Libro, Bolígrafo, Silla)">Drag the English word to the correct picture (Book, Pen, Chair)</span>
+			</div>
+		    </div>
+		    <div class="matching-grid">
+			<div class="object-item" data-answer="Book">
+			    <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/book-solid-full.svg" class="object-image" alt="Book">
+			</div>
+			<div class="object-item" data-answer="Pen">
+			    <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pen-clip-solid-full.svg" class="object-image" alt="Pen">
+			</div>
+			<div class="object-item" data-answer="Chair">
+			    <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/chair-solid-full.svg" class="object-image" alt="Chair">
+			</div>
+		    </div>
+		    <div class="word-bank">
+			<span class="draggable" draggable="true" id="word-Book" data-original="Book" data-translation="Libro">Book</span>
+			<span class="draggable" draggable="true" id="word-Pen" data-original="Pen" data-translation="Bolígrafo">Pen</span>
+			<span class="draggable" draggable="true" id="word-Chair" data-original="Chair" data-translation="Silla">Chair</span>
+		    </div>
+		</div>
+
+		<button type="button" onclick="checkQuiz()" class="big-btn translatable" data-original="Submit" data-translation="Enviar">Submit</button>
+	    </form>
+
+	    <div class="paragraph-with-buttons">
+		<div class="translatable-content">
+		    <span id="quiz-result" class="translatable" data-original="Your result will appear here." data-translation="Tu resultado aparecerá aquí.">Your result will appear here.</span>
+		</div>
+	    </div>
+	</section>
+
+	<!-- Material PDF -->
+	<section class="lesson-section" data-translated="false">
+	    <h2 class="title-flex">
+		<span id="pdf-material" class="translatable" data-original="📄 Download the base material for session 1" data-translation="📄 Descargar material base de la sesión 1">📄 Download the base material for session 1</span>
+		<button class="translate-section-btn">🌐</button>
+		<button onclick="speak('Download the base material for session 1')">🔊</button>
+	    </h2>
+	    <p>
+		<a href="class1.pdf" download="class1.pdf" class="big-btn">📄 Download PDF</a>
+	    </p>
+	    <embed src="class1.pdf" type="application/pdf" width="100%" height="600px" />
+	</section>
 
                 <!-- Sección de finalización -->
                 <section class="lesson-section">

@@ -283,6 +283,43 @@
 	    align-self: center !important;
 	    margin: 0 !important;
 	}
+	
+	.paragraph-with-buttons {
+	    display: flex;
+	    align-items: center;
+	    gap: 12px;
+	    margin-bottom: 15px;
+	}
+
+	.translatable-content {
+	    flex: 1;
+	    margin: 0;
+	}
+
+	.translation-buttons {
+	    flex-shrink: 0;
+	    margin: 0;
+	}
+
+	.translation-buttons button {
+	    padding: 8px 12px;
+	    margin: 0;
+	}
+
+	/* Para móviles */
+	@media (max-width: 768px) {
+	    .paragraph-with-buttons {
+		flex-direction: row; /* Mantener en línea incluso en móviles */
+		align-items: center;
+		gap: 10px;
+	    }
+	    
+	    .translation-buttons button {
+		min-width: 44px;
+		min-height: 44px;
+		padding: 10px;
+	    }
+	}
 
 	/* PARA MÓVILES */
 	@media (max-width: 768px) {

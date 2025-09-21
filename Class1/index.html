@@ -1630,7 +1630,7 @@ function practiceNumbers(start=1, end=10) {
   practiceTimeouts = [];
   window.speechSynthesis.cancel();
   
-  const text = numbers.slice(start-1, end).join(", ");
+  const text = numbers.slice(start-1, end).map(n => n.en).join(", ");
   speak(text);
 }
 </script>

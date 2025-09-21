@@ -1,3 +1,8 @@
+// ===== Helpers =====
+const path = window.location.pathname.replace(/\/+$/, ""); // quita barra al final
+const onHomePage = path === "" || path === "/" || path.endsWith("index.html");
+
+
 // ===== Inicializar app =====
 async function initApp() {
   let tokenValid = false;

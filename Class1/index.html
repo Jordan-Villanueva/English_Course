@@ -1518,124 +1518,67 @@ function practiceNumbers(start=1, end=10) {
 </script>
 
 <script src="../auth.js"></script>
-<!-- Script específico para páginas de clase -->
 <script>
-// Función para verificar autenticación y mostrar botones
-function checkAuthAndSetupButtons() {
-    console.log("Setting up buttons for class page...");
-    
-    // Obtener referencias a los botones
+// Script de autenticación para páginas de clase
+document.addEventListener('DOMContentLoaded', function() {
     const loginBtn = document.getElementById('login-btn');
     const logoutBtn = document.getElementById('logout-btn');
     const homeBtn = document.getElementById('home-btn');
     
-    // Verificar si se encontraron los botones
-    if (!loginBtn || !logoutBtn || !homeBtn) {
-        console.error("No se encontraron todos los botones");
-        return;
-    }
+    // Verificar autenticación
+    const token = localStorage.getItem('access_token');
+    const isAuthenticated = !!token;
     
-    console.log("Botones encontrados:", {loginBtn, logoutBtn, homeBtn});
+    // Configurar botones
+    if (loginBtn) loginBtn.style.display = isAuthenticated ? 'none' : 'block';
+    if (logoutBtn) logoutBtn.style.display = isAuthenticated ? 'block' : 'none';
+    if (homeBtn) homeBtn.style.display = 'block';
     
-    // Configurar el botón de home
-    homeBtn.onclick = function() {
-        window.location.href = 'https://elegant-frangipane-efce46.netlify.app/';
-    };
-    
-    // Configurar el botón de logout
-    logoutBtn.onclick = function() {
-        localStorage.removeItem('access_token');
-        updateAuthUI();
-        alert('Logged out successfully! / ¡Cierre de sesión exitoso!');
-    };
-    
-    // Configurar el botón de login
-    loginBtn.onclick = function() {
-        const AUTH0_DOMAIN = "dev-bjoqtux6wua5w2l2.us.auth0.com";
-        const AUTH0_CLIENT_ID = "ZcgIAj7vMvtUixpX421Jv6gs4YrakeC7";
-        const REDIRECT_URI = "https://elegant-frangipane-efce46.netlify.app";
-        
-        const authUrl = `https://${AUTH0_DOMAIN}/authorize?response_type=token&client_id=${AUTH0_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=openid%20profile%20email`;
-        window.location.href = authUrl;
-    };
-    
-    // Función para actualizar la interfaz
-    function updateAuthUI() {
-        const isLoggedIn = localStorage.getItem('access_token');
-        console.log("Usuario autenticado:", isLoggedIn);
-        
-        if (isLoggedIn) {
-            loginBtn.style.display = 'none';
-            logoutBtn.style.display = 'block';
-            homeBtn.style.display = 'block';
-        } else {
-            loginBtn.style.display = 'block';
-            logoutBtn.style.display = 'none';
-            homeBtn.style.display = 'none';
-        }
-    }
-    
-    // Verificar si hay un token en el URL (después de redirección de Auth0)
-    function checkUrlForToken() {
-        const hash = window.location.hash.substr(1);
-        const params = new URLSearchParams(hash);
-        const accessToken = params.get('access_token');
-        
-        if (accessToken) {
-            localStorage.setItem('access_token', accessToken);
-            // Limpiar el URL
-            window.location.hash = '';
-            return true;
-        }
-        return false;
-    }
-    
-    // Verificar autenticación y actualizar UI
-    if (checkUrlForToken()) {
-        // Se acaba de autenticar
-        updateAuthUI();
-    } else {
-        // Verificar si ya estaba autenticado
-        updateAuthUI();
-    }
-    
-    // Si no está autenticado en una página de clase, mostrar mensaje
-    if (!localStorage.getItem('access_token')) {
-        const mainContent = document.querySelector('.lesson-content');
-        if (mainContent && !document.getElementById('auth-required-message')) {
-            const originalContent = mainContent.innerHTML;
+    // Configurar eventos
+    if (loginBtn) {
+        loginBtn.onclick = function() {
+            // Guardar la página actual para redirección después del login
+            localStorage.setItem("redirectAfterLogin", window.location.href);
+            // Redirigir a Auth0
+            const AUTH0_DOMAIN = "dev-bjoqtux6wua5w2l2.us.auth0.com";
+            const AUTH0_CLIENT_ID = "ZcgIAj7vMvtUixpX421Jv6gs4YrakeC7";
+            const REDIRECT_URI = "https://elegant-frangipane-efce46.netlify.app";
             
-            // Crear mensaje de autenticación
-            const authMessage = document.createElement('div');
-            authMessage.id = 'auth-required-message';
-            authMessage.style.textAlign = 'center';
-            authMessage.style.padding = '40px';
-            authMessage.innerHTML = `
-                <h2>Authentication Required</h2>
-                <p>Please log in to access this class content.</p>
-                <button style="padding: 10px 20px; background: var(--primary); color: white; border: none; border-radius: 5px;">
-                    Go to Login
-                </button>
+            const authUrl = `https://${AUTH0_DOMAIN}/authorize?response_type=token&client_id=${AUTH0_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=openid%20profile%20email`;
+            window.location.href = authUrl;
+        };
+    }
+    
+    if (logoutBtn) {
+        logoutBtn.onclick = function() {
+            localStorage.removeItem('access_token');
+            window.location.reload();
+        };
+    }
+    
+    if (homeBtn) {
+        homeBtn.onclick = function() {
+            window.location.href = 'https://elegant-frangipane-efce46.netlify.app/';
+        };
+    }
+    
+    // Si no está autenticado, mostrar mensaje
+    if (!isAuthenticated) {
+        const mainContent = document.querySelector('.main-content');
+        if (mainContent) {
+            mainContent.innerHTML = `
+                <div style="text-align: center; padding: 40px;">
+                    <h2>Authentication Required</h2>
+                    <p>Please log in to access this class content.</p>
+                    <button onclick="localStorage.setItem('redirectAfterLogin', window.location.href); window.location.href = 'https://elegant-frangipane-efce46.netlify.app/';" 
+                            style="padding: 10px 20px; background: var(--primary); color: white; border: none; border-radius: 5px;">
+                        Go to Login
+                    </button>
+                </div>
             `;
-            
-            // Reemplazar contenido
-            mainContent.innerHTML = '';
-            mainContent.appendChild(authMessage);
-            
-            // Configurar evento del botón
-            authMessage.querySelector('button').onclick = function() {
-                window.location.href = 'https://elegant-frangipane-efce46.netlify.app/';
-            };
         }
     }
-}
-
-// Esperar a que el DOM esté completamente cargado
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', checkAuthAndSetupButtons);
-} else {
-    checkAuthAndSetupButtons();
-}
+});
 </script>
 </body>
 </html>

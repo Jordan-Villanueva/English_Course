@@ -441,21 +441,58 @@
             margin: 15px 0;
         }
         
-        .object-item {
-            position: relative;
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
+	.object-item {
+	    position: relative;
+	    text-align: center;
+	    padding: 15px;
+	    border: 2px solid #ddd;
+	    border-radius: 10px;
+	    cursor: pointer;
+	    transition: all 0.3s ease;
+	}
+
+	.object-item.selected {
+	    border-color: var(--accent);
+	    background-color: rgba(76, 181, 245, 0.1);
+	}
+
+	.object-item.correct {
+	    border-color: var(--success);
+	    background-color: rgba(40, 167, 69, 0.1);
+	}
+
+	.object-item.incorrect {
+	    border-color: var(--danger);
+	    background-color: rgba(220, 53, 69, 0.1);
+	}
         
         .object-item:hover {
             border-color: var(--accent);
             box-shadow: 0 5px 15px rgba(76, 181, 245, 0.2);
-        }
+        }.object-item {
+	    position: relative;
+	    text-align: center;
+	    padding: 15px;
+	    border: 2px solid #ddd;
+	    border-radius: 10px;
+	    cursor: pointer;
+	    transition: all 0.3s ease;
+	}
+
+	.object-item.selected {
+	    border-color: var(--accent);
+	    background-color: rgba(76, 181, 245, 0.1);
+	}
+
+	.object-item.correct {
+	    border-color: var(--success);
+	    background-color: rgba(40, 167, 69, 0.1);
+	}
+
+	.object-item.incorrect {
+	    border-color: var(--danger);
+	    background-color: rgba(220, 53, 69, 0.1);
+	}
         
         .object-image {
             max-width: 100%;
@@ -510,13 +547,17 @@
             transform: translateY(-3px);
         }
         
-        .matching-grid {
-            display: flex;
-            gap: 15px;
-            margin: 10px 0;
-            flex-wrap: wrap;
-        }
-        
+        .matching-game {
+	    margin: 15px 0;
+	}
+		
+	.matching-grid {
+	    display: grid;
+	    grid-template-columns: repeat(2, 1fr);
+	    gap: 15px;
+	    margin-bottom: 20px;
+	}
+		
         /* Responsive */
         @media (max-width: 900px) {
             .main-content {
@@ -662,6 +703,106 @@
         .game-item:hover {
             transform: translateY(-3px);
         }
+        
+        
+	.word-bank {
+	    display: flex;
+	    flex-wrap: wrap;
+	    gap: 10px;
+	    justify-content: center;
+	}
+
+	.selectable-word {
+	    padding: 12px 18px;
+	    border: 2px solid var(--primary);
+	    border-radius: 8px;
+	    background: white;
+	    cursor: pointer;
+	    transition: all 0.3s ease;
+	    user-select: none;
+	}
+
+	.selectable-word.selected {
+	    background-color: var(--accent);
+	    color: white;
+	    border-color: var(--secondary);
+	}
+
+	.selectable-word.matched {
+	    background-color: var(--success);
+	    color: white;
+	    border-color: var(--success);
+	    opacity: 0.7;
+	    text-decoration: line-through;
+	}
+
+	.match-feedback {
+	    position: absolute;
+	    top: 5px;
+	    right: 5px;
+	    width: 20px;
+	    height: 20px;
+	    border-radius: 50%;
+	    display: none;
+	}
+
+	.match-feedback.correct {
+	    display: block;
+	    background-color: var(--success);
+	}
+
+	.match-feedback.incorrect {
+	    display: block;
+	    background-color: var(--danger);
+	}
+
+	.mobile-match-instructions {
+	    text-align: center;
+	    margin-top: 10px;
+	    color: #666;
+	    font-style: italic;
+	}
+
+	/* Para desktop mantener drag & drop */
+	@media (min-width: 769px) {
+	    .object-item {
+		cursor: grab;
+	    }
+	    
+	    .object-item:active {
+		cursor: grabbing;
+	    }
+	    
+	    .selectable-word {
+		cursor: grab;
+	    }
+	    
+	    .mobile-match-instructions {
+		display: none;
+	    }
+	}
+
+	/* Para móviles */
+	@media (max-width: 768px) {
+	    .matching-grid {
+		grid-template-columns: repeat(3, 1fr);
+	    }
+	    
+	    .object-item {
+		padding: 12px;
+	    }
+	    
+	    .selectable-word {
+		padding: 15px 20px;
+		font-size: 16px;
+		min-width: 80px;
+		text-align: center;
+	    }
+	    
+	    .draggable {
+		display: none; /* Ocultar elementos draggable en móviles */
+	    }
+	}
         
         /* Footer */
         footer {
@@ -1420,36 +1561,53 @@
 		    <label><input type="radio" name="q4" value="c"> <span class="translatable" data-original="Hello" data-translation="Hola">Hello</span></label>
 		</div>
 
-		<!-- Q5: matching objects -->
-		<div class="quiz-item">
-		    <div class="paragraph-with-buttons">
-			<div class="translatable-content">
-			    <strong class="translatable" data-original="5. Match the object with its name:" data-translation="5. Empareja el objeto con su nombre:">5. Match the object with its name:</strong>
-			</div>
+		<!-- Q5: matching objects - Versión móvil compatible -->
+	<div class="quiz-item">
+	    <div class="paragraph-with-buttons">
+		<div class="translatable-content">
+		    <strong class="translatable" data-original="5. Match the object with its name:" data-translation="5. Empareja el objeto con su nombre:">5. Match the object with its name:</strong>
+		</div>
+	    </div>
+	    <div class="paragraph-with-buttons">
+		<div class="translatable-content">
+		    <span class="translatable" data-original="Tap the word and then tap the correct picture (Book, Pen, Chair)" data-translation="Toca la palabra y luego toca la imagen correcta (Libro, Bolígrafo, Silla)">Tap the word and then tap the correct picture (Book, Pen, Chair)</span>
+		</div>
+	    </div>
+	    
+	    <div class="matching-game">
+		<div class="matching-grid">
+		    <div class="object-item" data-answer="Book" onclick="handleMobileMatch(this, 'Book')">
+		        <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/book-solid-full.svg" class="object-image" alt="Book">
+		        <div class="match-feedback"></div>
 		    </div>
-		    <div class="paragraph-with-buttons">
-			<div class="translatable-content">
-			    <span class="translatable" data-original="Drag the English word to the correct picture (Book, Pen, Chair)" data-translation="Arrastra la palabra en inglés a la imagen correcta (Libro, Bolígrafo, Silla)">Drag the English word to the correct picture (Book, Pen, Chair)</span>
-			</div>
+		    <div class="object-item" data-answer="Pen" onclick="handleMobileMatch(this, 'Pen')">
+		        <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pen-clip-solid-full.svg" class="object-image" alt="Pen">
+		        <div class="match-feedback"></div>
 		    </div>
-		    <div class="matching-grid">
-			<div class="object-item" data-answer="Book">
-			    <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/book-solid-full.svg" class="object-image" alt="Book">
-			</div>
-			<div class="object-item" data-answer="Pen">
-			    <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pen-clip-solid-full.svg" class="object-image" alt="Pen">
-			</div>
-			<div class="object-item" data-answer="Chair">
-			    <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/chair-solid-full.svg" class="object-image" alt="Chair">
-			</div>
-		    </div>
-		    <div class="word-bank">
-			<span class="draggable" draggable="true" id="word-Book" data-original="Book" data-translation="Libro">Book</span>
-			<span class="draggable" draggable="true" id="word-Pen" data-original="Pen" data-translation="Bolígrafo">Pen</span>
-			<span class="draggable" draggable="true" id="word-Chair" data-original="Chair" data-translation="Silla">Chair</span>
+		    <div class="object-item" data-answer="Chair" onclick="handleMobileMatch(this, 'Chair')">
+		        <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/chair-solid-full.svg" class="object-image" alt="Chair">
+		        <div class="match-feedback"></div>
 		    </div>
 		</div>
-
+		
+		<div class="word-bank">
+		    <span class="selectable-word" data-word="Book" onclick="selectWord(this, 'Book')">
+		        <span class="translatable" data-original="Book" data-translation="Libro">Book</span>
+		    </span>
+		    <span class="selectable-word" data-word="Pen" onclick="selectWord(this, 'Pen')">
+		        <span class="translatable" data-original="Pen" data-translation="Bolígrafo">Pen</span>
+		    </span>
+		    <span class="selectable-word" data-word="Chair" onclick="selectWord(this, 'Chair')">
+		        <span class="translatable" data-original="Chair" data-translation="Silla">Chair</span>
+		    </span>
+		</div>
+	    </div>
+	    
+	    <div class="mobile-match-instructions">
+		<small class="translatable" data-original="Instructions: First tap a word, then tap the matching picture" data-translation="Instrucciones: Primero toca una palabra, luego toca la imagen correspondiente">Instructions: First tap a word, then tap the matching picture</small>
+	    </div>
+	</div>
+		
 		<button type="button" onclick="checkQuiz()" class="big-btn translatable" data-original="Submit" data-translation="Enviar">Submit</button>
 	    </form>
 
@@ -1605,6 +1763,26 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+let selectedWord = null;
+let matchedPairs = 0;
+const totalPairs = 3;
+
+function selectWord(element, word) {
+    if (element.classList.contains('matched')) return;
+    
+    // Deseleccionar palabra anterior
+    document.querySelectorAll('.selectable-word.selected').forEach(item => {
+        item.classList.remove('selected');
+    });
+    
+    // Seleccionar nueva palabra
+    element.classList.add('selected');
+    selectedWord = word;
+    
+    // Dar feedback
+    speak(word);
+}
+
 /* ------------------------
   Texto a voz (TTS) mejorado
 ------------------------ */
@@ -1633,6 +1811,45 @@ function speak(text, lang = 'en-US') {
 }
 window.speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
 
+function handleMobileMatch(imageElement, correctWord) {
+    if (!selectedWord) {
+        speak('Please select a word first');
+        return;
+    }
+    
+    const wordElement = document.querySelector(`.selectable-word[data-word="${selectedWord}"]`);
+    
+    if (selectedWord === correctWord) {
+        // Correcto
+        imageElement.classList.add('correct');
+        wordElement.classList.add('matched');
+        imageElement.querySelector('.match-feedback').classList.add('correct');
+        speak('Correct! ' + selectedWord);
+        matchedPairs++;
+    } else {
+        // Incorrecto
+        imageElement.classList.add('incorrect');
+        imageElement.querySelector('.match-feedback').classList.add('incorrect');
+        speak('Try again');
+        
+        // Resetear después de un momento
+        setTimeout(() => {
+            imageElement.classList.remove('incorrect');
+            imageElement.querySelector('.match-feedback').classList.remove('incorrect');
+        }, 1000);
+    }
+    
+    // Deseleccionar
+    wordElement.classList.remove('selected');
+    selectedWord = null;
+    
+    // Verificar si se completó
+    if (matchedPairs === totalPairs) {
+        setTimeout(() => {
+            speak('Congratulations! All matches completed');
+        }, 500);
+    }
+}
 /* ------------------------
   Flip cards y traducción
 ------------------------ */

@@ -244,19 +244,26 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 15px;
             flex-wrap: wrap;
         }
+        
+        .title-flex .translatable {
+    	    flex: 1; /* Ocupa el espacio disponible */
+	}
         
         .objetivos ul {
             padding-left: 20px;
         }
         
-        .objetivos li {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: flex-start;
-        }
+	.objetivos li {
+	    display: flex;
+	    align-items: center;
+	    gap: 10px;
+	}
+
+	.objetivos li .translatable {
+	    flex: 1;
+	}
         
         /* Elementos interactivos */
         .interactive-grid {

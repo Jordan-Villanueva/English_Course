@@ -1904,21 +1904,143 @@ objectItems.forEach(item=>{
 });
 
 function checkQuiz() {
-  let score=0;
-  const answers={q1:'b', q2:'a', q3:'b', q4:'a'};
-  for(const q in answers){
-    const radios=document.getElementsByName(q);
-    for(const r of radios) if(r.checked && r.value===answers[q]) score++;
-  }
-  let dragScore=0;
-  objectItems.forEach(item=>{
-    const word=item.querySelector('.draggable');
-    if(word && word.textContent===item.dataset.answer) dragScore++;
-  });
-  const totalScore = score + dragScore;
-  document.getElementById('quiz-result').textContent = `You scored ${totalScore}/7 🎉`;
-  speak(`You scored ${totalScore} out of 7`);
+    let score = 0;
+    const answers = {
+        q1: 'b', // Hello
+        q2: 'a', // I
+        q3: 'b', // Thirty
+        q4: 'a'  // See you later
+    };
+    
+    // Contar preguntas de opción múltiple (4 puntos)
+    for(const q in answers){
+        const radios = document.getElementsByName(q);
+        for(const r of radios) {
+            if(r.checked && r.value === answers[q]) {
+                score++;
+                break;
+            }
+        }
+    }
+    
+    // Agregar puntos del matching game (3 puntos - 1 por cada par)
+    const matchingScore = matchedPairs;
+    const totalScore = score + matchingScore;
+    const maxScore = 7; // 4 preguntas + 3 pares
+    
+    // Mostrar resultado
+    const resultElement = document.getElementById('quiz-result');
+    resultElement.textContent = `You scored ${totalScore}/${maxScore} 🎉`;
+    
+    // Feedback específico
+    let feedback = '';
+    if (totalScore === maxScore) {
+        feedback = 'Perfect score! Excellent job!';
+    } else if (totalScore >= 5) {
+        feedback = 'Great job! Almost there!';
+    } else if (totalScore >= 3) {
+        feedback = 'Good effort! Keep practicing!';
+    } else {
+        feedback = 'Keep learning and try again!';
+    }
+    
+    resultElement.textContent += ` - ${feedback}`;
+    speak(`You scored ${totalScore} out of ${maxScore}. ${feedback}`);
+    
+    // Mostrar qué preguntas se respondieron incorrectamente
+    showQuizFeedback(answers);
 }
+
+function showQuizFeedback(correctAnswers) {
+    // Feedback para preguntas de opción múltiple
+    for(const q in correctAnswers){
+        const radios = document.getElementsByName(q);
+        let answered = false;
+        let correct = false;
+        
+        for(const r of radios) {
+            if(r.checked) {
+                answered = true;
+                if(r.value === correctAnswers[q]) {
+                    correct = true;
+                }
+                break;
+            }
+        }
+        
+        // Resaltar respuestas incorrectas
+        if(answered && !correct) {
+            const questionElement = radios[0].closest('.quiz-item');
+            questionElement.style.border = '2px solid var(--danger)';
+            questionElement.style.backgroundColor = 'rgba(220, 53, 69, 0.1)';
+        }
+    }
+    
+    // Feedback para el matching game
+    if (matchedPairs < totalPairs) {
+        const matchingElement = document.querySelector('.matching-game');
+        matchingElement.style.border = '2px solid var(--warning)';
+        matchingElement.style.padding = '10px';
+        matchingElement.style.borderRadius = '8px';
+    }
+}
+
+// Función para resetear el quiz si es necesario
+function resetQuiz() {
+    matchedPairs = 0;
+    selectedWord = null;
+    
+    // Resetear selecciones de radio
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+        radio.checked = false;
+    });
+    
+    // Resetear matching game
+    document.querySelectorAll('.selectable-word').forEach(word => {
+        word.classList.remove('selected', 'matched');
+    });
+    
+    document.querySelectorAll('.object-item').forEach(item => {
+        item.classList.remove('correct', 'incorrect', 'selected');
+    });
+    
+    document.querySelectorAll('.match-feedback').forEach(feedback => {
+        feedback.classList.remove('correct', 'incorrect');
+    });
+    
+    // Resetear estilos de feedback
+    document.querySelectorAll('.quiz-item').forEach(item => {
+        item.style.border = '';
+        item.style.backgroundColor = '';
+    });
+    
+    const matchingElement = document.querySelector('.matching-game');
+    if (matchingElement) {
+        matchingElement.style.border = '';
+        matchingElement.style.padding = '';
+    }
+    
+    document.getElementById('quiz-result').textContent = 'Your result will appear here.';
+}
+
+// Opcional: Agregar botón de reset
+function addResetButton() {
+    const submitButton = document.querySelector('#quiz-form button[type="button"]');
+    const resetButton = document.createElement('button');
+    resetButton.type = 'button';
+    resetButton.textContent = 'Reset Quiz';
+    resetButton.className = 'big-btn';
+    resetButton.style.background = 'var(--warning)';
+    resetButton.style.marginLeft = '10px';
+    resetButton.onclick = resetQuiz;
+    
+    submitButton.parentNode.appendChild(resetButton);
+}
+
+// Inicializar cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', function() {
+    addResetButton();
+});
 
 /* ------------------------
   Lección completada

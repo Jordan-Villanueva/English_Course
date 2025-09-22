@@ -1,4 +1,14 @@
-// auth.js (pegalo tal cual, actualiza constantes si hace falta)
+(function() {
+    // Verificar autenticación inmediatamente si estamos en página de clase
+    const isClassPage = window.location.pathname.includes('Class') || 
+                        window.location.pathname.includes('class');
+    
+    if (isClassPage && !localStorage.getItem('access_token')) {
+        // Redirigir al home si no está autenticado
+        window.location.href = 'https://elegant-frangipane-efce46.netlify.app/';
+        return;
+    }
+})();
 
 // === Config (usa tus valores) ===
 const AUTH0_DOMAIN = "dev-bjoqtux6wua5w2l2.us.auth0.com";

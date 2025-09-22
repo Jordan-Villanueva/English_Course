@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Class 1 - English Course</title>
+  <link rel="stylesheet" href="../style.css">
+  <link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet/dist/leaflet.css"
+  />
+</head>
+<body>
+  <header class="page-header" data-translated="false">
+    <h1 class="title-flex">
+      <span id=introduction class="translatable"
+            data-original="Class 1: Introductions, greetings and farewells"
+            data-translation="Clase 1: Presentaciones, saludos y despedidas">
+        Class 1: Introductions, greetings and farewells. Numbers, pronouns an countries.
+      </span>
+      <button class="translate-section-btn" type="button">🌐</button>
+      <button onclick="speak(document.getElementById('introduction').dataset.original)">🔊</button>
+    </h1>
+  
+    <p class="subtitle">
+      <span id=beginners class="translatable"
+            data-original="English Course for Beginners"
+            data-translation="Curso de Inglés para principiantes">
+        English Course for Beginners
+      </span>
+      <button onclick="speak(document.getElementById('beginners').dataset.original)">🔊</button>
+    </p>
+  
+    <div class="header-buttons">
+      <button id="login-btn" style="display:none;">Login/Ingresar</button>
+      <button id="logout-btn" style="display:none;">Logout/Salir</button>
+      <button id="home-btn" style="display:none;">🏠 Home/Inicio</button>
+    </div>
+  </header>
+
+<main id="content">
+  <!-- Objectives -->
+<section class="objetivos" data-translated="false">
+  <h2 class="title-flex">
+    <span id=objectives class="translatable" 
+          data-original="🎯 Class objectives" 
+          data-translation="🎯 Objetivos de la clase">
+      🎯 Class objectives
+    </span>
+    <button class="translate-section-btn">🌐</button>
+    <button onclick="speak('Class objectives')">🔊</button>
+  </h2>
+  <ul>
+    <li>
+      <span id=objectives-desc1 class="translatable" 
+            data-original="Students will be able to introduce themselves, greet, say goodbye and use basic courtesy phrases." 
+            data-translation="Los estudiantes podrán presentarse, saludar, despedirse y usar frases básicas de cortesía.">
+        Students will be able to introduce themselves, greet, say goodbye and use basic courtesy phrases.
+      </span><button onclick="speak(document.getElementById('objectives-desc1').dataset.original)">🔊</button>
+    </li>
+    <li>
+      <span id=objectives-desc2 class="translatable" 
+            data-original="Start speaking and writing in English at a very basic level." 
+            data-translation="Comenzar a hablar y escribir en inglés a un nivel muy básico.">
+        Start speaking and writing in English at a very basic level.
+      </span><button onclick="speak(document.getElementById('objectives-desc2').dataset.original)">🔊</button>
+    </li>
+  </ul>
+</section>
+
+<!-- Warm-up -->
+<section class="bloque" data-translated="false">
+  <h2 class="title-flex">
+    <span id="warmup-title" class="translatable" 
+          data-original="1. Warm-up / Icebreaker (10 min)" 
+          data-translation="1. Calentamiento / Rompehielos (10 min)">
+      1. Warm-up / Icebreaker (10 min)
+    </span>
+    <button class="translate-section-btn">🌐</button>
+    <button onclick="speak('1. Warm-up / Icebreaker')">🔊</button>
+  </h2>
+
+  <!-- Primer texto: presentación -->
+  <p>
+    <span id="warm-desc1" class="translatable"
+          data-original="Hello, my name is Jordan. I’m from Mexico. I’m a physicist and software developer and I love movies and teaching."
+          data-translation="Hola, mi nombre es Jordan. Soy de México. Soy físico y desarrollador de software, y me encantan las películas y la enseñanza.">
+      Hello, my name is Jordan. I’m from Mexico. I'm a physicist and software developer and I love movies and teaching.
+    </span>
+    <button onclick="speak(document.getElementById('warm-desc1').dataset.original)">🔊</button>
+  </p>
+
+  <!-- Segundo texto: ejemplo en cursiva -->
+  <p><em>
+    <span id="warm-desc2" class="translatable"
+          data-original="Greeting: What's your name? Where are you from? What do you like and what do you do?"
+          data-translation="Saludo: ¿Cómo te llamas? ¿De dónde eres? ¿Qué te gusta y a qué te dedicas?">
+      Greeting: What's your name? Where are you from? What do you like and what do you do?
+    </span>
+  </em>
+    <button onclick="speak('Greeting: Whats your name? Where are you from? What do you like and what do you do?')">🔊</button>
+    </p>
+</section>
+
+<!-- Vocabulary -->
+<section class="bloque" data-translated="false">
+  <h2 class="title-flex">
+    <span id=vocabulary class="translatable" 
+          data-original="2. Vocabulary and pronouns (15 min)" 
+          data-translation="2. Vocabulario y pronombres (15 min)">
+      2. Vocabulary and pronouns (10 min)
+    </span>
+    <button class="translate-section-btn">🌐</button>
+    <button onclick="speak('2. Vocabulary and pronouns')">🔊</button>
+  </h2>
+
+  <!-- Greetings -->
+  <h3 class="title-flex">
+    <span id=greetings class="translatable" data-original="Greetings" data-translation="Saludos">Greetings</span>
+    <button onclick="speak(document.getElementById('greetings').dataset.original)">🔊</button>
+  </h3>
+  <p>
+    <button class="speak-word-btn" onclick="speak(document.getElementById('hello').dataset.original)">
+      <span id=hello class="translatable" data-original="Hello" data-translation="Hola">Hello</span>
+    </button>
+    <button class="speak-word-btn" onclick="speak(document.getElementById('hi').dataset.original)">
+      <span id=hi class="translatable" data-original="Hi" data-translation="Hola">Hi</span>
+    </button> 
+    <button class="speak-word-btn" onclick="speak(document.getElementById('goodm').dataset.original)">
+      <span id=goodm class="translatable" data-original="Good morning" data-translation="Buen día">Good morning</span>
+    </button> 
+    <button class="speak-word-btn" onclick="speak(document.getElementById('goodaf').dataset.original)">
+      <span id=goodaf class="translatable" data-original="Good afternoon" data-translation="Buena tarde">Good afternoon</span>
+    </button>
+    <button class="speak-word-btn" onclick="speak(document.getElementById('goodev').dataset.original)">
+      <span id=goodev class="translatable" data-original="Good evening" data-translation="Buena noche">Good evening</span>
+    </button>
+  </p>
+
+  <!-- Farewells -->
+  <h3 class="title-flex">
+    <span id=farew class="translatable" data-original="Farewells" data-translation="Despedidas">Farewells</span>
+    <button onclick="speak(document.getElementById('farew').dataset.original)">🔊</button>
+  </h3>
+  <p>
+    <button class="speak-word-btn" onclick="speak(document.getElementById('farew1').dataset.original)">
+      <span id="farew1" class="translatable" data-original="Good night" data-translation="Buena noche">Good night</span>
+    </button>
+    <button class="speak-word-btn" onclick="speak(document.getElementById('farew2').dataset.original)">
+      <span id="farew2" class="translatable" data-original="Goodbye" data-translation="Adiós">Goodbye</span>
+    </button> 
+    <button class="speak-word-btn" onclick="speak(document.getElementById('farew3').dataset.original)">
+      <span id="farew3" class="translatable" data-original="Bye" data-translation="Adiós">Bye</span>
+    </button> 
+    <button class="speak-word-btn" onclick="speak(document.getElementById('farew4').dataset.original)">
+      <span id="farew4" class="translatable" data-original="See you" data-translation="Nos vemos">See you</span>
+    </button>
+    <button class="speak-word-btn" onclick="speak(document.getElementById('farew5').dataset.original)">
+      <span id="farew5" class="translatable" data-original="See you later" data-translation="Hasta luego">See you later</span>
+    </button>
+  </p>
+
+  <!-- Personal pronouns + verb "To be" -->
+  <h3 class="title-flex">
+    <span id="title-pronouns" class="translatable"
+          data-original="Personal pronouns + verb 'To be'"
+          data-translation="Pronombres personales + verbo 'Ser/Estar'">
+      Personal pronouns + verb "To be"
+    </span>
+    <button onclick="speak(document.getElementById('title-pronouns').dataset.original)">🔊</button>
+  </h3>
+  <p>
+    <button class="speak-word-btn" onclick="speak(document.getElementById('pron1').dataset.original)">
+      <span id="pron1" class="translatable" data-original="I am" data-translation="Yo soy/estoy">I am</span>
+    </button> 
+    <button class="speak-word-btn" onclick="speak(document.getElementById('pron2').dataset.original)">
+      <span id="pron2" class="translatable" data-original="You are" data-translation="Tú eres/estás">You are</span>
+    </button> 
+    <button class="speak-word-btn" onclick="speak(document.getElementById('pron3').dataset.original)">
+      <span id="pron3" class="translatable" data-original="He/She is" data-translation="Él/Ella es/está">He/She is</span>
+    </button> 
+    <button class="speak-word-btn" onclick="speak(document.getElementById('pron4').dataset.original)">
+      <span id="pron4" class="translatable" data-original="We are" data-translation="Nosotros somos/estamos">We are</span>
+    </button> 
+    <button class="speak-word-btn" onclick="speak(document.getElementById('pron5').dataset.original)">
+      <span id="pron5" class="translatable" data-original="They are" data-translation="Ellos son/están">They are</span>
+    </button>
+  </p>
+</section>
+
+<!-- Listening / Modeled videos -->
+<section class="bloque" data-translated="false">
+  <h2 class="title-flex">
+    <span id="title-listening" class="translatable" data-original="3. Listening / Modeling: Conversation and Cinema (10 min)" data-translation="3. Escucha / Modelado: Conversación y Cine (10 min)">
+      3. Listening / Modeling: Conversation and Cinema (10 min)
+    </span>
+    <button class="translate-section-btn">🌐</button>
+    <button onclick="speak('3. Listening / Modeling: Conversation and Cinema')">🔊</button>
+  </h2>
+
+  <p>
+    <span id="listen-instr" class="translatable" 
+          data-original="Watch the conversation video and write key sentences. Then, in the movie clips video, identify the learned phrases:" 
+          data-translation="Mira el video de conversación y escribe las frases clave. Luego, en el video de clips de películas, identifica las frases aprendidas:">
+      Watch the conversation video and write key sentences. Then, in the movie clips video, identify the learned phrases:
+    </span>
+    <button onclick="speak(document.getElementById('listen-instr').dataset.original)">🔊</button>
+  </p>
+
+  <iframe width="100%" height="315" src="https://www.youtube.com/embed/RL8pLS8cUOs" frameborder="0" allowfullscreen style="margin-bottom: 15px;"></iframe>
+  <iframe width="100%" height="315" src="https://www.youtube.com/embed/ImOoyoLmGUI" frameborder="0" allowfullscreen></iframe>
+</section>
+
+<!-- Song practice -->
+<section class="bloque" data-translated="false">
+  <h2 class="title-flex">
+    <span id="title-song" class="translatable" data-original="4. Song Practice (10 min)" data-translation="4. Práctica de canción (10 min)">
+      4. Song Practice (10 min)
+    </span>
+    <button class="translate-section-btn">🌐</button>
+    <button onclick="speak('4. Song Practice')">🔊</button>
+  </h2>
+
+  <p>
+    <span id="song-instr" class="translatable" 
+          data-original="Listen to the song and complete the lyrics playing on LyricsTraining:" 
+          data-translation="Escucha la canción y completa la letra en LyricsTraining:">
+      Listen to the song and complete the lyrics playing on LyricsTraining:
+    </span>
+    <button onclick="speak(document.getElementById('song-instr').dataset.original)">🔊</button>
+  </p>
+
+<button class="speak-btn lyrics-btn" onclick="window.open('https://es.lyricstraining.com/play/the-beatles/hello-goodbye/HkEvrcQWdk#b7w!jortizvilla','_blank')">
+  <span id="song-btn" class="translatable" data-original="🎵 Play with the song on LyricsTraining" data-translation="🎵 Juega con la canción en LyricsTraining">
+    🎵 Play with the song on LyricsTraining
+  </span>
+</button>
+</section>
+
+<!-- Exercises -->
+<section class="bloque" data-translated="false">
+  <h2 class="title-flex">
+    <span id="title-where" class="translatable" data-original='5. Introduction of "Where are you from?" (10 min)' data-translation='5. Introducción de "¿De dónde eres?" (10 min)'>
+      5. Introduction of "Where are you from?" (10 min)
+    </span>
+    <button class="translate-section-btn">🌐</button>
+    <button onclick="speak('5. Introduction of Where are you from?')">🔊</button>
+  </h2>
+
+  <!-- Video -->
+  <p>
+    <span id="where-instr" class="translatable" data-original="Watch the video" data-translation="Mira el video">
+      Watch the video
+    </span>
+    <button onclick="speak(document.getElementById('where-instr').dataset.original)">🔊</button>
+  </p>
+  <iframe width="100%" height="315" src="https://www.youtube.com/embed/byqOkm6-SCc" frameborder="0" allowfullscreen></iframe>
+
+  <!-- Map con audio -->
+  <p>
+    <span id="map-instr" class="translatable" data-original="Select a country on the map!" data-translation="¡Selecciona un país en el mapa!">
+      Select a country on the map!
+    </span>
+    <button onclick="speak(document.getElementById('map-instr').dataset.original)">🔊</button>
+  </p>
+  <div id="map" style="height: 400px; width: 100%; border: 1px solid #ccc;"></div>
+  <p id="dialogue"></p>
+</section>
+
+<!-- Interactive exercise -->
+<section class="bloque" data-translated="false">
+  <h2 class="title-flex">
+    <span id="interactive-title-6" class="translatable"
+          data-original="6. Interactive Practice: &quot;What's this?&quot;"
+          data-translation="6. Práctica interactiva: &quot;¿Qué es esto?&quot;">
+      6. Interactive Practice: "What's this?" (10 min)
+    </span>
+    <button class="translate-section-btn" type="button">🌐</button>
+    <button type="button" onclick="speak('6. Interactive Practice: What’s this?')">🔊</button>
+  </h2>
+
+  <p>
+    <span id="interactive-desc-6" class="translatable"
+          data-original="Click on the objects to hear their names in English. Then practice asking &quot;What's this?&quot;"
+          data-translation="Haz clic en los objetos para escuchar sus nombres en inglés. Luego practica preguntando &quot;¿Qué es esto?&quot;">
+      Click on the objects to hear their names in English. Then practice asking "What's this?"
+    </span>
+    <button type="button" onclick="speak(document.getElementById('interactive-desc-6').dataset.original)">🔊</button>
+  </p>
+
+  <div class="object-container">
+    <!-- Book -->
+    <div class="object-item" onclick="flipCard(this)">
+      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/book-solid-full.svg" 
+           class="object-image" alt="Book">
+      <span class="object-name translatable" 
+        data-original="Book" 
+        data-translation="Libro">???</span>
+      <button class="speak-word-btn btn-style" onclick="speakWord('Book'); event.stopPropagation();">🔊</button>
+    </div>
+
+    <!-- Pen -->
+    <div class="object-item" onclick="flipCard(this)">
+      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pen-clip-solid-full.svg" 
+           class="object-image" alt="Pen">
+      <span class="object-name translatable" 
+        data-original="Pen" 
+        data-translation="Bolígrafo">???</span>
+      <button class="speak-word-btn btn-style" onclick="speakWord('Pen'); event.stopPropagation();">🔊</button>
+    </div>
+
+    <!-- Pencil -->
+    <div class="object-item" onclick="flipCard(this)">
+      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pencil-solid-full.svg" 
+           class="object-image" alt="Pencil">
+      <span class="object-name translatable" 
+        data-original="Pencil" 
+        data-translation="Lápiz​">???</span>
+      <button class="speak-word-btn btn-style" onclick="speakWord('Pencil'); event.stopPropagation();">🔊</button>
+    </div>
+
+    <!-- Chair -->
+    <div class="object-item" onclick="flipCard(this)">
+      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/chair-solid-full.svg" 
+           class="object-image" alt="Chair">
+      <span class="object-name translatable" 
+        data-original="Chair" 
+        data-translation="Silla">???</span>
+      <button class="speak-word-btn btn-style" onclick="speakWord('Chair'); event.stopPropagation();">🔊</button>
+    </div>
+
+    <!-- Table -->
+    <div class="object-item" onclick="flipCard(this)">
+      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/table-furniture.svg" 
+           class="object-image" alt="Table">
+      <span class="object-name translatable" 
+        data-original="Table" 
+        data-translation="Mesa">???</span>
+      <button class="speak-word-btn btn-style" onclick="speakWord('Table'); event.stopPropagation();">🔊</button>
+    </div>
+
+    <!-- Bag -->
+    <div class="object-item" onclick="flipCard(this)">
+      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/bag-personal.svg" 
+           class="object-image" alt="Bag">
+      <span class="object-name translatable" 
+        data-original="Bag" 
+        data-translation="Bolsa">???</span>
+      <button class="speak-word-btn btn-style" onclick="speakWord('Bag'); event.stopPropagation();">🔊</button>
+    </div>
+
+    <!-- Clock -->
+    <div class="object-item" onclick="flipCard(this)">
+      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/clock-time-seven-outline.svg" 
+           class="object-image" alt="Clock">
+      <span class="object-name translatable" 
+        data-original="Clock" 
+        data-translation="Reloj">???</span>
+      <button class="speak-word-btn btn-style" onclick="speakWord('Clock'); event.stopPropagation();">🔊</button>
+    </div>
+
+    <!-- Notebook -->
+    <div class="object-item" onclick="flipCard(this)">
+      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/notebook.svg" 
+           class="object-image" alt="Notebook">
+      <span class="object-name translatable" 
+        data-original="Notebook" 
+        data-translation="Libreta">???</span>
+      <button class="speak-word-btn btn-style" onclick="speakWord('Notebook'); event.stopPropagation();">🔊</button>
+    </div>
+
+    <!-- Marker -->
+    <div class="object-item" onclick="flipCard(this)">
+      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/marker.svg" 
+           class="object-image" alt="Marker">
+      <span class="object-name translatable" 
+        data-original="Marker" 
+        data-translation="Marcador">???</span>
+      <button class="speak-word-btn btn-style" onclick="speakWord('Marker'); event.stopPropagation();">🔊</button>
+    </div>
+
+    <!-- Eraser -->
+    <div class="object-item" onclick="flipCard(this)">
+      <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/eraser-solid-full.svg" 
+           class="object-image" alt="Eraser">
+      <span class="object-name translatable" 
+        data-original="Eraser" 
+        data-translation="Borrador">???</span>
+      <button class="speak-word-btn btn-style" onclick="speakWord('Eraser'); event.stopPropagation();">🔊</button>
+    </div>
+
+  </div>
+</section>
+  
+<!-- Numbers -->
+<section id="section7" class="bloque" data-translated="false">
+  <h2 class="title-flex">
+    <span id="numbers-title" class="translatable"
+          data-original="7. Numbers in English: from 1 to 30"
+          data-translation="7. Números en inglés: del 1 al 30">
+      7. Numbers in English: from 1 to 30 (10 min)
+    </span>
+    <button class="translate-section-btn">🌐</button>
+    <button onclick="speak(document.getElementById('numbers-title').dataset.original)">🔊</button>
+  </h2>
+
+  <p>
+    <span id="numbers-desc" class="translatable"
+          data-original="Click each number to hear its pronunciation:"
+          data-translation="Haz clic en cada número para escuchar su pronunciación:">
+      Click each number to hear its pronunciation:
+    </span>
+    <button onclick="speak(document.getElementById('numbers-desc').dataset.original)">🔊</button>
+  </p>
+
+  <div class="numbers-grid">
+    <script>
+      const numberGrid = document.currentScript.parentNode;
+      const numbers = [
+        { en: "one", es: "uno" }, { en: "two", es: "dos" }, { en: "three", es: "tres" }, 
+        { en: "four", es: "cuatro" }, { en: "five", es: "cinco" }, { en: "six", es: "seis" },
+        { en: "seven", es: "siete" }, { en: "eight", es: "ocho" }, { en: "nine", es: "nueve" },
+        { en: "ten", es: "diez" }, { en: "eleven", es: "once" }, { en: "twelve", es: "doce" },
+        { en: "thirteen", es: "trece" }, { en: "fourteen", es: "catorce" }, { en: "fifteen", es: "quince" },
+        { en: "sixteen", es: "dieciséis" }, { en: "seventeen", es: "diecisiete" }, { en: "eighteen", es: "dieciocho" },
+        { en: "nineteen", es: "diecinueve" }, { en: "twenty", es: "veinte" }, { en: "twenty-one", es: "veintiuno" },
+        { en: "twenty-two", es: "veintidós" }, { en: "twenty-three", es: "veintitrés" },
+        { en: "twenty-four", es: "veinticuatro" }, { en: "twenty-five", es: "veinticinco" },
+        { en: "twenty-six", es: "veintiséis" }, { en: "twenty-seven", es: "veintisiete" },
+        { en: "twenty-eight", es: "veintiocho" }, { en: "twenty-nine", es: "veintinueve" },
+        { en: "thirty", es: "treinta" }
+      ];
+
+      for (let i = 0; i < numbers.length; i++) {
+        const div = document.createElement('div');
+        div.className = 'number-item';
+
+        // Texto traducible
+        const numberName = document.createElement('span');
+        numberName.className = 'number-name translatable';
+        numberName.dataset.original = numbers[i].en;
+        numberName.dataset.translation = numbers[i].es;
+        numberName.dataset.tts = numbers[i].en;
+        numberName.textContent = numbers[i].en; // solo texto
+
+        // Botón de bocina separado
+        const speakerBtn = document.createElement('button');
+        // speakerBtn.textContent = "🔊";
+        speakerBtn.onclick = function(e) {
+          e.stopPropagation(); // evitar que el div padre también haga speak
+          speak(numberName.dataset.tts);
+        };
+
+        div.innerHTML = `<div class="number">${i+1}</div>`;
+        div.appendChild(numberName);
+       // div.appendChild(speakerBtn);
+
+        // Click en div completo también reproduce audio
+        div.onclick = function() {
+          speak(numberName.dataset.tts);
+        };
+
+        numberGrid.appendChild(div);
+      }
+    </script>
+  </div>
+
+  <div class="practice-block">
+    <p><strong>
+      <span class="translatable"
+            data-original="Pronunciation practice:"
+            data-translation="Práctica de pronunciación:">
+        Pronunciation practice:
+      </span>
+      <button type="button" onclick="speak('Pronunciation practice')">🔊</button>
+    </strong></p>
+
+   <!-- Sección de Listen 1-30 -->
+<button class="speak-btn big-btn" onclick="practiceNumbers(1,10)">
+  <span class="translatable" data-original="Listen 1 to 10" data-translation="Escuchar del 1 al 10">
+    Listen 1 to 10
+  </span>
+</button>
+
+<button class="speak-btn big-btn" onclick="practiceNumbers(11,20)">
+  <span class="translatable" data-original="Listen 11 to 20" data-translation="Escuchar del 11 al 20">
+    Listen 11 to 20
+  </span>
+</button>
+
+<button class="speak-btn big-btn" onclick="practiceNumbers(21,30)">
+  <span class="translatable" data-original="Listen 21 to 30" data-translation="Escuchar del 21 al 30">
+    Listen 21 to 30
+  </span>
+</button>
+  </div>
+</section>
+  
+<!-- Mini writing / journaling -->
+<section class="bloque" data-translated="false">
+  <h2 class="title-flex">
+    <span id="interactive-title-8" class="translatable" data-original="8. Mini writing / journaling (10 min)" data-translation="8. Escritura / Diario personal (10 min)">
+      8. Mini writing / journaling (10 min)
+    </span>
+    <button class="translate-section-btn">🌐</button>
+    <button type="button" onclick="speak('8. Mini writing / journaling')">🔊</button>
+  </h2>
+  <ul>
+    <li>
+      <span id="mini-write-1" class="translatable" data-original="Hello, my name is ___" data-translation="Hola, mi nombre es ___">Hello, my name is ___.</span>
+      <button type="button" onclick="speak('Hello, my name is')">🔊</button>
+    </li>
+    <li>
+      <span id="mini-write-2" class="translatable" data-original="I'm from ___" data-translation="Soy de ___">I'm from ___.</span>
+      <button type="button" onclick="speak('I’m from')">🔊</button>
+    </li>
+    <li>
+      <span id="mini-write-3" class="translatable" data-original="I like ___" data-translation="Me gusta ___">I like ___.</span>
+      <button type="button" onclick="speak('I like')">🔊</button>
+    </li>
+  </ul>
+</section>
+
+<!-- Group speaking -->
+<section class="bloque" data-translated="false">
+  <h2 class="title-flex">
+    <span id="interactive-title-9" class="translatable" data-original="9. Group speaking (10 min)" data-translation="9. Conversación grupal (10 min)">
+      9. Group speaking (10 min)
+    </span>
+    <button class="translate-section-btn">🌐</button>
+    <button type="button" onclick="speak('9. Group speaking')">🔊</button>
+  </h2>
+  <p>
+    <span id="group-desc" class="translatable" data-original="The students practice to introduce themselves in groups using the learned phrases, including the questions" 
+          data-translation="Los estudiantes practican presentarse en grupos usando las frases aprendidas, incluyendo las preguntas">
+      The students practice to introduce themselves in groups using the learned phrases, including the questions
+    </span> 
+    <button type="button" onclick="speak(document.getElementById('group-desc').dataset.original)">🔊</button>
+  </p>
+</section>
+
+<!-- Writing activity -->
+<section class="bloque" data-translated="false">
+  <h2 class="title-flex">
+    <span id="interactive-title-10" class="translatable" data-original="10. Writing activity (10 min)" data-translation="10. Actividad de escritura (10 min)">
+      10. Writing activity (10 min)
+    </span>
+    <button class="translate-section-btn">🌐</button>
+    <button type="button" onclick="speak('10. Writing activity')">🔊</button>
+  </h2>
+  <p>
+    <span id="write-desc" class="translatable" data-original="Solve the following exercise:" data-translation="Resuelve el siguiente ejercicio:">Solve the following exercise:</span>
+    <button type="button" onclick="speak(document.getElementById('write-desc').dataset.original)">🔊</button>
+  </p>
+  <img src="cierre.png" alt="Closing activity: Complete the dialogues" width="100%" style="border: 2px solid #ccc; border-radius: 10px; max-width: 600px;">
+</section>
+
+
+<!-- Games -->
+<section class="bloque" data-translated="false">
+  <h2 class="title-flex">
+    <span id="interactive-title-11" class="translatable"
+          data-original="11. Interactive games / Baamboozle (10 min)"
+          data-translation="11. Juegos interactivos / Baamboozle (10 min)">
+      11. Interactive games / Baamboozle (10 min)
+    </span>
+    <button class="translate-section-btn">🌐</button>
+    <button onclick="speak('11. Interactive games / Baamboozle')">🔊</button>
+  </h2>
+
+  <div class="game-item">
+    <p>
+      <span id="game-1" class="translatable"
+            data-original="🎲 Game 1"
+            data-translation="🎲 Juego 1">
+       🎲 Game 1
+      </span>
+      <button onclick="speak('Game 1')">🔊</button>
+    </p>
+	<a href="https://www.baamboozle.com/game/641765" target="_blank"
+	   class="speak-btn translatable big-btn"
+	   data-original="Play on Baamboozle"
+	   data-translation="Jugar en Baamboozle">
+	   Play on Baamboozle
+	</a>
+  </div>
+
+  <div class="game-item">
+    <p>
+      <span id="game-2" class="translatable"
+            data-original="🎲 Game 2"
+            data-translation="🎲 Juego 2">
+        🎲 Game 2
+      </span>
+      <button onclick="speak('Game 2')">🔊</button>
+    </p>
+	<a href="https://www.baamboozle.com/game/54952" target="_blank"
+	   class="speak-btn translatable big-btn"
+	   data-original="Play on Baamboozle"
+	   data-translation="Jugar en Baamboozle">
+	   Play on Baamboozle
+	</a>
+  </div>
+
+  <p>
+    <span id="game-tip" class="translatable"
+          data-original="Tip: Create teams for the activity."
+          data-translation="Consejo: Crea equipos para la actividad.">
+      Tip: Create teams for the activity.
+    </span>
+    <button onclick="speak(document.getElementById('game-tip').dataset.original)">🔊</button>
+  </p>
+</section>
+
+<!-- Quiz -->
+<section id="quiz-section" class="bloque" data-translated="false">
+  <h2 class="title-flex">
+    <span id="quiz-title" class="translatable"
+          data-original="📝 Quiz: Check your knowledge!"
+          data-translation="📝 Quiz: ¡Comprueba tu conocimiento!">
+      📝 Quiz: Check your knowledge!
+    </span>
+    <button class="translate-section-btn" 
+            data-original="🌐" data-translation="🌐">🌐</button>
+    <button onclick="speak('Quiz: Check your knowledge!')"
+            data-original="🔊" data-translation="🔊">🔊</button>
+  </h2>
+
+  <form id="quiz-form">
+    <!-- Q1 -->
+    <div class="quiz-item">
+      <p><strong class="translatable" 
+                 data-original="1. How do you say 'Hola' in English?" 
+                 data-translation="1. ¿Cómo se dice 'Hola' en inglés?">
+        1. How do you say "Hola" in English?
+      </strong></p>
+      <label><input type="radio" name="q1" value="a"
+                    data-original="Good night" data-translation="Buenas noches">Good night</label><br>
+      <label><input type="radio" name="q1" value="b"
+                    data-original="Hello" data-translation="Hola">Hello</label><br>
+      <label><input type="radio" name="q1" value="c"
+                    data-original="Bye" data-translation="Adiós">Bye</label>
+    </div>
+
+    <!-- Q2 -->
+    <div class="quiz-item">
+      <p><strong class="translatable" 
+                 data-original="2. Which pronoun fits: '___ am Jordan'" 
+                 data-translation="2. ¿Qué pronombre va: '___ soy Jordan'?">
+        2. Which pronoun fits: "___ am Jordan"
+      </strong></p>
+      <label><input type="radio" name="q2" value="a"
+                    data-original="I" data-translation="Yo">I</label><br>
+      <label><input type="radio" name="q2" value="b"
+                    data-original="You" data-translation="Tú">You</label><br>
+      <label><input type="radio" name="q2" value="c"
+                    data-original="They" data-translation="Ellos/Ellas">They</label>
+    </div>
+
+    <!-- Q3 -->
+    <div class="quiz-item">
+      <p><strong class="translatable" 
+                 data-original="3. What is 'treinta' in English?" 
+                 data-translation="3. ¿Qué es 'treinta' en inglés?">
+        3. What is "treinta" in English?
+      </strong></p>
+      <label><input type="radio" name="q3" value="a"
+                    data-original="Twenty" data-translation="Veinte">Twenty</label><br>
+      <label><input type="radio" name="q3" value="b"
+                    data-original="Thirty" data-translation="Treinta">Thirty</label><br>
+      <label><input type="radio" name="q3" value="c"
+                    data-original="Thirty-one" data-translation="Treinta y uno">Thirty-one</label>
+    </div>
+
+    <!-- Q4 -->
+    <div class="quiz-item">
+      <p><strong class="translatable" 
+                 data-original="4. Which farewell means 'Hasta luego'?" 
+                 data-translation="4. ¿Cuál despedida significa 'Hasta luego'?">
+        4. Which farewell means "Hasta luego"?
+      </strong></p>
+      <label><input type="radio" name="q4" value="a"
+                    data-original="See you later" data-translation="Hasta luego">See you later</label><br>
+      <label><input type="radio" name="q4" value="b"
+                    data-original="Good morning" data-translation="Buenos días">Good morning</label><br>
+      <label><input type="radio" name="q4" value="c"
+                    data-original="Hello" data-translation="Hola">Hello</label>
+    </div>
+
+    <!-- Q5: matching objects -->
+    <div class="quiz-item">
+      <p><strong class="translatable" 
+                 data-original="5. Match the object with its name:" 
+                 data-translation="5. Empareja el objeto con su nombre:">
+        5. Match the object with its name:
+      </strong></p>
+      <p class="translatable" 
+         data-original="Drag the English word to the correct picture (Book, Pen, Chair)"
+         data-translation="Arrastra la palabra en inglés a la imagen correcta (Libro, Bolígrafo, Silla)">
+        Drag the English word to the correct picture (Book, Pen, Chair)
+      </p>
+      <div class="matching-grid">
+        <div class="object-item" data-answer="Book">
+          <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/book-solid-full.svg" 
+               class="object-image" alt="Book">
+        </div>
+        <div class="object-item" data-answer="Pen">
+          <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pen-clip-solid-full.svg" 
+               class="object-image" alt="Pen">
+        </div>
+        <div class="object-item" data-answer="Chair">
+          <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/chair-solid-full.svg" 
+               class="object-image" alt="Chair">
+        </div>
+      </div>
+      <div class="word-bank">
+        <span class="draggable" draggable="true" id="word-Book" 
+              data-original="Book" data-translation="Libro">Book</span>
+        <span class="draggable" draggable="true" id="word-Pen" 
+              data-original="Pen" data-translation="Bolígrafo">Pen</span>
+        <span class="draggable" draggable="true" id="word-Chair" 
+              data-original="Chair" data-translation="Silla">Chair</span>
+      </div>
+    </div>
+
+    <button type="button" onclick="checkQuiz()" class="big-btn"
+            data-original="Submit / Enviar" data-translation="Enviar">Submit / Enviar</button>
+  </form>
+
+  <p id="quiz-result" class="translatable" 
+     data-original="Your result will appear here." 
+     data-translation="Tu resultado aparecerá aquí.">
+    Your result will appear here.
+  </p>
+</section>
+
+<!-- Material PDF -->
+  <section id="material-final" class="bloque" data-translated="false">
+   <h2 class="title-flex">
+    <span id="pdf-material" class="translatable"
+          data-original="📄 Download the base material for session 1"
+          data-translation="📄 Descargar material base de la sesión 1">
+      📄 Download the base material for session 1
+    </span>
+     <!-- Botón de traducción -->
+    <button class="translate-section-btn" onclick="translateSection('material-final')">🌐</button>
+    <!-- Botón de pronunciación -->
+    <button onclick="speak('Download the base material for session 1')">🔊</button>
+   </h2>
+   <p>
+     <a href="class1.pdf" download="class1.pdf" class="big-btn">
+       📄 Download PDF
+     </a>
+   </p>
+
+  <!-- Incrustación del PDF -->
+  <embed src="class1.pdf" type="application/pdf" width="100%" height="600px" />
+  </section>
+</main>
+
+<footer>
+  <p>English Course for Beginners — Created by Jordan Ortiz</p>
+</footer>
+
+<script>
+function flipCard(card) {
+  const wordSpan = card.querySelector(".object-name");
+  const isTranslated = card.closest("section").getAttribute("data-translated") === "true";
+  if (wordSpan.textContent === "???") {
+    // Revela el texto en el idioma actual
+    wordSpan.textContent = isTranslated 
+      ? wordSpan.dataset.translation 
+      : wordSpan.dataset.original;
+    wordSpan.dataset.revealed = "true"; // marcar como revelado
+  } else {
+    wordSpan.textContent = "???"; // opcional: volver a ocultar
+    wordSpan.dataset.revealed = "false";
+  }
+}
+
+function speakWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-US";
+  speechSynthesis.speak(utterance);
+}
+
+ function preprocessTextForTTS(text) {
+  // Diccionario de contracciones comunes → versión hackeada
+  const hacks = {
+    "I'm": "I\u200Bm",       // "I’m"
+    "I'm.": "I\u200Bm.", 
+    "I'm,": "I\u200Bm,", 
+
+    "It's": "It\u200Bs",    // "It’s"
+    "What's": "What\u200Bs",
+    "That's": "That\u200Bs",
+    "There's": "There\u200Bs",
+    "Here's": "Here\u200Bs",
+
+    "You're": "You\u200Bre",
+    "We're": "We\u200Bre",
+    "They're": "They\u200Bre",
+
+    "He’s": "He\u200Bs",
+    "She’s": "She\u200Bs"
+  };
+
+  let processed = text;
+  for (const [key, val] of Object.entries(hacks)) {
+    const regex = new RegExp(key, "gi");
+    processed = processed.replace(regex, val);
+  }
+
+  return processed;
+} 
+  
+// Speak function improved
+function speak(text, lang = 'en-US') {
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+
+    // Usar el preprocesador ANTES de mandar al motor
+    const fixedText = preprocessTextForTTS(text);
+
+    const utterance = new SpeechSynthesisUtterance(fixedText);
+    utterance.lang = lang;
+    utterance.rate = 0.95;
+    utterance.pitch = 1.2;
+    utterance.volume = 1;
+
+    const voices = speechSynthesis.getVoices();
+    let customVoice = voices.find(v => v.name === 'Google US English')
+                      || voices.find(v => v.name === 'Microsoft Zira Desktop - English (United States)')
+                      || voices.find(v => v.name === 'Samantha')
+                      || voices[0];
+    if (customVoice) utterance.voice = customVoice;
+
+    window.speechSynthesis.speak(utterance);
+  } else {
+    alert("Your browser doesn't support speech synthesis.");
+  }
+}
+
+// Evitar primer playback en blanco
+window.onload = () => { speechSynthesis.getVoices(); };
+
+let practiceTimeouts = [];
+
+function practiceNumbers(start=1, end=10) {
+  practiceTimeouts.forEach(t => clearTimeout(t));
+  practiceTimeouts = [];
+  window.speechSynthesis.cancel();
+
+  const text = numbers.slice(start-1, end).map(n => n.en).join(", ");
+  speak(text);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".translate-section-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const container = btn.closest("section, header");
+      const isTranslated = container.getAttribute("data-translated") === "true";
+
+      container.querySelectorAll(".translatable").forEach(el => {
+        // Si es un objeto interactivo revelado, traducirlo
+        if (el.classList.contains("object-name") && el.dataset.revealed === "true") {
+          el.textContent = isTranslated 
+            ? el.dataset.original 
+            : el.dataset.translation;
+        } else if (!el.classList.contains("object-name")) {
+          // Otro texto de la sección
+          el.textContent = isTranslated 
+            ? el.dataset.original 
+            : el.dataset.translation;
+        }
+      });
+
+      container.setAttribute("data-translated", isTranslated ? "false" : "true");
+    });
+  });
+});
+
+</script>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+  // Inicializa el mapa
+  const map = L.map('map').setView([20, 0], 2); // vista mundial
+
+  // Capa de mapa
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 5,
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Lista de países con diálogos y traducción
+  const countries = [
+    { name: "Japan", lat: 35.68, lng: 139.76, dialogue: "I'm from Japan. I'm Japanese.", translation: "Soy de Japón. Soy japonés/a." },
+    { name: "USA", lat: 38.9, lng: -77.03, dialogue: "I'm from the USA. I'm American.", translation: "Soy de Estados Unidos. Soy estadounidense." },
+    { name: "Mexico", lat: 19.43, lng: -99.13, dialogue: "I'm from Mexico. I'm Mexican.", translation: "Soy de México. Soy mexicano/a." },
+    { name: "Canada", lat: 45.42, lng: -75.69, dialogue: "I'm from Canada. I'm Canadian.", translation: "Soy de Canadá. Soy canadiense." },
+    { name: "Brazil", lat: -15.79, lng: -47.88, dialogue: "I'm from Brazil. I'm Brazilian.", translation: "Soy de Brasil. Soy brasileño/a." },
+    { name: "Argentina", lat: -34.6, lng: -58.38, dialogue: "I'm from Argentina. I'm Argentinian.", translation: "Soy de Argentina. Soy argentino/a." },
+    { name: "Chile", lat: -33.45, lng: -70.66, dialogue: "I'm from Chile. I'm Chilean.", translation: "Soy de Chile. Soy chileno/a." },
+    { name: "Peru", lat: -12.04, lng: -77.03, dialogue: "I'm from Peru. I'm Peruvian.", translation: "Soy de Perú. Soy peruano/a." },
+    { name: "Colombia", lat: 4.71, lng: -74.07, dialogue: "I'm from Colombia. I'm Colombian.", translation: "Soy de Colombia. Soy colombiano/a." },
+    { name: "Spain", lat: 40.42, lng: -3.7, dialogue: "I'm from Spain. I'm Spanish.", translation: "Soy de España. Soy español/a." },
+    { name: "France", lat: 48.85, lng: 2.35, dialogue: "I'm from France. I'm French.", translation: "Soy de Francia. Soy francés/a." },
+    { name: "Germany", lat: 52.52, lng: 13.4, dialogue: "I'm from Germany. I'm German.", translation: "Soy de Alemania. Soy alemán/a." },
+    { name: "Italy", lat: 41.9, lng: 12.5, dialogue: "I'm from Italy. I'm Italian.", translation: "Soy de Italia. Soy italiano/a." },
+    { name: "United Kingdom", lat: 51.5, lng: -0.12, dialogue: "I'm from the UK. I'm British.", translation: "Soy del Reino Unido. Soy británico/a." },
+    { name: "Ireland", lat: 53.35, lng: -6.26, dialogue: "I'm from Ireland. I'm Irish.", translation: "Soy de Irlanda. Soy irlandés/a." },
+    { name: "Portugal", lat: 38.72, lng: -9.14, dialogue: "I'm from Portugal. I'm Portuguese.", translation: "Soy de Portugal. Soy portugués/a." },
+    { name: "Russia", lat: 55.75, lng: 37.62, dialogue: "I'm from Russia. I'm Russian.", translation: "Soy de Rusia. Soy ruso/a." },
+    { name: "China", lat: 39.9, lng: 116.4, dialogue: "I'm from China. I'm Chinese.", translation: "Soy de China. Soy chino/a." },
+    { name: "India", lat: 28.61, lng: 77.2, dialogue: "I'm from India. I'm Indian.", translation: "Soy de India. Soy indio/a." },
+    { name: "South Korea", lat: 37.57, lng: 126.98, dialogue: "I'm from South Korea. I'm Korean.", translation: "Soy de Corea del Sur. Soy coreano/a." },
+    { name: "Australia", lat: -35.28, lng: 149.13, dialogue: "I'm from Australia. I'm Australian.", translation: "Soy de Australia. Soy australiano/a." },
+    { name: "New Zealand", lat: -41.29, lng: 174.78, dialogue: "I'm from New Zealand. I'm Kiwi.", translation: "Soy de Nueva Zelanda. Soy neozelandés/a." },
+    { name: "South Africa", lat: -25.75, lng: 28.19, dialogue: "I'm from South Africa. I'm South African.", translation: "Soy de Sudáfrica. Soy sudafricano/a." },
+    { name: "Egypt", lat: 30.04, lng: 31.24, dialogue: "I'm from Egypt. I'm Egyptian.", translation: "Soy de Egipto. Soy egipcio/a." },
+    { name: "Nigeria", lat: 9.05, lng: 7.49, dialogue: "I'm from Nigeria. I'm Nigerian.", translation: "Soy de Nigeria. Soy nigeriano/a." },
+    { name: "Kenya", lat: -1.29, lng: 36.82, dialogue: "I'm from Kenya. I'm Kenyan.", translation: "Soy de Kenia. Soy keniata." },
+    { name: "Turkey", lat: 39.93, lng: 32.86, dialogue: "I'm from Turkey. I'm Turkish.", translation: "Soy de Turquía. Soy turco/a." },
+    { name: "Greece", lat: 37.98, lng: 23.72, dialogue: "I'm from Greece. I'm Greek.", translation: "Soy de Grecia. Soy griego/a." },
+    { name: "Sweden", lat: 59.33, lng: 18.06, dialogue: "I'm from Sweden. I'm Swedish.", translation: "Soy de Suecia. Soy sueco/a." },
+    { name: "Norway", lat: 59.91, lng: 10.75, dialogue: "I'm from Norway. I'm Norwegian.", translation: "Soy de Noruega. Soy noruego/a." },
+    { name: "Finland", lat: 60.17, lng: 24.94, dialogue: "I'm from Finland. I'm Finnish.", translation: "Soy de Finlandia. Soy finlandés/a." },
+    { name: "Denmark", lat: 55.68, lng: 12.57, dialogue: "I'm from Denmark. I'm Danish.", translation: "Soy de Dinamarca. Soy danés/a." },
+    { name: "Netherlands", lat: 52.37, lng: 4.9, dialogue: "I'm from the Netherlands. I'm Dutch.", translation: "Soy de Países Bajos. Soy holandés/a." },
+    { name: "Belgium", lat: 50.85, lng: 4.35, dialogue: "I'm from Belgium. I'm Belgian.", translation: "Soy de Bélgica. Soy belga." },
+    { name: "Switzerland", lat: 46.95, lng: 7.44, dialogue: "I'm from Switzerland. I'm Swiss.", translation: "Soy de Suiza. Soy suizo/a." },
+    { name: "Austria", lat: 48.2, lng: 16.37, dialogue: "I'm from Austria. I'm Austrian.", translation: "Soy de Austria. Soy austríaco/a." },
+    { name: "Poland", lat: 52.23, lng: 21.01, dialogue: "I'm from Poland. I'm Polish.", translation: "Soy de Polonia. Soy polaco/a." },
+    { name: "Czech Republic", lat: 50.08, lng: 14.43, dialogue: "I'm from the Czech Republic. I'm Czech.", translation: "Soy de República Checa. Soy checo/a." },
+    { name: "Hungary", lat: 47.5, lng: 19.04, dialogue: "I'm from Hungary. I'm Hungarian.", translation: "Soy de Hungría. Soy húngaro/a." }
+  ];
+
+  let selectedDialogue = null;
+
+  // Agrega marcadores
+  countries.forEach(c => {
+    L.marker([c.lat, c.lng])
+      .addTo(map)
+      .bindPopup(`<b>${c.name}</b>`)
+      .on('click', () => {
+        const dialogueEl = document.getElementById('dialogue');
+        
+        // Crear el span dinámico si no existe
+        if (!selectedDialogue) {
+          selectedDialogue = document.createElement('span');
+          selectedDialogue.className = 'translatable';
+          dialogueEl.innerHTML = '';
+          dialogueEl.appendChild(selectedDialogue);
+        }
+
+        // Guardar original + traducción
+        selectedDialogue.dataset.original = c.dialogue;
+        selectedDialogue.dataset.translation = c.translation;
+        selectedDialogue.textContent = c.dialogue;
+
+        // Reproducir audio
+        speak(c.dialogue);
+      });
+  });
+
+  // Función de texto a voz
+  function speak(text) {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    speechSynthesis.speak(utterance);
+  }
+
+  // Botón general de traducción de la sección (asegúrate de tenerlo en tu HTML)
+  document.querySelector('#section5 .translate-section-btn')
+    .addEventListener('click', () => {
+      document.querySelectorAll('#section5 .translatable').forEach(el => {
+        if (!el.dataset.original) return;
+        if (el.textContent === el.dataset.original) {
+          el.textContent = el.dataset.translation;
+        } else {
+          el.textContent = el.dataset.original;
+        }
+      });
+    });
+
+  // Evitar primer playback en blanco
+  window.onload = () => { speechSynthesis.getVoices(); };
+</script>
+
+<script>
+  // Drag & Drop for Q5
+const draggables = document.querySelectorAll('.draggable');
+const objectItems = document.querySelectorAll('.object-item');
+
+draggables.forEach(draggable => {
+  draggable.addEventListener('dragstart', e => {
+    e.dataTransfer.setData('text', e.target.id);
+  });
+});
+
+objectItems.forEach(item => {
+  item.addEventListener('dragover', e => e.preventDefault());
+  item.addEventListener('drop', e => {
+    e.preventDefault();
+    const id = e.dataTransfer.getData('text');
+    const word = document.getElementById(id);
+    if(word.textContent === item.dataset.answer){
+      item.appendChild(word);
+      item.style.border = "2px solid green";
+    } else {
+      alert('Try again!');
+    }
+  });
+});
+
+// Check multiple choice answers + drag & drop
+function checkQuiz() {
+  let score = 0;
+  const answers = {q1:'b', q2:'a', q3:'b', q4:'a'};
+  for(const q in answers){
+    const radios = document.getElementsByName(q);
+    for(let r of radios){
+      if(r.checked && r.value === answers[q]){
+        score++;
+      }
+    }
+  }
+
+  // Check drag-drop
+  let dragScore = 0;
+  objectItems.forEach(item => {
+    const word = item.querySelector('.draggable');
+    if(word && word.textContent === item.dataset.answer){
+      dragScore++;
+    }
+  });
+
+  const totalScore = score + dragScore;
+  document.getElementById('quiz-result').textContent = `You scored ${totalScore}/7 🎉`;
+  speak(`You scored ${totalScore} out of 7`);
+}
+</script>
+
+<style>
+  #quiz-section .quiz-item { margin-bottom: 15px; }
+  .matching-grid { display: flex; gap: 15px; margin: 10px 0; }
+  .matching-grid .object-item { width: 100px; height: 100px; border: 2px dashed #ccc; display:flex; align-items:center; justify-content:center; }
+  .word-bank { margin-top: 10px; display:flex; gap:10px; }
+  .word-bank .draggable { cursor: grab; padding: 5px 10px; background: #eee; border-radius:5px; }
+</style>
+
+<!-- Auth0 -->
+<script src="../auth.js"></script>
+</body>
+</html>

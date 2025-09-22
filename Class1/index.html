@@ -1795,8 +1795,65 @@
 
 <script>
 
-// Esperar a que el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
+    // Verificar autenticación INMEDIATAMENTE en páginas de clase
+    const isClassPage = window.location.pathname.includes('Class') || 
+                        window.location.pathname.includes('class');
+    
+    if (isClassPage && !localStorage.getItem('access_token')) {
+        showAuthenticationRequired();
+        return; // Detener ejecución adicional
+    }
+    
+    // El resto de tu código de inicialización...
+    initializeButtons();
+    checkAuthLoaded();
+});
+
+function showAuthenticationRequired() {
+    const mainContent = document.querySelector('.main-content');
+    const header = document.querySelector('.main-header');
+    const nav = document.querySelector('.lessons-nav');
+    
+    if (mainContent) {
+        // Ocultar contenido de la clase
+        if (header) header.style.display = 'none';
+        if (nav) nav.style.display = 'none';
+        
+        mainContent.innerHTML = `
+            <div style="text-align: center; padding: 60px 20px;">
+                <div style="max-width: 500px; margin: 0 auto;">
+                    <h2 style="color: var(--primary); margin-bottom: 20px;">🔒 Authentication Required</h2>
+                    <p style="margin-bottom: 25px; font-size: 1.1rem;">
+                        Please log in to access this class content. You need to be authenticated to view the lessons.
+                    </p>
+                    <button id="goto-login" style="padding: 12px 24px; background: var(--primary); color: white; 
+                        border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; transition: transform 0.2s;">
+                        Go to Login Page
+                    </button>
+                    <div style="margin-top: 30px; padding: 20px; background: var(--light); border-radius: 10px;">
+                        <p style="margin-bottom: 10px;"><strong>Don't have an account yet?</strong></p>
+                        <p>Register on the login page to access all learning materials!</p>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.getElementById('goto-login').addEventListener('click', function() {
+            window.location.href = 'https://elegant-frangipane-efce46.netlify.app/';
+        });
+        
+        document.getElementById('goto-login').addEventListener('mouseover', function() {
+            this.style.transform = 'scale(1.05)';
+        });
+        
+        document.getElementById('goto-login').addEventListener('mouseout', function() {
+            this.style.transform = 'scale(1)';
+        });
+    }
+}
+
+function initializeButtons() {
     // Inicializar los botones
     const loginBtn = document.getElementById('login-btn');
     const logoutBtn = document.getElementById('logout-btn');
@@ -1811,56 +1868,54 @@ document.addEventListener('DOMContentLoaded', function() {
     if (homeBtn) {
         homeBtn.addEventListener('click', goHome);
     }
-    
+}
+
+function checkAuthLoaded() {
     // Verificar si auth.js ya está cargado y tiene las funciones
-    function checkAuthLoaded() {
-        if (typeof window.showLoggedOut === 'function' && 
-            typeof window.showContent === 'function') {
-            // Auth.js está cargado, actualizar UI según estado
-            if (localStorage.getItem('access_token')) {
-                // Usuario logueado
-                if (loginBtn) loginBtn.style.display = 'none';
-                if (logoutBtn) logoutBtn.style.display = 'block';
-                if (homeBtn) homeBtn.style.display = 'block';
-            } else {
-                // Usuario no logueado
-                if (loginBtn) loginBtn.style.display = 'block';
-                if (logoutBtn) logoutBtn.style.display = 'none';
-                if (homeBtn) homeBtn.style.display = 'none';
-            }
-            return true;
-        }
-        return false;
+    if (typeof window.showLoggedOut === 'function' && 
+        typeof window.showContent === 'function') {
+        // Auth.js está cargado, actualizar UI según estado
+        updateAuthUI();
+        return true;
     }
+    return false;
+}
+
+function updateAuthUI() {
+    const loginBtn = document.getElementById('login-btn');
+    const logoutBtn = document.getElementById('logout-btn');
+    const homeBtn = document.getElementById('home-btn');
     
-    // Intentar verificar si auth.js está cargado
-    if (!checkAuthLoaded()) {
-        // Si no está cargado aún, esperar un poco y reintentar
-        setTimeout(checkAuthLoaded, 500);
+    if (localStorage.getItem('access_token')) {
+        // Usuario logueado
+        if (loginBtn) loginBtn.style.display = 'none';
+        if (logoutBtn) logoutBtn.style.display = 'block';
+        if (homeBtn) homeBtn.style.display = 'block';
+    } else {
+        // Usuario no logueado
+        if (loginBtn) loginBtn.style.display = 'block';
+        if (logoutBtn) logoutBtn.style.display = 'none';
+        if (homeBtn) homeBtn.style.display = 'none';
     }
+}
+
+// Verificación periódica por si auth.js se carga después
+let authCheckAttempts = 0;
+const maxAuthCheckAttempts = 10;
+
+function checkAuthPeriodically() {
+    if (authCheckAttempts >= maxAuthCheckAttempts) return;
     
-    // Si estamos en una página de clase (no en el index principal)
-    // y el usuario no está autenticado, mostrar mensaje
-    const isClassPage = window.location.pathname.includes('Class');
-    if (isClassPage && !localStorage.getItem('access_token')) {
-        const mainContent = document.querySelector('.main-content');
-        if (mainContent) {
-            mainContent.innerHTML = `
-                <div style="text-align: center; padding: 40px;">
-                    <h2>Authentication Required</h2>
-                    <p>Please log in to access this class content.</p>
-                    <button id="goto-login" style="padding: 10px 20px; background: var(--primary); color: white; border: none; border-radius: 5px;">
-                        Go to Login
-                    </button>
-                </div>
-            `;
-            
-            document.getElementById('goto-login').addEventListener('click', function() {
-                window.location.href = 'https://elegant-frangipane-efce46.netlify.app/';
-            });
-        }
+    if (checkAuthLoaded()) {
+        console.log('auth.js loaded successfully');
+    } else {
+        authCheckAttempts++;
+        setTimeout(checkAuthPeriodically, 300);
     }
-});
+}
+
+// Iniciar verificación periódica
+setTimeout(checkAuthPeriodically, 100);
 
 let selectedWord = null;
 let matchedPairs = 0;

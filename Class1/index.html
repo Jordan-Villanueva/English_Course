@@ -1715,6 +1715,66 @@
 		<small class="translatable" data-original="Instructions: First tap a word, then tap the matching picture" data-translation="Instrucciones: Primero toca una palabra, luego toca la imagen correspondiente">Instructions: First tap a word, then tap the matching picture</small>
 	    </div>
 	</div>
+	
+			<!-- Q6 -->
+		<div class="quiz-item">
+		    <div class="paragraph-with-buttons">
+			<div class="translatable-content">
+			    <strong class="translatable" data-original="6. Which greeting is appropriate for the morning?" data-translation="6. ¿Qué saludo es apropiado para la mañana?">6. Which greeting is appropriate for the morning?</strong>
+			</div>
+		    </div>
+		    <label><input type="radio" name="q6" value="a"> <span class="translatable" data-original="Good evening" data-translation="Buenas noches">Good evening</span></label><br>
+		    <label><input type="radio" name="q6" value="b"> <span class="translatable" data-original="Good afternoon" data-translation="Buenas tardes">Good afternoon</span></label><br>
+		    <label><input type="radio" name="q6" value="c"> <span class="translatable" data-original="Good morning" data-translation="Buenos días">Good morning</span></label>
+		</div>
+
+		<!-- Q7 -->
+		<div class="quiz-item">
+		    <div class="paragraph-with-buttons">
+			<div class="translatable-content">
+			    <strong class="translatable" data-original="7. How do you say 'Me gusta' in English?" data-translation="7. ¿Cómo se dice 'Me gusta' en inglés?">7. How do you say "Me gusta" in English?</strong>
+			</div>
+		    </div>
+		    <label><input type="radio" name="q7" value="a"> <span class="translatable" data-original="I am" data-translation="Yo soy/estoy">I am</span></label><br>
+		    <label><input type="radio" name="q7" value="b"> <span class="translatable" data-original="I like" data-translation="Me gusta">I like</span></label><br>
+		    <label><input type="radio" name="q7" value="c"> <span class="translatable" data-original="I have" data-translation="Yo tengo">I have</span></label>
+		</div>
+
+		<!-- Q8 -->
+		<div class="quiz-item">
+		    <div class="paragraph-with-buttons">
+			<div class="translatable-content">
+			    <strong class="translatable" data-original="8. What is the correct way to ask someone's name?" data-translation="8. ¿Cuál es la forma correcta de preguntar el nombre de alguien?">8. What is the correct way to ask someone's name?</strong>
+			</div>
+		    </div>
+		    <label><input type="radio" name="q8" value="a"> <span class="translatable" data-original="Where are you from?" data-translation="¿De dónde eres?">Where are you from?</span></label><br>
+		    <label><input type="radio" name="q8" value="b"> <span class="translatable" data-original="What's your name?" data-translation="¿Cómo te llamas?">What's your name?</span></label><br>
+		    <label><input type="radio" name="q8" value="c"> <span class="translatable" data-original="How old are you?" data-translation="¿Cuántos años tienes?">How old are you?</span></label>
+		</div>
+
+		<!-- Q9 -->
+		<div class="quiz-item">
+		    <div class="paragraph-with-buttons">
+			<div class="translatable-content">
+			    <strong class="translatable" data-original="9. Which phrase means 'Hasta luego'?" data-translation="9. ¿Qué frase significa 'Hasta luego'?">9. Which phrase means "Hasta luego"?</strong>
+			</div>
+		    </div>
+		    <label><input type="radio" name="q9" value="a"> <span class="translatable" data-original="See you later" data-translation="Hasta luego">See you later</span></label><br>
+		    <label><input type="radio" name="q9" value="b"> <span class="translatable" data-original="Good night" data-translation="Buenas noches">Good night</span></label><br>
+		    <label><input type="radio" name="q9" value="c"> <span class="translatable" data-original="Hello" data-translation="Hola">Hello</span></label>
+		</div>
+
+		<!-- Q10 -->
+		<div class="quiz-item">
+		    <div class="paragraph-with-buttons">
+			<div class="translatable-content">
+			    <strong class="translatable" data-original="10. How do you respond to 'Where are you from?'" data-translation="10. ¿Cómo respondes a '¿De dónde eres?'?">10. How do you respond to "Where are you from?"</strong>
+			</div>
+		    </div>
+		    <label><input type="radio" name="q10" value="a"> <span class="translatable" data-original="I'm from Mexico" data-translation="Soy de México">I'm from Mexico</span></label><br>
+		    <label><input type="radio" name="q10" value="b"> <span class="translatable" data-original="My name is Maria" data-translation="Mi nombre es María">My name is Maria</span></label><br>
+		    <label><input type="radio" name="q10" value="c"> <span class="translatable" data-original="I like movies" data-translation="Me gustan las películas">I like movies</span></label>
+		</div>
 		
 		<button type="button" onclick="checkQuiz()" class="big-btn translatable" data-original="Submit" data-translation="Enviar">Submit</button>
 	    </form>
@@ -2072,10 +2132,15 @@ function checkQuiz() {
         q1: 'b', // Hello
         q2: 'a', // I
         q3: 'b', // Thirty
-        q4: 'a'  // See you later
+        q4: 'a', // See you later
+        q6: 'c', // Good morning
+        q7: 'b', // I like
+        q8: 'b', // What's your name?
+        q9: 'a', // See you later
+        q10: 'a' // I'm from Mexico
     };
     
-    // Contar preguntas de opción múltiple (4 puntos)
+    // Contar preguntas de opción múltiple (9 puntos)
     for(const q in answers){
         const radios = document.getElementsByName(q);
         for(const r of radios) {
@@ -2089,8 +2154,9 @@ function checkQuiz() {
     // Agregar puntos del matching game (3 puntos - 1 por cada par)
     const matchingScore = matchedPairs;
     const totalScore = score + matchingScore;
-    const maxScore = 7; // 4 preguntas + 3 pares
+    const maxScore = 12; // 9 preguntas + 3 pares
     
+    // Resto del código permanece igual...
     // Mostrar resultado
     const resultElement = document.getElementById('quiz-result');
     resultElement.textContent = `You scored ${totalScore}/${maxScore} 🎉`;
@@ -2099,9 +2165,9 @@ function checkQuiz() {
     let feedback = '';
     if (totalScore === maxScore) {
         feedback = 'Perfect score! Excellent job!';
-    } else if (totalScore >= 5) {
+    } else if (totalScore >= 9) {
         feedback = 'Great job! Almost there!';
-    } else if (totalScore >= 3) {
+    } else if (totalScore >= 6) {
         feedback = 'Good effort! Keep practicing!';
     } else {
         feedback = 'Keep learning and try again!';

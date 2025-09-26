@@ -6,1214 +6,1240 @@
     <title>English Learning Platform</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #4a6fa5;
-            --secondary: #166088;
-            --accent: #4cb5f5;
-            --light: #f8f9fa;
-            --dark: #343a40;
-            --success: #28a745;
-            --warning: #ffc107;
-            --danger: #dc3545;
-            --card-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            --hover-shadow: 0 8px 16px rgba(0,0,0,0.12);
-        }
-        
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f5f7fa;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        /* Header mejorado */
-        .main-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 1rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        
-	.header-buttons {
-	  display: flex;
-	  justify-content: center;
-	  gap: 10px;
-	  margin-top: 15px;
-	  flex-wrap: wrap;
+	<style>
+	    :root {
+		--primary: #4a6fa5;
+		--secondary: #166088;
+		--accent: #4cb5f5;
+		--light: #f8f9fa;
+		--dark: #343a40;
+		--success: #28a745;
+		--warning: #ffc107;
+		--danger: #dc3545;
+		--card-shadow: 0 4px 12px rgba(0,0,0,0.08);
+		--hover-shadow: 0 8px 16px rgba(0,0,0,0.12);
+	    }
+	    
+	    * {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	    }
+	    
+	    body {
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		line-height: 1.6;
+		color: #333;
+		background-color: #f5f7fa;
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+		overflow-x: hidden;
+	    }
+	    
+	    /* Nueva estructura de navegación por secciones */
+	    .app-container {
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+	    }
+	    
+	    .sections-container {
+		display: flex;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scroll-behavior: smooth;
+		flex: 1;
+	    }
+	    
+	    .section {
+		min-width: 100vw;
+		height: 100vh;
+		scroll-snap-align: start;
+		padding: 20px;
+		overflow-y: auto;
+		display: flex;
+		flex-direction: column;
+	    }
+	    
+	    /* Barra de progreso superior */
+	    .progress-header {
+		background: white;
+		padding: 15px 0;
+		box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+		position: sticky;
+		top: 0;
+		z-index: 100;
+	    }
+	    
+	    .progress-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 15px;
+	    }
+	    
+	    .progress-info {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 10px;
+	    }
+	    
+	    .progress-bar {
+		width: 100%;
+		height: 8px;
+		background: #e9ecef;
+		border-radius: 4px;
+		overflow: hidden;
+	    }
+	    
+	    .progress-fill {
+		height: 100%;
+		background: var(--accent);
+		border-radius: 4px;
+		transition: width 0.3s ease;
+	    }
+	    
+	    .section-indicators {
+		display: flex;
+		justify-content: center;
+		gap: 8px;
+		margin-top: 10px;
+	    }
+	    
+	    .section-indicator {
+		width: 12px;
+		height: 12px;
+		border-radius: 50%;
+		background: #ddd;
+		cursor: pointer;
+		transition: all 0.3s;
+	    }
+	    
+	    .section-indicator.active {
+		background: var(--primary);
+		transform: scale(1.2);
+	    }
+	    
+	    .section-indicator.completed {
+		background: var(--success);
+	    }
+	    
+	    /* Header mejorado */
+	    .main-header {
+		background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+		color: white;
+		padding: 1rem;
+		position: sticky;
+		top: 0;
+		z-index: 100;
+		box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+	    }
+	    
+	    .header-content {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 15px;
+	    }
+	    
+	    /* Para listas en escritorio */
+	    ul, ol {
+		margin-left: 0;
+		padding-left: 0;
+		list-style-position: inside;
+	    }
+
+	    /* Si quieres que los botones siempre estén alineados */
+	    .header-buttons {
+		display: flex;
+		flex-direction: row;
+		gap: 10px;
+		align-items: center;
+	    }
+
+	    .header-buttons button {
+		padding: 10px 20px;
+		background-color: rgba(255,255,255,0.2);
+		color: white;
+		border: 1px solid white;
+		border-radius: 12px;
+		cursor: pointer;
+		transition: all 0.4s ease;
+	    }
+
+	    .header-buttons button:hover {
+		background-color: rgba(255,255,255,0.35);
+		transform: translateY(-2px) scale(1.05);
+	    }
+	    
+	    .user-progress {
+		display: flex;
+		align-items: center;
+		gap: 15px;
+		background: rgba(255,255,255,0.2);
+		padding: 8px 15px;
+		border-radius: 20px;
+	    }
+	    
+	    .xp-bar {
+		width: 120px;
+		height: 12px;
+		background: rgba(255,255,255,0.3);
+		border-radius: 6px;
+		overflow: hidden;
+	    }
+	    
+	    .xp-progress {
+		height: 100%;
+		background: var(--accent);
+		border-radius: 6px;
+		font-size: 0.7rem;
+		color: white;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		white-space: nowrap;
+		padding: 0 5px;
+	    }
+	    
+	    .streak-counter, .coins {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+		font-weight: bold;
+	    }
+	    
+	    /* Contenido de sección */
+	    .section-content {
+		max-width: 800px;
+		margin: 0 auto;
+		width: 100%;
+		flex: 1;
+		padding: 20px 0;
+	    }
+	    
+	    /* Controles de navegación entre secciones */
+	    .section-nav {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 20px;
+		padding: 0 15px;
+	    }
+	    
+	    /* Mantener todos los estilos existentes para el contenido */
+	    .lesson-section {
+		background: white;
+		border-radius: 10px;
+		padding: 20px;
+		box-shadow: var(--card-shadow);
+		transition: transform 0.3s, box-shadow 0.3s;
+		margin-bottom: 20px;
+	    }
+	    
+	    .lesson-section:hover {
+		box-shadow: var(--hover-shadow);
+	    }
+	    
+	    .title-flex {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		flex-wrap: wrap;
+	    }
+	    
+	    /* PARA MÓVILES */
+	    @media (max-width: 768px) {
+		
+		.objetivos li {
+		    flex-direction: row !important;
+		    align-items: center !important;
+		    gap: 10px !important;
+		}
+		
+		.objetivos li .translatable {
+		    margin-right: 10px !important;
+		}
+		
+		.objetivos li button {
+		    min-width: 44px !important;
+		    min-height: 44px !important;
+		    padding: 10px !important;
+		}
+		
+		.header-buttons { 
+		    flex-direction:column; 
+		    align-items:center; 
+		}
+		
+		.header-buttons button { 
+		    width:80%; 
+		    margin-bottom:10px; 
+		}
+		
+		.title-flex {
+		    display: grid !important;
+		    grid-template-columns: 1fr auto;
+		    gap: 10px;
+		    align-items: center;
+		}
+		
+		.title-flex > .translatable {
+		    grid-column: 1;
+		}
+		
+		.title-flex > button {
+		    grid-column: 2;
+		    margin: 0 !important;
+		    justify-self: end;
+		}
+		
+		/* Para múltiples botones */
+		.title-flex > button.translate-section-btn {
+		    grid-row: 1;
+		}
+		
+		.title-flex > button[onclick*="speak"] {
+		    grid-row: 1;
+		    grid-column: 3;
+		}
+	    }
+
+	    /* PARA ESCRITORIO */
+	    @media (min-width: 769px) {
+		.objetivos li {
+		    gap: 15px !important;
+		}
+		
+		.objetivos li button {
+		    padding: 8px 12px !important;
+		}
+	    }
+	    
+	    .objetivos ul {
+		list-style: none !important;
+		margin: 0 !important;
+		padding: 0 !important;
+	    }
+
+	    /* Solución de emergencia si los bullets no se ven */
+	    .objetivos li::before {
+		content: "•" !important;
+		color: var(--primary) !important;
+		font-weight: bold !important;
+		font-size: 18px !important;
+		margin-right: 10px !important;
+		display: inline-block !important;
+	    }
+	    
+	    .paragraph-with-buttons {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		margin-bottom: 15px;
+	    }
+
+	    .translatable-content {
+		flex: 1;
+		margin: 0;
+	    }
+
+	    .translation-buttons {
+		flex-shrink: 0;
+		margin: 0;
+	    }
+
+	    .translation-buttons button {
+		padding: 8px 12px;
+		margin: 0;
+	    }
+
+	    /* Elementos interactivos */
+	    .interactive-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+		gap: 12px;
+		margin: 15px 0;
+	    }
+	    
+	    .word-card {
+		    background-color: white;
+		    border-radius: 12px;
+		    overflow: hidden;
+		    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+		    transition: transform 0.3s ease, box-shadow 0.3s ease;
+		    cursor: pointer;
+		    display: flex;
+		    flex-direction: column;
+		    height: 100%;
+		    min-height: 160px; /* Altura mínima consistente */
+		}
+	    
+	    .word-card:hover, .number-item:hover {
+		transform: translateY(-3px);
+		box-shadow: var(--hover-shadow);
+	    }
+	    
+	    .word-card-image {
+		width: 100px;
+		height: 100px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		overflow: hidden;
+	    }
+
+	    .word-card-image img {
+		max-width: 100%;
+		max-height: 100%;
+		object-fit: contain;
+		border-radius: 6px;
+		display: block;
+	    }
+	    
+	    /* Ajuste automático para texto traducido */
+	    .word-card-text.translated {
+		font-size: 0.85em;
+		line-height: 1.2;
+	    }
+
+	    /* Para textos muy largos, reducir más */
+	    .word-card-text.translated.long-text {
+		font-size: 0.8em;
+		line-height: 1.1;
+	    }
+
+	    /* Asegurar que el texto se ajuste */
+	    .word-card-content {
+		min-height: 70px; /* Aumentar altura mínima */
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		padding: 10px 5px; /* Más padding */
+		flex-grow: 1;
+	    }
+
+	    .word-card-text {
+		word-wrap: break-word;
+		hyphens: auto;
+		line-height: 1.3;
+		font-size: 0.9em;
+		width: 100%;
+	    }
+	    
+	    .object-container {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+		gap: 15px;
+		margin: 15px 0;
+	    }
+
+	    .object-item {
+		    position: relative;
+		    text-align: center;
+		    padding: 15px 10px; /* Reducir padding horizontal */
+		    border: 2px solid #ddd;
+		    border-radius: 10px;
+		    cursor: pointer;
+		    transition: all 0.3s ease;
+		    min-height: 120px; /* Altura mínima consistente */
+		    display: flex;
+		    flex-direction: column;
+		    align-items: center;
+		    justify-content: space-between;
+		}
+
+	    .object-item.selected {
+		border-color: var(--accent);
+		background-color: rgba(76, 181, 245, 0.1);
+	    }
+
+	    .object-item.correct {
+		border-color: var(--success);
+		background-color: rgba(40, 167, 69, 0.1);
+	    }
+
+	    .object-item.incorrect {
+		border-color: var(--danger);
+		background-color: rgba(220, 53, 69, 0.1);
+	    }
+	    
+	    .object-item:hover {
+		border-color: var(--accent);
+		box-shadow: 0 5px 15px rgba(76, 181, 245, 0.2);
+	    }
+
+	    .object-image {
+		max-width: 100%;
+		height: 60px;
+		object-fit: contain;
+		margin-bottom: 8px;
+		flex-shrink: 0;
+	    }
+	    
+	    .object-name {
+		    font-size: 0.9em;
+		    font-weight: 500;
+		    line-height: 1.2;
+		    word-wrap: break-word;
+		    hyphens: auto;
+		    text-align: center;
+		    width: 100%;
+		    min-height: 2.4em; /* Altura mínima para 2 líneas */
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		}
+	    
+	    /* ===== ESTILOS GENERALES DE BOTONES ===== */
+	    button {
+		cursor: pointer;
+		border: none;
+		border-radius: 5px;
+		padding: 8px 12px;
+		background: var(--light);
+		transition: background 0.2s, transform 0.2s;
+		font-family: inherit;
+	    }
+	    
+	    button:hover {
+		background: #e2e6ea;
+		transform: translateY(-2px);
+	    }
+	    
+	    /* ===== BOTONES ESPECÍFICOS ===== */
+	    
+	    /* Botones de audio pequeños (junto a títulos) */
+	    button[onclick*="speak"] {
+		background: #f8f9fa;
+		border: 1px solid #dee2e6;
+		padding: 6px 10px;
+		font-size: 0.9em;
+	    }
+
+	    button[onclick*="speak"]:hover {
+		background: #e9ecef;
+		border-color: #4CAF50;
+	    }
+
+	    /* Botones de práctica grandes */
+	    .practice-btn {
+		background: linear-gradient(135deg, #4CAF50, #45a049) !important;
+		color: white !important;
+		border: none !important;
+		border-radius: 8px;
+		padding: 15px 20px !important;
+		font-size: 1em;
+		font-weight: 600;
+		box-shadow: 0 3px 10px rgba(76, 175, 80, 0.3);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		min-height: 60px;
+		line-height: 1.3;
+		width: 100%;
+	    }
+
+	    .practice-btn:hover {
+		background: linear-gradient(135deg, #45a049, #4CAF50) !important;
+		transform: translateY(-2px) !important;
+		box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+	    }
+
+	    /* Botones de navegación */
+	    .nav-btn {
+		background: #6c757d !important;
+		color: white !important;
+		padding: 10px 20px !important;
+		font-weight: 500;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	    }
+
+	    .nav-btn:hover {
+		background: #5a6268 !important;
+	    }
+
+	    .nav-btn:disabled {
+		background: #ccc;
+		cursor: not-allowed;
+		transform: none;
+	    }
+
+	    /* Botón de traducción */
+	    .translate-section-btn {
+		background: #17a2b8 !important;
+		color: white !important;
+	    }
+
+	    .translate-section-btn:hover {
+		background: #138496 !important;
+	    }
+	    
+	    .speak-btn {
+		background: var(--accent);
+		color: white;
+	    }
+	    
+	    .speak-btn:hover {
+		background: #3aa0d9;
+	    }
+	    
+	    .big-btn {
+		display: inline-block;
+		padding: 12px 20px;
+		margin: 5px;
+		font-size: 1rem;
+		font-weight: bold;
+		border-radius: 8px;
+	    }
+	    
+	    /* Quiz */
+	    .quiz-item {
+		margin-bottom: 20px;
+		padding: 15px;
+		background: var(--light);
+		border-radius: 8px;
+		transition: transform 0.3s;
+	    }
+	    
+	    .quiz-item:hover {
+		transform: translateY(-3px);
+	    }
+	    
+	    .matching-game {
+		margin: 15px 0;
+	    }
+	    
+	    .matching-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 15px;
+		margin-bottom: 20px;
+	    }
+	    
+	    /* Grid de números - FIXED GRID PARA MEJOR VISUALIZACIÓN */
+	.numbers-grid {
+	    display: grid;
+	    grid-template-columns: repeat(5, 1fr); /* 5 columnas fijas */
+	    gap: 10px;
+	    margin: 25px 0;
+	    padding: 10px;
 	}
 
-	.header-buttons button {
-	  padding: 10px 20px;
-	  background-color: rgba(255,255,255,0.2);
-	  color: white;
-	  border: 1px solid white;
-	  border-radius: 12px;
-	  cursor: pointer;
-	  transition: all 0.4s ease;
-	}
-
-	.header-buttons button:hover {
-	  background-color: rgba(255,255,255,0.35);
-	  transform: translateY(-2px) scale(1.05);
-	}
-        
-        .user-progress {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            background: rgba(255,255,255,0.2);
-            padding: 8px 15px;
-            border-radius: 20px;
-        }
-        
-        .xp-bar {
-            width: 120px;
-            height: 12px;
-            background: rgba(255,255,255,0.3);
-            border-radius: 6px;
-            overflow: hidden;
-        }
-        
-        .xp-progress {
-            height: 100%;
-            background: var(--accent);
-            border-radius: 6px;
-            font-size: 0.7rem;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            white-space: nowrap;
-            padding: 0 5px;
-        }
-        
-        .streak-counter, .coins {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-weight: bold;
-        }
-        
-        /* Navegación de lecciones */
-        .lessons-nav {
-            background: white;
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-            display: flex;
-            overflow-x: auto;
-            gap: 5px;
-        }
-        
-        .lessons-nav a {
-	    text-decoration: none;
-	    color: inherit;
-	    display: inline-block;
-	}
-        
-	.lesson-chip {
-	    padding: 5px 15px;
-	    border-radius: 20px;
-	    background: #e9ecef;
-	    font-size: 0.9rem;
-	    white-space: nowrap;
+	.number-item {
+	    background: white;
+	    border: 2px solid #4CAF50;
+	    border-radius: 12px;
+	    padding: 15px 8px;
+	    text-align: center;
 	    cursor: pointer;
-	    transition: all 0.3s;
-	    display: inline-block; /* Asegura que se comporte como un chip */
-	}
-        
-        .lesson-chip.current {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .lesson-chip.completed {
-            background: var(--success);
-            color: white;
-        }
-        
-        .lesson-chip:hover {
-            transform: translateY(-2px);
-        }
-        
-        /* Contenido principal */
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 20px;
-            padding: 20px 0;
-            flex: 1;
-        }
-        
-        .lesson-content {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        
-        /* Barra lateral de progreso */
-        .progress-sidebar {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: var(--card-shadow);
-            height: fit-content;
-            position: sticky;
-            top: 90px;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .stat-card {
-            background: var(--light);
-            padding: 10px;
-            border-radius: 8px;
-            text-align: center;
-            transition: transform 0.3s;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-3px);
-        }
-        
-        .stat-number {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary);
-        }
-        
-        .community-activity {
-            margin-top: 20px;
-        }
-        
-        .activity-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .activity-item img {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-        }
-        
-        /* Elementos de lección */
-        .lesson-section {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: var(--card-shadow);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .lesson-section:hover {
-            box-shadow: var(--hover-shadow);
-        }
-        
-        .title-flex {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        
-        .title-flex .translatable {
-    	    flex: 1; /* Ocupa el espacio disponible */
-	}
-        
-        /* RESTABLECER BULLET POINTS - Versión corregida */
-	.objetivos ul {
-	    list-style-type: disc !important;
-	    padding-left: 30px !important;
-	    margin: 15px 0 !important;
+	    transition: all 0.3s ease;
+	    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.1);
+	    display: flex;
+	    flex-direction: column;
+	    align-items: center;
+	    justify-content: center;
+	    min-height: 90px;
 	}
 
-	.objetivos li {
-	    display: list-item !important; /* Esto es clave */
-	    list-style-type: inherit !important;
-	    list-style-position: outside !important;
-	    margin-bottom: 12px !important;
-	    padding-left: 5px !important;
-	}
-
-	/* Estructura para contenido y botones */
-	.objetivos li {
-	    display: flex !important;
-	    align-items: flex-start !important;
-	    justify-content: space-between !important;
-	}
-
-	.objetivos li .translatable {
-	    flex: 1 !important;
-	    margin-right: 15px !important;
-	}
-
-	.objetivos li button {
-	    flex-shrink: 0 !important;
-	    align-self: center !important;
-	    margin: 0 !important;
-	}
-	
-	.paragraph-with-buttons {
+	.number-circle {
+	    width: 30px;
+	    height: 30px;
+	    border-radius: 50%;
+	    background: #4CAF50;
+	    color: white;
 	    display: flex;
 	    align-items: center;
-	    gap: 12px;
-	    margin-bottom: 15px;
-	}
-
-	.translatable-content {
-	    flex: 1;
-	    margin: 0;
-	}
-
-	.translation-buttons {
-	    flex-shrink: 0;
-	    margin: 0;
-	}
-
-	.translation-buttons button {
-	    padding: 8px 12px;
-	    margin: 0;
-	}
-
-	/* Para móviles */
-	@media (max-width: 768px) {
-	    .paragraph-with-buttons {
-		flex-direction: row; /* Mantener en línea incluso en móviles */
-		align-items: center;
-		gap: 10px;
-	    }
-	    
-	    .translation-buttons button {
-		min-width: 44px;
-		min-height: 44px;
-		padding: 10px;
-	    }
-	}
-
-	/* PARA MÓVILES */
-	@media (max-width: 768px) {
-	    .objetivos ul {
-		padding-left: 25px !important;
-	    }
-	    
-	    .objetivos li {
-		flex-direction: row !important;
-		align-items: center !important;
-		gap: 10px !important;
-	    }
-	    
-	    .objetivos li .translatable {
-		margin-right: 10px !important;
-	    }
-	    
-	    .objetivos li button {
-		min-width: 44px !important;
-		min-height: 44px !important;
-		padding: 10px !important;
-	    }
-	}
-
-	/* PARA ESCRITORIO */
-	@media (min-width: 769px) {
-	    .objetivos li {
-		gap: 15px !important;
-	    }
-	    
-	    .objetivos li button {
-		padding: 8px 12px !important;
-	    }
-	}
-
-	/* Solución de emergencia si los bullets no se ven */
-	.objetivos li::before {
-	    content: "•" !important;
-	    color: var(--primary) !important;
-	    font-weight: bold !important;
-	    font-size: 18px !important;
-	    margin-right: 10px !important;
-	    display: inline-block !important;
-	}
-
-	.objetivos ul {
-	    list-style: none !important;
-	    padding-left: 20px !important;
-	}
-        
-        /* Elementos interactivos */
-        .interactive-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 10px;
-            margin: 15px 0;
-        }
-        
-        .word-card {
-            background-color: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-        
-        .word-card:hover, .number-item:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--hover-shadow);
-        }
-        
-                /* CONTENEDOR DE IMAGEN - CLAVE PARA EL AJUSTE */
-	.word-card-image {
-	  width: 100px;   /* contenedor cuadrado */
-	  height: 100px;
-	  display: flex;
-	  justify-content: center;
-	  align-items: center;
-	  overflow: hidden; /* evita que se salga */
-	}
-
-	.word-card-image img {
-	  max-width: 100%;
-	  max-height: 100%;
-	  object-fit: contain; /* asegura que la imagen quepa completa */
-	  border-radius: 6px;
-	  display: block;
-	}
-
-        
-        /* Efecto de zoom suave al pasar el ratón */
-        .word-card:hover .word-card-image img {
-            transform: scale(1.05);
-        }
-        
-        .word-card-content {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            justify-content: space-between;
-        }
-        
-        .word-card-text {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-        
-        .object-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 15px;
-            margin: 15px 0;
-        }
-        
-	.object-item {
-	    position: relative;
-	    text-align: center;
-	    padding: 15px;
-	    border: 2px solid #ddd;
-	    border-radius: 10px;
-	    cursor: pointer;
-	    transition: all 0.3s ease;
-	}
-
-	.object-item.selected {
-	    border-color: var(--accent);
-	    background-color: rgba(76, 181, 245, 0.1);
-	}
-
-	.object-item.correct {
-	    border-color: var(--success);
-	    background-color: rgba(40, 167, 69, 0.1);
-	}
-
-	.object-item.incorrect {
-	    border-color: var(--danger);
-	    background-color: rgba(220, 53, 69, 0.1);
-	}
-        
-        .object-item:hover {
-            border-color: var(--accent);
-            box-shadow: 0 5px 15px rgba(76, 181, 245, 0.2);
-        }.object-item {
-	    position: relative;
-	    text-align: center;
-	    padding: 15px;
-	    border: 2px solid #ddd;
-	    border-radius: 10px;
-	    cursor: pointer;
-	    transition: all 0.3s ease;
-	}
-
-	.object-item.selected {
-	    border-color: var(--accent);
-	    background-color: rgba(76, 181, 245, 0.1);
-	}
-
-	.object-item.correct {
-	    border-color: var(--success);
-	    background-color: rgba(40, 167, 69, 0.1);
-	}
-
-	.object-item.incorrect {
-	    border-color: var(--danger);
-	    background-color: rgba(220, 53, 69, 0.1);
-	}
-        
-        .object-image {
-            max-width: 100%;
-            height: 60px;
-            object-fit: contain;
-            margin-bottom: 8px;
-        }
-        
-        /* Botones */
-        button {
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            padding: 8px 12px;
-            background: var(--light);
-            transition: background 0.2s, transform 0.2s;
-        }
-        
-        button:hover {
-            background: #e2e6ea;
-            transform: translateY(-2px);
-        }
-        
-        .speak-btn {
-            background: var(--accent);
-            color: white;
-        }
-        
-        .speak-btn:hover {
-            background: #3aa0d9;
-        }
-        
-        .big-btn {
-            display: inline-block;
-            padding: 12px 20px;
-            margin: 5px;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 8px;
-        }
-        
-        /* Quiz */
-        .quiz-item {
-            margin-bottom: 20px;
-            padding: 15px;
-            background: var(--light);
-            border-radius: 8px;
-            transition: transform 0.3s;
-        }
-        
-        .quiz-item:hover {
-            transform: translateY(-3px);
-        }
-        
-        .matching-game {
-	    margin: 15px 0;
-	}
-		
-	.matching-grid {
-	    display: grid;
-	    grid-template-columns: repeat(2, 1fr);
-	    gap: 15px;
-	    margin-bottom: 20px;
-	}
-		
-        /* Responsive */
-        @media (max-width: 900px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .progress-sidebar {
-                position: static;
-                margin-bottom: 20px;
-                order: -1;
-            }
-        }
-        
-        @media (max-width: 600px) {
-            .header-content {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .interactive-grid {
-                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            }
-            
-            .title-flex {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
-        
-	@media (max-width:768px) {
-	  .header-buttons { flex-direction:column; align-items:center; }
-	  .header-buttons button { width:80%; margin-bottom:10px; }
-	}
-	
-	@media (max-width: 768px) {
-	    .title-flex {
-		display: grid !important;
-		grid-template-columns: 1fr auto;
-		gap: 10px;
-		align-items: center;
-	    }
-	    
-	    .title-flex > .translatable {
-		grid-column: 1;
-	    }
-	    
-	    .title-flex > button {
-		grid-column: 2;
-		margin: 0 !important;
-		justify-self: end;
-	    }
-	    
-	    /* Para múltiples botones */
-	    .title-flex > button.translate-section-btn {
-		grid-row: 1;
-	    }
-	    
-	    .title-flex > button[onclick*="speak"] {
-		grid-row: 1;
-		grid-column: 3;
-	    }
-	}
-        
-        /* Animaciones */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .pulse {
-            animation: pulse 1s infinite;
-        }
-        
-        @keyframes celebrate {
-            0% { transform: translateY(0); }
-            25% { transform: translateY(-5px); }
-            50% { transform: translateY(0); }
-            75% { transform: translateY(-3px); }
-            100% { transform: translateY(0); }
-        }
-        
-        .celebrate {
-            animation: celebrate 0.5s ease;
-        }
-        
-        /* Efectos de finalización */
-        .completed-checkmark {
-            color: var(--success);
-            margin-left: 5px;
-        }
-        
-        /* Mejoras visuales para iframes */
-        iframe {
-            border-radius: 8px;
-            box-shadow: var(--card-shadow);
-            margin: 10px 0;
-        }
-        
-        /* Estilo para números */
-        .numbers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-            gap: 10px;
-            margin: 15px 0;
-        }
-        
-        .number-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-        }
-        
-        .number {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--primary);
-        }
-        
-        .number-name {
-            font-size: 0.9rem;
-            margin-top: 5px;
-        }
-        
-        /* Mejoras para el mapa */
-        #map {
-            border-radius: 8px;
-            box-shadow: var(--card-shadow);
-            z-index: 1;
-        }
-        
-        /* Mejoras para la sección de juego */
-        .game-item {
-            background: var(--light);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            transition: transform 0.3s;
-        }
-        
-        .game-item:hover {
-            transform: translateY(-3px);
-        }
-        
-        
-	.word-bank {
-	    display: flex;
-	    flex-wrap: wrap;
-	    gap: 10px;
 	    justify-content: center;
+	    font-weight: bold;
+	    font-size: 1em;
+	    margin-bottom: 5px;
 	}
 
-	.selectable-word {
-	    padding: 12px 18px;
-	    border: 2px solid var(--primary);
-	    border-radius: 8px;
-	    background: white;
-	    cursor: pointer;
-	    transition: all 0.3s ease;
-	    user-select: none;
-	}
-
-	.selectable-word.selected {
-	    background-color: var(--accent);
-	    color: white;
-	    border-color: var(--secondary);
-	}
-
-	.selectable-word.matched {
-	    background-color: var(--success);
-	    color: white;
-	    border-color: var(--success);
-	    opacity: 0.7;
-	    text-decoration: line-through;
-	}
-
-	.match-feedback {
-	    position: absolute;
-	    top: 5px;
-	    right: 5px;
-	    width: 20px;
-	    height: 20px;
-	    border-radius: 50%;
-	    display: none;
-	}
-
-	.match-feedback.correct {
-	    display: block;
-	    background-color: var(--success);
-	}
-
-	.match-feedback.incorrect {
-	    display: block;
-	    background-color: var(--danger);
-	}
-
-	.mobile-match-instructions {
+	.number-name {
+	    font-size: 0.85em; /* Tamaño ligeramente mayor */
+	    color: #333;
+	    font-weight: 500;
+	    line-height: 1.3;
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
 	    text-align: center;
-	    margin-top: 10px;
-	    color: #666;
-	    font-style: italic;
+	    width: 100%;
+	    min-height: 2.6em; /* Altura para 2-3 líneas */
+	    word-wrap: break-word;
+	    hyphens: auto;
 	}
 
-	/* Para desktop mantener drag & drop */
-	@media (min-width: 769px) {
-	    .object-item {
-		cursor: grab;
-	    }
-	    
-	    .object-item:active {
-		cursor: grabbing;
-	    }
-	    
-	    .selectable-word {
-		cursor: grab;
-	    }
-	    
-	    .mobile-match-instructions {
-		display: none;
-	    }
+	/* Ajuste para español */
+	.number-name.translated {
+	    font-size: 0.7em;
 	}
 
-	/* Para móviles */
-	@media (max-width: 768px) {
-	    .matching-grid {
-		grid-template-columns: repeat(3, 1fr);
+	    /* Ajuste para español */
+	    .number-name.translated {
+		font-size: 0.75em;
+		line-height: 1.2;
 	    }
-	    
-	    .object-item {
-		padding: 12px;
+
+	    /* ===== BLOQUE DE PRÁCTICA ===== */
+	    .practice-block {
+		margin-top: 30px;
+		padding: 20px;
+		background: #f8f9fa;
+		border-radius: 12px;
+		border-left: 4px solid #4CAF50;
 	    }
-	    
-	    .selectable-word {
-		padding: 15px 20px;
-		font-size: 16px;
-		min-width: 80px;
+
+	    .practice-buttons-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 15px;
+		margin-top: 15px;
+	    }
+
+	    .practice-btn .translatable {
+		display: block;
 		text-align: center;
+		width: 100%;
 	    }
 	    
-	    .draggable {
-		display: none; /* Ocultar elementos draggable en móviles */
+
+		.long-word {
+		    font-size: 0.75em !important;
+		    line-height: 1.1 !important;
+		}
+
+		/* Asegurar que las imágenes no se distorsionen */
+		.word-card-image {
+		    width: 100%;
+		    height: 80px; /* Altura fija para imágenes */
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    overflow: hidden;
+		    flex-shrink: 0;
+		}
+	    
+	    /* Responsive */
+	    @media (max-width: 768px) {
+	    	 .object-container {
+			grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+			gap: 10px;
+		    }
+		    
+		    .object-item {
+			padding: 12px 8px;
+			min-height: 110px;
+		    }
+		    
+		.section {
+		    padding: 15px;
+		}
+		
+		.header-content {
+		    flex-direction: column;
+		    gap: 10px;
+		}
+		
+		.interactive-grid {
+		    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+		    gap: 10px;
+		}
+		
+		.title-flex {
+		    flex-direction: column;
+		    align-items: flex-start;
+		}
+		
+		.section-nav {
+		    flex-direction: column;
+		    gap: 10px;
+		}
+		
+		.nav-btn {
+		    width: 100%;
+		    justify-content: center;
+		}
+		
+		.practice-buttons-grid {
+		    grid-template-columns: 1fr;
+		}
 	    }
-	}
-        
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 20px;
-            margin-top: 30px;
-            background: var(--dark);
-            color: white;
-        }
-        
-        /* Modo oscuro */
-        .dark-mode {
-            --light: #2d2d2d;
-            background-color: #1a1a1a;
-            color: #f0f0f0;
-        }
-        
-        .dark-mode .lesson-section, 
-        .dark-mode .progress-sidebar,
-        .dark-mode .game-item,
-        .dark-mode .quiz-item,
-        .dark-mode .word-card,
-        .dark-mode .number-item,
-        .dark-mode .stat-card {
-            background: #2d2d2d;
-            color: #f0f0f0;
-        }
-        
-        .dark-mode .lessons-nav {
-            background: #2d2d2d;
-            border-bottom: 1px solid #444;
-        }
-        
-        .dark-mode .lesson-chip {
-            background: #3d3d3d;
-            color: #f0f0f0;
-        }
-        
-        .dark-mode button {
-            background: #3d3d3d;
-            color: #f0f0f0;
-        }
-        
-        .dark-mode .object-item {
-            background: #2d2d2d;
-            border-color: #444;
-        }
-    </style>
+	    
+	    @media (max-width: 768px) {
+		    .numbers-grid {
+			grid-template-columns: repeat(4, 1fr); /* 4 columnas en móviles */
+			gap: 8px;
+		    }
+		    
+		    .number-item {
+			padding: 10px 5px;
+			min-height: 70px;
+		    }
+		    
+		    .number-circle {
+			width: 25px;
+			height: 25px;
+			font-size: 0.9em;
+		    }
+		}
+
+		@media (max-width: 480px) {
+		    .numbers-grid {
+			grid-template-columns: repeat(3, 1fr); /* 3 columnas en móviles pequeños */
+		    }
+		}
+	    
+	    /* Animaciones */
+	    @keyframes pulse {
+		0% { transform: scale(1); }
+		50% { transform: scale(1.05); }
+		100% { transform: scale(1); }
+	    }
+	    
+	    .pulse {
+		animation: pulse 1s infinite;
+	    }
+	    
+	    @keyframes celebrate {
+		0% { transform: translateY(0); }
+		25% { transform: translateY(-5px); }
+		50% { transform: translateY(0); }
+		75% { transform: translateY(-3px); }
+		100% { transform: translateY(0); }
+	    }
+	    
+	    .celebrate {
+		animation: celebrate 0.5s ease;
+	    }
+	    
+	    /* Footer */
+	    footer {
+		text-align: center;
+		padding: 20px;
+		margin-top: 30px;
+		background: var(--dark);
+		color: white;
+	    }
+	</style>
 </head>
 <body>
-	<header class="main-header">
-	    <div class="container">
-		<div class="header-content">
-		    <h1><i class="fas fa-language"></i> English Learning Platform</h1>
-		    <div class="user-progress">
-		        <div class="xp-bar">
-		            <div class="xp-progress" style="width: 30%;">150/500 XP</div>
-		        </div>
-		        <div class="streak-counter"><i class="fas fa-fire"></i> 3 días</div>
-		        <div class="coins"><i class="fas fa-coins"></i> 75</div>
-		        <button id="theme-toggle"><i class="fas fa-moon"></i></button>
-		    </div>
-		</div>
-		
-	<div class="header-buttons">
-	    <button id="login-btn">Login/Ingresar</button>
-	    <button id="logout-btn">Logout/Salir</button>
-	    <button id="home-btn">🏠 Home/Inicio</button>
-	</div>
-	    </div>
-	</header>
-    
-	<nav class="lessons-nav">
-	    <div class="container">
-		<a href="/class1/" class="lesson-chip completed"><i class="fas fa-check-circle"></i> Class 1</a>
-		<a href="/class2/" class="lesson-chip completed"><i class="fas fa-check-circle"></i> Class 2</a>
-		<a href="/class3/" class="lesson-chip current"><i class="fas fa-play-circle"></i> Class 3</a>
-		<a href="/class4/" class="lesson-chip"><i class="fas fa-lock"></i> Class 4</a>
-		
-		<a href="/class5/" class="lesson-chip"><i class="fas fa-lock"></i> Class 5</a>
-		
-		<a href="/class6/" class="lesson-chip"><i class="fas fa-lock"></i> Class 6</a>
-	    </div>
-	</nav>
-    
-    <div class="container">
-        <div class="main-content">
-            <div class="lesson-content">
-                <section class="lesson-section objetivos" data-translated="false">
-                    <h2 class="title-flex">
-                        <span id="introduction" class="translatable" data-original="Class 1: Introductions, greetings and farewells. Numbers, pronouns and countries" data-translation="Clase 1: Presentaciones, saludos y despedidas. Números, pronombres y países">Class 1: Introductions, greetings and farewells. Numbers, pronouns and countries</span>
-                    <button class="translate-section-btn">🌐</button>
-                    <button onclick="speak(document.getElementById('introduction').dataset.original)">🔊</button> 
-                    </h2>
-                    <p class="subtitle">
-                        <span id="beginners" class="translatable" data-original="English Course for Beginners" data-translation="Curso de Inglés para principiantes">English Course for Beginners</span>
-                        <button onclick="speak(document.getElementById('beginners').dataset.original)">🔊</button>
-                    </p>
-                </section>
-
-                <section class="lesson-section objetivos" data-translated="false">
-            <h2 class="title-flex">
-                <span id="objectives" class="translatable" data-original="🎯 Class objectives" data-translation="🎯 Objetivos de la clase">🎯 Class objectives 
-                </span>
-                <button class="translate-section-btn">🌐</button>
-                <button onclick="speak('Class objectives')">🔊</button> 
-            </h2>
-            <ul>
-                <li>
-                    <span id="objectives-desc1" class="translatable" data-original="Students will be able to introduce themselves, greet, say goodbye and use basic courtesy phrases." data-translation="Los estudiantes podrán presentarse, saludar, despedirse y usar frases básicas de cortesía.">Students will be able to introduce themselves, greet, say goodbye and use basic courtesy phrases.</span>
-                    <button onclick="speak(document.getElementById('objectives-desc1').dataset.original)">🔊</button>
-                </li>
-                <li>
-                    <span id="objectives-desc2" class="translatable" data-original="Start speaking and writing in English at a very basic level." data-translation="Comenzar a hablar y escribir en inglés a un nivel muy básico.">Start speaking and writing in English at a very basic level.</span>
-                    <button onclick="speak(document.getElementById('objectives-desc2').dataset.original)">🔊</button>
-                </li>
-                <li>
-                    <span id="objectives-desc3" class="translatable" data-original="Learn basic vocabulary including numbers, pronouns and countries." data-translation="Aprender vocabulario básico incluyendo números, pronombres y países.">Learn basic vocabulary including numbers, pronouns and countries.</span>
-                    <button onclick="speak(document.getElementById('objectives-desc3').dataset.original)">🔊</button>
-                </li>
-                <li>
-                    <span id="objectives-desc4" class="translatable" data-original="Practice listening comprehension through videos and songs." data-translation="Practicar comprensión auditiva mediante videos y canciones.">Practice listening comprehension through videos and songs.</span>
-                    <button onclick="speak(document.getElementById('objectives-desc4').dataset.original)">🔊</button>
-                </li>
-            </ul>
-        </section>
-
-                <!-- Warm-up -->
-                <section class="lesson-section" data-translated="false">
-                    <h2 class="title-flex">
-                        <span id="warmup-title" class="translatable" data-original="1. Warm-up / Icebreaker (10 min)" data-translation="1. Calentamiento / Rompehielos (10 min)">1. Warm-up / Icebreaker (10 min) </span>
-                    <button class="translate-section-btn">🌐</button>
-                        <button onclick="speak('1. Warm-up / Icebreaker')">🔊</button>
-                    </h2>
-                    <p>
-                        <span id="warm-desc1" class="translatable" data-original="Hello, my name is Jordan. I'm from Mexico. I'm a physicist and software developer and I love movies and teaching." data-translation="Hola, mi nombre es Jordan. Soy de México. Soy físico y desarrollador de software, y me encantan las películas y la enseñanza.">Hello, my name is Jordan. I'm from Mexico. I'm a physicist and software developer and I love movies and teaching.</span>
-                        <button onclick="speak(document.getElementById('warm-desc1').dataset.original)">🔊</button>
-                    </p>
-                    <p><em>
-                        <span id="warm-desc2" class="translatable" data-original="Greeting: What's your name? Where are you from? What do you like and what do you do?" data-translation="Saludo: ¿Cómo te llamas? ¿De dónde eres? ¿Qué te gusta y a qué te dedicas?">Greeting: What's your name? Where are you from? What do you like and what do you do?</span>
-                    </em>
-                        <button onclick="speak('Greeting: Whats your name? Where are you from? What do you like and what do you do?')">🔊</button>
-                    </p>
-                </section>
-
-                <!-- Sección 2: Vocabulary and pronouns con imágenes -->
-                <section class="lesson-section" data-translated="false">
-                    <h2 class="title-flex">
-                        <span id="vocabulary" class="translatable" data-original="2. Vocabulary and pronouns (15 min)" data-translation="2. Vocabulario y pronombres (15 min)">2. Vocabulary and pronouns (10 min) </span>
-                     <button class="translate-section-btn">🌐</button>
-                        <button onclick="speak('2. Vocabulary and pronouns')">🔊</button> 
-                    </h2>
-                    
-                    <h3 class="title-flex">
-                        <span id="greetings" class="translatable" data-original="Greetings" data-translation="Saludos">Greetings</span> <button onclick="speak(document.getElementById('greetings').dataset.original)">🔊</button> 
-                    </h3>
-                    
-                    <div class="interactive-grid">
-                        <div class="word-card" onclick="speak('Hello')">
-                            <div class="word-card-image">
-                                <img src="images/greetings_farewells/Hello.jpg" alt="Hello">
-                            </div>
-                            <div class="word-card-content">
-                                <div class="word-card-text translatable" data-original="Hello" data-translation="Hola">Hello</div>
-                                
-                            </div>
+    <div class="app-container">
+        <header class="main-header">
+            <div class="container">
+                <div class="header-content">
+                    <h1><i class="fas fa-language"></i> English Learning Platform</h1>
+                    <div class="user-progress">
+                        <div class="xp-bar">
+                            <div class="xp-progress" style="width: 30%;">150/500 XP</div>
                         </div>
-                        
-                        <div class="word-card" onclick="speak('Hi')">
-                            <div class="word-card-image">
-                                <img src="images/greetings_farewells/Hi.png" alt="Hi">
-                            </div>
-                            <div class="word-card-content">
-                                <div class="word-card-text translatable" data-original="Hi" data-translation="Hola">Hi</div>
-                            </div>
-                        </div>
-                        
-                        <div class="word-card" onclick="speak('Good morning')">
-                            <div class="word-card-image">
-                                <img src="images/greetings_farewells/good_morning.jpg" alt="Good morning">
-                            </div>
-                            <div class="word-card-content">
-                                <div class="word-card-text translatable" data-original="Good morning" data-translation="Buen día">Good morning</div>
-                            </div>
-                        </div>
-                        
-                        <div class="word-card" onclick="speak('Good afternoon')">
-                            <div class="word-card-image">
-                                <img src="images/greetings_farewells/good_afternoon.jpg" alt="Good afternoon">
-                            </div>
-                            <div class="word-card-content">
-                                <div class="word-card-text translatable" data-original="Good afternoon" data-translation="Buena tarde">Good afternoon</div>
-                            </div>
-                        </div>
-                        
-                        <div class="word-card" onclick="speak('Good evening')">
-                            <div class="word-card-image">
-                                <img src="images/greetings_farewells/good_evening.jpg" alt="Good evening">
-                            </div>
-                            <div class="word-card-content">
-                                <div class="word-card-text translatable" data-original="Good evening" data-translation="Buena noche">Good evening</div>
-                            </div>
-                        </div>
+                        <div class="streak-counter"><i class="fas fa-fire"></i> 3 días</div>
+                        <div class="coins"><i class="fas fa-coins"></i> 75</div>
+                        <button id="theme-toggle"><i class="fas fa-moon"></i></button>
                     </div>
+                </div>
+                
+                <div class="header-buttons">
+                    <button id="login-btn">Login/Ingresar</button>
+                    <button id="logout-btn">Logout/Salir</button>
+                    <button id="home-btn">🏠 Home/Inicio</button>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Barra de progreso y navegación -->
+        <div class="progress-header">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span>Section <span id="current-section">1</span> of <span id="total-sections">12</span></span>
+                    <span><span id="section-progress">8%</span> Complete</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="section-progress-bar" style="width: 8%;"></div>
+                </div>
+                <div class="section-indicators" id="section-indicators">
+                    <!-- Los indicadores se generarán con JavaScript -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contenedor de secciones -->
+        <div class="sections-container" id="sections-container">
+            <!-- Sección 1: Introducción -->
+            <section class="section" id="section-1">
+                <div class="section-content">
+                    <section class="lesson-section objetivos" data-translated="false">
+                        <h2 class="title-flex">
+                            <span id="introduction" class="translatable" data-original="Class 1: Introductions, greetings and farewells. Numbers, pronouns and countries" data-translation="Clase 1: Presentaciones, saludos y despedidas. Números, pronombres y países">Class 1: Introductions, greetings and farewells. Numbers, pronouns and countries</span>
+                            <button class="translate-section-btn">🌐</button>
+                            <button onclick="speak(document.getElementById('introduction').dataset.original)">🔊</button> 
+                        </h2>
+                        <p class="subtitle">
+                            <span id="beginners" class="translatable" data-original="English Course for Beginners" data-translation="Curso de Inglés para principiantes">English Course for Beginners</span>
+                            <button onclick="speak(document.getElementById('beginners').dataset.original)">🔊</button>
+                        </p>
+                    </section>
+
+                    <section class="lesson-section objetivos" data-translated="false">
+                        <h2 class="title-flex">
+                            <span id="objectives" class="translatable" data-original="🎯 Class objectives" data-translation="🎯 Objetivos de la clase">🎯 Class objectives</span>
+                            <button class="translate-section-btn">🌐</button>
+                            <button onclick="speak('Class objectives')">🔊</button> 
+                        </h2>
+                        <ul>
+                            <li>
+                                <span id="objectives-desc1" class="translatable" data-original="Students will be able to introduce themselves, greet, say goodbye and use basic courtesy phrases." data-translation="Los estudiantes podrán presentarse, saludar, despedirse y usar frases básicas de cortesía.">Students will be able to introduce themselves, greet, say goodbye and use basic courtesy phrases.</span>
+                                <button onclick="speak(document.getElementById('objectives-desc1').dataset.original)">🔊</button>
+                            </li>
+                            <li>
+                                <span id="objectives-desc2" class="translatable" data-original="Start speaking and writing in English at a very basic level." data-translation="Comenzar a hablar y escribir en inglés a un nivel muy básico.">Start speaking and writing in English at a very basic level.</span>
+                                <button onclick="speak(document.getElementById('objectives-desc2').dataset.original)">🔊</button>
+                            </li>
+                            <li>
+                                <span id="objectives-desc3" class="translatable" data-original="Learn basic vocabulary including numbers, pronouns and countries." data-translation="Aprender vocabulario básico incluyendo números, pronombres y países.">Learn basic vocabulary including numbers, pronouns and countries.</span>
+                                <button onclick="speak(document.getElementById('objectives-desc3').dataset.original)">🔊</button>
+                            </li>
+                            <li>
+                                <span id="objectives-desc4" class="translatable" data-original="Practice listening comprehension through videos and songs." data-translation="Practicar comprensión auditiva mediante videos y canciones.">Practice listening comprehension through videos and songs.</span>
+                                <button onclick="speak(document.getElementById('objectives-desc4').dataset.original)">🔊</button>
+                            </li>
+                        </ul>
+                    </section>
                     
-                    <h3 class="title-flex">
-                        <span id="farew" class="translatable" data-original="Farewells" data-translation="Despedidas">Farewells</span>
-                        <button onclick="speak(document.getElementById('farew').dataset.original)">🔊</button>
-                    </h3>
-                    
-                    <div class="interactive-grid">
-                        <div class="word-card" onclick="speak('Good night')">
-                            <div class="word-card-image">
-                                <img src="images/greetings_farewells/Good_night.jpg" alt="Good night">
-                            </div>
-                            <div class="word-card-content">
-                                <div class="word-card-text translatable" data-original="Good night" data-translation="Buena noche">Good night</div>
-                            </div>
-                        </div>
-                        
-                        <div class="word-card" onclick="speak('Goodbye')">
-                            <div class="word-card-image">
-                                <img src="images/greetings_farewells/Goodbye.jpg" alt="Goodbye">
-                            </div>
-                            <div class="word-card-content">
-                                <div class="word-card-text translatable" data-original="Goodbye" data-translation="Adiós">Goodbye</div>
-                            </div>
-                        </div>
-                        
-                        <div class="word-card" onclick="speak('Bye')">
-                            <div class="word-card-image">
-                                <img src="images/greetings_farewells/bye.jpg" alt="Bye">
-                            </div>
-                            <div class="word-card-content">
-                                <div class="word-card-text translatable" data-original="Bye" data-translation="Adiós">Bye</div>
-                            </div>
-                        </div>
-                        
-                        <div class="word-card" onclick="speak('See you')">
-                            <div class="word-card-image">
-                                <img src="images/greetings_farewells/see_you.png" alt="See you">
-                            </div>
-                            <div class="word-card-content">
-                                <div class="word-card-text translatable" data-original="See you" data-translation="Nos vemos">See you</div>
-                            </div>
-                        </div>
-                        
-                        <div class="word-card" onclick="speak('See you later')">
-                            <div class="word-card-image">
-                                <img src="images/greetings_farewells/see_you_later.jpg" alt="See you later">
-                            </div>
-                            <div class="word-card-content">
-                                <div class="word-card-text translatable" data-original="See you later" data-translation="Hasta luego">See you later</div>
-                            </div>
-                        </div>
+                    <div class="section-nav">
+                        <button class="nav-btn" disabled><i class="fas fa-arrow-left"></i> Previous</button>
+                        <button class="nav-btn" onclick="navigateToSection(2)">Next <i class="fas fa-arrow-right"></i></button>
                     </div>
+                </div>
+            </section>
+            
+            <!-- Sección 2: Warm-up -->
+            <section class="section" id="section-2">
+                <div class="section-content">
+                    <section class="lesson-section" data-translated="false">
+                        <h2 class="title-flex">
+                            <span id="warmup-title" class="translatable" data-original="1. Warm-up / Icebreaker (10 min)" data-translation="1. Calentamiento / Rompehielos (10 min)">1. Warm-up / Icebreaker (10 min)</span>
+                            <button class="translate-section-btn">🌐</button>
+                            <button onclick="speak('1. Warm-up / Icebreaker')">🔊</button>
+                        </h2>
+                        <p>
+                            <span id="warm-desc1" class="translatable" data-original="Hello, my name is Jordan. I'm from Mexico. I'm a physicist and software developer and I love movies and teaching." data-translation="Hola, mi nombre es Jordan. Soy de México. Soy físico y desarrollador de software, y me encantan las películas y la enseñanza.">Hello, my name is Jordan. I'm from Mexico. I'm a physicist and software developer and I love movies and teaching.</span>
+                            <button onclick="speak(document.getElementById('warm-desc1').dataset.original)">🔊</button>
+                        </p>
+                        <p><em>
+                            <span id="warm-desc2" class="translatable" data-original="Greeting: What's your name? Where are you from? What do you like and what do you do?" data-translation="Saludo: ¿Cómo te llamas? ¿De dónde eres? ¿Qué te gusta y a qué te dedicas?">Greeting: What's your name? Where are you from? What do you like and what do you do?</span>
+                        </em>
+                            <button onclick="speak('Greeting: Whats your name? Where are you from? What do you like and what do you do?')">🔊</button>
+                        </p>
+                    </section>
                     
-                    <h3 class="title-flex">
-                        <span id="title-pronouns" class="translatable" data-original="Personal pronouns + verb 'To be'" data-translation="Pronombres personales + verbo 'Ser/Estar'">Personal pronouns + verb "To be" </span>
-                        <button onclick="speak(document.getElementById('title-pronouns').dataset.original)">🔊</button>
-                    </h3>
-                    
-                    <div class="interactive-grid">
-                        <div class="word-card" onclick="speak('I am')">
-                            <div class="word-card-image">
-                                <img src="images/greetings_farewells/iam.png" alt="I am">
-                            </div>
-                            <div class="word-card-content">
-                                <div class="word-card-text translatable" data-original="I am" data-translation="Yo soy/estoy">I am</div>
-                            </div>
-                        </div>
-                        
-                        <div class="word-card" onclick="speak('You are')">
-                            <div class="word-card-image">
-                                <img src="images/greetings_farewells/youare.jpg" alt="You are">
-                            </div>
-                            <div class="word-card-content">
-                                <div class="word-card-text translatable" data-original="You are" data-translation="Tú eres/estás">You are</div>
-                            </div>
-                        </div>
-                        
-                        <div class="word-card" onclick="speak('He is')">
-                            <div class="word-card-image">
-                                <img src="images/greetings_farewells/heis.png" alt="He is">
-                            </div>
-                            <div class="word-card-content">
-                                <div class="word-card-text translatable" data-original="He is" data-translation="Él es/está">He is</div>
-                            </div>
-                        </div>
-                        
-                        <div class="word-card" onclick="speak('She is')">
-                            <div class="word-card-image">
-                                <img src="images/greetings_farewells/sheis.png" alt="She is">
-                            </div>
-                            <div class="word-card-content">
-                                <div class="word-card-text translatable" data-original="She is" data-translation="Ella es/está">She is</div>
-                            </div>
-                        </div>
-                        
-                        <div class="word-card" onclick="speak('We are')">
-                            <div class="word-card-image">
-                                <img src="images/greetings_farewells/weare.jpg" alt="We are">
-                            </div>
-                            <div class="word-card-content">
-                                <div class="word-card-text translatable" data-original="We are" data-translation="Nosotros somos/estamos">We are</div>
-                            </div>
-                        </div>
-                        
-                        <div class="word-card" onclick="speak('They are')">
-                            <div class="word-card-image">
-                                <img src="images/greetings_farewells/theyare.jpg" alt="They are">
-                            </div>
-                            <div class="word-card-content">
-                                <div class="word-card-text translatable" data-original="They are" data-translation="Ellos son/están">They are</div>
-                            </div>
-                        </div>
+                    <div class="section-nav">
+                        <button class="nav-btn" onclick="navigateToSection(1)"><i class="fas fa-arrow-left"></i> Previous</button>
+                        <button class="nav-btn" onclick="navigateToSection(3)">Next <i class="fas fa-arrow-right"></i></button>
                     </div>
-                </section>
+                </div>
+            </section>
+            
+            <!-- Sección 3: Vocabulary and pronouns -->
+            <section class="section" id="section-3">
+                <div class="section-content">
+                    <section class="lesson-section" data-translated="false">
+                        <h2 class="title-flex">
+                            <span id="vocabulary" class="translatable" data-original="2. Vocabulary and pronouns (15 min)" data-translation="2. Vocabulario y pronombres (15 min)">2. Vocabulary and pronouns (10 min)</span>
+                            <button class="translate-section-btn">🌐</button>
+                            <button onclick="speak('2. Vocabulary and pronouns')">🔊</button> 
+                        </h2>
+                        
+                        <h3 class="title-flex">
+                            <span id="greetings" class="translatable" data-original="Greetings" data-translation="Saludos">Greetings</span> <button onclick="speak(document.getElementById('greetings').dataset.original)">🔊</button> 
+                        </h3>
+                        
+                        <div class="interactive-grid">
+                            <div class="word-card" onclick="speak('Hello')">
+                                <div class="word-card-image">
+                                    <img src="images/greetings_farewells/Hello.jpg" alt="Hello">
+                                </div>
+                                <div class="word-card-content">
+                                    <div class="word-card-text translatable" data-original="Hello" data-translation="Hola">Hello</div>
+                                </div>
+                            </div>
+                            
+                            <div class="word-card" onclick="speak('Hi')">
+                                <div class="word-card-image">
+                                    <img src="images/greetings_farewells/Hi.png" alt="Hi">
+                                </div>
+                                <div class="word-card-content">
+                                    <div class="word-card-text translatable" data-original="Hi" data-translation="Hola">Hi</div>
+                                </div>
+                            </div>
+                            
+                            <div class="word-card" onclick="speak('Good morning')">
+                                <div class="word-card-image">
+                                    <img src="images/greetings_farewells/good_morning.jpg" alt="Good morning">
+                                </div>
+                                <div class="word-card-content">
+                                    <div class="word-card-text translatable" data-original="Good morning" data-translation="Buen día">Good morning</div>
+                                </div>
+                            </div>
+                            
+                            <div class="word-card" onclick="speak('Good afternoon')">
+                                <div class="word-card-image">
+                                    <img src="images/greetings_farewells/good_afternoon.jpg" alt="Good afternoon">
+                                </div>
+                                <div class="word-card-content">
+                                    <div class="word-card-text translatable" data-original="Good afternoon" data-translation="Buena tarde">Good afternoon</div>
+                                </div>
+                            </div>
+                            
+                            <div class="word-card" onclick="speak('Good evening')">
+                                <div class="word-card-image">
+                                    <img src="images/greetings_farewells/good_evening.jpg" alt="Good evening">
+                                </div>
+                                <div class="word-card-content">
+                                    <div class="word-card-text translatable" data-original="Good evening" data-translation="Buena noche">Good evening</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h3 class="title-flex">
+                            <span id="farew" class="translatable" data-original="Farewells" data-translation="Despedidas">Farewells</span>
+                            <button onclick="speak(document.getElementById('farew').dataset.original)">🔊</button>
+                        </h3>
+                        
+                        <div class="interactive-grid">
+                            <div class="word-card" onclick="speak('Good night')">
+                                <div class="word-card-image">
+                                    <img src="images/greetings_farewells/Good_night.jpg" alt="Good night">
+                                </div>
+                                <div class="word-card-content">
+                                    <div class="word-card-text translatable" data-original="Good night" data-translation="Buena noche">Good night</div>
+                                </div>
+                            </div>
+                            
+                            <div class="word-card" onclick="speak('Goodbye')">
+                                <div class="word-card-image">
+                                    <img src="images/greetings_farewells/Goodbye.jpg" alt="Goodbye">
+                                </div>
+                                <div class="word-card-content">
+                                    <div class="word-card-text translatable" data-original="Goodbye" data-translation="Adiós">Goodbye</div>
+                                </div>
+                            </div>
+                            
+                            <div class="word-card" onclick="speak('Bye')">
+                                <div class="word-card-image">
+                                    <img src="images/greetings_farewells/bye.jpg" alt="Bye">
+                                </div>
+                                <div class="word-card-content">
+                                    <div class="word-card-text translatable" data-original="Bye" data-translation="Adiós">Bye</div>
+                                </div>
+                            </div>
+                            
+                            <div class="word-card" onclick="speak('See you')">
+                                <div class="word-card-image">
+                                    <img src="images/greetings_farewells/see_you.png" alt="See you">
+                                </div>
+                                <div class="word-card-content">
+                                    <div class="word-card-text translatable" data-original="See you" data-translation="Nos vemos">See you</div>
+                                </div>
+                            </div>
+                            
+                            <div class="word-card" onclick="speak('See you later')">
+                                <div class="word-card-image">
+                                    <img src="images/greetings_farewells/see_you_later.jpg" alt="See you later">
+                                </div>
+                                <div class="word-card-content">
+                                    <div class="word-card-text translatable" data-original="See you later" data-translation="Hasta luego">See you later</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h3 class="title-flex">
+                            <span id="title-pronouns" class="translatable" data-original="Personal pronouns + verb 'To be'" data-translation="Pronombres personales + verbo 'Ser/Estar'">Personal pronouns + verb "To be"</span>
+                            <button onclick="speak(document.getElementById('title-pronouns').dataset.original)">🔊</button>
+                        </h3>
+                        
+                        <div class="interactive-grid">
+                            <div class="word-card" onclick="speak('I am')">
+                                <div class="word-card-image">
+                                    <img src="images/greetings_farewells/iam.png" alt="I am">
+                                </div>
+                                <div class="word-card-content">
+                                    <div class="word-card-text translatable" data-original="I am" data-translation="Yo soy/estoy">I am</div>
+                                </div>
+                            </div>
+                            
+                            <div class="word-card" onclick="speak('You are')">
+                                <div class="word-card-image">
+                                    <img src="images/greetings_farewells/youare.jpg" alt="You are">
+                                </div>
+                                <div class="word-card-content">
+                                    <div class="word-card-text translatable" data-original="You are" data-translation="Tú eres/estás">You are</div>
+                                </div>
+                            </div>
+                            
+                            <div class="word-card" onclick="speak('He is')">
+                                <div class="word-card-image">
+                                    <img src="images/greetings_farewells/heis.png" alt="He is">
+                                </div>
+                                <div class="word-card-content">
+                                    <div class="word-card-text translatable" data-original="He is" data-translation="Él es/está">He is</div>
+                                </div>
+                            </div>
+                            
+                            <div class="word-card" onclick="speak('She is')">
+                                <div class="word-card-image">
+                                    <img src="images/greetings_farewells/sheis.png" alt="She is">
+                                </div>
+                                <div class="word-card-content">
+                                    <div class="word-card-text translatable" data-original="She is" data-translation="Ella es/está">She is</div>
+                                </div>
+                            </div>
+                            
+                            <div class="word-card" onclick="speak('We are')">
+                                <div class="word-card-image">
+                                    <img src="images/greetings_farewells/weare.jpg" alt="We are">
+                                </div>
+                                <div class="word-card-content">
+                                    <div class="word-card-text translatable" data-original="We are" data-translation="Nosotros somos/estamos">We are</div>
+                                </div>
+                            </div>
+                            
+                            <div class="word-card" onclick="speak('They are')">
+                                <div class="word-card-image">
+                                    <img src="images/greetings_farewells/theyare.jpg" alt="They are">
+                                </div>
+                                <div class="word-card-content">
+                                    <div class="word-card-text translatable" data-original="They are" data-translation="Ellos son/están">They are</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <div class="section-nav">
+                        <button class="nav-btn" onclick="navigateToSection(2)"><i class="fas fa-arrow-left"></i> Previous</button>
+                        <button class="nav-btn" onclick="navigateToSection(4)">Next <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Sección 4: Listening / Modeling -->
+            <section class="section" id="section-4">
+                <div class="section-content">
+                    <section class="lesson-section" data-translated="false">
+                        <h2 class="title-flex">
+                            <span id="title-listening" class="translatable" data-original="3. Listening / Modeling: Conversation and Cinema (10 min)" data-translation="3. Escucha / Modelado: Conversación y Cine (10 min)">3. Listening / Modeling: Conversation and Cinema (10 min)</span>
+                            <button class="translate-section-btn">🌐</button>
+                            <button onclick="speak('3. Listening / Modeling: Conversation and Cinema')">🔊</button>
+                        </h2>
+                        <p>
+                            <span id="listen-instr" class="translatable" data-original="Watch the conversation video and write key sentences. Then, in the movie clips video, identify the learned phrases:" data-translation="Mira el video de conversación y escribe las frases clave. Luego, en el video de clips de películas, identifica las frases aprendidas:">Watch the conversation video and write key sentences. Then, in the movie clips video, identify the learned phrases:</span>
+                            <button onclick="speak(document.getElementById('listen-instr').dataset.original)">🔊</button>
+                        </p>
+                        <iframe width="100%" height="315" src="https://www.youtube.com/embed/RL8pLS8cUOs" frameborder="0" allowfullscreen style="margin-bottom: 15px;"></iframe>
+                        <iframe width="100%" height="315" src="https://www.youtube.com/embed/ImOoyoLmGUI" frameborder="0" allowfullscreen></iframe>
+                    </section>
+                    
+                    <div class="section-nav">
+                        <button class="nav-btn" onclick="navigateToSection(3)"><i class="fas fa-arrow-left"></i> Previous</button>
+                        <button class="nav-btn" onclick="navigateToSection(5)">Next <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Sección 5: Song Practice -->
+            <section class="section" id="section-5">
+                <div class="section-content">
+                    <section class="lesson-section" data-translated="false">
+                        <h2 class="title-flex">
+                            <span id="title-song" class="translatable" data-original="4. Song Practice (10 min)" data-translation="4. Práctica de canción (10 min)">4. Song Practice (10 min)</span>
+                            <button class="translate-section-btn">🌐</button>
+                            <button onclick="speak('4. Song Practice')">🔊</button> 
+                        </h2>
+                        <p>
+                            <span id="song-instr" class="translatable" data-original="Listen to the song and complete the lyrics playing on LyricsTraining:" data-translation="Escucha la canción y completa la letra en LyricsTraining:">Listen to the song and complete the lyrics playing on LyricsTraining:</span>
+                            <button onclick="speak(document.getElementById('song-instr').dataset.original)">🔊</button>
+                        </p>
+                        <button class="speak-btn lyrics-btn" onclick="window.open('https://es.lyricstraining.com/play/the-beatles/hello-goodbye/HkEvrcQWdk#b7w!jortizvilla','_blank')">
+                            <span id="song-btn" class="translatable" data-original="🎵 Play with the song on LyricsTraining" data-translation="🎵 Juega con la canción en LyricsTraining">🎵 Play with the song on LyricsTraining</span>
+                        </button>
+                    </section>
+                    
+                    <div class="section-nav">
+                        <button class="nav-btn" onclick="navigateToSection(4)"><i class="fas fa-arrow-left"></i> Previous</button>
+                        <button class="nav-btn" onclick="navigateToSection(6)">Next <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Sección 6: Where are you from? -->
+            <section class="section" id="section-6">
+                <div class="section-content">
+                    <section class="lesson-section" data-translated="false">
+                        <h2 class="title-flex">
+                            <span id="title-where" class="translatable" data-original='5. Introduction of "Where are you from?" (10 min)' data-translation='5. Introducción de "¿De dónde eres?" (10 min)'>
+                                5. Introduction of "Where are you from?" (10 min)
+                            </span>
+                            <button class="translate-section-btn">🌐</button>
+                            <button onclick="speak('5. Introduction of Where are you from?')">🔊</button>
+                        </h2>
 
-                <!-- Listening / Modeled videos -->
-                <section class="lesson-section" data-translated="false">
-                    <h2 class="title-flex">
-                        <span id="title-listening" class="translatable" data-original="3. Listening / Modeling: Conversation and Cinema (10 min)" data-translation="3. Escucha / Modelado: Conversación y Cine (10 min)">3. Listening / Modeling: Conversation and Cinema (10 min)
-                        </span>
-                        <button class="translate-section-btn">🌐</button>
-                        <button onclick="speak('3. Listening / Modeling: Conversation and Cinema')">🔊</button>
-                    </h2>
-                    <p>
-                        <span id="listen-instr" class="translatable" data-original="Watch the conversation video and write key sentences. Then, in the movie clips video, identify the learned phrases:" data-translation="Mira el video de conversación y escribe las frases clave. Luego, en el video de clips de películas, identifica las frases aprendidas:">Watch the conversation video and write key sentences. Then, in the movie clips video, identify the learned phrases:</span>
-                        <button onclick="speak(document.getElementById('listen-instr').dataset.original)">🔊</button>
-                    </p>
-                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/RL8pLS8cUOs" frameborder="0" allowfullscreen style="margin-bottom: 15px;"></iframe>
-                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/ImOoyoLmGUI" frameborder="0" allowfullscreen></iframe>
-                </section>
+                        <!-- Video -->
+                        <p>
+                            <span id="where-instr" class="translatable" data-original="Watch the video" data-translation="Mira el video">
+                                Watch the video
+                            </span>
+                            <button onclick="speak(document.getElementById('where-instr').dataset.original)">🔊</button>
+                        </p>
+                        <iframe width="100%" height="315" src="https://www.youtube.com/embed/byqOkm6-SCc" frameborder="0" allowfullscreen></iframe>
 
-                <!-- Song practice -->
-                <section class="lesson-section" data-translated="false">
-                    <h2 class="title-flex">
-                        <span id="title-song" class="translatable" data-original="4. Song Practice (10 min)" data-translation="4. Práctica de canción (10 min)">4. Song Practice (10 min)
-                        </span>
-                        <button class="translate-section-btn">🌐</button>
-                        <button onclick="speak('4. Song Practice')">🔊</button> 
-                    </h2>
-                    <p>
-                        <span id="song-instr" class="translatable" data-original="Listen to the song and complete the lyrics playing on LyricsTraining:" data-translation="Escucha la canción y completa la letra en LyricsTraining:">Listen to the song and complete the lyrics playing on LyricsTraining:</span>
-                        <button onclick="speak(document.getElementById('song-instr').dataset.original)">🔊</button>
-                    </p>
-                    <button class="speak-btn lyrics-btn" onclick="window.open('https://es.lyricstraining.com/play/the-beatles/hello-goodbye/HkEvrcQWdk#b7w!jortizvilla','_blank')">
-                        <span id="song-btn" class="translatable" data-original="🎵 Play with the song on LyricsTraining" data-translation="🎵 Juega con la canción en LyricsTraining">🎵 Play with the song on LyricsTraining</span>
-                    </button>
-                </section>
+                        <!-- Map con audio -->
+                        <p>
+                            <span id="map-instr" class="translatable" data-original="Select a country on the map!" data-translation="¡Selecciona un país en el mapa!">
+                                Select a country on the map!
+                            </span>
+                            <button onclick="speak(document.getElementById('map-instr').dataset.original)">🔊</button>
+                        </p>
+                        <div id="map" style="height: 400px; width: 100%;"></div>
+                        <p id="dialogue"></p>
+                    </section>
+                    
+                    <div class="section-nav">
+                        <button class="nav-btn" onclick="navigateToSection(5)"><i class="fas fa-arrow-left"></i> Previous</button>
+                        <button class="nav-btn" onclick="navigateToSection(7)">Next <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Sección 7: What's this? -->
+            <section class="section" id="section-7">
+                <div class="section-content">
+                    <section class="lesson-section" data-translated="false">
+                        <h2 class="title-flex">
+                            <span id="interactive-title-6" class="translatable"
+                                  data-original="6. Interactive Practice: &quot;What's this?&quot;"
+                                  data-translation="6. Práctica interactiva: &quot;¿Qué es esto?&quot;">
+                                6. Interactive Practice: "What's this?" (10 min)
+                            </span>
+                            <button class="translate-section-btn" type="button">🌐</button>
+                            <button type="button" onclick="speak('6. Interactive Practice: What’s this?')">🔊</button>
+                        </h2>
 
-                <!-- Sección 5: Where are you from? -->
-                <section class="lesson-section" data-translated="false">
-                    <h2 class="title-flex">
-                        <span id="title-where" class="translatable" data-original='5. Introduction of "Where are you from?" (10 min)' data-translation='5. Introducción de "¿De dónde eres?" (10 min)'>
-                            5. Introduction of "Where are you from?" (10 min)
-                        </span>
-                        <button class="translate-section-btn">🌐</button>
-                        <button onclick="speak('5. Introduction of Where are you from?')">🔊</button>
-                    </h2>
+                        <p>
+                            <span id="interactive-desc-6" class="translatable"
+                                  data-original="Click on the objects to hear their names in English. Then practice asking &quot;What's this?&quot;"
+                                  data-translation="Haz clic en los objetos para escuchar sus nombres en inglés. Luego practica preguntando &quot;¿Qué es esto?&quot;">
+                                Click on the objects to hear their names in English. Then practice asking "What's this?"
+                            </span>
+                            <button type="button" onclick="speak(document.getElementById('interactive-desc-6').dataset.original)">🔊</button>
+                        </p>
 
-                    <!-- Video -->
-                    <p>
-                        <span id="where-instr" class="translatable" data-original="Watch the video" data-translation="Mira el video">
-                            Watch the video
-                        </span>
-                        <button onclick="speak(document.getElementById('where-instr').dataset.original)">🔊</button>
-                    </p>
-                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/byqOkm6-SCc" frameborder="0" allowfullscreen></iframe>
-
-                    <!-- Map con audio -->
-                    <p>
-                        <span id="map-instr" class="translatable" data-original="Select a country on the map!" data-translation="¡Selecciona un país en el mapa!">
-                            Select a country on the map!
-                        </span>
-                        <button onclick="speak(document.getElementById('map-instr').dataset.original)">🔊</button>
-                    </p>
-                    <div id="map" style="height: 400px; width: 100%;"></div>
-                    <p id="dialogue"></p>
-                </section>
-
-                <!-- Sección 6: What's this? -->
-                <section class="lesson-section" data-translated="false">
-                    <h2 class="title-flex">
-                        <span id="interactive-title-6" class="translatable"
-                              data-original="6. Interactive Practice: &quot;What's this?&quot;"
-                              data-translation="6. Práctica interactiva: &quot;¿Qué es esto?&quot;">
-                            6. Interactive Practice: "What's this?" (10 min)
-                        </span>
-                        <button class="translate-section-btn" type="button">🌐</button>
-                        <button type="button" onclick="speak('6. Interactive Practice: What’s this?')">🔊</button>
-                    </h2>
-
-                    <p>
-                        <span id="interactive-desc-6" class="translatable"
-                              data-original="Click on the objects to hear their names in English. Then practice asking &quot;What's this?&quot;"
-                              data-translation="Haz clic en los objetos para escuchar sus nombres en inglés. Luego practica preguntando &quot;¿Qué es esto?&quot;">
-                            Click on the objects to hear their names in English. Then practice asking "What's this?"
-                        </span>
-                        <button type="button" onclick="speak(document.getElementById('interactive-desc-6').dataset.original)">🔊</button>
-                    </p>
-
-                    <div class="object-container">
+                        <div class="object-container">
                        <!-- Bag -->
 			<div class="object-item" onclick="flipCard(this)">
 			    <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/bag-personal.svg" 
@@ -1403,224 +1429,311 @@
 				  data-translation="Televisor">???</span>
 			</div>                        
                     </div>
-                </section>
+                    </section>
+                    
+                    <div class="section-nav">
+                        <button class="nav-btn" onclick="navigateToSection(6)"><i class="fas fa-arrow-left"></i> Previous</button>
+                        <button class="nav-btn" onclick="navigateToSection(8)">Next <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </section>
+            
+	    <!-- Sección 8: Numbers Part 1 -->
+	<section class="section" id="section-8">
+	    <div class="section-content">
+		<section class="lesson-section" data-translated="false">
+		    <h2 class="title-flex">
+			<span id="numbers-title-1" class="translatable"
+			      data-original="7. Numbers in English: 1-20"
+			      data-translation="7. Números en inglés: 1-20">
+			    7. Numbers in English: 1-20 (5 min)
+			</span>
+			<button class="translate-section-btn">🌐</button>
+			<button onclick="speak(document.getElementById('numbers-title-1').dataset.original)">🔊</button>
+		    </h2>
 
-                <!-- Numbers -->
-                <section class="lesson-section" data-translated="false">
-                  <h2 class="title-flex">
-                    <span id="numbers-title" class="translatable"
-                          data-original="7. Numbers in English: from 1 to 30"
-                          data-translation="7. Números en inglés: del 1 al 30">
-                      7. Numbers in English: from 1 to 30 (10 min)
-                    </span>
-                    <button class="translate-section-btn">🌐</button>
-                    <button onclick="speak(document.getElementById('numbers-title').dataset.original)">🔊</button>
-                  </h2>
+		    <p>
+			<span id="numbers-desc-1" class="translatable"
+			      data-original="Click each number to hear its pronunciation:"
+			      data-translation="Haz clic en cada número para escuchar su pronunciación:">
+			    Click each number to hear its pronunciation:
+			</span>
+			<button onclick="speak(document.getElementById('numbers-desc-1').dataset.original)">🔊</button>
+		    </p>
 
-                  <p>
-                    <span id="numbers-desc" class="translatable"
-                          data-original="Click each number to hear its pronunciation:"
-                          data-translation="Haz clic en cada número para escuchar su pronunciación:">
-                      Click each number to hear its pronunciation:
-                    </span>
-                    <button onclick="speak(document.getElementById('numbers-desc').dataset.original)">🔊</button>
-                  </p>
-
-                  <div class="numbers-grid">
-                     <script>
-		      const numberGrid = document.currentScript.parentNode;
-		      const numbers = [
-			{ en: "one", es: "uno" }, { en: "two", es: "dos" }, { en: "three", es: "tres" }, 
-			{ en: "four", es: "cuatro" }, { en: "five", es: "cinco" }, { en: "six", es: "seis" },
-			{ en: "seven", es: "siete" }, { en: "eight", es: "ocho" }, { en: "nine", es: "nueve" },
-			{ en: "ten", es: "diez" }, { en: "eleven", es: "once" }, { en: "twelve", es: "doce" },
-			{ en: "thirteen", es: "trece" }, { en: "fourteen", es: "catorce" }, { en: "fifteen", es: "quince" },
-			{ en: "sixteen", es: "dieciséis" }, { en: "seventeen", es: "diecisiete" }, { en: "eighteen", es: "dieciocho" },
-			{ en: "nineteen", es: "diecinueve" }, { en: "twenty", es: "veinte" }, { en: "twenty-one", es: "veintiuno" },
-			{ en: "twenty-two", es: "veintidós" }, { en: "twenty-three", es: "veintitrés" },
-			{ en: "twenty-four", es: "veinticuatro" }, { en: "twenty-five", es: "veinticinco" },
-			{ en: "twenty-six", es: "veintiséis" }, { en: "twenty-seven", es: "veintisiete" },
-			{ en: "twenty-eight", es: "veintiocho" }, { en: "twenty-nine", es: "veintinueve" },
-			{ en: "thirty", es: "treinta" }
-		      ];
-
-		      for (let i = 0; i < numbers.length; i++) {
-			const div = document.createElement('div');
-			div.className = 'number-item';
-
-			// Texto traducible
-			const numberName = document.createElement('span');
-			numberName.className = 'number-name translatable';
-			numberName.dataset.original = numbers[i].en;
-			numberName.dataset.translation = numbers[i].es;
-			numberName.dataset.tts = numbers[i].en;
-			numberName.textContent = numbers[i].en; // solo texto
-
-			// Botón de bocina separado
-			const speakerBtn = document.createElement('button');
-			// speakerBtn.textContent = "🔊";
-			speakerBtn.onclick = function(e) {
-			  e.stopPropagation(); // evitar que el div padre también haga speak
-			  speak(numberName.dataset.tts);
-			};
-
-			div.innerHTML = `<div class="number">${i+1}</div>`;
-			div.appendChild(numberName);
-		       // div.appendChild(speakerBtn);
-
-			// Click en div completo también reproduce audio
-			div.onclick = function() {
-			  speak(numberName.dataset.tts);
-			};
-
-			numberGrid.appendChild(div);
-		      }
-		    </script>
-                  </div>
-
-                  <div class="practice-block">
-                    <p><strong>
-                      <span class="translatable"
-                            data-original="Pronunciation practice:"
-                            data-translation="Práctica de pronunciación:">
-                        Pronunciation practice:
-                      </span>
-                      <button type="button" onclick="speak('Pronunciation practice')">🔊</button>
-                    </strong></p>
-
-                   <!-- Sección de Listen 1-30 -->
-                <button class="speak-btn big-btn" onclick="practiceNumbers(1,10)">
-                  <span class="translatable" data-original="Listen 1 to 10" data-translation="Escuchar del 1 al 10">
-                    Listen 1 to 10
-                  </span>
-                </button>
-
-                <button class="speak-btn big-btn" onclick="practiceNumbers(11,20)">
-                  <span class="translatable" data-original="Listen 11 to 20" data-translation="Escuchar del 11 al 20">
-                    Listen 11 to 20
-                  </span>
-                </button>
-
-                <button class="speak-btn big-btn" onclick="practiceNumbers(21,30)">
-                  <span class="translatable" data-original="Listen 21 to 30" data-translation="Escuchar del 21 al 30">
-                    Listen 21 to 30
-                  </span>
-                </button>
-                  </div>
-                </section>
-
-                <!-- Sección 8: Mini writing -->
-                <section class="lesson-section" data-translated="false">
-                    <h2 class="title-flex">
-                        <span id="interactive-title-8" class="translatable" data-original="8. Mini writing / journaling (10 min)" data-translation="8. Escritura / Diario personal (10 min)">
-                            8. Mini writing / journaling (10 min)
-                        </span>
-                        <button class="translate-section-btn">🌐</button>
-                        <button type="button" onclick="speak('8. Mini writing / journaling')">🔊</button>
-                    </h2>
-                    <ul>
-                        <li>
-                            <span id="mini-write-1" class="translatable" data-original="Hello, my name is ___" data-translation="Hola, mi nombre es ___">Hello, my name is ___.</span>
-                            <button type="button" onclick="speak('Hello, my name is')">🔊</button>
-                        </li>
-                        <li>
-                            <span id="mini-write-2" class="translatable" data-original="I'm from ___" data-translation="Soy de ___">I'm from ___.</span>
-                            <button type="button" onclick="speak('I'm from')">🔊</button>
-                        </li>
-                        <li>
-                            <span id="mini-write-3" class="translatable" data-original="I like ___" data-translation="Me gusta ___">I like ___.</span>
-                            <button type="button" onclick="speak('I like')">🔊</button>
-                        </li>
-                    </ul>
-                </section>
-
-                <!-- Sección 9: Group speaking -->
-	        <section class="lesson-section" data-translated="false">
-	            <h2 class="title-flex">
-	                <span id="interactive-title-9" class="translatable" data-original="9. Group speaking (10 min)" data-translation="9. Conversación grupal (10 min)">
-	                    9. Group speaking (10 min)
-	                </span>
-	                <button class="translate-section-btn">🌐</button>
-	                <button type="button" onclick="speak('9. Group speaking')">🔊</button>
-	            </h2>
-	            <p>
-	                <span id="group-desc" class="translatable" data-original="The students practice to introduce themselves in groups using the learned phrases, including the questions" 
-	                      data-translation="Los estudiantes practican presentarse en grupos usando las frases aprendidas, incluyendo las preguntas">
-	                    The students practice to introduce themselves in groups using the learned phrases, including the questions
-	                </span> 
-	                <button type="button" onclick="speak(document.getElementById('group-desc').dataset.original)">🔊</button>
-	            </p>
-	        </section>
-	        
-<!-- Writing activity -->
-	<section class="lesson-section" data-translated="false">
-	    <h2 class="title-flex">
-		<span id="interactive-title-10" class="translatable" data-original="10. Writing activity (10 min)" data-translation="10. Actividad de escritura (10 min)">10. Writing activity (10 min)</span>
-		<button class="translate-section-btn">🌐</button>
-		<button onclick="speak('10. Writing activity')">🔊</button>
-	    </h2>
-	    <div class="paragraph-with-buttons">
-		<div class="translatable-content">
-		    <span id="write-desc" class="translatable" data-original="Solve the following exercise:" data-translation="Resuelve el siguiente ejercicio:">Solve the following exercise:</span>
-		</div>
-		<div class="translation-buttons">
-		    <button onclick="speak(document.getElementById('write-desc').dataset.original)">🔊</button>
-		</div>
-	    </div>
-	    <img src="cierre.png" alt="Closing activity: Complete the dialogues" width="100%" style="border: 2px solid #ccc; border-radius: 10px; max-width: 600px;">
-	</section>
-
-	<!-- Games -->
-	<section class="lesson-section" data-translated="false">
-	    <h2 class="title-flex">
-		<span id="interactive-title-11" class="translatable" data-original="11. Interactive games / Baamboozle (10 min)" data-translation="11. Juegos interactivos / Baamboozle (10 min)">11. Interactive games / Baamboozle (10 min)</span>
-		<button class="translate-section-btn">🌐</button>
-		<button onclick="speak('11. Interactive games / Baamboozle')">🔊</button>
-	    </h2>
-
-	    <div class="game-item">
-		<div class="paragraph-with-buttons">
-		    <div class="translatable-content">
-			<span id="game-1" class="translatable" data-original="🎲 Game 1" data-translation="🎲 Juego 1">🎲 Game 1</span>
+		    <div class="numbers-grid" id="numbers-container-1to20">
+			<!-- Números 1-20 se generarán aquí -->
 		    </div>
-		    <div class="translation-buttons">
-			<button onclick="speak('Game 1')">🔊</button>
-		    </div>
-		</div>
-		<a href="https://www.baamboozle.com/game/641765" target="_blank" class="speak-btn translatable big-btn" data-original="Play on Baamboozle" data-translation="Jugar en Baamboozle">Play on Baamboozle</a>
-	    </div>
 
-	    <div class="game-item">
-		<div class="paragraph-with-buttons">
-		    <div class="translatable-content">
-			<span id="game-2" class="translatable" data-original="🎲 Game 2" data-translation="🎲 Juego 2">🎲 Game 2</span>
-		    </div>
-		    <div class="translation-buttons">
-			<button onclick="speak('Game 2')">🔊</button>
-		    </div>
-		</div>
-		<a href="https://www.baamboozle.com/game/54952" target="_blank" class="speak-btn translatable big-btn" data-original="Play on Baamboozle" data-translation="Jugar en Baamboozle">Play on Baamboozle</a>
-	    </div>
+		    <div class="practice-block">
+			<p><strong>
+			    <span class="translatable"
+			          data-original="Quick practice:"
+			          data-translation="Práctica rápida:">
+			        Quick practice:
+			    </span>
+			    <button type="button" onclick="speak('Quick practice')">🔊</button>
+			</strong></p>
 
-	    <div class="paragraph-with-buttons">
-		<div class="translatable-content">
-		    <span id="game-tip" class="translatable" data-original="Tip: Create teams for the activity." data-translation="Consejo: Crea equipos para la actividad.">Tip: Create teams for the activity.</span>
-		</div>
-		<div class="translation-buttons">
-		    <button onclick="speak(document.getElementById('game-tip').dataset.original)">🔊</button>
+			<div class="practice-buttons-grid">
+			    <button class="practice-btn" onclick="practiceNumbers(1,10)">
+			        <span class="translatable" data-original="Listen 1 to 10" data-translation="Escuchar del 1 al 10">
+			            Listen 1 to 10
+			        </span>
+			    </button>
+
+			    <button class="practice-btn" onclick="practiceNumbers(11,20)">
+			        <span class="translatable" data-original="Listen 11 to 20" data-translation="Escuchar del 11 al 20">
+			            Listen 11 to 20
+			        </span>
+			    </button>
+			</div>
+		    </div>
+		</section>
+		
+		<div class="section-nav">
+		    <button class="nav-btn" onclick="navigateToSection(7)"><i class="fas fa-arrow-left"></i> Previous</button>
+		    <button class="nav-btn" onclick="navigateToSection(9)">Next <i class="fas fa-arrow-right"></i></button>
 		</div>
 	    </div>
 	</section>
 
-	<!-- Quiz -->
-	<section class="lesson-section" data-translated="false">
-	    <h2 class="title-flex">
-		<span id="quiz-title" class="translatable" data-original="📝 Quiz: Check your knowledge!" data-translation="📝 Quiz: ¡Comprueba tu conocimiento!">📝 Quiz: Check your knowledge!</span>
-		<button class="translate-section-btn">🌐</button>
-		<button onclick="speak('Quiz: Check your knowledge!')">🔊</button>
-	    </h2>
+	<!-- Sección 9: Numbers Part 2 -->
+	<section class="section" id="section-9">
+	    <div class="section-content">
+		<section class="lesson-section" data-translated="false">
+		    <h2 class="title-flex">
+			<span id="numbers-title-2" class="translatable"
+			      data-original="8. Numbers in English: 21-30"
+			      data-translation="8. Números en inglés: 21-30">
+			    8. Numbers in English: 21-30 (5 min)
+			</span>
+			<button class="translate-section-btn">🌐</button>
+			<button onclick="speak(document.getElementById('numbers-title-2').dataset.original)">🔊</button>
+		    </h2>
 
-	    <form id="quiz-form">
+		    <p>
+			<span id="numbers-desc-2" class="translatable"
+			      data-original="Click each number to hear its pronunciation:"
+			      data-translation="Haz clic en cada número para escuchar su pronunciación:">
+			    Click each number to hear its pronunciation:
+			</span>
+			<button onclick="speak(document.getElementById('numbers-desc-2').dataset.original)">🔊</button>
+		    </p>
+
+		    <div class="numbers-grid" id="numbers-container-21to30">
+			<!-- Números 21-30 se generarán aquí -->
+		    </div>
+
+		    <div class="practice-block">
+			<p><strong>
+			    <span class="translatable"
+			          data-original="Final practice:"
+			          data-translation="Práctica final:">
+			        Final practice:
+			    </span>
+			    <button type="button" onclick="speak('Final practice')">🔊</button>
+			</strong></p>
+
+			<div class="practice-buttons-grid">
+			    <button class="practice-btn" onclick="practiceNumbers(21,30)">
+			        <span class="translatable" data-original="Listen 21 to 30" data-translation="Escuchar del 21 al 30">
+			            Listen 21 to 30
+			        </span>
+			    </button>
+
+			    <button class="practice-btn" onclick="practiceNumbers(1,30)">
+			        <span class="translatable" data-original="Listen all numbers 1-30" data-translation="Escuchar todos los números 1-30">
+			            Listen all numbers 1-30
+			        </span>
+			    </button>
+			</div>
+		    </div>
+		</section>
+		
+		<div class="section-nav">
+		    <button class="nav-btn" onclick="navigateToSection(8)"><i class="fas fa-arrow-left"></i> Previous</button>
+		    <button class="nav-btn" onclick="navigateToSection(10)">Next <i class="fas fa-arrow-right"></i></button>
+		</div>
+	    </div>
+	</section>
+            
+            <!-- Sección 10: Mini writing -->
+            <section class="section" id="section-10">
+                <div class="section-content">
+                    <section class="lesson-section" data-translated="false">
+                        <h2 class="title-flex">
+                            <span id="interactive-title-8" class="translatable" data-original="9. Mini writing / journaling (10 min)" data-translation="9. Escritura / Diario personal (10 min)">
+                                9. Mini writing / journaling (10 min)
+                            </span>
+                            <button class="translate-section-btn">🌐</button>
+                            <button type="button" onclick="speak('9. Mini writing / journaling')">🔊</button>
+                        </h2>
+                        <ul>
+                            <li>
+                                <span id="mini-write-1" class="translatable" data-original="Hello, my name is ___" data-translation="Hola, mi nombre es ___">Hello, my name is ___.</span>
+                                <button type="button" onclick="speak('Hello, my name is')">🔊</button>
+                            </li>
+                            <li>
+                                <span id="mini-write-2" class="translatable" data-original="I'm from ___" data-translation="Soy de ___">I'm from ___.</span>
+                                <button type="button" onclick="speak('I am from')">🔊</button>
+                            </li>
+                            <li>
+                                <span id="mini-write-3" class="translatable" data-original="I like ___" data-translation="Me gusta ___">I like ___.</span>
+                                <button type="button" onclick="speak('I like')">🔊</button>
+                            </li>
+                        </ul>
+                    </section>
+                    
+                    <div class="section-nav">
+                        <button class="nav-btn" onclick="navigateToSection(9)"><i class="fas fa-arrow-left"></i> Previous</button>
+                        <button class="nav-btn" onclick="navigateToSection(11)">Next <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Sección 11: Group speaking -->
+            <section class="section" id="section-11">
+                <div class="section-content">
+                    <section class="lesson-section" data-translated="false">
+                        <h2 class="title-flex">
+                            <span id="interactive-title-9" class="translatable" data-original="10. Group speaking (10 min)" data-translation="10. Conversación grupal (10 min)">
+                                10. Group speaking (10 min)
+                            </span>
+                            <button class="translate-section-btn">🌐</button>
+                            <button type="button" onclick="speak('10. Group speaking')">🔊</button>
+                        </h2>
+                        <p>
+                            <span id="group-desc" class="translatable" data-original="The students practice to introduce themselves in groups using the learned phrases, including the questions" 
+                                  data-translation="Los estudiantes practican presentarse en grupos usando las frases aprendidas, incluyendo las preguntas">
+                                The students practice to introduce themselves in groups using the learned phrases, including the questions
+                            </span> 
+                            <button type="button" onclick="speak(document.getElementById('group-desc').dataset.original)">🔊</button>
+                        </p>
+                    </section>
+                    
+                    <div class="section-nav">
+                        <button class="nav-btn" onclick="navigateToSection(10)"><i class="fas fa-arrow-left"></i> Previous</button>
+                        <button class="nav-btn" onclick="navigateToSection(12)">Next <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Sección 12: Writing activity -->
+            <section class="section" id="section-12">
+                <div class="section-content">
+                    <section class="lesson-section" data-translated="false">
+                        <h2 class="title-flex">
+                            <span id="interactive-title-10" class="translatable" data-original="11. Writing activity (10 min)" data-translation="11. Actividad de escritura (10 min)">11. Writing activity (10 min)</span>
+                            <button class="translate-section-btn">🌐</button>
+                            <button onclick="speak('11. Writing activity')">🔊</button>
+                        </h2>
+                        <div class="paragraph-with-buttons">
+                            <div class="translatable-content">
+                                <span id="write-desc" class="translatable" data-original="Solve the following exercise:" data-translation="Resuelve el siguiente ejercicio:">Solve the following exercise:</span>
+                            </div>
+                            <div class="translation-buttons">
+                                <button onclick="speak(document.getElementById('write-desc').dataset.original)">🔊</button>
+                            </div>
+                        </div>
+                        <img src="cierre.png" width="100%" style="border: 2px solid #ccc; border-radius: 10px; max-width: 600px;">
+                    </section>
+                    
+                    <div class="section-nav">
+                        <button class="nav-btn" onclick="navigateToSection(11)"><i class="fas fa-arrow-left"></i> Previous</button>
+                        <button class="nav-btn" onclick="navigateToSection(13)">Next <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </section>
+            		
+            		<!-- Sección 13: Interactive Games -->
+	<section class="section" id="section-13">
+	    <div class="section-content">
+		<section class="lesson-section" data-translated="false">
+		    <h2 class="title-flex">
+		        <span id="interactive-title-11" class="translatable" 
+		              data-original="12. Interactive games / Baamboozle (10 min)" 
+		              data-translation="12. Juegos interactivos / Baamboozle (10 min)">
+		            12. Interactive games / Baamboozle (10 min)
+		        </span>
+		        <button class="translate-section-btn">🌐</button>
+		        <button onclick="speak('12. Interactive games / Baamboozle')">🔊</button>
+		    </h2>
+
+		    <div class="game-item">
+		        <div class="paragraph-with-buttons">
+		            <div class="translatable-content">
+		                <span id="game-1" class="translatable" 
+		                      data-original="🎲 Game 1: Greetings and Farewells" 
+		                      data-translation="🎲 Juego 1: Saludos y Despedidas">
+		                    🎲 Game 1: Greetings and Farewells
+		                </span>
+		            </div>
+		            <div class="translation-buttons">
+		                <button onclick="speak('Game 1: Greetings and Farewells')">🔊</button>
+		            </div>
+		        </div>
+		        <a href="https://www.baamboozle.com/game/641765" target="_blank" 
+		           class="speak-btn translatable big-btn" 
+		           data-original="Play on Baamboozle" 
+		           data-translation="Jugar en Baamboozle">
+		            Play on Baamboozle
+		        </a>
+		    </div>
+
+		    <div class="game-item">
+		        <div class="paragraph-with-buttons">
+		            <div class="translatable-content">
+		                <span id="game-2" class="translatable" 
+		                      data-original="🎲 Game 2: Basic Introductions" 
+		                      data-translation="🎲 Juego 2: Presentaciones Básicas">
+		                    🎲 Game 2: Basic Introductions
+		                </span>
+		            </div>
+		            <div class="translation-buttons">
+		                <button onclick="speak('Game 2: Basic Introductions')">🔊</button>
+		            </div>
+		        </div>
+		        <a href="https://www.baamboozle.com/game/54952" target="_blank" 
+		           class="speak-btn translatable big-btn" 
+		           data-original="Play on Baamboozle" 
+		           data-translation="Jugar en Baamboozle">
+		            Play on Baamboozle
+		        </a>
+		    </div>
+
+		    <div class="paragraph-with-buttons">
+		        <div class="translatable-content">
+		            <span id="game-tip" class="translatable" 
+		                  data-original="Tip: Create teams for the activity and compete for points!" 
+		                  data-translation="Consejo: ¡Crea equipos para la actividad y compite por puntos!">
+		                Tip: Create teams for the activity and compete for points!
+		            </span>
+		        </div>
+		        <div class="translation-buttons">
+		            <button onclick="speak(document.getElementById('game-tip').dataset.original)">🔊</button>
+		        </div>
+		    </div>
+		</section>
+		
+		<div class="section-nav">
+		    <button class="nav-btn" onclick="navigateToSection(12)"><i class="fas fa-arrow-left"></i> Previous</button>
+		    <button class="nav-btn" onclick="navigateToSection(14)">Next <i class="fas fa-arrow-right"></i></button>
+		</div>
+	    </div>
+	</section>
+                    
+            <!-- Sección 14: Quiz -->
+            <section class="section" id="section-14">
+                <div class="section-content">
+                    <section class="lesson-section" data-translated="false">
+                        <h2 class="title-flex">
+                            <span id="quiz-title" class="translatable" data-original="📝 Quiz: Check your knowledge!" data-translation="📝 Quiz: ¡Comprueba tu conocimiento!">📝 Quiz: Check your knowledge!</span>
+                            <button class="translate-section-btn">🌐</button>
+                            <button onclick="speak('Quiz: Check your knowledge!')">🔊</button>
+                        </h2>
+
+                        <form id="quiz-form">
 		<!-- Q1 -->
 		<div class="quiz-item">
 		    <div class="paragraph-with-buttons">
@@ -1711,7 +1824,7 @@
 		</div>
 	    </div>
 	    
-	    <div class="mobile-match-instructions">
+	     <div class="mobile-match-instructions">
 		<small class="translatable" data-original="Instructions: First tap a word, then tap the matching picture" data-translation="Instrucciones: Primero toca una palabra, luego toca la imagen correspondiente">Instructions: First tap a word, then tap the matching picture</small>
 	    </div>
 	</div>
@@ -1784,633 +1897,641 @@
 		    <span id="quiz-result" class="translatable" data-original="Your result will appear here." data-translation="Tu resultado aparecerá aquí.">Your result will appear here.</span>
 		</div>
 	    </div>
-	</section>
+                    </section>
+                    
+                    <div class="section-nav">
+                        <button class="nav-btn" onclick="navigateToSection(13)"><i class="fas fa-arrow-left"></i> Previous</button>
+                        <button class="nav-btn" onclick="navigateToSection(15)">Next <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </section>
 
-	<!-- Material PDF -->
-	<section class="lesson-section" data-translated="false">
-	    <h2 class="title-flex">
-		<span id="pdf-material" class="translatable" data-original="📄 Download the base material for session 1" data-translation="📄 Descargar material base de la sesión 1">📄 Download the base material for session 1</span>
-		<button class="translate-section-btn">🌐</button>
-		<button onclick="speak('Download the base material for session 1')">🔊</button>
-	    </h2>
-	    <p>
-		<a href="class1.pdf" download="class1.pdf" class="big-btn">📄 Download PDF</a>
-	    </p>
-	    <embed src="class1.pdf" type="application/pdf" width="100%" height="600px" />
-	</section>
-
-                <!-- Sección de finalización -->
-                <section class="lesson-section">
-                    <h2>✅ Complete this lesson</h2>
-                    <p>Finish all activities and take the quiz to complete this lesson and earn 50 XP!</p>
-                    <button class="big-btn speak-btn" onclick="completeLesson()">Mark as Complete</button>
-                </section>
-            </div>
-            
-            <div class="progress-sidebar">
-                <h3><i class="fas fa-chart-line"></i> Your Progress</h3>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <h4>Words Learned</h4>
-                        <p class="stat-number">42</p>
-                    </div>
-                    <div class="stat-card">
-                        <h4>Streak</h4>
-                        <p class="stat-number">3 days</p>
-                    </div>
-                    <div class="stat-card">
-                        <h4>Lessons</h4>
-                        <p class="stat-number">2/10</p>
-                    </div>
-                    <div class="stat-card">
-                        <h4>Accuracy</h4>
-                        <p class="stat-number">87%</p>
+            <!-- Sección 15: Material Complementario y Final -->
+            <section class="section" id="section-15">
+                <div class="section-content">
+                    <!-- Material PDF -->
+                    <section class="lesson-section" data-translated="false">
+                        <h2 class="title-flex">
+                            <span id="pdf-material" class="translatable" data-original="📄 Download the base material for session 1" data-translation="📄 Descargar material base de la sesión 1">📄 Download the base material for session 1</span>
+                            <button class="translate-section-btn">🌐</button>
+                            <button onclick="speak('Download the base material for session 1')">🔊</button>
+                        </h2>
+                        <p>
+                            <a href="class1.pdf" download="class1.pdf" class="big-btn">📄 Download PDF</a>
+                        </p>
+                        <embed src="class1.pdf" type="application/pdf" width="100%" height="600px" />
+                    </section>
+                    
+                    <!-- Finalización -->
+                    <section class="lesson-section">
+                        <h2>✅ Complete this lesson</h2>
+                        <p>Finish all activities and take the quiz to complete this lesson and earn 50 XP!</p>
+                        <button class="big-btn speak-btn" onclick="completeLesson()">Mark as Complete</button>
+                    </section>
+                    
+                    <div class="section-nav">
+                        <button class="nav-btn" onclick="navigateToSection(14)"><i class="fas fa-arrow-left"></i> Previous</button>
+                        <button class="nav-btn" disabled>Next <i class="fas fa-arrow-right"></i></button>
                     </div>
                 </div>
-                
-                <div class="daily-goal">
-                    <h4>🎯 Daily Goal</h4>
-                    <div class="xp-bar">
-                        <div class="xp-progress" style="width: 65%;">13/20 points</div>
-                    </div>
-                </div>
-                
-                <div class="community-activity">
-                    <h4><i class="fas fa-users"></i> Community Activity</h4>
-                    <div class="activity-item">
-                        <img src="https://i.pravatar.cc/40?img=1" alt="User">
-                        <p><strong>Maria</strong> completed Greetings lesson</p>
-                    </div>
-                    <div class="activity-item">
-                        <img src="https://i.pravatar.cc/40?img=2" alt="User">
-                        <p><strong>John</strong> earned 100 XP</p>
-                    </div>
-                    <div class="activity-item">
-                        <img src="https://i.pravatar.cc/40?img=3" alt="User">
-                        <p><strong>Sophia</strong> is on a 7-day streak!</p>
-                    </div>
-                </div>
-                
-                <button class="big-btn" style="margin-top: 15px; width: 100%;"><i class="fas fa-handshake"></i> Find Practice Partners</button>
-            </div>
+            </section>
         </div>
+        
+        <footer>
+            <p>English Course for Beginners — Created by Jordan Ortiz</p>
+        </footer>
     </div>
 
-    <footer>
-        <p>English Course for Beginners — Created by Jordan Ortiz</p>
-    </footer>
-
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-<script>
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Verificar autenticación INMEDIATAMENTE en páginas de clase
-    const isClassPage = window.location.pathname.includes('Class') || 
-                        window.location.pathname.includes('class');
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     
-    if (isClassPage && !localStorage.getItem('access_token')) {
-        showAuthenticationRequired();
-        return; // Detener ejecución adicional
-    }
+    <script>
+	// Sistema de navegación por secciones
+	let currentSection = 1;
+	const totalSections = 15;
+
+	// Inicializar indicadores de sección
+	function initSectionIndicators() {
+	    const indicatorsContainer = document.getElementById('section-indicators');
+	    indicatorsContainer.innerHTML = '';
+	    
+	    for (let i = 1; i <= totalSections; i++) {
+		const indicator = document.createElement('div');
+		indicator.className = 'section-indicator';
+		indicator.dataset.section = i;
+		indicator.addEventListener('click', () => navigateToSection(i));
+		
+		if (i < currentSection) {
+		    indicator.classList.add('completed');
+		} else if (i === currentSection) {
+		    indicator.classList.add('active');
+		}
+		
+		indicatorsContainer.appendChild(indicator);
+	    }
+	    
+	    updateProgress();
+	}
+
+	// Actualizar la UI después de cambiar de sección
+	function updateUI() {
+	    document.querySelectorAll('.section-indicator').forEach((indicator, index) => {
+		indicator.classList.remove('active', 'completed');
+		
+		const sectionNum = index + 1;
+		if (sectionNum < currentSection) {
+		    indicator.classList.add('completed');
+		} else if (sectionNum === currentSection) {
+		    indicator.classList.add('active');
+		}
+	    });
+	    
+	    updateProgress();
+	    
+	    document.querySelectorAll('.nav-btn').forEach(btn => {
+		btn.disabled = false;
+	    });
+	    
+	    if (currentSection === 1) {
+		document.querySelector('.nav-btn:first-child').disabled = true;
+	    }
+	    
+	    if (currentSection === totalSections) {
+		document.querySelector('.nav-btn:last-child').disabled = true;
+	    }
+	}
+
+	// Actualizar barra de progreso
+	function updateProgress() {
+	    const progressPercentage = ((currentSection - 1) / (totalSections - 1)) * 100;
+	    document.getElementById('section-progress-bar').style.width = `${progressPercentage}%`;
+	    document.getElementById('section-progress').textContent = `${Math.round(progressPercentage)}%`;
+	    document.getElementById('current-section').textContent = currentSection;
+	    document.getElementById('total-sections').textContent = totalSections;
+	}
+
+	// Detectar cambios de sección al hacer scroll
+	document.getElementById('sections-container').addEventListener('scroll', function() {
+	    const scrollLeft = this.scrollLeft;
+	    const sectionWidth = window.innerWidth;
+	    const newSection = Math.round(scrollLeft / sectionWidth) + 1;
+	    
+	    if (newSection !== currentSection) {
+		currentSection = newSection;
+		updateUI();
+	    }
+	});
+
+	// Sistema de traducción
+	document.addEventListener("DOMContentLoaded", () => {
+	    document.querySelectorAll(".translate-section-btn").forEach(btn => {
+		btn.addEventListener("click", () => {
+		    const container = btn.closest("[data-translated]");
+		    const isTranslated = container.getAttribute("data-translated") === "true";
+		    container.querySelectorAll(".translatable").forEach(el => {
+		        if(el.classList.contains("object-name") && el.dataset.revealed==="true"){
+		            el.textContent = isTranslated ? el.dataset.original : el.dataset.translation;
+		        } else if (!el.classList.contains("object-name")){
+		            el.textContent = isTranslated ? el.dataset.original : el.dataset.translation;
+		        }
+		    });
+		    container.setAttribute("data-translated", !isTranslated);
+		});
+	    });
+	});
+
+	// Sistema de texto a voz
+	function preprocessTextForTTS(text) {
+	    const hacks = {
+		"I'm": "I am", "I'm.": "I am.", "I'm,": "I am,",
+		"It's": "It is", "What's": "What is", "That's": "That is",
+		"There's": "There is", "Here's": "Here is",
+		"You're": "You are", "We're": "We are", "They're": "They are",
+		"He's": "He is", "She's": "She is"
+	    };
+	    let processed = text;
+	    for(const [k,v] of Object.entries(hacks)) processed = processed.replace(new RegExp(k, "gi"), v);
+	    return processed;
+	}
+
+	window.speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
+
+	// ===== SISTEMA UNIFICADO DE AUDIO =====
+	let currentUtterance = null;
+	let currentPractice = null;
+	let practiceTimeouts = [];
+
+	// Función para detener TODO el audio
+	function stopAllAudio() {
+	    if (window.speechSynthesis) {
+		window.speechSynthesis.cancel();
+	    }
+	    
+	    practiceTimeouts.forEach(timeout => clearTimeout(timeout));
+	    practiceTimeouts = [];
+	    currentPractice = null;
+	    
+	    removeHighlight();
+	}
+
+	// Función principal para hablar
+	function speak(text, options = {}) {
+	    if (!('speechSynthesis' in window)) {
+		console.log('Text-to-speech no soportado');
+		return;
+	    }
+	    
+	    stopAllAudio();
+	    
+	    const processedText = preprocessTextForTTS(text);
+	    
+	    currentUtterance = new SpeechSynthesisUtterance(processedText);
+	    currentUtterance.lang = 'en-US';
+	    currentUtterance.rate = options.rate || 1.0;
+	    currentUtterance.pitch = options.pitch || 1.0;
+	    currentUtterance.volume = 1;
+	    
+	    if (options.highlight) {
+		highlightText(text);
+	    }
+	    
+	    currentUtterance.onend = function() {
+		if (options.highlight) {
+		    setTimeout(() => removeHighlight(), 500);
+		}
+		currentUtterance = null;
+	    };
+	    
+	    currentUtterance.onerror = function() {
+		console.log('Error en speech synthesis');
+		currentUtterance = null;
+	    };
+	    
+	    window.speechSynthesis.speak(currentUtterance);
+	}
+
+	// Función para resaltar texto (coincidencia exacta)
+	function highlightText(text) {
+	    const elements = document.querySelectorAll('.number-name, .dialogue-text, .word-item');
+	    const target = text.trim().toLowerCase();
+
+	    elements.forEach(element => {
+		const elementText = element.textContent.trim().toLowerCase();
+		const originalText = element.dataset.original ? element.dataset.original.trim().toLowerCase() : "";
+
+		if (elementText === target || originalText === target) {
+		    element.style.backgroundColor = '#d4edda';   // azul suave
+		    element.style.padding = '2px 5px';
+		    element.style.borderRadius = '3px';
+		    element.style.transition = 'all 0.3s ease';
+		}
+	    });
+	}
+
+	// Función para remover resaltado
+	function removeHighlight() {
+	    const elements = document.querySelectorAll('.number-name, .dialogue-text, .word-item');
+	    elements.forEach(element => {
+		element.style.backgroundColor = '';
+		element.style.padding = '';
+		element.style.borderRadius = '';
+	    });
+	}
+
+	// Función específica para números
+	function speakNumber(numberText) {
+	    speak(numberText, { rate: 1.0, highlight: true });
+	}
+
+	// ===== FLIPCARD MEJORADA =====
+	function flipCard(card) {
+	    const wordSpan = card.querySelector(".object-name");
+	    const isTranslated = card.closest("section").getAttribute("data-translated") === "true";
+	    
+	    stopAllAudio();
+	    
+	    if (wordSpan.textContent === "???") {
+		wordSpan.textContent = isTranslated ? wordSpan.dataset.translation : wordSpan.dataset.original;
+		wordSpan.dataset.revealed = "true";
+		speak(wordSpan.dataset.original, { rate: 1.0 });
+	    } else {
+		wordSpan.textContent = "???";
+		wordSpan.dataset.revealed = "false";
+	    }
+	}
+
+	// ===== GENERAR NÚMEROS 1-20 =====
+	function generateNumbers1to20() {
+	    const container = document.getElementById('numbers-container-1to20');
+	    if (!container) {
+		console.log('Container numbers-container-1to20 no encontrado');
+		return;
+	    }
+	    
+	    container.innerHTML = '';
+	    
+	    const numbers = [
+		{ num: 1, en: "one", es: "uno" }, { num: 2, en: "two", es: "dos" }, 
+		{ num: 3, en: "three", es: "tres" }, { num: 4, en: "four", es: "cuatro" }, 
+		{ num: 5, en: "five", es: "cinco" }, { num: 6, en: "six", es: "seis" },
+		{ num: 7, en: "seven", es: "siete" }, { num: 8, en: "eight", es: "ocho" }, 
+		{ num: 9, en: "nine", es: "nueve" }, { num: 10, en: "ten", es: "diez" },
+		{ num: 11, en: "eleven", es: "once" }, { num: 12, en: "twelve", es: "doce" },
+		{ num: 13, en: "thirteen", es: "trece" }, { num: 14, en: "fourteen", es: "catorce" }, 
+		{ num: 15, en: "fifteen", es: "quince" }, { num: 16, en: "sixteen", es: "dieciséis" },
+		{ num: 17, en: "seventeen", es: "diecisiete" }, { num: 18, en: "eighteen", es: "dieciocho" },
+		{ num: 19, en: "nineteen", es: "diecinueve" }, { num: 20, en: "twenty", es: "veinte" }
+	    ];
+
+	    numbers.forEach(number => {
+		const numberItem = document.createElement('div');
+		numberItem.className = 'number-item';
+		numberItem.innerHTML = `
+		    <div class="number-circle">${number.num}</div>
+		    <div class="number-name translatable" 
+		         data-original="${number.en}" 
+		         data-translation="${number.es}">
+		        ${number.en}
+		    </div>
+		`;
+		
+		numberItem.onclick = (function(currentNumber) {
+		    return function() {
+		        speakNumber(currentNumber.en);
+		    };
+		})(number); // Pasar el número actual como parámetro
+		
+		
+		container.appendChild(numberItem);
+	    });
+	}
+
+	// ===== GENERAR NÚMEROS 21-30 =====
+	function generateNumbers21to30() {
+	    const container = document.getElementById('numbers-container-21to30');
+	    if (!container) {
+		console.log('Container numbers-container-21to30 no encontrado');
+		return;
+	    }
+	    
+	    container.innerHTML = '';
+	    
+	    const numbers = [
+		{ num: 21, en: "twenty-one", es: "veintiuno" },
+		{ num: 22, en: "twenty-two", es: "veintidós" },
+		{ num: 23, en: "twenty-three", es: "veintitrés" },
+		{ num: 24, en: "twenty-four", es: "veinticuatro" },
+		{ num: 25, en: "twenty-five", es: "veinticinco" },
+		{ num: 26, en: "twenty-six", es: "veintiséis" },
+		{ num: 27, en: "twenty-seven", es: "veintisiete" },
+		{ num: 28, en: "twenty-eight", es: "veintiocho" },
+		{ num: 29, en: "twenty-nine", es: "veintinueve" },
+		{ num: 30, en: "thirty", es: "treinta" }
+	    ];
+
+	    numbers.forEach(number => {
+		const numberItem = document.createElement('div');
+		numberItem.className = 'number-item';
+		numberItem.innerHTML = `
+		    <div class="number-circle">${number.num}</div>
+		    <div class="number-name translatable" 
+		         data-original="${number.en}" 
+		         data-translation="${number.es}">
+		        ${number.en}
+		    </div>
+		`;
+		
+		numberItem.onclick = (function(currentNumber) {
+		    return function() {
+		        speakNumber(currentNumber.en);
+		    };
+		})(number);
+		
+		container.appendChild(numberItem);
+	    });
+	}
+
+	// ===== PRÁCTICA DE NÚMEROS CORREGIDA =====
+	function practiceNumbers(start, end) {
+	    stopAllAudio();
+
+	    const numbers = [
+		"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
+		"eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", 
+		"eighteen", "nineteen", "twenty", "twenty-one", "twenty-two", "twenty-three", 
+		"twenty-four", "twenty-five", "twenty-six", "twenty-seven", "twenty-eight", 
+		"twenty-nine", "thirty"
+	    ];
+	    
+	    const selectedNumbers = numbers.slice(start - 1, end);
+	    let currentIndex = 0;
+
+	    function speakNextNumber() {
+		if (currentIndex >= selectedNumbers.length) {
+		    currentPractice = null;
+		    removeHighlight();
+		    return;
+		}
+
+		const word = selectedNumbers[currentIndex];
+		highlightText(word);
+
+		const utterance = new SpeechSynthesisUtterance(word);
+		utterance.lang = "en-US";
+		utterance.rate = 1.25;
+
+		utterance.onend = () => {
+		    removeHighlight();
+		    currentIndex++;
+		    // retardo opcional en ms antes de pasar al siguiente número
+		    setTimeout(() => speakNextNumber(), 100); // 0.3s entre números
+		};
+
+
+		window.speechSynthesis.speak(utterance);
+	    }
+
+	    speakNextNumber(); // arranca el ciclo
+	}
+
+	// ===== NAVEGACIÓN =====
+	function navigateToSection(sectionNumber) {
+	    if (sectionNumber < 1 || sectionNumber > totalSections) return;
+	    
+	    stopAllAudio();
+	    
+	    currentSection = sectionNumber;
+	    const sectionElement = document.getElementById(`section-${sectionNumber}`);
+	    
+	    if (sectionElement) {
+		document.getElementById('sections-container').scrollTo({
+		    left: (sectionNumber - 1) * window.innerWidth,
+		    behavior: 'smooth'
+		});
+		
+		updateUI();
+		
+		setTimeout(() => {
+		    if (sectionNumber === 8) {
+		        generateNumbers1to20();
+		    } else if (sectionNumber === 9) {
+		        generateNumbers21to30();
+		    }
+		}, 100);
+	    }
+	}
+
+	// ===== INICIALIZACIÓN =====
+	document.addEventListener('DOMContentLoaded', function() {
+	    initSectionIndicators();
+	    updateUI();
+	    
+	    setTimeout(() => {
+		generateNumbers1to20();
+		generateNumbers21to30();
+	    }, 500);
+	    
+	    const mapElement = document.getElementById('map');
+	    if (mapElement) {
+		initMap();
+	    }
+	});
+
+	// ===== FUNCIÓN CHECKQUIZ ACTUALIZADA =====
+	function checkQuiz() {
+	    let score = 0;
+	    const answers = {
+		q1: 'b', // Hello
+		q2: 'a', // I
+		q3: 'b', // Thirty
+		q4: 'a', // See you later
+		q5: 'correct', // Matching game
+		q6: 'c', // Good morning
+		q7: 'b', // I like
+		q8: 'b', // What's your name?
+		q9: 'a', // See you later
+		q10: 'a' // I'm from Mexico
+	    };
+	    
+	    // Contar preguntas de opción múltiple
+	    for(const q in answers){
+		if (q === 'q5') continue; // Saltar la pregunta de matching
+		
+		const radios = document.getElementsByName(q);
+		for(const r of radios) {
+		    if(r.checked && r.value === answers[q]) {
+		        score++;
+		        break;
+		    }
+		}
+	    }
+	    
+	    // Verificar pregunta de matching (Q5)
+	    const matchingCorrect = checkMatchingGame();
+	    if (matchingCorrect) {
+		score++;
+	    }
+	    
+	    const totalScore = score;
+	    const maxScore = Object.keys(answers).length;
+	    
+	    // Mostrar resultado
+	    const resultElement = document.getElementById('quiz-result');
+	    resultElement.textContent = `You scored ${totalScore}/${maxScore} 🎉`;
+	    
+	    // Feedback específico
+	    let feedback = '';
+	    if (totalScore === maxScore) {
+		feedback = 'Perfect score! Excellent job!';
+	    } else if (totalScore >= maxScore * 0.7) {
+		feedback = 'Good effort! Keep practicing!';
+	    } else {
+		feedback = 'Keep learning and try again!';
+	    }
+	    
+	    resultElement.textContent += ` - ${feedback}`;
+	    speak(`You scored ${totalScore} out of ${maxScore}. ${feedback}`);
+	}
+
+	function completeLesson(){
+	    alert('Lesson completed! +50 XP');
+	    const btn = document.querySelector('.complete-lesson-btn');
+	    if (btn) {
+		btn.classList.add('pulse');
+		setTimeout(()=>{
+		    btn.classList.remove('pulse');
+		    btn.textContent='Completed ✓';
+		    btn.style.background='var(--success)';
+		},1000);
+	    }
+	}
+	
+	// ===== FUNCIONES PARA EL MATCHING GAME =====
+	let selectedWord = null;
+
+	function selectWord(element, word) {
+	    // Remover selección anterior
+	    document.querySelectorAll('.selectable-word').forEach(el => {
+		el.classList.remove('selected');
+	    });
+	    
+	    // Seleccionar nueva palabra
+	    element.classList.add('selected');
+	    selectedWord = word;
+	    
+	    // Dar feedback de audio
+	    speak(`Selected: ${word}`);
+	}
+
+	function handleMobileMatch(element, correctAnswer) {
+	    if (!selectedWord) {
+		speak('Please select a word first');
+		return;
+	    }
+	    
+	    const feedbackElement = element.querySelector('.match-feedback');
+	    
+	    if (selectedWord === correctAnswer) {
+		// Correcto
+		element.classList.add('correct');
+		feedbackElement.textContent = '✓';
+		feedbackElement.style.color = 'green';
+		speak('Correct match!');
+	    } else {
+		// Incorrecto
+		element.classList.add('incorrect');
+		feedbackElement.textContent = '✗';
+		feedbackElement.style.color = 'red';
+		speak('Try again');
+	    }
+	    
+	    // Resetear selección después de 2 segundos
+	    setTimeout(() => {
+		element.classList.remove('correct', 'incorrect');
+		feedbackElement.textContent = '';
+		document.querySelectorAll('.selectable-word').forEach(el => {
+		    el.classList.remove('selected');
+		});
+		selectedWord = null;
+	    }, 2000);
+	}
+
+	function checkMatchingGame() {
+	    // Verificar si al menos un match fue correcto
+	    const correctMatches = document.querySelectorAll('.object-item.correct');
+	    return correctMatches.length > 0;
+	}
+
+	// ===== MAPA =====
+	function initMap() {
+	    const map = L.map('map').setView([20, 0], 2);
+	    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 5, 
+		attribution: '&copy; OpenStreetMap contributors'
+	    }).addTo(map);
+
+		const countries = [
+		    { name: "Japan", lat: 35.68, lng: 139.76, dialogue: "I'm from Japan. I'm Japanese.", translation: "Soy de Japón. Soy japonés/a." },
+		    { name: "USA", lat: 38.9, lng: -77.03, dialogue: "I'm from the USA. I'm American.", translation: "Soy de Estados Unidos. Soy estadounidense." },
+		    { name: "Mexico", lat: 19.43, lng: -99.13, dialogue: "I'm from Mexico. I'm Mexican.", translation: "Soy de México. Soy mexicano/a." },
+		    { name: "Canada", lat: 45.42, lng: -75.69, dialogue: "I'm from Canada. I'm Canadian.", translation: "Soy de Canadá. Soy canadiense." },
+		    { name: "Brazil", lat: -15.79, lng: -47.88, dialogue: "I'm from Brazil. I'm Brazilian.", translation: "Soy de Brasil. Soy brasileño/a." },
+		    { name: "Argentina", lat: -34.6, lng: -58.38, dialogue: "I'm from Argentina. I'm Argentinian.", translation: "Soy de Argentina. Soy argentino/a." },
+		    { name: "Chile", lat: -33.45, lng: -70.66, dialogue: "I'm from Chile. I'm Chilean.", translation: "Soy de Chile. Soy chileno/a." },
+		    { name: "Peru", lat: -12.04, lng: -77.03, dialogue: "I'm from Peru. I'm Peruvian.", translation: "Soy de Perú. Soy peruano/a." },
+		    { name: "Colombia", lat: 4.71, lng: -74.07, dialogue: "I'm from Colombia. I'm Colombian.", translation: "Soy de Colombia. Soy colombiano/a." },
+		    { name: "Spain", lat: 40.42, lng: -3.7, dialogue: "I'm from Spain. I'm Spanish.", translation: "Soy de España. Soy español/a." },
+		    { name: "France", lat: 48.85, lng: 2.35, dialogue: "I'm from France. I'm French.", translation: "Soy de Francia. Soy francés/a." },
+		    { name: "Germany", lat: 52.52, lng: 13.4, dialogue: "I'm from Germany. I'm German.", translation: "Soy de Alemania. Soy alemán/a." },
+		    { name: "Italy", lat: 41.9, lng: 12.5, dialogue: "I'm from Italy. I'm Italian.", translation: "Soy de Italia. Soy italiano/a." },
+		    { name: "United Kingdom", lat: 51.5, lng: -0.12, dialogue: "I'm from the UK. I'm British.", translation: "Soy del Reino Unido. Soy británico/a." },
+		    { name: "Ireland", lat: 53.35, lng: -6.26, dialogue: "I'm from Ireland. I'm Irish.", translation: "Soy de Irlanda. Soy irlandés/a." },
+		    { name: "Portugal", lat: 38.72, lng: -9.14, dialogue: "I'm from Portugal. I'm Portuguese.", translation: "Soy de Portugal. Soy portugués/a." },
+		    { name: "Russia", lat: 55.75, lng: 37.62, dialogue: "I'm from Russia. I'm Russian.", translation: "Soy de Rusia. Soy ruso/a." },
+		    { name: "China", lat: 39.9, lng: 116.4, dialogue: "I'm from China. I'm Chinese.", translation: "Soy de China. Soy chino/a." },
+		    { name: "India", lat: 28.61, lng: 77.2, dialogue: "I'm from India. I'm Indian.", translation: "Soy de India. Soy indio/a." },
+		    { name: "South Korea", lat: 37.57, lng: 126.98, dialogue: "I'm from South Korea. I'm Korean.", translation: "Soy de Corea del Sur. Soy coreano/a." },
+		    { name: "Australia", lat: -35.28, lng: 149.13, dialogue: "I'm from Australia. I'm Australian.", translation: "Soy de Australia. Soy australiano/a." },
+		    { name: "New Zealand", lat: -41.29, lng: 174.78, dialogue: "I'm from New Zealand. I'm Kiwi.", translation: "Soy de Nueva Zelanda. Soy neozelandés/a." },
+		    { name: "South Africa", lat: -25.75, lng: 28.19, dialogue: "I'm from South Africa. I'm South African.", translation: "Soy de Sudáfrica. Soy sudafricano/a." },
+		    { name: "Egypt", lat: 30.04, lng: 31.24, dialogue: "I'm from Egypt. I'm Egyptian.", translation: "Soy de Egipto. Soy egipcio/a." },
+		    { name: "Nigeria", lat: 9.05, lng: 7.49, dialogue: "I'm from Nigeria. I'm Nigerian.", translation: "Soy de Nigeria. Soy nigeriano/a." },
+		    { name: "Kenya", lat: -1.29, lng: 36.82, dialogue: "I'm from Kenya. I'm Kenyan.", translation: "Soy de Kenia. Soy keniata." },
+		    { name: "Turkey", lat: 39.93, lng: 32.86, dialogue: "I'm from Turkey. I'm Turkish.", translation: "Soy de Turquía. Soy turco/a." },
+		    { name: "Greece", lat: 37.98, lng: 23.72, dialogue: "I'm from Greece. I'm Greek.", translation: "Soy de Grecia. Soy griego/a." },
+		    { name: "Sweden", lat: 59.33, lng: 18.06, dialogue: "I'm from Sweden. I'm Swedish.", translation: "Soy de Suecia. Soy sueco/a." },
+		    { name: "Norway", lat: 59.91, lng: 10.75, dialogue: "I'm from Norway. I'm Norwegian.", translation: "Soy de Noruega. Soy noruego/a." },
+		    { name: "Finland", lat: 60.17, lng: 24.94, dialogue: "I'm from Finland. I'm Finnish.", translation: "Soy de Finlandia. Soy finlandés/a." },
+		    { name: "Denmark", lat: 55.68, lng: 12.57, dialogue: "I'm from Denmark. I'm Danish.", translation: "Soy de Dinamarca. Soy danés/a." },
+		    { name: "Netherlands", lat: 52.37, lng: 4.9, dialogue: "I'm from the Netherlands. I'm Dutch.", translation: "Soy de Países Bajos. Soy holandés/a." },
+		    { name: "Belgium", lat: 50.85, lng: 4.35, dialogue: "I'm from Belgium. I'm Belgian.", translation: "Soy de Bélgica. Soy belga." },
+		    { name: "Switzerland", lat: 46.95, lng: 7.44, dialogue: "I'm from Switzerland. I'm Swiss.", translation: "Soy de Suiza. Soy suizo/a." },
+		    { name: "Austria", lat: 48.2, lng: 16.37, dialogue: "I'm from Austria. I'm Austrian.", translation: "Soy de Austria. Soy austríaco/a." },
+		    { name: "Poland", lat: 52.23, lng: 21.01, dialogue: "I'm from Poland. I'm Polish.", translation: "Soy de Polonia. Soy polaco/a." },
+		    { name: "Czech Republic", lat: 50.08, lng: 14.43, dialogue: "I'm from the Czech Republic. I'm Czech.", translation: "Soy de República Checa. Soy checo/a." },
+		    { name: "Hungary", lat: 47.5, lng: 19.04, dialogue: "I'm from Hungary. I'm Hungarian.", translation: "Soy de Hungría. Soy húngaro/a." }
+		  ];
+
+	    let selectedDialogue = null;
+	    countries.forEach(country => {
+		L.marker([country.lat, country.lng])
+		    .addTo(map)
+		    .bindPopup(`<b>${country.name}</b>`)
+		    .on('click', () => {
+		        const dialogueEl = document.getElementById('dialogue');
+		        if (!selectedDialogue) {
+		            selectedDialogue = document.createElement('span');
+		            selectedDialogue.className = 'translatable dialogue-text';
+		            dialogueEl.innerHTML = '';
+		            dialogueEl.appendChild(selectedDialogue);
+		        }
+		        selectedDialogue.dataset.original = country.dialogue;
+		        selectedDialogue.dataset.translation = country.translation;
+		        selectedDialogue.textContent = country.dialogue;
+		        speak(country.dialogue, { rate: 1.0 });
+		    });
+	    });
+	}
+	</script>
     
-    // El resto de tu código de inicialización...
-    initializeButtons();
-    checkAuthLoaded();
-});
-
-function showAuthenticationRequired() {
-    const mainContent = document.querySelector('.main-content');
-    const header = document.querySelector('.main-header');
-    const nav = document.querySelector('.lessons-nav');
-    
-    if (mainContent) {
-        // Ocultar contenido de la clase
-        if (header) header.style.display = 'none';
-        if (nav) nav.style.display = 'none';
-        
-        mainContent.innerHTML = `
-            <div style="text-align: center; padding: 60px 20px;">
-                <div style="max-width: 500px; margin: 0 auto;">
-                    <h2 style="color: var(--primary); margin-bottom: 20px;">🔒 Authentication Required</h2>
-                    <p style="margin-bottom: 25px; font-size: 1.1rem;">
-                        Please log in to access this class content. You need to be authenticated to view the lessons.
-                    </p>
-                    <button id="goto-login" style="padding: 12px 24px; background: var(--primary); color: white; 
-                        border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; transition: transform 0.2s;">
-                        Go to Login Page
-                    </button>
-                    <div style="margin-top: 30px; padding: 20px; background: var(--light); border-radius: 10px;">
-                        <p style="margin-bottom: 10px;"><strong>Don't have an account yet?</strong></p>
-                        <p>Register on the login page to access all learning materials!</p>
-                    </div>
-                </div>
-            </div>
-        `;
-        
-        document.getElementById('goto-login').addEventListener('click', function() {
-            window.location.href = 'https://elegant-frangipane-efce46.netlify.app/';
-        });
-        
-        document.getElementById('goto-login').addEventListener('mouseover', function() {
-            this.style.transform = 'scale(1.05)';
-        });
-        
-        document.getElementById('goto-login').addEventListener('mouseout', function() {
-            this.style.transform = 'scale(1)';
-        });
-    }
-}
-
-function initializeButtons() {
-    // Inicializar los botones
-    const loginBtn = document.getElementById('login-btn');
-    const logoutBtn = document.getElementById('logout-btn');
-    const homeBtn = document.getElementById('home-btn');
-    
-    // Función para redirigir al home
-    function goHome() {
-        window.location.href = 'https://elegant-frangipane-efce46.netlify.app/';
-    }
-    
-    // Asignar evento al botón home
-    if (homeBtn) {
-        homeBtn.addEventListener('click', goHome);
-    }
-}
-
-function checkAuthLoaded() {
-    // Verificar si auth.js ya está cargado y tiene las funciones
-    if (typeof window.showLoggedOut === 'function' && 
-        typeof window.showContent === 'function') {
-        // Auth.js está cargado, actualizar UI según estado
-        updateAuthUI();
-        return true;
-    }
-    return false;
-}
-
-function updateAuthUI() {
-    const loginBtn = document.getElementById('login-btn');
-    const logoutBtn = document.getElementById('logout-btn');
-    const homeBtn = document.getElementById('home-btn');
-    
-    if (localStorage.getItem('access_token')) {
-        // Usuario logueado
-        if (loginBtn) loginBtn.style.display = 'none';
-        if (logoutBtn) logoutBtn.style.display = 'block';
-        if (homeBtn) homeBtn.style.display = 'block';
-    } else {
-        // Usuario no logueado
-        if (loginBtn) loginBtn.style.display = 'block';
-        if (logoutBtn) logoutBtn.style.display = 'none';
-        if (homeBtn) homeBtn.style.display = 'none';
-    }
-}
-
-// Verificación periódica por si auth.js se carga después
-let authCheckAttempts = 0;
-const maxAuthCheckAttempts = 10;
-
-function checkAuthPeriodically() {
-    if (authCheckAttempts >= maxAuthCheckAttempts) return;
-    
-    if (checkAuthLoaded()) {
-        console.log('auth.js loaded successfully');
-    } else {
-        authCheckAttempts++;
-        setTimeout(checkAuthPeriodically, 300);
-    }
-}
-
-// Iniciar verificación periódica
-setTimeout(checkAuthPeriodically, 100);
-
-let selectedWord = null;
-let matchedPairs = 0;
-const totalPairs = 3;
-
-function selectWord(element, word) {
-    if (element.classList.contains('matched')) return;
-    
-    // Deseleccionar palabra anterior
-    document.querySelectorAll('.selectable-word.selected').forEach(item => {
-        item.classList.remove('selected');
-    });
-    
-    // Seleccionar nueva palabra
-    element.classList.add('selected');
-    selectedWord = word;
-    
-    // Dar feedback
-    speak(word);
-}
-
-/* ------------------------
-  Texto a voz (TTS) mejorado
------------------------- */
-function preprocessTextForTTS(text) {
-  const hacks = {
-    "I'm": "I\u200Bm", "I'm.": "I\u200Bm.", "I'm,": "I\u200Bm,",
-    "It's": "It\u200Bs", "What's": "What\u200Bs", "That's": "That\u200Bs",
-    "There's": "There\u200Bs", "Here's": "Here\u200Bs",
-    "You're": "You\u200Bre", "We're": "We\u200Bre", "They're": "They\u200Bre",
-    "He's": "He\u200Bs", "She's": "She\u200Bs"
-  };
-  let processed = text;
-  for(const [k,v] of Object.entries(hacks)) processed = processed.replace(new RegExp(k, "gi"), v);
-  return processed;
-}
-
-function speak(text, lang = 'en-US') {
-  if (!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(preprocessTextForTTS(text));
-  utterance.lang = lang;
-  utterance.rate = 0.95; utterance.pitch = 1.2; utterance.volume = 1;
-  const voices = speechSynthesis.getVoices();
-  utterance.voice = voices.find(v => ['Google US English','Microsoft Zira Desktop - English (United States)','Samantha'].includes(v.name)) || voices[0];
-  window.speechSynthesis.speak(utterance);
-}
-window.speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
-
-function handleMobileMatch(imageElement, correctWord) {
-    if (!selectedWord) {
-        speak('Please select a word first');
-        return;
-    }
-    
-    const wordElement = document.querySelector(`.selectable-word[data-word="${selectedWord}"]`);
-    
-    if (selectedWord === correctWord) {
-        // Correcto - SIN audio individual
-        imageElement.classList.add('correct');
-        wordElement.classList.add('matched');
-        imageElement.querySelector('.match-feedback').classList.add('correct');
-        
-        // ELIMINADO: speak('Correct! ' + selectedWord); // ← Esto es lo que molesta
-        matchedPairs++;
-    } else {
-        // Incorrecto - mantener audio de feedback
-        imageElement.classList.add('incorrect');
-        imageElement.querySelector('.match-feedback').classList.add('incorrect');
-        speak('Try again');
-        
-        // Resetear después de un momento
-        setTimeout(() => {
-            imageElement.classList.remove('incorrect');
-            imageElement.querySelector('.match-feedback').classList.remove('incorrect');
-        }, 1000);
-    }
-    
-    // Deseleccionar
-    wordElement.classList.remove('selected');
-    selectedWord = null;
-    
-    // Verificar si se completó - SOLO AQUÍ reproducir audio
-    if (matchedPairs === totalPairs) {
-        setTimeout(() => {
-            speak('Congratulations! All matches completed'); // ← Audio solo al final
-        }, 500);
-    }
-}
-/* ------------------------
-  Flip cards y traducción
------------------------- */
-function flipCard(card) {
-  const wordSpan = card.querySelector(".object-name");
-  const isTranslated = card.closest("section").getAttribute("data-translated") === "true";
-  if (wordSpan.textContent === "???") {
-    wordSpan.textContent = isTranslated ? wordSpan.dataset.translation : wordSpan.dataset.original;
-    wordSpan.dataset.revealed = "true";
-  } else {
-    wordSpan.textContent = "???";
-    wordSpan.dataset.revealed = "false";
-  }
-  speak(wordSpan.dataset.original);
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".translate-section-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const container = btn.closest("[data-translated]");
-      const isTranslated = container.getAttribute("data-translated") === "true";
-      container.querySelectorAll(".translatable").forEach(el => {
-        if(el.classList.contains("object-name") && el.dataset.revealed==="true"){
-          el.textContent = isTranslated ? el.dataset.original : el.dataset.translation;
-        } else if (!el.classList.contains("object-name")){
-          el.textContent = isTranslated ? el.dataset.original : el.dataset.translation;
-        }
-      });
-      container.setAttribute("data-translated", !isTranslated);
-    });
-  });
-});
-
-/* ------------------------
-  Drag & Drop y quiz
------------------------- */
-const draggables = document.querySelectorAll('.draggable');
-const objectItems = document.querySelectorAll('.object-item');
-
-draggables.forEach(d => d.addEventListener('dragstart', e=> e.dataTransfer.setData('text', e.target.id)));
-objectItems.forEach(item=>{
-  item.addEventListener('dragover', e=> e.preventDefault());
-  item.addEventListener('drop', e=>{
-    e.preventDefault();
-    const id = e.dataTransfer.getData('text');
-    const word = document.getElementById(id);
-    if(word.textContent === item.dataset.answer){
-      item.appendChild(word);
-      item.style.border = "2px solid green";
-    } else alert('Try again!');
-  });
-});
-
-function checkQuiz() {
-    let score = 0;
-    const answers = {
-        q1: 'b', // Hello
-        q2: 'a', // I
-        q3: 'b', // Thirty
-        q4: 'a', // See you later
-        q6: 'c', // Good morning
-        q7: 'b', // I like
-        q8: 'b', // What's your name?
-        q9: 'a', // See you later
-        q10: 'a' // I'm from Mexico
-    };
-    
-    // Contar preguntas de opción múltiple (9 puntos)
-    for(const q in answers){
-        const radios = document.getElementsByName(q);
-        for(const r of radios) {
-            if(r.checked && r.value === answers[q]) {
-                score++;
-                break;
-            }
-        }
-    }
-    
-    // Agregar puntos del matching game (3 puntos - 1 por cada par)
-    const matchingScore = matchedPairs;
-    const totalScore = score + matchingScore;
-    const maxScore = 12; // 9 preguntas + 3 pares
-    
-    // Resto del código permanece igual...
-    // Mostrar resultado
-    const resultElement = document.getElementById('quiz-result');
-    resultElement.textContent = `You scored ${totalScore}/${maxScore} 🎉`;
-    
-    // Feedback específico
-    let feedback = '';
-    if (totalScore === maxScore) {
-        feedback = 'Perfect score! Excellent job!';
-    } else if (totalScore >= 9) {
-        feedback = 'Great job! Almost there!';
-    } else if (totalScore >= 6) {
-        feedback = 'Good effort! Keep practicing!';
-    } else {
-        feedback = 'Keep learning and try again!';
-    }
-    
-    resultElement.textContent += ` - ${feedback}`;
-    speak(`You scored ${totalScore} out of ${maxScore}. ${feedback}`);
-    
-    // Mostrar qué preguntas se respondieron incorrectamente
-    showQuizFeedback(answers);
-}
-
-function showQuizFeedback(correctAnswers) {
-    // Feedback para preguntas de opción múltiple
-    for(const q in correctAnswers){
-        const radios = document.getElementsByName(q);
-        let answered = false;
-        let correct = false;
-        
-        for(const r of radios) {
-            if(r.checked) {
-                answered = true;
-                if(r.value === correctAnswers[q]) {
-                    correct = true;
-                }
-                break;
-            }
-        }
-        
-        // Resaltar respuestas incorrectas
-        if(answered && !correct) {
-            const questionElement = radios[0].closest('.quiz-item');
-            questionElement.style.border = '2px solid var(--danger)';
-            questionElement.style.backgroundColor = 'rgba(220, 53, 69, 0.1)';
-        }
-    }
-    
-    // Feedback para el matching game
-    if (matchedPairs < totalPairs) {
-        const matchingElement = document.querySelector('.matching-game');
-        matchingElement.style.border = '2px solid var(--warning)';
-        matchingElement.style.padding = '10px';
-        matchingElement.style.borderRadius = '8px';
-    }
-}
-
-// Función para resetear el quiz si es necesario
-function resetQuiz() {
-    matchedPairs = 0;
-    selectedWord = null;
-    
-    // Resetear selecciones de radio
-    document.querySelectorAll('input[type="radio"]').forEach(radio => {
-        radio.checked = false;
-    });
-    
-    // Resetear matching game
-    document.querySelectorAll('.selectable-word').forEach(word => {
-        word.classList.remove('selected', 'matched');
-    });
-    
-    document.querySelectorAll('.object-item').forEach(item => {
-        item.classList.remove('correct', 'incorrect', 'selected');
-    });
-    
-    document.querySelectorAll('.match-feedback').forEach(feedback => {
-        feedback.classList.remove('correct', 'incorrect');
-    });
-    
-    // Resetear estilos de feedback
-    document.querySelectorAll('.quiz-item').forEach(item => {
-        item.style.border = '';
-        item.style.backgroundColor = '';
-    });
-    
-    const matchingElement = document.querySelector('.matching-game');
-    if (matchingElement) {
-        matchingElement.style.border = '';
-        matchingElement.style.padding = '';
-    }
-    
-    document.getElementById('quiz-result').textContent = 'Your result will appear here.';
-}
-
-// Opcional: Agregar botón de reset
-function addResetButton() {
-    const submitButton = document.querySelector('#quiz-form button[type="button"]');
-    const resetButton = document.createElement('button');
-    resetButton.type = 'button';
-    resetButton.textContent = 'Reset Quiz';
-    resetButton.className = 'big-btn';
-    resetButton.style.background = 'var(--warning)';
-    resetButton.style.marginLeft = '10px';
-    resetButton.onclick = resetQuiz;
-    
-    submitButton.parentNode.appendChild(resetButton);
-}
-
-// Inicializar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', function() {
-    addResetButton();
-});
-
-/* ------------------------
-  Lección completada
------------------------- */
-function completeLesson(){
-  const btn=document.querySelector('.complete-lesson-btn');
-  alert('Lesson completed! +50 XP');
-  btn.classList.add('pulse');
-  setTimeout(()=>{
-    btn.classList.remove('pulse');
-    btn.textContent='Completed ✓';
-    btn.style.background='var(--success)';
-  },1000);
-}
-
-/* ------------------------
-  Sistema de repetición espaciada
------------------------- */
-const learningItems = {};
-function scheduleReview(itemId, difficulty) {
-  if (!learningItems[itemId]) learningItems[itemId] = { interval: 1, ease: 2.5, dueDate: new Date() };
-  const item = learningItems[itemId];
-  const factors = { again: 1.2, hard: 1.5, good: 2.0, easy: 2.5 };
-  item.interval = Math.round(item.interval * factors[difficulty]);
-  item.dueDate = new Date(Date.now() + item.interval * 86400000);
-  console.log(`Item ${itemId} scheduled for review in ${item.interval} days`);
-  return item.dueDate;
-}
-
-/* ------------------------
-  Celebraciones y modo oscuro
------------------------- */
-document.querySelectorAll('.word-card, .number-item').forEach(item=>{
-  item.addEventListener('click', ()=>{ 
-    item.classList.add('celebrate');
-    setTimeout(()=>item.classList.remove('celebrate'),500);
-  });
-});
-
-document.getElementById('theme-toggle')?.addEventListener('click', ()=>{
-  document.body.classList.toggle('dark-mode');
-  const icon=document.querySelector('#theme-toggle i');
-  icon?.classList.toggle('fa-sun', document.body.classList.contains('dark-mode'));
-  icon?.classList.toggle('fa-moon', !document.body.classList.contains('dark-mode'));
-});
-
-/* ------------------------
-  Mapa de países con diálogos
------------------------- */
-const map = L.map('map').setView([20,0],2);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-  maxZoom:5, attribution:'&copy; OpenStreetMap contributors'
-}).addTo(map);
-
-  // Lista de países con diálogos y traducción
-  const countries = [
-    { name: "Japan", lat: 35.68, lng: 139.76, dialogue: "I'm from Japan. I'm Japanese.", translation: "Soy de Japón. Soy japonés/a." },
-    { name: "USA", lat: 38.9, lng: -77.03, dialogue: "I'm from the USA. I'm American.", translation: "Soy de Estados Unidos. Soy estadounidense." },
-    { name: "Mexico", lat: 19.43, lng: -99.13, dialogue: "I'm from Mexico. I'm Mexican.", translation: "Soy de México. Soy mexicano/a." },
-    { name: "Canada", lat: 45.42, lng: -75.69, dialogue: "I'm from Canada. I'm Canadian.", translation: "Soy de Canadá. Soy canadiense." },
-    { name: "Brazil", lat: -15.79, lng: -47.88, dialogue: "I'm from Brazil. I'm Brazilian.", translation: "Soy de Brasil. Soy brasileño/a." },
-    { name: "Argentina", lat: -34.6, lng: -58.38, dialogue: "I'm from Argentina. I'm Argentinian.", translation: "Soy de Argentina. Soy argentino/a." },
-    { name: "Chile", lat: -33.45, lng: -70.66, dialogue: "I'm from Chile. I'm Chilean.", translation: "Soy de Chile. Soy chileno/a." },
-    { name: "Peru", lat: -12.04, lng: -77.03, dialogue: "I'm from Peru. I'm Peruvian.", translation: "Soy de Perú. Soy peruano/a." },
-    { name: "Colombia", lat: 4.71, lng: -74.07, dialogue: "I'm from Colombia. I'm Colombian.", translation: "Soy de Colombia. Soy colombiano/a." },
-    { name: "Spain", lat: 40.42, lng: -3.7, dialogue: "I'm from Spain. I'm Spanish.", translation: "Soy de España. Soy español/a." },
-    { name: "France", lat: 48.85, lng: 2.35, dialogue: "I'm from France. I'm French.", translation: "Soy de Francia. Soy francés/a." },
-    { name: "Germany", lat: 52.52, lng: 13.4, dialogue: "I'm from Germany. I'm German.", translation: "Soy de Alemania. Soy alemán/a." },
-    { name: "Italy", lat: 41.9, lng: 12.5, dialogue: "I'm from Italy. I'm Italian.", translation: "Soy de Italia. Soy italiano/a." },
-    { name: "United Kingdom", lat: 51.5, lng: -0.12, dialogue: "I'm from the UK. I'm British.", translation: "Soy del Reino Unido. Soy británico/a." },
-    { name: "Ireland", lat: 53.35, lng: -6.26, dialogue: "I'm from Ireland. I'm Irish.", translation: "Soy de Irlanda. Soy irlandés/a." },
-    { name: "Portugal", lat: 38.72, lng: -9.14, dialogue: "I'm from Portugal. I'm Portuguese.", translation: "Soy de Portugal. Soy portugués/a." },
-    { name: "Russia", lat: 55.75, lng: 37.62, dialogue: "I'm from Russia. I'm Russian.", translation: "Soy de Rusia. Soy ruso/a." },
-    { name: "China", lat: 39.9, lng: 116.4, dialogue: "I'm from China. I'm Chinese.", translation: "Soy de China. Soy chino/a." },
-    { name: "India", lat: 28.61, lng: 77.2, dialogue: "I'm from India. I'm Indian.", translation: "Soy de India. Soy indio/a." },
-    { name: "South Korea", lat: 37.57, lng: 126.98, dialogue: "I'm from South Korea. I'm Korean.", translation: "Soy de Corea del Sur. Soy coreano/a." },
-    { name: "Australia", lat: -35.28, lng: 149.13, dialogue: "I'm from Australia. I'm Australian.", translation: "Soy de Australia. Soy australiano/a." },
-    { name: "New Zealand", lat: -41.29, lng: 174.78, dialogue: "I'm from New Zealand. I'm Kiwi.", translation: "Soy de Nueva Zelanda. Soy neozelandés/a." },
-    { name: "South Africa", lat: -25.75, lng: 28.19, dialogue: "I'm from South Africa. I'm South African.", translation: "Soy de Sudáfrica. Soy sudafricano/a." },
-    { name: "Egypt", lat: 30.04, lng: 31.24, dialogue: "I'm from Egypt. I'm Egyptian.", translation: "Soy de Egipto. Soy egipcio/a." },
-    { name: "Nigeria", lat: 9.05, lng: 7.49, dialogue: "I'm from Nigeria. I'm Nigerian.", translation: "Soy de Nigeria. Soy nigeriano/a." },
-    { name: "Kenya", lat: -1.29, lng: 36.82, dialogue: "I'm from Kenya. I'm Kenyan.", translation: "Soy de Kenia. Soy keniata." },
-    { name: "Turkey", lat: 39.93, lng: 32.86, dialogue: "I'm from Turkey. I'm Turkish.", translation: "Soy de Turquía. Soy turco/a." },
-    { name: "Greece", lat: 37.98, lng: 23.72, dialogue: "I'm from Greece. I'm Greek.", translation: "Soy de Grecia. Soy griego/a." },
-    { name: "Sweden", lat: 59.33, lng: 18.06, dialogue: "I'm from Sweden. I'm Swedish.", translation: "Soy de Suecia. Soy sueco/a." },
-    { name: "Norway", lat: 59.91, lng: 10.75, dialogue: "I'm from Norway. I'm Norwegian.", translation: "Soy de Noruega. Soy noruego/a." },
-    { name: "Finland", lat: 60.17, lng: 24.94, dialogue: "I'm from Finland. I'm Finnish.", translation: "Soy de Finlandia. Soy finlandés/a." },
-    { name: "Denmark", lat: 55.68, lng: 12.57, dialogue: "I'm from Denmark. I'm Danish.", translation: "Soy de Dinamarca. Soy danés/a." },
-    { name: "Netherlands", lat: 52.37, lng: 4.9, dialogue: "I'm from the Netherlands. I'm Dutch.", translation: "Soy de Países Bajos. Soy holandés/a." },
-    { name: "Belgium", lat: 50.85, lng: 4.35, dialogue: "I'm from Belgium. I'm Belgian.", translation: "Soy de Bélgica. Soy belga." },
-    { name: "Switzerland", lat: 46.95, lng: 7.44, dialogue: "I'm from Switzerland. I'm Swiss.", translation: "Soy de Suiza. Soy suizo/a." },
-    { name: "Austria", lat: 48.2, lng: 16.37, dialogue: "I'm from Austria. I'm Austrian.", translation: "Soy de Austria. Soy austríaco/a." },
-    { name: "Poland", lat: 52.23, lng: 21.01, dialogue: "I'm from Poland. I'm Polish.", translation: "Soy de Polonia. Soy polaco/a." },
-    { name: "Czech Republic", lat: 50.08, lng: 14.43, dialogue: "I'm from the Czech Republic. I'm Czech.", translation: "Soy de República Checa. Soy checo/a." },
-    { name: "Hungary", lat: 47.5, lng: 19.04, dialogue: "I'm from Hungary. I'm Hungarian.", translation: "Soy de Hungría. Soy húngaro/a." }
-  ];
-
-let selectedDialogue = null;
-countries.forEach(c=>{
-  L.marker([c.lat,c.lng]).addTo(map).bindPopup(`<b>${c.name}</b>`).on('click',()=>{
-    const dialogueEl = document.getElementById('dialogue');
-    if(!selectedDialogue){
-      selectedDialogue=document.createElement('span');
-      selectedDialogue.className='translatable';
-      dialogueEl.innerHTML='';
-      dialogueEl.appendChild(selectedDialogue);
-    }
-    selectedDialogue.dataset.original=c.dialogue;
-    selectedDialogue.dataset.translation=c.translation;
-    selectedDialogue.textContent=c.dialogue;
-    speak(c.dialogue);
-  });
-});
-
-// Traducción específica de la sección del mapa
-const sectionBtn=document.querySelector('#section5 .translate-section-btn');
-if(sectionBtn){
-  sectionBtn.addEventListener('click',()=>{
-    document.querySelectorAll('#section5 .translatable').forEach(el=>{
-      if(!el.dataset.original) return;
-      el.textContent=el.textContent===el.dataset.original ? el.dataset.translation : el.dataset.original;
-    });
-  });
-}
-
-// Evitar primer playback en blanco
-window.onload = () => { speechSynthesis.getVoices(); };
-
-let practiceTimeouts = [];
-
-function practiceNumbers(start=1, end=10) {
-  practiceTimeouts.forEach(t => clearTimeout(t));
-  practiceTimeouts = [];
-  window.speechSynthesis.cancel();
-  
-  const text = numbers.slice(start-1, end).map(n => n.en).join(", ");
-  speak(text);
-}
-</script>
-
-<script src="../auth.js"></script>
 </body>
 </html>

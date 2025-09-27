@@ -473,15 +473,51 @@
 		    transition: all 0.3s ease;
 		}
 
-		.matching-item.correct {
-		    border-color: #28a745;
-		    background-color: rgba(40, 167, 69, 0.1);
-		}
+	    /* Estilos mejorados para el matching game simétrico */
+	.matching-item.selected {
+	    border-color: var(--accent);
+	    background-color: rgba(76, 181, 245, 0.2);
+	    transform: scale(1.05);
+	}
 
-		.matching-item.incorrect {
-		    border-color: #dc3545;
-		    background-color: rgba(220, 53, 69, 0.1);
-		}
+	.selectable-word-btn.selected {
+	    background: var(--accent);
+	    color: white;
+	    border-color: var(--accent);
+	    transform: scale(1.05);
+	}
+
+	.matching-item.correct, .selectable-word-btn.correct {
+	    border-color: var(--success);
+	    background-color: rgba(40, 167, 69, 0.15);
+	}
+
+	.matching-item.incorrect, .selectable-word-btn.incorrect {
+	    border-color: var(--danger);
+	    background-color: rgba(220, 53, 69, 0.15);
+	    animation: shake 0.5s;
+	}
+
+	@keyframes shake {
+	    0%, 100% { transform: translateX(0); }
+	    25% { transform: translateX(-5px); }
+	    75% { transform: translateX(5px); }
+	}
+
+	.small-btn {
+	    padding: 6px 12px;
+	    font-size: 0.8em;
+	    background: #6c757d;
+	    color: white;
+	    border: none;
+	    border-radius: 4px;
+	    cursor: pointer;
+	    margin-top: 10px;
+	}
+
+	.small-btn:hover {
+	    background: #5a6268;
+	}
 
 		.match-feedback {
 		    font-size: 1.2em;
@@ -1851,47 +1887,52 @@
 		    <label><input type="radio" name="q4" value="c"> <span class="translatable" data-original="Hello" data-translation="Hola">Hello</span></label>
 		</div>
 
-		<!-- Q5: matching objects - VERSIÓN CORREGIDA -->
-		<div class="quiz-item">
-		    <div class="paragraph-with-buttons">
-			<div class="translatable-content">
-			    <strong class="translatable" data-original="5. Match the object with its name:" data-translation="5. Empareja el objeto con su nombre:">5. Match the object with its name:</strong>
-			</div>
+			<!-- Q5: matching objects - VERSIÓN COMPLETA Y CORREGIDA -->
+	<div class="quiz-item">
+	    <div class="paragraph-with-buttons">
+		<div class="translatable-content">
+		    <strong class="translatable" data-original="5. Match the object with its name:" data-translation="5. Empareja el objeto con su nombre:">5. Match the object with its name:</strong>
+		</div>
+	    </div>
+	    
+	    <div class="matching-game">
+		<div class="matching-grid">
+		    <div class="object-item matching-item" data-answer="Book" onclick="selectMatchingItem(this, 'image', 'Book')">
+		        <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/book-solid-full.svg" class="object-image" alt="Book">
+		        <div class="match-feedback"></div>
 		    </div>
-		    
-		    <div class="matching-game">
-			<div class="matching-grid">
-			    <div class="object-item matching-item" data-answer="Book">
-				<img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/book-solid-full.svg" class="object-image" alt="Book">
-				<div class="match-feedback"></div>
-			    </div>
-			    <div class="object-item matching-item" data-answer="Pen">
-				<img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pen-clip-solid-full.svg" class="object-image" alt="Pen">
-				<div class="match-feedback"></div>
-			    </div>
-			    <div class="object-item matching-item" data-answer="Chair">
-				<img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/chair-solid-full.svg" class="object-image" alt="Chair">
-				<div class="match-feedback"></div>
-			    </div>
-			</div>
-			
-			<div class="word-bank">
-			    <button class="selectable-word-btn" data-word="Book" onclick="selectMatchingItem(this, 'image','Book')">
-				<span class="translatable" data-original="Book" data-translation="Libro">Book</span>
-			    </button>
-			    <button class="selectable-word-btn" data-word="Pen" onclick="selectMatchingItem(this, 'image','Pen')">
-				<span class="translatable" data-original="Pen" data-translation="Bolígrafo">Pen</span>
-			    </button>
-			    <button class="selectable-word-btn" data-word="Chair" onclick="selectMatchingItem(this, 'image','Chair')">
-				<span class="translatable" data-original="Chair" data-translation="Silla">Chair</span>
-			    </button>
-			</div>
+		    <div class="object-item matching-item" data-answer="Pen" onclick="selectMatchingItem(this, 'image', 'Pen')">
+		        <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pen-clip-solid-full.svg" class="object-image" alt="Pen">
+		        <div class="match-feedback"></div>
 		    </div>
-		    
-		    <div class="mobile-match-instructions">
-			<small class="translatable" data-original="Instructions: First click a word, then click the matching picture" data-translation="Instrucciones: Primero haz clic en una palabra, luego en la imagen correspondiente">Instructions: First click a word, then click the matching picture</small>
+		    <div class="object-item matching-item" data-answer="Chair" onclick="selectMatchingItem(this, 'image', 'Chair')">
+		        <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/chair-solid-full.svg" class="object-image" alt="Chair">
+		        <div class="match-feedback"></div>
 		    </div>
 		</div>
+		
+		<!-- AÑADE ESTE WORD-BANK QUE FALTABA -->
+		<div class="word-bank">
+		    <button class="selectable-word-btn" data-word="Book" onclick="selectMatchingItem(this, 'word', 'Book')">
+		        <span class="translatable" data-original="Book" data-translation="Libro">Book</span>
+		    </button>
+		    <button class="selectable-word-btn" data-word="Pen" onclick="selectMatchingItem(this, 'word', 'Pen')">
+		        <span class="translatable" data-original="Pen" data-translation="Bolígrafo">Pen</span>
+		    </button>
+		    <button class="selectable-word-btn" data-word="Chair" onclick="selectMatchingItem(this, 'word', 'Chair')">
+		        <span class="translatable" data-original="Chair" data-translation="Silla">Chair</span>
+		    </button>
+		</div>
+	    </div>
+	    
+	    <div class="mobile-match-instructions">
+		<small class="translatable" data-original="Instructions: Click any picture or word first, then click its match" data-translation="Instrucciones: Haz clic en cualquier imagen o palabra primero, luego en su pareja">Instructions: Click any picture or word first, then click its match</small>
+	    </div>
+	    
+	    <button type="button" onclick="resetMatchingGame()" class="small-btn" style="margin-top: 10px;">
+		<span class="translatable" data-original="Reset Matching Game" data-translation="Reiniciar juego">Reset Matching Game</span>
+	    </button>
+	</div>
 	
 			<!-- Q6 -->
 		<div class="quiz-item">

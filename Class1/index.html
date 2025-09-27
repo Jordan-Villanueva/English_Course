@@ -1876,13 +1876,13 @@
 			</div>
 			
 			<div class="word-bank">
-			    <button class="selectable-word-btn" data-word="Book" onclick="selectWord(this, 'Book')">
+			    <button class="selectable-word-btn" data-word="Book" onclick="selectMatchingItem(this, 'image','Book')">
 				<span class="translatable" data-original="Book" data-translation="Libro">Book</span>
 			    </button>
-			    <button class="selectable-word-btn" data-word="Pen" onclick="selectWord(this, 'Pen')">
+			    <button class="selectable-word-btn" data-word="Pen" onclick="selectMatchingItem(this, 'image','Pen')">
 				<span class="translatable" data-original="Pen" data-translation="Bolígrafo">Pen</span>
 			    </button>
-			    <button class="selectable-word-btn" data-word="Chair" onclick="selectWord(this, 'Chair')">
+			    <button class="selectable-word-btn" data-word="Chair" onclick="selectMatchingItem(this, 'image','Chair')">
 				<span class="translatable" data-original="Chair" data-translation="Silla">Chair</span>
 			    </button>
 			</div>
@@ -2488,75 +2488,118 @@
 	    }
 	}
 	
-	// ===== FUNCIONES PARA EL MATCHING GAME =====
-	let selectedWord = null;
-	let matchingScore = 0; // Contador para los aciertos del matching
-	const totalMatches = 3; // Total de matches posibles
+	// ===== MATCHING GAME MEJORADO (SIMÉTRICO) =====
+	let selectedElement = null;
+	let matchedPairs = 0;
+	const totalMatches = 3;
 
-	function selectWord(element, word) {
-	    // Remover selección anterior
-	    document.querySelectorAll('.selectable-word').forEach(el => {
-		el.classList.remove('selected');
-	    });
-	    
-	    // Seleccionar nueva palabra
-	    element.classList.add('selected');
-	    selectedWord = word;
-	    
-	}
-
-	function handleMobileMatch(element, correctAnswer) {
-	    if (!selectedWord) {
-		speak('Please select a word first');
+	function selectMatchingItem(element, type, value) {
+	    // Si no hay elemento seleccionado, seleccionar este
+	    if (!selectedElement) {
+		element.classList.add('selected');
+		selectedElement = { element, type, value };
 		return;
 	    }
 	    
-	    const feedbackElement = element.querySelector('.match-feedback');
-	    
-	     // Verificar si ya fue respondido correctamente
-	    if (element.classList.contains('correct')) {
-		speak('Already matched correctly');
+	    // Si se hace clic en el mismo elemento, deseleccionar
+	    if (selectedElement.element === element) {
+		element.classList.remove('selected');
+		selectedElement = null;
 		return;
 	    }
 	    
-	    if (selectedWord === correctAnswer) {
-		// Correcto
-		element.classList.add('correct');
-		feedbackElement.textContent = '✓';
-		feedbackElement.style.color = 'green';
-		speak('Correct! ' + correctAnswer);
-		matchingScore++; // Incrementar puntuación
+	    // Verificar si es un match
+	    const isMatch = checkMatch(selectedElement, { element, type, value });
+	    
+	    if (isMatch) {
+		// Match correcto
+		handleCorrectMatch(selectedElement.element, element);
+		matchedPairs++;
 		
-		// Deshabilitar el botón de palabra correspondiente
-		document.querySelector(`.selectable-word-btn[data-word="${correctAnswer}"]`).disabled = true;
+		// Verificar si se completó el juego
+		if (matchedPairs === totalMatches) {
+		    setTimeout(() => {
+		        speak('All matches completed! Excellent!');
+		    }, 1000);
+		}
 	    } else {
-		// Incorrecto
-		element.classList.add('incorrect');
-		feedbackElement.textContent = '✗';
-		feedbackElement.style.color = 'red';
-		speak('Try again');
-		
-		// Quitar el estilo incorrecto después de 1 segundo
-		setTimeout(() => {
-		    element.classList.remove('incorrect');
-		    feedbackElement.textContent = '';
-		}, 1000);
+		// Match incorrecto
+		handleIncorrectMatch(selectedElement.element, element);
 	    }
 	    
-	    // Resetear selección después de la acción
+	    // Resetear selección después de un intento
 	    setTimeout(() => {
-		document.querySelectorAll('.selectable-word-btn').forEach(el => {
-		    el.classList.remove('selected');
-		});
-		selectedWord = null;
-	    }, 1500);
+		selectedElement.element.classList.remove('selected');
+		element.classList.remove('selected');
+		selectedElement = null;
+	    }, 1000);
 	}
 
+	function checkMatch(first, second) {
+	    // Un match es válido si tenemos una imagen y una palabra que coincidan
+	    if (first.type === second.type) return false; // No pueden ser del mismo tipo
+	    
+	    // Determinar qué elemento es la imagen y cuál es la palabra
+	    const imageItem = first.type === 'image' ? first : second;
+	    const wordItem = first.type === 'word' ? first : second;
+	    
+	    return imageItem.value === wordItem.value;
+	}
+
+	function handleCorrectMatch(element1, element2) {
+	    element1.classList.add('correct');
+	    element2.classList.add('correct');
+	    element1.classList.remove('selected', 'incorrect');
+	    element2.classList.remove('selected', 'incorrect');
+	    
+	    element1.querySelector('.match-feedback').textContent = '✓';
+	    element2.querySelector('.match-feedback').textContent = '✓';
+	    
+	    // Deshabilitar elementos emparejados
+	    element1.style.pointerEvents = 'none';
+	    element2.style.pointerEvents = 'none';
+	    
+	    speak('Correct match!');
+	}
+
+	function handleIncorrectMatch(element1, element2) {
+	    element1.classList.add('incorrect');
+	    element2.classList.add('incorrect');
+	    
+	    element1.querySelector('.match-feedback').textContent = '✗';
+	    element2.querySelector('.match-feedback').textContent = '✗';
+	    
+	    speak('Try again');
+	    
+	    // Remover estilos incorrectos después de 1 segundo
+	    setTimeout(() => {
+		element1.classList.remove('incorrect');
+		element2.classList.remove('incorrect');
+		element1.querySelector('.match-feedback').textContent = '';
+		element2.querySelector('.match-feedback').textContent = '';
+	    }, 1000);
+	}
+
+	// Función para resetear el juego de matching
+	function resetMatchingGame() {
+	    selectedElement = null;
+	    matchedPairs = 0;
+	    
+	    document.querySelectorAll('.matching-item, .selectable-word-btn').forEach(element => {
+		element.classList.remove('selected', 'correct', 'incorrect');
+		element.style.pointerEvents = 'auto';
+		
+		const feedback = element.querySelector('.match-feedback');
+		if (feedback) {
+		    feedback.textContent = '';
+		}
+	    });
+	}
+
+	// Actualizar la función checkMatchingGame para usar el nuevo sistema
 	function checkMatchingGame() {
-	    // Retornar la puntuación del matching (0-3 puntos)
-	    return matchingScore;
+	    return matchedPairs;
 	}
-
 	let mapDialogue = null;
 	let currentCountry = null;
 

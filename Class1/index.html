@@ -2541,6 +2541,11 @@
 		event.stopPropagation();
 	    }
 	    
+	    // ✅ Si el elemento ya está emparejado correctamente, ignorar clic
+	    if (element.classList.contains('correct')) {
+		return;
+	    }
+	    
 	    // Si no hay elemento seleccionado, seleccionar este
 	    if (!selectedElement) {
 		element.classList.add('selected');
@@ -2548,10 +2553,15 @@
 		return;
 	    }
 	    
-	    // Si se hace clic en el mismo elemento, deseleccionar
+	    // ✅ Si se hace clic en el mismo elemento, deseleccionar
 	    if (selectedElement.element === element) {
 		element.classList.remove('selected');
 		selectedElement = null;
+		return;
+	    }
+	    
+	    // ✅ Si el segundo elemento ya está emparejado, ignorar
+	    if (element.classList.contains('correct')) {
 		return;
 	    }
 	    
@@ -2574,7 +2584,7 @@
 		handleIncorrectMatch(selectedElement.element, element);
 	    }
 	    
-	    // Resetear selección después de un intento
+	    // ✅ LIMPIAR LA SELECCIÓN DESPUÉS DE CUALQUIER INTENTO
 	    setTimeout(() => {
 		if (selectedElement && selectedElement.element) {
 		    selectedElement.element.classList.remove('selected');
@@ -2601,14 +2611,19 @@
 	    element1.classList.remove('selected', 'incorrect');
 	    element2.classList.remove('selected', 'incorrect');
 	    
-	    element1.querySelector('.match-feedback').textContent = '✓';
-	    element2.querySelector('.match-feedback').textContent = '✓';
+	    // ✅ Asegurarse de que los elementos existen antes de manipularlos
+	    const feedback1 = element1.querySelector('.match-feedback');
+	    const feedback2 = element2.querySelector('.match-feedback');
+	    
+	    if (feedback1) feedback1.textContent = '✓';
+	    if (feedback2) feedback2.textContent = '✓';
 	    
 	    // Deshabilitar elementos emparejados
 	    element1.style.pointerEvents = 'none';
 	    element2.style.pointerEvents = 'none';
 	    
-	    speak('Correct match!');
+	    // ✅ LIMPIAR LA SELECCIÓN INMEDIATAMENTE
+	    selectedElement = null;
 	}
 
 	function handleIncorrectMatch(element1, element2) {
@@ -2618,14 +2633,16 @@
 	    element1.querySelector('.match-feedback').textContent = '✗';
 	    element2.querySelector('.match-feedback').textContent = '✗';
 	    
-	    speak('Try again');
-	    
+	    const incorrectElement1 = element1;
+	    const incorrectElement2 = element2;
+    
 	    // Remover estilos incorrectos después de 1 segundo
 	    setTimeout(() => {
 		element1.classList.remove('incorrect');
 		element2.classList.remove('incorrect');
 		element1.querySelector('.match-feedback').textContent = '';
 		element2.querySelector('.match-feedback').textContent = '';
+		selectedElement = null;
 	    }, 1000);
 	}
 
@@ -2649,8 +2666,6 @@
 		    feedback.textContent = '';
 		}
 	    });
-	    
-	    speak('Matching game reset');
 	}
 
 	// Actualizar la función checkMatchingGame para usar el nuevo sistema

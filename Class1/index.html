@@ -1619,32 +1619,37 @@
                 </div>
             </section>
             
-            <!-- Sección 12: Writing activity -->
-            <section class="section" id="section-12">
-                <div class="section-content">
-                    <section class="lesson-section" data-translated="false">
-                        <h2 class="title-flex">
-                            <span id="interactive-title-10" class="translatable" data-original="11. Writing activity (10 min)" data-translation="11. Actividad de escritura (10 min)">11. Writing activity (10 min)</span>
-                            <button class="translate-section-btn">🌐</button>
-                            <button onclick="speak('11. Writing activity')">🔊</button>
-                        </h2>
-                        <div class="paragraph-with-buttons">
-                            <div class="translatable-content">
-                                <span id="write-desc" class="translatable" data-original="Solve the following exercise:" data-translation="Resuelve el siguiente ejercicio:">Solve the following exercise:</span>
-                            </div>
-                            <div class="translation-buttons">
-                                <button onclick="speak(document.getElementById('write-desc').dataset.original)">🔊</button>
-                            </div>
-                        </div>
-                        <img src="cierre.jpeg" width="100%" style="border: 2px solid #ccc; border-radius: 10px; max-width: 600px;">
-                    </section>
-                    
-                    <div class="section-nav">
-                        <button class="nav-btn" onclick="navigateToSection(11)"><i class="fas fa-arrow-left"></i> Previous</button>
-                        <button class="nav-btn" onclick="navigateToSection(13)">Next <i class="fas fa-arrow-right"></i></button>
-                    </div>
-                </div>
-            </section>
+	<!-- Sección 12: Writing activity -->
+	<section class="section" id="section-12">
+	    <div class="section-content">
+		<section class="lesson-section" data-translated="false">
+		    <h2 class="title-flex">
+		        <span id="interactive-title-10" class="translatable" data-original="11. Writing activity (10 min)" data-translation="11. Actividad de escritura (10 min)">11. Writing activity (10 min)</span>
+		        <button class="translate-section-btn">🌐</button>
+		        <button onclick="speak('11. Writing activity')">🔊</button>
+		    </h2>
+		    <div class="paragraph-with-buttons">
+		        <div class="translatable-content">
+		            <span id="write-desc" class="translatable" data-original="Solve the following exercise:" data-translation="Resuelve el siguiente ejercicio:">Solve the following exercise:</span>
+		        </div>
+		        <div class="translation-buttons">
+		            <button onclick="speak(document.getElementById('write-desc').dataset.original)">🔊</button>
+		        </div>
+		    </div>
+		    
+		    <!-- Video en loop silencioso (como GIF) -->
+		    <video width="100%" autoplay muted loop playsinline style="border: 2px solid #ccc; border-radius: 10px; max-width: 600px;">
+		        <source src="cierre.mp4" type="video/mp4">
+		        Tu navegador no soporta el elemento de video.
+		    </video>
+		</section>
+		
+		<div class="section-nav">
+		    <button class="nav-btn" onclick="navigateToSection(11)"><i class="fas fa-arrow-left"></i> Previous</button>
+		    <button class="nav-btn" onclick="navigateToSection(13)">Next <i class="fas fa-arrow-right"></i></button>
+		</div>
+	    </div>
+	</section>
             		
             		<!-- Sección 13: Interactive Games -->
 	<section class="section" id="section-13">
@@ -2532,6 +2537,67 @@
 	    });
 	}
 	</script>
-    
+	<script>
+	// Sistema de autenticación mejorado
+	let isLoggedIn = false;
+
+	// Verificar estado al cargar la página
+	function checkAuthStatus() {
+	    const savedAuth = localStorage.getItem('userLoggedIn');
+	    isLoggedIn = savedAuth === 'true';
+	    updateAuthButtons();
+	}
+
+	// Actualizar botones de autenticación
+	function updateAuthButtons() {
+	    const loginBtn = document.getElementById('login-btn');
+	    const logoutBtn = document.getElementById('logout-btn');
+	    const homeBtn = document.getElementById('home-btn');
+	    
+	    if (isLoggedIn) {
+		loginBtn.style.display = 'none';
+		logoutBtn.style.display = 'block';
+		homeBtn.style.display = 'block';
+	    } else {
+		loginBtn.style.display = 'block';
+		logoutBtn.style.display = 'none';
+		homeBtn.style.display = 'none';
+	    }
+	}
+
+	// Función de login
+	function login() {
+	    isLoggedIn = true;
+	    localStorage.setItem('userLoggedIn', 'true');
+	    updateAuthButtons();
+	    alert('¡Bienvenido! Has iniciado sesión correctamente.');
+	}
+
+	// Función de logout
+	function logout() {
+	    isLoggedIn = false;
+	    localStorage.setItem('userLoggedIn', 'false');
+	    updateAuthButtons();
+	    alert('Has cerrado sesión. ¡Hasta pronto!');
+	}
+
+	// Función para ir al inicio
+	function goHome() {
+	    navigateToSection(1);
+	}
+
+	// Inicializar al cargar la página
+	document.addEventListener('DOMContentLoaded', function() {
+	    checkAuthStatus();
+	    
+	    // Asignar event listeners a los botones
+	    document.getElementById('login-btn').addEventListener('click', login);
+	    document.getElementById('logout-btn').addEventListener('click', logout);
+	    document.getElementById('home-btn').addEventListener('click', goHome);
+	    
+	    // Resto de tu código de inicialización...
+	});
+	</script>
+	    
 </body>
 </html>

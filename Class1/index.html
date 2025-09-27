@@ -1897,30 +1897,30 @@
 	    
 	    <div class="matching-game">
 		<div class="matching-grid">
-		    <div class="object-item matching-item" data-answer="Book" onclick="selectMatchingItem(this, 'image', 'Book')">
-		        <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/book-solid-full.svg" class="object-image" alt="Book">
-		        <div class="match-feedback"></div>
-		    </div>
-		    <div class="object-item matching-item" data-answer="Pen" onclick="selectMatchingItem(this, 'image', 'Pen')">
-		        <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pen-clip-solid-full.svg" class="object-image" alt="Pen">
-		        <div class="match-feedback"></div>
-		    </div>
-		    <div class="object-item matching-item" data-answer="Chair" onclick="selectMatchingItem(this, 'image', 'Chair')">
-		        <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/chair-solid-full.svg" class="object-image" alt="Chair">
-		        <div class="match-feedback"></div>
-		    </div>
+		<div class="object-item matching-item" data-answer="Book" onclick="selectMatchingItem(this, 'image', 'Book', event)">
+		    <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/book-solid-full.svg" class="object-image" alt="Book">
+		    <div class="match-feedback"></div>
+		</div>
+		<div class="object-item matching-item" data-answer="Pen" onclick="selectMatchingItem(this, 'image', 'Pen', event)">
+		    <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pen-clip-solid-full.svg" class="object-image" alt="Pen">
+		    <div class="match-feedback"></div>
+		</div>
+		<div class="object-item matching-item" data-answer="Chair" onclick="selectMatchingItem(this, 'image', 'Chair', event)">
+		    <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/chair-solid-full.svg" class="object-image" alt="Chair">
+		    <div class="match-feedback"></div>
+		</div>
 		</div>
 		
 		<!-- AÑADE ESTE WORD-BANK QUE FALTABA -->
 		<div class="word-bank">
-		    <button class="selectable-word-btn" data-word="Book" onclick="selectMatchingItem(this, 'word', 'Book')">
-		        <span class="translatable" data-original="Book" data-translation="Libro">Book</span>
+		    <button type="button" class="selectable-word-btn" data-word="Book" onclick="selectMatchingItem(this, 'word', 'Book', event)">
+			<span class="translatable" data-original="Book" data-translation="Libro">Book</span>
 		    </button>
-		    <button class="selectable-word-btn" data-word="Pen" onclick="selectMatchingItem(this, 'word', 'Pen')">
-		        <span class="translatable" data-original="Pen" data-translation="Bolígrafo">Pen</span>
+		    <button type="button" class="selectable-word-btn" data-word="Pen" onclick="selectMatchingItem(this, 'word', 'Pen', event)">
+			<span class="translatable" data-original="Pen" data-translation="Bolígrafo">Pen</span>
 		    </button>
-		    <button class="selectable-word-btn" data-word="Chair" onclick="selectMatchingItem(this, 'word', 'Chair')">
-		        <span class="translatable" data-original="Chair" data-translation="Silla">Chair</span>
+		    <button type="button" class="selectable-word-btn" data-word="Chair" onclick="selectMatchingItem(this, 'word', 'Chair', event)">
+			<span class="translatable" data-original="Chair" data-translation="Silla">Chair</span>
 		    </button>
 		</div>
 	    </div>
@@ -1929,7 +1929,7 @@
 		<small class="translatable" data-original="Instructions: Click any picture or word first, then click its match" data-translation="Instrucciones: Haz clic en cualquier imagen o palabra primero, luego en su pareja">Instructions: Click any picture or word first, then click its match</small>
 	    </div>
 	    
-	    <button type="button" onclick="resetMatchingGame()" class="small-btn" style="margin-top: 10px;">
+	    <button type="button" onclick="resetMatchingGame(event)" class="small-btn" style="margin-top: 10px;">
 		<span class="translatable" data-original="Reset Matching Game" data-translation="Reiniciar juego">Reset Matching Game</span>
 	    </button>
 	</div>
@@ -2534,7 +2534,13 @@
 	let matchedPairs = 0;
 	const totalMatches = 3;
 
-	function selectMatchingItem(element, type, value) {
+	function selectMatchingItem(element, type, value, event) {
+	    // ✅ PREVENIR EL COMPORTAMIENTO POR DEFECTO Y PROPAGACIÓN
+	    if (event) {
+		event.preventDefault();
+		event.stopPropagation();
+	    }
+	    
 	    // Si no hay elemento seleccionado, seleccionar este
 	    if (!selectedElement) {
 		element.classList.add('selected');
@@ -2570,7 +2576,9 @@
 	    
 	    // Resetear selección después de un intento
 	    setTimeout(() => {
-		selectedElement.element.classList.remove('selected');
+		if (selectedElement && selectedElement.element) {
+		    selectedElement.element.classList.remove('selected');
+		}
 		element.classList.remove('selected');
 		selectedElement = null;
 	    }, 1000);
@@ -2622,7 +2630,13 @@
 	}
 
 	// Función para resetear el juego de matching
-	function resetMatchingGame() {
+	function resetMatchingGame(event) {
+	    // ✅ Prevenir comportamiento por defecto si hay evento
+	    if (event) {
+		event.preventDefault();
+		event.stopPropagation();
+	    }
+	    
 	    selectedElement = null;
 	    matchedPairs = 0;
 	    
@@ -2635,6 +2649,8 @@
 		    feedback.textContent = '';
 		}
 	    });
+	    
+	    speak('Matching game reset');
 	}
 
 	// Actualizar la función checkMatchingGame para usar el nuevo sistema

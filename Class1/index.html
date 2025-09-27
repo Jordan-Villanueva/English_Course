@@ -438,6 +438,57 @@
 		width: 100%;
 	    }
 	    
+	    .word-bank {
+		    display: flex;
+		    justify-content: center;
+		    gap: 15px;
+		    margin: 20px 0;
+		    flex-wrap: wrap;
+		}
+		
+	    .selectable-word-btn {
+		    padding: 10px 15px;
+		    background: #f8f9fa;
+		    border: 2px solid #dee2e6;
+		    border-radius: 8px;
+		    cursor: pointer;
+		    transition: all 0.3s ease;
+		    font-size: 0.9em;
+		    font-weight: 500;
+		}
+
+		.selectable-word-btn:hover {
+		    background: #e9ecef;
+		    border-color: #4a6fa5;
+		}
+
+		.selectable-word-btn.selected {
+		    background: #4a6fa5;
+		    color: white;
+		    border-color: #4a6fa5;
+		}
+	
+	    .matching-item {
+		    cursor: pointer;
+		    transition: all 0.3s ease;
+		}
+
+		.matching-item.correct {
+		    border-color: #28a745;
+		    background-color: rgba(40, 167, 69, 0.1);
+		}
+
+		.matching-item.incorrect {
+		    border-color: #dc3545;
+		    background-color: rgba(220, 53, 69, 0.1);
+		}
+
+		.match-feedback {
+		    font-size: 1.2em;
+		    font-weight: bold;
+		    margin-top: 5px;
+		}
+				
 	    .object-container {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -1800,52 +1851,47 @@
 		    <label><input type="radio" name="q4" value="c"> <span class="translatable" data-original="Hello" data-translation="Hola">Hello</span></label>
 		</div>
 
-		<!-- Q5: matching objects - Versión móvil compatible -->
-	<div class="quiz-item">
-	    <div class="paragraph-with-buttons">
-		<div class="translatable-content">
-		    <strong class="translatable" data-original="5. Match the object with its name:" data-translation="5. Empareja el objeto con su nombre:">5. Match the object with its name:</strong>
-		</div>
-	    </div>
-	    <div class="paragraph-with-buttons">
-		<div class="translatable-content">
-		    <span class="translatable" data-original="Tap the word and then tap the correct picture (Book, Pen, Chair)" data-translation="Toca la palabra y luego toca la imagen correcta (Libro, Bolígrafo, Silla)">Tap the word and then tap the correct picture (Book, Pen, Chair)</span>
-		</div>
-	    </div>
-	    
-	    <div class="matching-game">
-		<div class="matching-grid">
-		    <div class="object-item" data-answer="Book" onclick="handleMobileMatch(this, 'Book')">
-		        <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/book-solid-full.svg" class="object-image" alt="Book">
-		        <div class="match-feedback"></div>
+		<!-- Q5: matching objects - VERSIÓN CORREGIDA -->
+		<div class="quiz-item">
+		    <div class="paragraph-with-buttons">
+			<div class="translatable-content">
+			    <strong class="translatable" data-original="5. Match the object with its name:" data-translation="5. Empareja el objeto con su nombre:">5. Match the object with its name:</strong>
+			</div>
 		    </div>
-		    <div class="object-item" data-answer="Pen" onclick="handleMobileMatch(this, 'Pen')">
-		        <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pen-clip-solid-full.svg" class="object-image" alt="Pen">
-		        <div class="match-feedback"></div>
+		    
+		    <div class="matching-game">
+			<div class="matching-grid">
+			    <div class="object-item matching-item" data-answer="Book">
+				<img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/book-solid-full.svg" class="object-image" alt="Book">
+				<div class="match-feedback"></div>
+			    </div>
+			    <div class="object-item matching-item" data-answer="Pen">
+				<img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/pen-clip-solid-full.svg" class="object-image" alt="Pen">
+				<div class="match-feedback"></div>
+			    </div>
+			    <div class="object-item matching-item" data-answer="Chair">
+				<img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/chair-solid-full.svg" class="object-image" alt="Chair">
+				<div class="match-feedback"></div>
+			    </div>
+			</div>
+			
+			<div class="word-bank">
+			    <button class="selectable-word-btn" data-word="Book" onclick="selectWord(this, 'Book')">
+				<span class="translatable" data-original="Book" data-translation="Libro">Book</span>
+			    </button>
+			    <button class="selectable-word-btn" data-word="Pen" onclick="selectWord(this, 'Pen')">
+				<span class="translatable" data-original="Pen" data-translation="Bolígrafo">Pen</span>
+			    </button>
+			    <button class="selectable-word-btn" data-word="Chair" onclick="selectWord(this, 'Chair')">
+				<span class="translatable" data-original="Chair" data-translation="Silla">Chair</span>
+			    </button>
+			</div>
 		    </div>
-		    <div class="object-item" data-answer="Chair" onclick="handleMobileMatch(this, 'Chair')">
-		        <img src="https://raw.githubusercontent.com/Jordan-Villanueva/English_Course/main/Class1/images/chair-solid-full.svg" class="object-image" alt="Chair">
-		        <div class="match-feedback"></div>
+		    
+		    <div class="mobile-match-instructions">
+			<small class="translatable" data-original="Instructions: First click a word, then click the matching picture" data-translation="Instrucciones: Primero haz clic en una palabra, luego en la imagen correspondiente">Instructions: First click a word, then click the matching picture</small>
 		    </div>
 		</div>
-		
-		<div class="word-bank">
-		    <span class="selectable-word" data-word="Book" onclick="selectWord(this, 'Book')">
-		        <span class="translatable" data-original="Book" data-translation="Libro">Book</span>
-		    </span>
-		    <span class="selectable-word" data-word="Pen" onclick="selectWord(this, 'Pen')">
-		        <span class="translatable" data-original="Pen" data-translation="Bolígrafo">Pen</span>
-		    </span>
-		    <span class="selectable-word" data-word="Chair" onclick="selectWord(this, 'Chair')">
-		        <span class="translatable" data-original="Chair" data-translation="Silla">Chair</span>
-		    </span>
-		</div>
-	    </div>
-	    
-	     <div class="mobile-match-instructions">
-		<small class="translatable" data-original="Instructions: First tap a word, then tap the matching picture" data-translation="Instrucciones: Primero toca una palabra, luego toca la imagen correspondiente">Instructions: First tap a word, then tap the matching picture</small>
-	    </div>
-	</div>
 	
 			<!-- Q6 -->
 		<div class="quiz-item">
@@ -2364,7 +2410,7 @@
 	    }
 	});
 
-	// ===== FUNCIÓN CHECKQUIZ ACTUALIZADA =====
+	// ===== FUNCIÓN CHECKQUIZ CORREGIDA =====
 	function checkQuiz() {
 	    let score = 0;
 	    const answers = {
@@ -2372,7 +2418,6 @@
 		q2: 'a', // I
 		q3: 'b', // Thirty
 		q4: 'a', // See you later
-		q5: 'correct', // Matching game
 		q6: 'c', // Good morning
 		q7: 'b', // I like
 		q8: 'b', // What's your name?
@@ -2380,10 +2425,8 @@
 		q10: 'a' // I'm from Mexico
 	    };
 	    
-	    // Contar preguntas de opción múltiple
+	    // Contar preguntas de opción múltiple (9 preguntas)
 	    for(const q in answers){
-		if (q === 'q5') continue; // Saltar la pregunta de matching
-		
 		const radios = document.getElementsByName(q);
 		for(const r of radios) {
 		    if(r.checked && r.value === answers[q]) {
@@ -2393,14 +2436,12 @@
 		}
 	    }
 	    
-	    // Verificar pregunta de matching (Q5)
-	    const matchingCorrect = checkMatchingGame();
-	    if (matchingCorrect) {
-		score++;
-	    }
+	    // Verificar pregunta de matching (Q5) - vale 3 puntos
+	    const matchingPoints = checkMatchingGame();
+	    score += matchingPoints;
 	    
 	    const totalScore = score;
-	    const maxScore = Object.keys(answers).length;
+	    const maxScore = 12; // 9 preguntas + 3 matches = 12 puntos
 	    
 	    // Mostrar resultado
 	    const resultElement = document.getElementById('quiz-result');
@@ -2418,6 +2459,20 @@
 	    
 	    resultElement.textContent += ` - ${feedback}`;
 	    speak(`You scored ${totalScore} out of ${maxScore}. ${feedback}`);
+	    
+	    // Resetear el matching game para reintentos
+	    setTimeout(() => {
+		matchingScore = 0;
+		document.querySelectorAll('.matching-item').forEach(item => {
+		    item.classList.remove('correct', 'incorrect');
+		    item.querySelector('.match-feedback').textContent = '';
+		});
+		document.querySelectorAll('.selectable-word-btn').forEach(btn => {
+		    btn.classList.remove('selected');
+		    btn.disabled = false;
+		});
+		selectedWord = null;
+	    }, 3000);
 	}
 
 	function completeLesson(){
@@ -2435,6 +2490,8 @@
 	
 	// ===== FUNCIONES PARA EL MATCHING GAME =====
 	let selectedWord = null;
+	let matchingScore = 0; // Contador para los aciertos del matching
+	const totalMatches = 3; // Total de matches posibles
 
 	function selectWord(element, word) {
 	    // Remover selección anterior
@@ -2446,8 +2503,6 @@
 	    element.classList.add('selected');
 	    selectedWord = word;
 	    
-	    // Dar feedback de audio
-	    speak(`Selected: ${word}`);
 	}
 
 	function handleMobileMatch(element, correctAnswer) {
@@ -2458,35 +2513,48 @@
 	    
 	    const feedbackElement = element.querySelector('.match-feedback');
 	    
+	     // Verificar si ya fue respondido correctamente
+	    if (element.classList.contains('correct')) {
+		speak('Already matched correctly');
+		return;
+	    }
+	    
 	    if (selectedWord === correctAnswer) {
 		// Correcto
 		element.classList.add('correct');
 		feedbackElement.textContent = '✓';
 		feedbackElement.style.color = 'green';
-		speak('Correct match!');
+		speak('Correct! ' + correctAnswer);
+		matchingScore++; // Incrementar puntuación
+		
+		// Deshabilitar el botón de palabra correspondiente
+		document.querySelector(`.selectable-word-btn[data-word="${correctAnswer}"]`).disabled = true;
 	    } else {
 		// Incorrecto
 		element.classList.add('incorrect');
 		feedbackElement.textContent = '✗';
 		feedbackElement.style.color = 'red';
 		speak('Try again');
+		
+		// Quitar el estilo incorrecto después de 1 segundo
+		setTimeout(() => {
+		    element.classList.remove('incorrect');
+		    feedbackElement.textContent = '';
+		}, 1000);
 	    }
 	    
-	    // Resetear selección después de 2 segundos
+	    // Resetear selección después de la acción
 	    setTimeout(() => {
-		element.classList.remove('correct', 'incorrect');
-		feedbackElement.textContent = '';
-		document.querySelectorAll('.selectable-word').forEach(el => {
+		document.querySelectorAll('.selectable-word-btn').forEach(el => {
 		    el.classList.remove('selected');
 		});
 		selectedWord = null;
-	    }, 2000);
+	    }, 1500);
 	}
 
 	function checkMatchingGame() {
-	    // Verificar si al menos un match fue correcto
-	    const correctMatches = document.querySelectorAll('.object-item.correct');
-	    return correctMatches.length > 0;
+	    // Retornar la puntuación del matching (0-3 puntos)
+	    return matchingScore;
 	}
 
 	let mapDialogue = null;

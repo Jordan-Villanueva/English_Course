@@ -2039,7 +2039,7 @@
 	    }
 	});
 
-	// Sistema de traducción MEJORADO
+	// En el evento de traducción, cambia a:
 	document.addEventListener("DOMContentLoaded", () => {
 	    document.querySelectorAll(".translate-section-btn").forEach(btn => {
 		btn.addEventListener("click", () => {
@@ -2057,9 +2057,9 @@
 		    
 		    container.setAttribute("data-translated", !isTranslated);
 		    
-		    // Actualizar el diálogo del mapa si estamos en la sección 6
+		    // ✅ ACTUALIZAR TEXTO DEL MAPA SIN AUDIO
 		    if (container.closest('#section-6')) {
-		        updateMapDialogue();
+		        updateMapDialogue(false); // FALSE para solo actualizar texto
 		    }
 		});
 	    });
@@ -2540,48 +2540,46 @@
 		    { name: "Hungary", lat: 47.5, lng: 19.04, dialogue: "I'm from Hungary. I'm Hungarian.", translation: "Soy de Hungría. Soy húngaro/a." }
 		  ];
 
-	      countries.forEach(country => {
-			L.marker([country.lat, country.lng])
-			    .addTo(map)
-			    .bindPopup(`<b>${country.name}</b>`)
-			    .on('click', () => {
-				currentCountry = country;
-				updateMapDialogue();
-			    });
-		    });
+	      	countries.forEach(country => {
+			    L.marker([country.lat, country.lng])
+				.addTo(map)
+				.bindPopup(`<b>${country.name}</b>`)
+				.on('click', () => {
+				    currentCountry = country;
+				    updateMapDialogue(true);
+				});
+			});
 		}
 
-		// Función para actualizar el diálogo - SOLUCIÓN DEFINITIVA
-	function updateMapDialogue() {
-	    if (!currentCountry) return;
-	    
-	    const dialogueEl = document.getElementById('dialogue');
-	    
-	    // Buscar el estado de traducción en la sección 6
-	    const section6 = document.getElementById('section-6');
-	    const isTranslated = section6 ? 
-		section6.querySelector('[data-translated]')?.getAttribute("data-translated") === "true" : 
-		false;
-	    
-	    if (!mapDialogue) {
-		mapDialogue = document.createElement('span');
-		mapDialogue.className = 'translatable dialogue-text';
-		dialogueEl.innerHTML = '';
-		dialogueEl.appendChild(mapDialogue);
-	    }
-	    
-	    mapDialogue.dataset.original = currentCountry.dialogue;
-	    mapDialogue.dataset.translation = currentCountry.translation;
-	    
-	    // MOSTRAR texto según traducción
-	    mapDialogue.textContent = isTranslated ? currentCountry.translation : currentCountry.dialogue;
-	    
-	    // ✅ AUDIO SIEMPRE EN INGLÉS (pronunciación correcta)
-	    speak(currentCountry.dialogue, { 
-		rate: 0.9, // Un poco más lento para practicar
-		highlight: true 
-	    });
-	}
+		// Función para actualizar el diálogo - SIN AUDIO AUTOMÁTICO
+		function updateMapDialogue(playAudio = false) {  // ✅ Nuevo parámetro
+		    if (!currentCountry) return;
+		    
+		    const dialogueEl = document.getElementById('dialogue');
+		    const section6 = document.getElementById('section-6');
+		    const isTranslated = section6 ? 
+			section6.querySelector('[data-translated]')?.getAttribute("data-translated") === "true" : 
+			false;
+		    
+		    if (!mapDialogue) {
+			mapDialogue = document.createElement('span');
+			mapDialogue.className = 'translatable dialogue-text';
+			dialogueEl.innerHTML = '';
+			dialogueEl.appendChild(mapDialogue);
+		    }
+		    
+		    mapDialogue.dataset.original = currentCountry.dialogue;
+		    mapDialogue.dataset.translation = currentCountry.translation;
+		    mapDialogue.textContent = isTranslated ? currentCountry.translation : currentCountry.dialogue;
+		    
+		    // ✅ SOLO reproducir audio si se solicita explícitamente
+		    if (playAudio) {
+			speak(currentCountry.dialogue, { 
+			    rate: 0.9, 
+			    highlight: true 
+			});
+		    }
+		}
 	</script>
 	<script src="../auth.js"></script>
 	<!-- LUEGO este código simple para verificar autenticación -->

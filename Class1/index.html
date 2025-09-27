@@ -2535,32 +2535,36 @@
 	const totalMatches = 3;
 
 	function selectMatchingItem(element, type, value, event) {
-	    // ✅ PREVENIR EL COMPORTAMIENTO POR DEFECTO Y PROPAGACIÓN
 	    if (event) {
 		event.preventDefault();
 		event.stopPropagation();
 	    }
 	    
-	    // ✅ Si el elemento ya está emparejado correctamente, ignorar clic
+	    // Si el elemento ya está CORRECTO, ignorar clic
 	    if (element.classList.contains('correct')) {
 		return;
 	    }
 	    
 	    // Si no hay elemento seleccionado, seleccionar este
 	    if (!selectedElement) {
+		// Remover selección anterior de cualquier elemento incorrecto
+		document.querySelectorAll('.matching-item.selected, .selectable-word-btn.selected').forEach(el => {
+		    el.classList.remove('selected');
+		});
+		
 		element.classList.add('selected');
 		selectedElement = { element, type, value };
 		return;
 	    }
 	    
-	    // ✅ Si se hace clic en el mismo elemento, deseleccionar
+	    // Si se hace clic en el mismo elemento, deseleccionar
 	    if (selectedElement.element === element) {
 		element.classList.remove('selected');
 		selectedElement = null;
 		return;
 	    }
 	    
-	    // ✅ Si el segundo elemento ya está emparejado, ignorar
+	    // Si el segundo elemento ya está CORRECTO, ignorar
 	    if (element.classList.contains('correct')) {
 		return;
 	    }
@@ -2569,29 +2573,28 @@
 	    const isMatch = checkMatch(selectedElement, { element, type, value });
 	    
 	    if (isMatch) {
-		// Match correcto
+		// Match correcto - MARCAR PERMANENTEMENTE
 		handleCorrectMatch(selectedElement.element, element);
 		matchedPairs++;
 		
-		// Verificar si se completó el juego
 		if (matchedPairs === totalMatches) {
 		    setTimeout(() => {
 		        speak('All matches completed! Excellent!');
 		    }, 1000);
 		}
 	    } else {
-		// Match incorrecto
+		// Match incorrecto - SOLO FEEDBACK TEMPORAL
 		handleIncorrectMatch(selectedElement.element, element);
 	    }
 	    
-	    // ✅ LIMPIAR LA SELECCIÓN DESPUÉS DE CUALQUIER INTENTO
+	    // Limpiar selección después del intento
 	    setTimeout(() => {
 		if (selectedElement && selectedElement.element) {
 		    selectedElement.element.classList.remove('selected');
 		}
 		element.classList.remove('selected');
 		selectedElement = null;
-	    }, 1000);
+	    }, isMatch ? 0 : 1000); // Si es correcto, limpiar inmediatamente
 	}
 
 	function checkMatch(first, second) {
@@ -2606,54 +2609,59 @@
 	}
 
 	function handleCorrectMatch(element1, element2) {
+	    // Marcar como CORRECTO permanentemente
 	    element1.classList.add('correct');
 	    element2.classList.add('correct');
 	    element1.classList.remove('selected', 'incorrect');
 	    element2.classList.remove('selected', 'incorrect');
 	    
-	    // ✅ Asegurarse de que los elementos existen antes de manipularlos
 	    const feedback1 = element1.querySelector('.match-feedback');
 	    const feedback2 = element2.querySelector('.match-feedback');
 	    
 	    if (feedback1) feedback1.textContent = '✓';
 	    if (feedback2) feedback2.textContent = '✓';
 	    
-	    // Deshabilitar elementos emparejados
+	    // Deshabilitar elementos emparejados permanentemente
 	    element1.style.pointerEvents = 'none';
 	    element2.style.pointerEvents = 'none';
 	    
-	    // ✅ LIMPIAR LA SELECCIÓN INMEDIATAMENTE
-	    selectedElement = null;
+	    speak('Correct match!');
 	}
 
 	function handleIncorrectMatch(element1, element2) {
+	    // Solo mostrar feedback visual temporal
 	    element1.classList.add('incorrect');
 	    element2.classList.add('incorrect');
 	    
-	    element1.querySelector('.match-feedback').textContent = '✗';
-	    element2.querySelector('.match-feedback').textContent = '✗';
+	    const feedback1 = element1.querySelector('.match-feedback');
+	    const feedback2 = element2.querySelector('.match-feedback');
 	    
-	    const incorrectElement1 = element1;
-	    const incorrectElement2 = element2;
-    
-	    // Remover estilos incorrectos después de 1 segundo
+	    if (feedback1) feedback1.textContent = '✗';
+	    if (feedback2) feedback2.textContent = '✗';
+	    
+	    speak('Try again');
+	    
+	    // Remover todo después de 1 segundo - SIN conservar errores
 	    setTimeout(() => {
-		element1.classList.remove('incorrect');
-		element2.classList.remove('incorrect');
-		element1.querySelector('.match-feedback').textContent = '';
-		element2.querySelector('.match-feedback').textContent = '';
+		element1.classList.remove('incorrect', 'selected');
+		element2.classList.remove('incorrect', 'selected');
+		
+		if (feedback1) feedback1.textContent = '';
+		if (feedback2) feedback2.textContent = '';
+		
+		// Limpiar selección global
 		selectedElement = null;
 	    }, 1000);
 	}
 
 	// Función para resetear el juego de matching
 	function resetMatchingGame(event) {
-	    // ✅ Prevenir comportamiento por defecto si hay evento
 	    if (event) {
 		event.preventDefault();
 		event.stopPropagation();
 	    }
 	    
+	    // Reset completo
 	    selectedElement = null;
 	    matchedPairs = 0;
 	    
@@ -2666,6 +2674,8 @@
 		    feedback.textContent = '';
 		}
 	    });
+	    
+	    speak('Matching game reset');
 	}
 
 	// Actualizar la función checkMatchingGame para usar el nuevo sistema

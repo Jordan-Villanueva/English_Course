@@ -2039,12 +2039,14 @@
 	    }
 	});
 
-	// Sistema de traducción
+	// Sistema de traducción MEJORADO
 	document.addEventListener("DOMContentLoaded", () => {
 	    document.querySelectorAll(".translate-section-btn").forEach(btn => {
 		btn.addEventListener("click", () => {
 		    const container = btn.closest("[data-translated]");
 		    const isTranslated = container.getAttribute("data-translated") === "true";
+		    
+		    // Traducir todos los elementos translatables
 		    container.querySelectorAll(".translatable").forEach(el => {
 		        if(el.classList.contains("object-name") && el.dataset.revealed==="true"){
 		            el.textContent = isTranslated ? el.dataset.original : el.dataset.translation;
@@ -2052,7 +2054,13 @@
 		            el.textContent = isTranslated ? el.dataset.original : el.dataset.translation;
 		        }
 		    });
+		    
 		    container.setAttribute("data-translated", !isTranslated);
+		    
+		    // Actualizar el diálogo del mapa si estamos en la sección 6
+		    if (container.closest('#section-6')) {
+		        updateMapDialogue();
+		    }
 		});
 	    });
 	});
@@ -2479,6 +2487,9 @@
 	    return correctMatches.length > 0;
 	}
 
+	let mapDialogue = null;
+	let currentCountry = null;
+
 	// ===== MAPA =====
 	function initMap() {
 	    const map = L.map('map').setView([20, 0], 2);
@@ -2529,26 +2540,40 @@
 		    { name: "Hungary", lat: 47.5, lng: 19.04, dialogue: "I'm from Hungary. I'm Hungarian.", translation: "Soy de Hungría. Soy húngaro/a." }
 		  ];
 
-	    let selectedDialogue = null;
-	    countries.forEach(country => {
-		L.marker([country.lat, country.lng])
-		    .addTo(map)
-		    .bindPopup(`<b>${country.name}</b>`)
-		    .on('click', () => {
-		        const dialogueEl = document.getElementById('dialogue');
-		        if (!selectedDialogue) {
-		            selectedDialogue = document.createElement('span');
-		            selectedDialogue.className = 'translatable dialogue-text';
-		            dialogueEl.innerHTML = '';
-		            dialogueEl.appendChild(selectedDialogue);
-		        }
-		        selectedDialogue.dataset.original = country.dialogue;
-		        selectedDialogue.dataset.translation = country.translation;
-		        selectedDialogue.textContent = country.dialogue;
-		        speak(country.dialogue, { rate: 1.0 });
+	      countries.forEach(country => {
+			L.marker([country.lat, country.lng])
+			    .addTo(map)
+			    .bindPopup(`<b>${country.name}</b>`)
+			    .on('click', () => {
+				currentCountry = country;
+				updateMapDialogue();
+			    });
 		    });
-	    });
-	}
+		}
+
+		// Función para actualizar el diálogo según el idioma actual
+		function updateMapDialogue() {
+		    if (!currentCountry) return;
+		    
+		    const dialogueEl = document.getElementById('dialogue');
+		    const isTranslated = document.querySelector('#section-6 [data-translated]')?.getAttribute("data-translated") === "true";
+		    
+		    if (!mapDialogue) {
+			mapDialogue = document.createElement('span');
+			mapDialogue.className = 'translatable dialogue-text';
+			dialogueEl.innerHTML = '';
+			dialogueEl.appendChild(mapDialogue);
+		    }
+		    
+		    mapDialogue.dataset.original = currentCountry.dialogue;
+		    mapDialogue.dataset.translation = currentCountry.translation;
+		    
+		    // Mostrar en el idioma correcto
+		    mapDialogue.textContent = isTranslated ? currentCountry.translation : currentCountry.dialogue;
+		    
+		    // Hablar en el idioma correcto
+		    speak(isTranslated ? currentCountry.translation : currentCountry.dialogue, { rate: 1.0 });
+		}
 	</script>
 	<script src="../auth.js"></script>
 	<!-- LUEGO este código simple para verificar autenticación -->

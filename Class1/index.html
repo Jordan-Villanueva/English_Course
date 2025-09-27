@@ -2175,6 +2175,8 @@
 	    
 	    stopAllAudio();
 	    
+	    speak(wordSpan.dataset.original, { rate: 1.0 });
+	    
 	    if (wordSpan.textContent === "???") {
 		wordSpan.textContent = isTranslated ? wordSpan.dataset.translation : wordSpan.dataset.original;
 		wordSpan.dataset.revealed = "true";

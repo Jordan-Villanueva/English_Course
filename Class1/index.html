@@ -2551,34 +2551,37 @@
 		    });
 		}
 
-		// Función para actualizar el diálogo según el idioma actual
-		function updateMapDialogue() {
-		    if (!currentCountry) return;
-		    
-		    const dialogueEl = document.getElementById('dialogue');
-		    
-		    // Buscar el estado de traducción en la sección 6 de manera más robusta
-		    const section6 = document.getElementById('section-6');
-		    const isTranslated = section6 ? 
-			section6.querySelector('[data-translated]')?.getAttribute("data-translated") === "true" : 
-			false;
-		    
-		    if (!mapDialogue) {
-			mapDialogue = document.createElement('span');
-			mapDialogue.className = 'translatable dialogue-text';
-			dialogueEl.innerHTML = '';
-			dialogueEl.appendChild(mapDialogue);
-		    }
-		    
-		    mapDialogue.dataset.original = currentCountry.dialogue;
-		    mapDialogue.dataset.translation = currentCountry.translation;
-		    
-		    // Mostrar en el idioma correcto
-		    mapDialogue.textContent = isTranslated ? currentCountry.translation : currentCountry.dialogue;
-		    
-		    // Hablar en el idioma correcto
-		    speak(isTranslated ? currentCountry.translation : currentCountry.dialogue, { rate: 1.0 });
-		}
+		// Función para actualizar el diálogo - SOLUCIÓN DEFINITIVA
+	function updateMapDialogue() {
+	    if (!currentCountry) return;
+	    
+	    const dialogueEl = document.getElementById('dialogue');
+	    
+	    // Buscar el estado de traducción en la sección 6
+	    const section6 = document.getElementById('section-6');
+	    const isTranslated = section6 ? 
+		section6.querySelector('[data-translated]')?.getAttribute("data-translated") === "true" : 
+		false;
+	    
+	    if (!mapDialogue) {
+		mapDialogue = document.createElement('span');
+		mapDialogue.className = 'translatable dialogue-text';
+		dialogueEl.innerHTML = '';
+		dialogueEl.appendChild(mapDialogue);
+	    }
+	    
+	    mapDialogue.dataset.original = currentCountry.dialogue;
+	    mapDialogue.dataset.translation = currentCountry.translation;
+	    
+	    // MOSTRAR texto según traducción
+	    mapDialogue.textContent = isTranslated ? currentCountry.translation : currentCountry.dialogue;
+	    
+	    // ✅ AUDIO SIEMPRE EN INGLÉS (pronunciación correcta)
+	    speak(currentCountry.dialogue, { 
+		rate: 0.9, // Un poco más lento para practicar
+		highlight: true 
+	    });
+	}
 	</script>
 	<script src="../auth.js"></script>
 	<!-- LUEGO este código simple para verificar autenticación -->

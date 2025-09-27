@@ -2556,7 +2556,12 @@
 		    if (!currentCountry) return;
 		    
 		    const dialogueEl = document.getElementById('dialogue');
-		    const isTranslated = document.querySelector('#section-6 [data-translated]')?.getAttribute("data-translated") === "true";
+		    
+		    // Buscar el estado de traducción en la sección 6 de manera más robusta
+		    const section6 = document.getElementById('section-6');
+		    const isTranslated = section6 ? 
+			section6.querySelector('[data-translated]')?.getAttribute("data-translated") === "true" : 
+			false;
 		    
 		    if (!mapDialogue) {
 			mapDialogue = document.createElement('span');

@@ -2252,6 +2252,7 @@
 
 	// Función específica para números
 	function speakNumber(numberText) {
+	    stopAllAudio();
 	    speak(numberText, { rate: 1.0, highlight: true });
 	}
 
@@ -2379,8 +2380,18 @@
 	    
 	    const selectedNumbers = numbers.slice(start - 1, end);
 	    let currentIndex = 0;
+	    
+	    currentPractice = {
+		start: start,
+		end: end,
+		isActive: true
+	    };
 
 	    function speakNextNumber() {
+	    	if (!currentPractice || !currentPractice.isActive) {
+		    return;
+		}
+		    	
 		if (currentIndex >= selectedNumbers.length) {
 		    currentPractice = null;
 		    removeHighlight();
@@ -2398,9 +2409,19 @@
 		    removeHighlight();
 		    currentIndex++;
 		    // retardo opcional en ms antes de pasar al siguiente número
-		    setTimeout(() => speakNextNumber(), 75); // 0.3s entre números
+		    if (currentPractice && currentPractice.isActive) {
+		        practiceTimeouts.push(setTimeout(() => speakNextNumber(), 75));
+		    }
 		};
 
+		utterance.onerror = () => {
+		    // ✅ En caso de error, continuar con el siguiente número
+		    removeHighlight();
+		    currentIndex++;
+		    if (currentPractice && currentPractice.isActive) {
+		        practiceTimeouts.push(setTimeout(() => speakNextNumber(), 75));
+		    }
+		};
 
 		window.speechSynthesis.speak(utterance);
 	    }
@@ -2413,6 +2434,11 @@
 	    if (sectionNumber < 1 || sectionNumber > totalSections) return;
 	    
 	    stopAllAudio();
+	    
+	    if (currentPractice) {
+		currentPractice.isActive = false;
+		currentPractice = null;
+	    }
 	    
 	    currentSection = sectionNumber;
 	    const sectionElement = document.getElementById(`section-${sectionNumber}`);
@@ -2635,8 +2661,6 @@
 	    
 	    if (feedback1) feedback1.textContent = '✗';
 	    if (feedback2) feedback2.textContent = '✗';
-	    
-	    speak('Try again');
 	    
 	    // Remover todo después de 1 segundo - SIN conservar errores
 	    setTimeout(() => {

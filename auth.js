@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const logoutBtn = document.getElementById("logout-btn");
   const content = document.getElementById("content");
 
-  // Chequea si ya hay sesión iniciada
   const loggedIn = localStorage.getItem("loggedIn") === "true";
 
   if (loggedIn) {
@@ -12,24 +11,24 @@ document.addEventListener("DOMContentLoaded", () => {
     showLogin();
   }
 
-  // Evento de login
   loginBtn.addEventListener("click", () => {
     localStorage.setItem("loggedIn", "true");
     showCourse();
   });
 
-  // Evento de logout
   logoutBtn.addEventListener("click", () => {
     localStorage.removeItem("loggedIn");
     showLogin();
   });
 
-  // ---- Funciones auxiliares ----
   function showCourse() {
+    // Aquí agregamos la lista de clases reales
     content.innerHTML = `
-      <h2>Welcome to your English Course!</h2>
-      <p>Lesson 1: Greetings and introductions.</p>
-      <p>Example: "Hello! My name is Jordan."</p>
+      <ul>
+        <li><a href="Class1/index.html">Class1</a></li>
+        <li><a href="Class2/index.html">Class2</a></li>
+        <li><a href="functions/check-user.js">Functions</a></li>
+      </ul>
     `;
     loginBtn.style.display = "none";
     logoutBtn.style.display = "inline-block";

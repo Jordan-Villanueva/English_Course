@@ -2807,20 +2807,19 @@
 	<script>
 	// Verificar autenticación cada segundo
 	function checkAuth() {
-	    const hasToken = localStorage.getItem('access_token') !== null;
+	    const loggedIn = localStorage.getItem('loggedIn') === 'true';
 	    const loginBtn = document.getElementById('login-btn');
 	    const logoutBtn = document.getElementById('logout-btn');
 	    const homeBtn = document.getElementById('home-btn');
-	    
-	    // Los botones ya los maneja auth.js, pero aseguramos visibilidad
-	    if (hasToken) {
-		if (loginBtn) loginBtn.style.display = 'none';
-		if (logoutBtn) logoutBtn.style.display = 'block';
-		if (homeBtn) homeBtn.style.display = 'block';
+	
+	    if (loggedIn) {
+	        if (loginBtn) loginBtn.style.display = 'none';
+	        if (logoutBtn) logoutBtn.style.display = 'inline-block';
+	        if (homeBtn) homeBtn.style.display = 'block';
 	    } else {
-		if (loginBtn) loginBtn.style.display = 'block';
-		if (logoutBtn) logoutBtn.style.display = 'none';
-		if (homeBtn) homeBtn.style.display = 'none';
+	        if (loginBtn) loginBtn.style.display = 'inline-block';
+	        if (logoutBtn) logoutBtn.style.display = 'none';
+	        if (homeBtn) homeBtn.style.display = 'none';
 	    }
 	}
 

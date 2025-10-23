@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (content) {
       content.innerHTML = `
         <ul>
-          <li><a href="Class1/index.html">Class1</a></li>
+          <li><a href="/Class1/index.html">Class1</a></li>
         </ul>
       `;
     }
@@ -41,6 +41,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Función home
   window.goHome = () => {
-    window.location.href = 'https://elegant-frangipane-efce46.netlify.app/';
+    window.location.href = 'https://elegant-frangipane-efce46.netlify.app';
   };
 });

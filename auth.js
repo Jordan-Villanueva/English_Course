@@ -11,32 +11,29 @@ document.addEventListener("DOMContentLoaded", () => {
     showLogin();
   }
 
-  loginBtn.addEventListener("click", () => {
+  loginBtn?.addEventListener("click", () => {
     localStorage.setItem("loggedIn", "true");
     showCourse();
   });
 
-  logoutBtn.addEventListener("click", () => {
+  logoutBtn?.addEventListener("click", () => {
     localStorage.removeItem("loggedIn");
     showLogin();
   });
 
   function showCourse() {
-    // Aquí agregamos la lista de clases reales
-    content.innerHTML = `
+    content?.innerHTML = `
       <ul>
         <li><a href="Class1/index.html">Class1</a></li>
-        <li><a href="Class2/index.html">Class2</a></li>
-        <li><a href="functions/check-user.js">Functions</a></li>
       </ul>
     `;
-    loginBtn.style.display = "none";
-    logoutBtn.style.display = "inline-block";
+    if (loginBtn) loginBtn.style.display = "none";
+    if (logoutBtn) logoutBtn.style.display = "inline-block";
   }
 
   function showLogin() {
-    content.innerHTML = `<p>Please log in to access the course.</p>`;
-    loginBtn.style.display = "inline-block";
-    logoutBtn.style.display = "none";
+    content?.innerHTML = `<p>Please log in to access the course.</p>`;
+    if (loginBtn) loginBtn.style.display = "inline-block";
+    if (logoutBtn) logoutBtn.style.display = "none";
   }
 });
